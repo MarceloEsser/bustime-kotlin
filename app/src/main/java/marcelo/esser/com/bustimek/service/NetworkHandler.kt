@@ -41,7 +41,6 @@ class NetworkHandler<T> {
         return instance
     }
 
-
     internal fun build(): T {
         return retrofit.create(tClass)
     }
