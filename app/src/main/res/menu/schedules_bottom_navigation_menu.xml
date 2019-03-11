@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_workingdays"
+        android:enabled="true"
+        android:title="@string/text_working_days"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_saturday"
+        android:enabled="true"
+        android:title="@string/text_saturday"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_sunday"
+        android:enabled="true"
+        android:title="@string/text_sunday"
+        app:showAsAction="ifRoom" />
+</menu>

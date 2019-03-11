@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">BusTime</string>
+    <string name="text_favorites">Faviritos</string>
+    <string name="text_schedules">Horários</string>
+    <string name="text_cb">Centro Bairro</string>
+    <string name="text_bc">Bairro Centro</string>
+    <string name="text_saturday">Sábados</string>
+    <string name="text_working_days">Dias úteis</string>
+    <string name="text_sunday">Domingos</string>
+    <string name="lines_title">Linhas</string>
+    <string name="schedules_title">Horários</string>
+    <string name="itineraries_title">Itinerários</string>
+    <string name="empty_itineraries">Não há itinerários</string>
+    <string name="empty_schedules">Não há horários</string>
+    <string name="commom_message_error">Ocorreu algum erro, tente novamente mais tarde</string>
+    <string name="text_clear_all">Limpar lista</string>
+    <string name="cancel">Cancelar</string>
+</resources>
