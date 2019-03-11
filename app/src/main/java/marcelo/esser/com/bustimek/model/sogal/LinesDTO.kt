@@ -6,13 +6,13 @@ import com.google.gson.annotations.SerializedName
 class LinesDTO(
     @SerializedName(value = "nome_master", alternate = ["nomeLinha"])
     @Expose
-    private var name: String? = null,
+    var name: String? = null,
 
     @SerializedName(value = "linhas_master", alternate = ["linha"])
     @Expose
-    private var lineCode: String? = null,
+    var lineCode: String? = null,
 
     @SerializedName("itinerarios")
     @Expose
-    private var itineraries: List<ItinerariesDTO>? = null
+    var itineraries: List<ItinerariesDTO>? = null
 )

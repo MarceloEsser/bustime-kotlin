@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import kotlinx.android.synthetic.main.row_line.view.*
 import marcelo.esser.com.bustimek.R
 import marcelo.esser.com.bustimek.delegate.SogalLinesAdapterDelegate
 import marcelo.esser.com.bustimek.model.sogal.LinesDTO
@@ -32,12 +32,16 @@ class SogalLinesAdapter(
         return linesDTO.size
     }
 
-    override fun onBindViewHolder(p0: SogalLinesViewHolder, p1: Int) {
-
+    override fun onBindViewHolder(viewHolder: SogalLinesViewHolder, position: Int) {
+        val line = linesDTO[position]
+        with(viewHolder) {
+            lineName.text = line.name
+            lineCode.text = line.lineCode
+        }
     }
 
     class SogalLinesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val lineName: TextView = itemView.findViewById(R.id.tv_line_name)
-
+        val lineName = itemView.tv_line_name
+        val lineCode = itemView.tv_line_code
     }
 }
