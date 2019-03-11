@@ -33,7 +33,7 @@ class SogalLinesAdapter(
     }
 
     override fun onBindViewHolder(p0: SogalLinesViewHolder, p1: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     class SogalLinesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

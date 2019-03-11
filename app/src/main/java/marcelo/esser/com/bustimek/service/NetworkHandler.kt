@@ -13,25 +13,21 @@ import java.util.concurrent.TimeUnit
  */
 class NetworkHandler<T> {
     private var SOGAL_URL: String = "http://sogal.com.br/"
-    private lateinit var instance: NetworkHandler<T>
+    private val instance: NetworkHandler<T> by lazy {
+        NetworkHandler<T>()
+    }
     private lateinit var retrofit: Retrofit
     private lateinit var okHttpClient: OkHttpClient
     private lateinit var tClass: Class<T>
+
     private val logginInterceptor: HttpLoggingInterceptor by lazy {
         HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
     }
 
     companion object {
-        fun <T> build(): T {
-            return build()
-        }
 
         fun <T> getInstance(mclass: Class<T>): NetworkHandler<T> {
-            return getInstance(mclass)
-        }
-
-        fun retrofitBuilder(): Retrofit {
-            return retrofitBuilder()
+            return NetworkHandler<T>().getInstance(mclass)
         }
     }
 
@@ -42,7 +38,7 @@ class NetworkHandler<T> {
     }
 
     internal fun build(): T {
-        return retrofit.create(tClass)
+        return retrofitBuilder().create(tClass)
     }
 
     private fun retrofitBuilder(): Retrofit {
