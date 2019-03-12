@@ -1,5 +1,6 @@
 package marcelo.esser.com.bustimek.vvm.lines
 
+import marcelo.esser.com.bustimek.dao.DataOnHold
 import marcelo.esser.com.bustimek.model.sogal.LinesDTO
 import marcelo.esser.com.bustimek.service.sogalServices.SogalService
 import retrofit2.Call
@@ -24,13 +25,19 @@ class LinesActivityViewModel {
             }
 
             override fun onResponse(call: Call<List<LinesDTO>>, response: Response<List<LinesDTO>>) {
-                if(response.body() != null){
+                if (response.body() != null) {
                     onSucces(response.body()!!)
-                }else{
+                } else {
                     onError("Houve algum erro em buscar as linhas")
                 }
             }
 
         })
+    }
+
+    fun saveData(lineCode: String, lineName: String) {
+        DataOnHold.setLineCode(lineCode)
+        DataOnHold.setLineName(lineName)
+
     }
 }

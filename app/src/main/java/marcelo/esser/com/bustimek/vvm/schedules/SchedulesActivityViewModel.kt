@@ -1,5 +1,6 @@
 package marcelo.esser.com.bustimek.vvm.schedules
 
+import marcelo.esser.com.bustimek.dao.DataOnHold
 import marcelo.esser.com.bustimek.model.sogal.SogalResponse
 import marcelo.esser.com.bustimek.service.sogalServices.ISogalService
 import marcelo.esser.com.bustimek.service.sogalServices.SogalService
@@ -17,11 +18,14 @@ class SchedulesActivityViewModel {
     }
 
     fun loadSchedulesBy(
-        lineWay: String, lineCode: String,
         onSuccess: (response: SogalResponse) -> Unit,
         onError: (errorMessage: String) -> Unit
     ) {
-        sogalService.getSogalSchedulesBy(lineWay, lineCode).enqueue(object : Callback<SogalResponse> {
+
+        val lineWay: String? = DataOnHold().lineWay
+        val lineCode: String? = DataOnHold().lineCode
+
+        sogalService.getSogalSchedulesBy(lineWay!!, lineCode!!).enqueue(object : Callback<SogalResponse> {
             override fun onFailure(call: Call<SogalResponse>, t: Throwable) {
                 onError(t.message.toString())
             }

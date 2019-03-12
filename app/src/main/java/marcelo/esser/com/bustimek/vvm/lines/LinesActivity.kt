@@ -34,7 +34,8 @@ class LinesActivity : AppCompatActivity(), SogalLinesAdapterDelegate {
         lines_activity_rv_lines.adapter = adapter
     }
 
-    override fun onLineCLickListener(lineCode: String) {
+    override fun onLineCLickListener(lineCode: String, lineName: String) {
+        viewModel.saveData(lineCode, lineName)
         startActivity(Intent(this@LinesActivity, SchedulesActivity::class.java))
     }
 }
