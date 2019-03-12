@@ -38,6 +38,10 @@ class SogalLinesAdapter(
             lineName.text = line.name
             lineCode.text = line.lineCode
         }
+
+        viewHolder.itemView.setOnClickListener {
+            delegate.onLineCLickListener(line.lineCode.toString())
+        }
     }
 
     class SogalLinesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

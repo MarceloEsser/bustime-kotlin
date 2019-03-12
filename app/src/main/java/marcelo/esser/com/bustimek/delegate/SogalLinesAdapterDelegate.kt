@@ -9,5 +9,5 @@ import marcelo.esser.com.bustimek.model.sogal.LinesDTO
  * @since 11/03/19
  */
 interface SogalLinesAdapterDelegate{
-
+    fun onLineCLickListener(lineCode: String)
 }

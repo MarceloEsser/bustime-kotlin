@@ -1,5 +1,6 @@
 package marcelo.esser.com.bustimek.vvm.lines
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
@@ -8,12 +9,14 @@ import marcelo.esser.com.bustimek.R
 import marcelo.esser.com.bustimek.adapter.SogalLinesAdapter
 import marcelo.esser.com.bustimek.delegate.SogalLinesAdapterDelegate
 import marcelo.esser.com.bustimek.model.sogal.LinesDTO
+import marcelo.esser.com.bustimek.vvm.schedules.SchedulesActivity
 
 class LinesActivity : AppCompatActivity(), SogalLinesAdapterDelegate {
 
     private val viewModel: LinesActivityViewModel by lazy {
         LinesActivityViewModel()
     }
+
     private lateinit var adapter: SogalLinesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,5 +32,9 @@ class LinesActivity : AppCompatActivity(), SogalLinesAdapterDelegate {
     private fun adapterConstruct(it: List<LinesDTO>) {
         adapter = SogalLinesAdapter(this@LinesActivity, it, this)
         lines_activity_rv_lines.adapter = adapter
+    }
+
+    override fun onLineCLickListener(lineCode: String) {
+        startActivity(Intent(this@LinesActivity, SchedulesActivity::class.java))
     }
 }
