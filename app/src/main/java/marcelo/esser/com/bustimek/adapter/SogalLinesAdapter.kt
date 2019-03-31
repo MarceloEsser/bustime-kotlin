@@ -40,7 +40,7 @@ class SogalLinesAdapter(
         }
 
         viewHolder.itemView.setOnClickListener {
-            delegate.onLineCLickListener(line.lineCode.toString())
+            delegate.onLineCLickListener(line.lineCode.toString(), line.name.toString())
         }
     }
 

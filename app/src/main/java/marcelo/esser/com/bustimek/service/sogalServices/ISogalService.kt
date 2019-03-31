@@ -12,7 +12,7 @@ import retrofit2.http.*
 interface ISogalService {
     @POST("wp-content/themes/MobidickTheme/linhas/searchLine.php")
     @FormUrlEncoded
-    fun getSogalSchedulesBy(@Field("action") action: String, @Field("linha") linha: String): Call<SogalResponse>
+    fun getSogalSchedulesBy(@Field("action") lineWay: String, @Field("linha") lineCode: String): Call<SogalResponse>
 
     @POST("wp-content/themes/MobidickTheme/linhas/searchLine.php")
     @FormUrlEncoded
