@@ -33,10 +33,11 @@ class SchedulesAdapter(
 
     override fun onBindViewHolder(viewHolder: SchedulesViewHolder, position: Int) {
         val schedule = schedules[position]
+
         with(viewHolder) {
+            tvSchedule.text = schedule.hour
             if (getItemViewType(position) == 0) {
                 imgAPD.visibility = View.INVISIBLE
-                tvSchedule.text = schedule.hour
             }
         }
     }

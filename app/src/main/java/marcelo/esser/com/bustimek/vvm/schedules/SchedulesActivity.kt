@@ -24,8 +24,35 @@ class SchedulesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_schedules)
 
+        loadSchedules(WORKINGDAY)
+
+        bottomNavigationBarListener()
+    }
+
+    private fun bottomNavigationBarListener() {
+        schedules_bottom_navigation.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.action_workingdays -> {
+                    loadSchedules(WORKINGDAY)
+                    true
+                }
+                R.id.action_saturday -> {
+                    loadSchedules(SATURDAY)
+                    true
+                }
+                R.id.action_sunday -> {
+                    loadSchedules(SUNDAY)
+                    true
+                }
+
+                else -> false
+            }
+        }
+    }
+
+    private fun loadSchedules(scheduleDay: Int) {
         viewModel.loadSchedulesBy(onSuccess = { sogalResponse ->
-            adapterConstructor(sogalResponse, WORKINGDAY)
+            adapterConstructor(sogalResponse, scheduleDay)
         }, onError = { errorMessage ->
 
         })

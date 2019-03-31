@@ -41,7 +41,7 @@ class DataOnHold {
         }
 
         fun setLineWay(lineWay: String) {
-            DataOnHold.setLineWay(lineWay)
+            DataOnHold()._setLineWay(lineWay)
         }
 
         private var _workingdays: List<SchedulesDTO>? = null

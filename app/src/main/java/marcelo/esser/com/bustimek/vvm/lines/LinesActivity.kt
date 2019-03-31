@@ -18,15 +18,39 @@ class LinesActivity : AppCompatActivity(), SogalLinesAdapterDelegate {
     }
 
     private lateinit var adapter: SogalLinesAdapter
+    private var lineWay: String = "buscaHorarioLinhaCB"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lines)
+
+        loadLines()
+
+        bottomNavigationBarListener()
+    }
+
+    private fun loadLines() {
         viewModel.loadSogalLines(onSucces = {
             adapterConstruct(it)
         }, onError = {
             Toast.makeText(this@LinesActivity, "Ops", Toast.LENGTH_SHORT).show()
         })
+    }
+
+    private fun bottomNavigationBarListener() {
+        lines_bottom_navigation.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.action_cb -> {
+                    lineWay = "buscaHorarioLinhaCB"
+                    true
+                }
+                R.id.action_bc -> {
+                    lineWay = "buscaHorarioLinhaBC"
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     private fun adapterConstruct(it: List<LinesDTO>) {
@@ -35,7 +59,7 @@ class LinesActivity : AppCompatActivity(), SogalLinesAdapterDelegate {
     }
 
     override fun onLineCLickListener(lineCode: String, lineName: String) {
-        viewModel.saveData(lineCode, lineName)
+        viewModel.saveData(lineCode, lineName, lineWay)
         startActivity(Intent(this@LinesActivity, SchedulesActivity::class.java))
     }
 }
