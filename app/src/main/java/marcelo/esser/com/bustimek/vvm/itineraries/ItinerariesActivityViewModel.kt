@@ -22,7 +22,9 @@ class ItinerariesActivityViewModel {
             }
 
             override fun onResponse(call: Call<LinesDTO>, response: Response<LinesDTO>) {
-                onSucces(response.body()!!.itineraries!!)
+                if (response.body() != null && response.body()!!.itineraries != null) {
+                    onSucces(response.body()!!.itineraries!!)
+                }
             }
 
         })
