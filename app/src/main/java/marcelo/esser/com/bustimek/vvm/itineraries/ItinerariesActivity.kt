@@ -1,17 +1,22 @@
 package marcelo.esser.com.bustimek.vvm.itineraries
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.RecyclerView
+import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_itineraries.*
 import marcelo.esser.com.bustimek.R
 import marcelo.esser.com.bustimek.adapter.ItinerariesAdapter
+import marcelo.esser.com.bustimek.helper.ProgressDialogHelper
+import marcelo.esser.com.bustimek.model.sogal.ItinerariesDTO
 
 class ItinerariesActivity : AppCompatActivity() {
 
     private val viewModel: ItinerariesActivityViewModel by lazy {
         ItinerariesActivityViewModel()
+    }
+
+    private val progressDialog: ProgressDialogHelper by lazy {
+        ProgressDialogHelper(this@ItinerariesActivity)
     }
 
     private lateinit var itinerariesAdapter: ItinerariesAdapter
@@ -31,12 +36,18 @@ class ItinerariesActivity : AppCompatActivity() {
     }
 
     private fun loadItineraries() {
+        progressDialog.showLoader()
         viewModel.loadItineraries(
             onSucces = {
-                itinerariesAdapter = ItinerariesAdapter(this@ItinerariesActivity, it)
-                itineraries_activity_rv_itineraries.adapter = itinerariesAdapter
+                adapterConstruct(it)
             }, onError = {
                 Toast.makeText(this@ItinerariesActivity, it, Toast.LENGTH_SHORT).show()
             })
+    }
+
+    private fun adapterConstruct(it: List<ItinerariesDTO>?) {
+        progressDialog.hideLoader()
+        itinerariesAdapter = ItinerariesAdapter(this@ItinerariesActivity, it)
+        itineraries_activity_rv_itineraries.adapter = itinerariesAdapter
     }
 }

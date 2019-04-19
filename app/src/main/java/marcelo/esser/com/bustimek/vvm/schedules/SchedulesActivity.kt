@@ -7,6 +7,7 @@ import kotlinx.android.synthetic.main.activity_schedules.*
 import marcelo.esser.com.bustimek.R
 import marcelo.esser.com.bustimek.adapter.SchedulesAdapter
 import marcelo.esser.com.bustimek.dao.DataOnHold
+import marcelo.esser.com.bustimek.helper.ProgressDialogHelper
 import marcelo.esser.com.bustimek.model.sogal.SchedulesDTO
 import marcelo.esser.com.bustimek.model.sogal.SogalResponse
 import marcelo.esser.com.bustimek.vvm.itineraries.ItinerariesActivity
@@ -21,6 +22,10 @@ class SchedulesActivity : AppCompatActivity() {
         SchedulesActivityViewModel()
     }
 
+    private val progressDialog: ProgressDialogHelper by lazy {
+        ProgressDialogHelper(this@SchedulesActivity)
+    }
+
     private lateinit var adapter: SchedulesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,12 +34,16 @@ class SchedulesActivity : AppCompatActivity() {
 
         loadSchedules(WORKINGDAY)
 
+        btnGoToItineraries()
+
+        bottomNavigationBarListener()
+    }
+
+    private fun btnGoToItineraries() {
         img_btn_add_itineraries.setOnClickListener {
             val goToItineraries = Intent(this, ItinerariesActivity::class.java)
             startActivity(goToItineraries)
         }
-
-        bottomNavigationBarListener()
     }
 
     private fun bottomNavigationBarListener() {
@@ -59,6 +68,7 @@ class SchedulesActivity : AppCompatActivity() {
     }
 
     private fun loadSchedules(scheduleDay: Int) {
+        progressDialog.showLoader()
         viewModel.loadSchedulesBy(onSuccess = { sogalResponse ->
             adapterConstructor(sogalResponse, scheduleDay)
         }, onError = { errorMessage ->
@@ -81,6 +91,7 @@ class SchedulesActivity : AppCompatActivity() {
     }
 
     private fun configureList(sogalResponse: List<SchedulesDTO>?) {
+        progressDialog.hideLoader()
         sogalResponse?.let {
             adapter = SchedulesAdapter(this@SchedulesActivity, sogalResponse)
             adapter.notifyDataSetChanged()

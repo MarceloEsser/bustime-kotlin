@@ -8,6 +8,7 @@ import kotlinx.android.synthetic.main.activity_lines.*
 import marcelo.esser.com.bustimek.R
 import marcelo.esser.com.bustimek.adapter.SogalLinesAdapter
 import marcelo.esser.com.bustimek.delegate.SogalLinesAdapterDelegate
+import marcelo.esser.com.bustimek.helper.ProgressDialogHelper
 import marcelo.esser.com.bustimek.model.sogal.LinesDTO
 import marcelo.esser.com.bustimek.vvm.schedules.SchedulesActivity
 
@@ -15,6 +16,10 @@ class LinesActivity : AppCompatActivity(), SogalLinesAdapterDelegate {
 
     private val viewModel: LinesActivityViewModel by lazy {
         LinesActivityViewModel()
+    }
+
+    private val progressDialog: ProgressDialogHelper by lazy {
+        ProgressDialogHelper(this@LinesActivity)
     }
 
     private lateinit var adapter: SogalLinesAdapter
@@ -30,9 +35,11 @@ class LinesActivity : AppCompatActivity(), SogalLinesAdapterDelegate {
     }
 
     private fun loadLines() {
+        progressDialog.showLoader()
         viewModel.loadSogalLines(onSucces = {
             adapterConstruct(it)
         }, onError = {
+            progressDialog.hideLoader()
             Toast.makeText(this@LinesActivity, "Ops", Toast.LENGTH_SHORT).show()
         })
     }
@@ -56,6 +63,7 @@ class LinesActivity : AppCompatActivity(), SogalLinesAdapterDelegate {
     private fun adapterConstruct(it: List<LinesDTO>) {
         adapter = SogalLinesAdapter(this@LinesActivity, it, this)
         lines_activity_rv_lines.adapter = adapter
+        progressDialog.hideLoader()
     }
 
     override fun onLineCLickListener(lineCode: String, lineName: String) {
