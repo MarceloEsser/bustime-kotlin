@@ -13,6 +13,8 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".vvm.itineraries.ItinerariesActivity">
+        </activity>
         <activity android:name=".vvm.schedules.SchedulesActivity">
         </activity>
         <activity android:name=".vvm.lines.LinesActivity">
