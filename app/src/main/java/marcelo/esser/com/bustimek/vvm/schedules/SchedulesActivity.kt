@@ -7,8 +7,10 @@ import kotlinx.android.synthetic.main.activity_schedules.*
 import marcelo.esser.com.bustimek.R
 import marcelo.esser.com.bustimek.adapter.SchedulesAdapter
 import marcelo.esser.com.bustimek.dao.DataOnHold
+import marcelo.esser.com.bustimek.extensions.box
 import marcelo.esser.com.bustimek.helper.ProgressDialogHelper
 import marcelo.esser.com.bustimek.model.sogal.SchedulesDTO
+import marcelo.esser.com.bustimek.model.sogal.SogalFavoriteLine
 import marcelo.esser.com.bustimek.model.sogal.SogalResponse
 import marcelo.esser.com.bustimek.vvm.itineraries.ItinerariesActivity
 
@@ -37,6 +39,9 @@ class SchedulesActivity : AppCompatActivity() {
         btnGoToItineraries()
 
         bottomNavigationBarListener()
+        img_btn_add_remove_line.setOnClickListener {
+            viewModel.addOrRemoveLine()
+        }
     }
 
     private fun btnGoToItineraries() {
