@@ -1,8 +1,14 @@
 package marcelo.esser.com.bustimek.model.sogal
 
 import com.google.gson.annotations.SerializedName
+import io.objectbox.annotation.Entity
+import io.objectbox.annotation.Id
 
+@Entity
 class SchedulesDTO(
+    @Id
+    var id: Long?,
+
     @SerializedName("hora")
     var hour: String? = null,
 

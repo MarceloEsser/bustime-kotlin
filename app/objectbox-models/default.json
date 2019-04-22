@@ -1,0 +1,79 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:7364865783444885023",
+      "lastPropertyId": "4:2580762184727938524",
+      "name": "SogalFavoriteLine",
+      "properties": [
+        {
+          "id": "1:1394659367069519737",
+          "name": "id"
+        },
+        {
+          "id": "2:6898663058466546365",
+          "name": "lineName"
+        },
+        {
+          "id": "3:8173424204629236258",
+          "name": "lineCode"
+        },
+        {
+          "id": "4:2580762184727938524",
+          "name": "lineWay"
+        }
+      ],
+      "relations": [
+        {
+          "id": "1:5802682233987839502",
+          "name": "workingDays"
+        },
+        {
+          "id": "2:6456436195359749436",
+          "name": "saturdays"
+        },
+        {
+          "id": "3:9062590877981316395",
+          "name": "sundays"
+        }
+      ]
+    },
+    {
+      "id": "2:7996608208218721477",
+      "lastPropertyId": "4:4890220563520595657",
+      "name": "SchedulesDTO",
+      "properties": [
+        {
+          "id": "1:2761074579810761320",
+          "name": "hour"
+        },
+        {
+          "id": "2:6896518381614848277",
+          "name": "abrev"
+        },
+        {
+          "id": "3:829512421484489487",
+          "name": "apd"
+        },
+        {
+          "id": "4:4890220563520595657",
+          "name": "id"
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "2:7996608208218721477",
+  "lastIndexId": "0:0",
+  "lastRelationId": "3:9062590877981316395",
+  "lastSequenceId": "0:0",
+  "modelVersion": 4,
+  "modelVersionParserMinimum": 4,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}
