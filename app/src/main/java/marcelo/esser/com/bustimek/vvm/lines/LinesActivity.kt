@@ -28,6 +28,7 @@ class LinesActivity : AppCompatActivity(), SogalLinesAdapterDelegate {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lines)
+        activity_lines_et_search.clearFocus()
 
         loadLines()
 

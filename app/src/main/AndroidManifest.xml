@@ -14,11 +14,14 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".vvm.itineraries.ItinerariesActivity">
+        <activity android:name=".vvm.itineraries.ItinerariesActivity"
+                  android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".vvm.schedules.SchedulesActivity">
+        <activity android:name=".vvm.schedules.SchedulesActivity"
+                  android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".vvm.lines.LinesActivity">
+        <activity android:name=".vvm.lines.LinesActivity"
+                  android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
