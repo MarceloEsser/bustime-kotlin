@@ -1,4 +1,4 @@
-package marcelo.esser.com.bustimek.vvm.lines
+package marcelo.esser.com.bustimek.vvm.sogal.lines
 
 import marcelo.esser.com.bustimek.dao.DataOnHold
 import marcelo.esser.com.bustimek.model.sogal.LinesDTO
@@ -34,6 +34,8 @@ class LinesActivityViewModel {
 
         })
     }
+
+
 
     fun saveData(lineCode: String, lineName: String, lineWay: String) {
         DataOnHold.setLineCode(lineCode)

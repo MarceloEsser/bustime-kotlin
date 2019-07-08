@@ -1,4 +1,4 @@
-package marcelo.esser.com.bustimek.delegate
+package marcelo.esser.com.bustimek.interfaces
 
 /**
  * @author Marcelo Esser

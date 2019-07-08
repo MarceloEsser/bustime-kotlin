@@ -1,4 +1,4 @@
-package marcelo.esser.com.bustimek.vvm.itineraries
+package marcelo.esser.com.bustimek.vvm.sogal.itineraries
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity

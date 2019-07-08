@@ -1,9 +1,17 @@
 package marcelo.esser.com.bustimek.service
 
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.CallAdapter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.net.HttpURLConnection
+import java.net.URL
+import java.util.concurrent.Callable
 import java.util.concurrent.TimeUnit
 
 /**
@@ -12,7 +20,8 @@ import java.util.concurrent.TimeUnit
  * @since 19/02/19
  */
 class NetworkHandler<T> {
-    private var SOGAL_URL: String = "http://sogal.com.br/"
+    private val SOGAL_URL: String = "http://sogal.com.br/"
+    private val VICASA_URL: String = "http://www.vicasa.com.br/"
     private val instance: NetworkHandler<T> by lazy {
         NetworkHandler<T>()
     }
@@ -42,9 +51,13 @@ class NetworkHandler<T> {
     }
 
     private fun retrofitBuilder(): Retrofit {
+        val gson: Gson = GsonBuilder()
+            .disableHtmlEscaping()
+            .setLenient().create()
+
         instance.retrofit = Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(instance.SOGAL_URL)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .baseUrl(instance.VICASA_URL)
             .client(httpClient())
             .build()
 
