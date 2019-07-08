@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.row_line.view.*
 import marcelo.esser.com.bustimek.R
-import marcelo.esser.com.bustimek.delegate.SogalLinesAdapterDelegate
+import marcelo.esser.com.bustimek.interfaces.SogalLinesAdapterDelegate
 import marcelo.esser.com.bustimek.model.sogal.LinesDTO
 
 

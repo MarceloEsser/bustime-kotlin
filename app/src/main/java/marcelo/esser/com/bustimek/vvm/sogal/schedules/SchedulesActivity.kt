@@ -1,4 +1,4 @@
-package marcelo.esser.com.bustimek.vvm.schedules
+package marcelo.esser.com.bustimek.vvm.sogal.schedules
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,13 +6,10 @@ import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_schedules.*
 import marcelo.esser.com.bustimek.R
 import marcelo.esser.com.bustimek.adapter.SchedulesAdapter
-import marcelo.esser.com.bustimek.dao.DataOnHold
-import marcelo.esser.com.bustimek.extensions.box
 import marcelo.esser.com.bustimek.helper.ProgressDialogHelper
 import marcelo.esser.com.bustimek.model.sogal.SchedulesDTO
-import marcelo.esser.com.bustimek.model.sogal.SogalFavoriteLine
 import marcelo.esser.com.bustimek.model.sogal.SogalResponse
-import marcelo.esser.com.bustimek.vvm.itineraries.ItinerariesActivity
+import marcelo.esser.com.bustimek.vvm.sogal.itineraries.ItinerariesActivity
 
 class SchedulesActivity : AppCompatActivity() {
 

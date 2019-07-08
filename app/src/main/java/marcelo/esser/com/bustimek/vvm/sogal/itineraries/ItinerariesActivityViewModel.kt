@@ -1,4 +1,4 @@
-package marcelo.esser.com.bustimek.vvm.itineraries
+package marcelo.esser.com.bustimek.vvm.sogal.itineraries
 
 import marcelo.esser.com.bustimek.dao.DataOnHold
 import marcelo.esser.com.bustimek.model.sogal.ItinerariesDTO

@@ -1,4 +1,4 @@
-package marcelo.esser.com.bustimek.vvm.schedules
+package marcelo.esser.com.bustimek.vvm.sogal.schedules
 
 import marcelo.esser.com.bustimek.dao.DataOnHold
 import marcelo.esser.com.bustimek.extensions.box
