@@ -95,16 +95,16 @@
 
         <ImageButton
                 android:src="@drawable/ic_filter"
-                android:background="@android:color/transparent"
                 android:id="@+id/activity_lines_imgbtn_filter"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginStart="5dp"
-                android:foreground="@drawable/ripple_white"
+                android:background="@drawable/ripple_white"
                 android:padding="15dp"
                 android:layout_width="50dp"
-                android:layout_height="0dp"/>
+                android:layout_height="0dp"
+                android:contentDescription="@string/filter_description"/>
 
     </android.support.constraint.ConstraintLayout>
 

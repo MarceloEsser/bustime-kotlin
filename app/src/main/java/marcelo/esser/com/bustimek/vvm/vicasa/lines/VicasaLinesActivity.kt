@@ -12,6 +12,7 @@ import marcelo.esser.com.bustimek.adapter.VicasaLinesAdapter
 import marcelo.esser.com.bustimek.helper.ProgressDialogHelper
 import marcelo.esser.com.bustimek.interfaces.SogalLinesAdapterDelegate
 import marcelo.esser.com.bustimek.vvm.sogal.schedules.SogalSchedulesActivity
+import marcelo.esser.com.bustimek.vvm.vicasa.filterDialog.VicasaFilterDialog
 
 class VicasaLinesActivity : AppCompatActivity() {
 
@@ -35,6 +36,10 @@ class VicasaLinesActivity : AppCompatActivity() {
         loadLines()
 
         bottomNavigationBarListener()
+        activity_lines_imgbtn_filter.setOnClickListener {
+            val dialog = VicasaFilterDialog()
+            dialog.show(supportFragmentManager, "teste")
+        }
     }
 
     private fun loadLines() {
