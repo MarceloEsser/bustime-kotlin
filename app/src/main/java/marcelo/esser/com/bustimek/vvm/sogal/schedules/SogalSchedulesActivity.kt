@@ -9,20 +9,20 @@ import marcelo.esser.com.bustimek.adapter.SchedulesAdapter
 import marcelo.esser.com.bustimek.helper.ProgressDialogHelper
 import marcelo.esser.com.bustimek.model.sogal.SchedulesDTO
 import marcelo.esser.com.bustimek.model.sogal.SogalResponse
-import marcelo.esser.com.bustimek.vvm.sogal.itineraries.ItinerariesActivity
+import marcelo.esser.com.bustimek.vvm.sogal.itineraries.SogalItinerariesActivity
 
-class SchedulesActivity : AppCompatActivity() {
+class SogalSchedulesActivity : AppCompatActivity() {
 
     private val WORKINGDAY: Int = 1
     private val SATURDAY: Int = 2
     private val SUNDAY: Int = 3
 
-    private val viewModel: SchedulesActivityViewModel by lazy {
-        SchedulesActivityViewModel()
+    private val viewModelSogal: SogalSchedulesActivityViewModel by lazy {
+        SogalSchedulesActivityViewModel()
     }
 
     private val progressDialog: ProgressDialogHelper by lazy {
-        ProgressDialogHelper(this@SchedulesActivity)
+        ProgressDialogHelper(this@SogalSchedulesActivity)
     }
 
     private lateinit var adapter: SchedulesAdapter
@@ -37,13 +37,17 @@ class SchedulesActivity : AppCompatActivity() {
 
         bottomNavigationBarListener()
         img_btn_add_remove_line.setOnClickListener {
-            viewModel.addOrRemoveLine()
+            viewModelSogal.addOrRemoveLine()
+        }
+
+        schedules_activity_img_btn_back.setOnClickListener {
+            finish()
         }
     }
 
     private fun btnGoToItineraries() {
         img_btn_add_itineraries.setOnClickListener {
-            val goToItineraries = Intent(this, ItinerariesActivity::class.java)
+            val goToItineraries = Intent(this, SogalItinerariesActivity::class.java)
             startActivity(goToItineraries)
         }
     }
@@ -71,7 +75,7 @@ class SchedulesActivity : AppCompatActivity() {
 
     private fun loadSchedules(scheduleDay: Int) {
         progressDialog.showLoader()
-        viewModel.loadSchedulesBy(onSuccess = { sogalResponse ->
+        viewModelSogal.loadSchedulesBy(onSuccess = { sogalResponse ->
             adapterConstructor(sogalResponse, scheduleDay)
         }, onError = { errorMessage ->
 
@@ -95,7 +99,7 @@ class SchedulesActivity : AppCompatActivity() {
     private fun configureList(sogalResponse: List<SchedulesDTO>?) {
         progressDialog.hideLoader()
         sogalResponse?.let {
-            adapter = SchedulesAdapter(this@SchedulesActivity, sogalResponse)
+            adapter = SchedulesAdapter(this@SogalSchedulesActivity, sogalResponse)
             adapter.notifyDataSetChanged()
             schedules_activity_rv_schedules.adapter = adapter
         }

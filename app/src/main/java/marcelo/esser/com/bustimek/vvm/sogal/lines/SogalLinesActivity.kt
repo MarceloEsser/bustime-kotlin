@@ -3,6 +3,8 @@ package marcelo.esser.com.bustimek.vvm.sogal.lines
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
+import android.view.WindowManager
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_lines.*
 import marcelo.esser.com.bustimek.R
@@ -10,16 +12,16 @@ import marcelo.esser.com.bustimek.adapter.SogalLinesAdapter
 import marcelo.esser.com.bustimek.interfaces.SogalLinesAdapterDelegate
 import marcelo.esser.com.bustimek.helper.ProgressDialogHelper
 import marcelo.esser.com.bustimek.model.sogal.LinesDTO
-import marcelo.esser.com.bustimek.vvm.sogal.schedules.SchedulesActivity
+import marcelo.esser.com.bustimek.vvm.sogal.schedules.SogalSchedulesActivity
 
-class LinesActivity : AppCompatActivity(), SogalLinesAdapterDelegate {
+class SogalLinesActivity : AppCompatActivity(), SogalLinesAdapterDelegate {
 
-    private val viewModel: LinesActivityViewModel by lazy {
-        LinesActivityViewModel()
+    private val viewModelSogal: SogalLinesActivityViewModel by lazy {
+        SogalLinesActivityViewModel()
     }
 
     private val progressDialog: ProgressDialogHelper by lazy {
-        ProgressDialogHelper(this@LinesActivity)
+        ProgressDialogHelper(this@SogalLinesActivity)
     }
 
     private lateinit var adapter: SogalLinesAdapter
@@ -28,7 +30,10 @@ class LinesActivity : AppCompatActivity(), SogalLinesAdapterDelegate {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lines)
-        activity_lines_et_search.clearFocus()
+
+        this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        activity_lines_imgbtn_filter.visibility = View.GONE
+
 
         loadLines()
 
@@ -37,12 +42,13 @@ class LinesActivity : AppCompatActivity(), SogalLinesAdapterDelegate {
 
     private fun loadLines() {
         progressDialog.showLoader()
-        viewModel.loadSogalLines(onSucces = {
-            adapterConstruct(it)
-        }, onError = {
-            progressDialog.hideLoader()
-            Toast.makeText(this@LinesActivity, "Ops", Toast.LENGTH_SHORT).show()
-        })
+        viewModelSogal.loadSogalLines(
+            onSucces = {
+                adapterConstruct(it)
+            }, onError = {
+                progressDialog.hideLoader()
+                Toast.makeText(this@SogalLinesActivity, "Ops", Toast.LENGTH_SHORT).show()
+            })
     }
 
     private fun bottomNavigationBarListener() {
@@ -62,13 +68,13 @@ class LinesActivity : AppCompatActivity(), SogalLinesAdapterDelegate {
     }
 
     private fun adapterConstruct(it: List<LinesDTO>) {
-        adapter = SogalLinesAdapter(this@LinesActivity, it, this)
+        adapter = SogalLinesAdapter(this@SogalLinesActivity, it, this)
         lines_activity_rv_lines.adapter = adapter
         progressDialog.hideLoader()
     }
 
     override fun onLineCLickListener(lineCode: String, lineName: String) {
-        viewModel.saveData(lineCode, lineName, lineWay)
-        startActivity(Intent(this@LinesActivity, SchedulesActivity::class.java))
+        viewModelSogal.saveData(lineCode, lineName, lineWay)
+        startActivity(Intent(this@SogalLinesActivity, SogalSchedulesActivity::class.java))
     }
 }

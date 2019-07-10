@@ -11,7 +11,7 @@ import retrofit2.Response
  * @author Marcelo Esser
  * @since 19/02/19
  */
-class LinesActivityViewModel {
+class SogalLinesActivityViewModel {
     private val service = SogalService().sogalSerivce()
     private val SEARCH_LINES: String = "buscaLinhas"
 
@@ -19,7 +19,7 @@ class LinesActivityViewModel {
         onSucces: (linesDTO: List<LinesDTO>) -> Unit,
         onError: (errorMessage: String) -> Unit
     ) {
-        service.getSogalList(SEARCH_LINES).enqueue(object : Callback<List<LinesDTO>> {
+        service.getSogalList(action = SEARCH_LINES).enqueue(object : Callback<List<LinesDTO>> {
             override fun onFailure(call: Call<List<LinesDTO>>, t: Throwable) {
                 onError(t.message!!)
             }
@@ -34,8 +34,6 @@ class LinesActivityViewModel {
 
         })
     }
-
-
 
     fun saveData(lineCode: String, lineName: String, lineWay: String) {
         DataOnHold.setLineCode(lineCode)

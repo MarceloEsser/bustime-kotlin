@@ -15,7 +15,7 @@ import retrofit2.Response
  * @author Marcelo Esser
  * @since 12/03/19
  */
-class SchedulesActivityViewModel {
+class SogalSchedulesActivityViewModel {
 
     var workingDays: List<SchedulesDTO>? = null
     var saturdays: List<SchedulesDTO>? = null
@@ -29,26 +29,26 @@ class SchedulesActivityViewModel {
         onSuccess: (response: SogalResponse) -> Unit,
         onError: (errorMessage: String) -> Unit
     ) {
-
         val lineWay: String? = DataOnHold().lineWay
         val lineCode: String? = DataOnHold().lineCode
 
-        sogalService.getSogalSchedulesBy(lineWay!!, lineCode!!).enqueue(object : Callback<SogalResponse> {
-            override fun onFailure(call: Call<SogalResponse>, t: Throwable) {
-                onError(t.message.toString())
-            }
-
-            override fun onResponse(call: Call<SogalResponse>, response: Response<SogalResponse>) {
-                response.body()?.let { sogalResponse ->
-                    onSuccess(sogalResponse)
-                    workingDays = sogalResponse.workingDays
-                    saturdays = sogalResponse.saturdays
-                    sundays = sogalResponse.sundays
+        sogalService.getSogalSchedulesBy(lineWay = lineWay!!, lineCode = lineCode!!)
+            .enqueue(object : Callback<SogalResponse> {
+                override fun onFailure(call: Call<SogalResponse>, t: Throwable) {
+                    onError(t.message.toString())
                 }
 
-            }
+                override fun onResponse(call: Call<SogalResponse>, response: Response<SogalResponse>) {
+                    response.body()?.let { sogalResponse ->
+                        onSuccess(sogalResponse)
+                        workingDays = sogalResponse.workingDays
+                        saturdays = sogalResponse.saturdays
+                        sundays = sogalResponse.sundays
+                    }
 
-        })
+                }
+
+            })
     }
 
     fun addOrRemoveLine() {

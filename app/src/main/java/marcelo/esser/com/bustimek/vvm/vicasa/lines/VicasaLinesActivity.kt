@@ -1,19 +1,19 @@
-package marcelo.esser.com.bustimek.vvm.sogal.lines
+package marcelo.esser.com.bustimek.vvm.vicasa.lines
 
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.KeyEvent
+import android.view.WindowManager
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_lines.*
 import marcelo.esser.com.bustimek.R
-import marcelo.esser.com.bustimek.adapter.SogalLinesAdapter
-import marcelo.esser.com.bustimek.interfaces.SogalLinesAdapterDelegate
+import marcelo.esser.com.bustimek.adapter.VicasaLinesAdapter
 import marcelo.esser.com.bustimek.helper.ProgressDialogHelper
-import marcelo.esser.com.bustimek.model.sogal.LinesDTO
-import marcelo.esser.com.bustimek.vvm.sogal.schedules.SchedulesActivity
-import marcelo.esser.com.bustimek.vvm.vicasa.lines.VicasaLinesActivityViewModel
+import marcelo.esser.com.bustimek.interfaces.SogalLinesAdapterDelegate
+import marcelo.esser.com.bustimek.vvm.sogal.schedules.SogalSchedulesActivity
 
-class VicasaLinesActivity : AppCompatActivity(), SogalLinesAdapterDelegate {
+class VicasaLinesActivity : AppCompatActivity() {
 
     private val viewModel: VicasaLinesActivityViewModel by lazy {
         VicasaLinesActivityViewModel()
@@ -23,13 +23,14 @@ class VicasaLinesActivity : AppCompatActivity(), SogalLinesAdapterDelegate {
         ProgressDialogHelper(this@VicasaLinesActivity)
     }
 
-    private lateinit var adapter: SogalLinesAdapter
+    private lateinit var adapter: VicasaLinesAdapter
     private var lineWay: String = "buscaHorarioLinhaCB"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lines)
-        activity_lines_et_search.clearFocus()
+
+        this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         loadLines()
 
@@ -38,13 +39,14 @@ class VicasaLinesActivity : AppCompatActivity(), SogalLinesAdapterDelegate {
 
     private fun loadLines() {
         progressDialog.showLoader()
-        viewModel.loadVicasaLines(onSucces = {
-            progressDialog.hideLoader()
-            Toast.makeText(this@VicasaLinesActivity, it[0], Toast.LENGTH_LONG).show()
-        }, onError = {
-            progressDialog.hideLoader()
-            Toast.makeText(this@VicasaLinesActivity, "Ops", Toast.LENGTH_SHORT).show()
-        })
+        viewModel.loadVicasaLines(
+            onSucces = {
+                progressDialog.hideLoader()
+                adapterConstruct(it)
+            }, onError = {
+                progressDialog.hideLoader()
+                Toast.makeText(this@VicasaLinesActivity, "Ops", Toast.LENGTH_SHORT).show()
+            })
     }
 
     private fun bottomNavigationBarListener() {
@@ -63,14 +65,9 @@ class VicasaLinesActivity : AppCompatActivity(), SogalLinesAdapterDelegate {
         }
     }
 
-    private fun adapterConstruct(it: List<LinesDTO>) {
-        adapter = SogalLinesAdapter(this@VicasaLinesActivity, it, this)
+    private fun adapterConstruct(it: List<String>) {
+        adapter = VicasaLinesAdapter(it, this@VicasaLinesActivity)
         lines_activity_rv_lines.adapter = adapter
         progressDialog.hideLoader()
-    }
-
-    override fun onLineCLickListener(lineCode: String, lineName: String) {
-        viewModel.saveData(lineCode, lineName, lineWay)
-        startActivity(Intent(this@VicasaLinesActivity, SchedulesActivity::class.java))
     }
 }

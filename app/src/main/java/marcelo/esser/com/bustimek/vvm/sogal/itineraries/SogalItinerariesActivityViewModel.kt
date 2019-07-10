@@ -8,7 +8,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ItinerariesActivityViewModel {
+class SogalItinerariesActivityViewModel {
     private val service = SogalService().sogalSerivce()
     private val SEARCH_ITINERARIES: String = "buscaItinerarios"
 
@@ -16,17 +16,18 @@ class ItinerariesActivityViewModel {
         onSucces: (itineraries: List<ItinerariesDTO>?) -> Unit,
         onError: (erroMessage: String) -> Unit
     ) {
-        service.getSogalItineraries(SEARCH_ITINERARIES, DataOnHold().lineCode!!).enqueue(object : Callback<LinesDTO> {
-            override fun onFailure(call: Call<LinesDTO>, t: Throwable) {
-                onError(t.message!!)
-            }
-
-            override fun onResponse(call: Call<LinesDTO>, response: Response<LinesDTO>) {
-                if (response.body() != null && response.body()!!.itineraries != null) {
-                    onSucces(response.body()!!.itineraries!!)
+        service.getSogalItineraries(action = SEARCH_ITINERARIES, linha = DataOnHold().lineCode!!)
+            .enqueue(object : Callback<LinesDTO> {
+                override fun onFailure(call: Call<LinesDTO>, t: Throwable) {
+                    onError(t.message!!)
                 }
-            }
 
-        })
+                override fun onResponse(call: Call<LinesDTO>, response: Response<LinesDTO>) {
+                    if (response.body() != null && response.body()!!.itineraries != null) {
+                        onSucces(response.body()!!.itineraries!!)
+                    }
+                }
+
+            })
     }
 }

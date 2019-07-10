@@ -1,5 +1,6 @@
 package marcelo.esser.com.bustimek.service.vicasaServices
 
+import okhttp3.ResponseBody
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.http.Field
@@ -16,6 +17,6 @@ interface IVicasaService {
         @Field("servicolinha") lineService: String,
         @Field("x") xCoordinate: String,
         @Field("y") yCoordinate: String
-    ): Call<Any>
+    ): Call<ResponseBody>
 
 }

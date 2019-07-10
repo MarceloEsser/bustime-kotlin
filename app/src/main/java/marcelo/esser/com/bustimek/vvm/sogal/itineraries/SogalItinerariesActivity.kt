@@ -9,14 +9,14 @@ import marcelo.esser.com.bustimek.adapter.ItinerariesAdapter
 import marcelo.esser.com.bustimek.helper.ProgressDialogHelper
 import marcelo.esser.com.bustimek.model.sogal.ItinerariesDTO
 
-class ItinerariesActivity : AppCompatActivity() {
+class SogalItinerariesActivity : AppCompatActivity() {
 
-    private val viewModel: ItinerariesActivityViewModel by lazy {
-        ItinerariesActivityViewModel()
+    private val viewModelSogal: SogalItinerariesActivityViewModel by lazy {
+        SogalItinerariesActivityViewModel()
     }
 
     private val progressDialog: ProgressDialogHelper by lazy {
-        ProgressDialogHelper(this@ItinerariesActivity)
+        ProgressDialogHelper(this@SogalItinerariesActivity)
     }
 
     private lateinit var itinerariesAdapter: ItinerariesAdapter
@@ -37,17 +37,17 @@ class ItinerariesActivity : AppCompatActivity() {
 
     private fun loadItineraries() {
         progressDialog.showLoader()
-        viewModel.loadItineraries(
+        viewModelSogal.loadItineraries(
             onSucces = {
                 adapterConstruct(it)
             }, onError = {
-                Toast.makeText(this@ItinerariesActivity, it, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@SogalItinerariesActivity, it, Toast.LENGTH_SHORT).show()
             })
     }
 
     private fun adapterConstruct(it: List<ItinerariesDTO>?) {
         progressDialog.hideLoader()
-        itinerariesAdapter = ItinerariesAdapter(this@ItinerariesActivity, it)
+        itinerariesAdapter = ItinerariesAdapter(this@SogalItinerariesActivity, it)
         itineraries_activity_rv_itineraries.adapter = itinerariesAdapter
     }
 }

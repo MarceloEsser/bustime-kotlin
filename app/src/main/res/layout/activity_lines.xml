@@ -5,11 +5,12 @@
                                              android:layout_width="match_parent"
                                              android:layout_height="match_parent"
                                              android:background="@color/white"
-                                             tools:context=".vvm.sogal.lines.VicasaLinesActivity">
+                                             tools:context=".vvm.vicasa.lines.VicasaLinesActivity">
 
     <android.support.constraint.ConstraintLayout
             android:id="@+id/lines_toolbar"
             style="@style/TabBarStyle"
+            android:focusable="true"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:elevation="10dp"
@@ -45,10 +46,9 @@
     <android.support.constraint.ConstraintLayout
             android:id="@+id/clSearch"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:background="@color/colorPrimaryDark"
             android:elevation="6dp"
-            android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/lines_toolbar">
@@ -57,15 +57,16 @@
                 android:id="@+id/activity_lines_et_search"
                 android:layout_width="0dp"
                 android:layout_height="35dp"
-                android:layout_marginEnd="8dp"
                 android:background="@drawable/background_search"
                 android:inputType="text"
                 android:maxLines="1"
+                android:layout_margin="10dp"
                 android:paddingEnd="5dp"
                 android:paddingStart="40dp"
                 app:layout_constraintEnd_toStartOf="@+id/textView"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintHorizontal_bias="0.5"/>
 
         <ImageView
                 android:id="@+id/activity_lines_img_search"
@@ -87,8 +88,23 @@
                 tools:visibility="visible"
                 android:text="@string/cancel"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/activity_lines_imgbtn_filter"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/activity_lines_et_search"
+                app:layout_constraintHorizontal_bias="0.5"/>
+
+        <ImageButton
+                android:src="@drawable/ic_filter"
+                android:background="@android:color/transparent"
+                android:id="@+id/activity_lines_imgbtn_filter"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                android:layout_marginStart="5dp"
+                android:foreground="@drawable/ripple_white"
+                android:padding="15dp"
+                android:layout_width="50dp"
+                android:layout_height="0dp"/>
 
     </android.support.constraint.ConstraintLayout>
 

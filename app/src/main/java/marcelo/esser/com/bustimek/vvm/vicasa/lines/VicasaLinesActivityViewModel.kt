@@ -3,6 +3,7 @@ package marcelo.esser.com.bustimek.vvm.vicasa.lines
 import marcelo.esser.com.bustimek.dao.DataOnHold
 import marcelo.esser.com.bustimek.helper.Constants
 import marcelo.esser.com.bustimek.service.vicasaServices.VicasaService
+import okhttp3.ResponseBody
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -16,37 +17,36 @@ class VicasaLinesActivityViewModel {
     private val service = VicasaService().vicasaService()
 
     fun loadVicasaLines(
-        onSucces: (succes:List< String>) -> Unit,
+        onSucces: (succes: List<String>) -> Unit,
         onError: (errorMessage: String) -> Unit
     ) {
         service.postVicasaLines("", Constants.VICASA_LINE_NAME, "T", "17", "7")
-            .enqueue(object : Callback<Any> {
-                override fun onFailure(call: Call<Any>, t: Throwable) {
+            .enqueue(object : Callback<ResponseBody> {
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                     t.message?.let { onError(it) }
                 }
 
-                override fun onResponse(call: Call<Any>, response: Response<Any>) {
-                    var listString: ArrayList<String> = ArrayList()
+                override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                    val resultsList: ArrayList<String> = ArrayList()
 
-                    val matchResults: Sequence<MatchResult> = Regex(">(.*?)</a>").findAll(response.toString())
+                    val matchResults: Sequence<MatchResult> =
+                        Regex(">(.*?)</a>", RegexOption.MULTILINE).findAll(response.body()?.string() ?: "")
 
                     matchResults.groupBy {
-                        for (string in it.groups) {
-                            listString.add(string.toString())
-                        }
+                        if (!resultsList.contains(it.value))
+                            resultsList.add(
+                                it.value
+                                    .replace(">", "")
+                                    .replace(">", "")
+                                    .replace("a", "")
+                                    .replace("/", " ")
+                                    .replace("<", "")
+                            )
                     }
 
-                    print(listString)
+                    onSucces(resultsList)
                 }
 
             })
-    }
-
-
-    fun saveData(lineCode: String, lineName: String, lineWay: String) {
-        DataOnHold.setLineCode(lineCode)
-        DataOnHold.setLineName(lineName)
-        DataOnHold.setLineWay(lineWay)
-
     }
 }
