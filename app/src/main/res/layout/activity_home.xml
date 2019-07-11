@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                             xmlns:app="http://schemas.android.com/apk/res-auto"
-                                             xmlns:tools="http://schemas.android.com/tools"
-                                             android:layout_width="match_parent"
-                                             android:layout_height="match_parent"
-                                             tools:context=".vvm.home.HomeActivity">
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".vvm.home.HomeActivity">
 
     <android.support.constraint.ConstraintLayout
             android:id="@+id/home_toolbar"
@@ -31,8 +32,7 @@
                 android:id="@+id/lines_activity_img_btn_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:foreground="@drawable/ripple_white"
+                android:background="@drawable/background_transparent_ripple_white"
                 android:padding="10dp"
                 android:src="@drawable/icon_back"
                 android:visibility="invisible"
@@ -41,50 +41,51 @@
                 app:layout_constraintTop_toTopOf="parent"/>
     </android.support.constraint.ConstraintLayout>
 
-    <android.support.v7.widget.CardView
+    <Button
             style="@style/HomeCardStyle"
+            android:text="Vicasa"
+            android:layout_margin="20dp"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/home_toolbar"
             android:id="@+id/cv_home_activity_vicasa"
             android:layout_width="0dp"
             android:layout_height="100dp">
+    </Button>
 
-        <android.support.constraint.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            <TextView
-                    android:id="@+id/tv_home_activity_vicasa"
-                    android:text="@string/vicasa"
-                    style="@style/HomeCardContentStyle"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-        </android.support.constraint.ConstraintLayout>
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
+    <Button
             style="@style/HomeCardStyle"
+            android:text="Sogal"
+            android:textColor="@color/black"
+            android:textAllCaps="false"
+            android:layout_margin="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cv_home_activity_vicasa"
             android:id="@+id/cv_home_activity_sogal"
             android:layout_width="0dp"
             android:layout_height="100dp">
+    </Button>
 
-        <android.support.constraint.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            <TextView
-                    android:id="@+id/tv_home_activity_sogal"
-                    android:text="@string/sogal"
-                    style="@style/HomeCardContentStyle"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-        </android.support.constraint.ConstraintLayout>
-    </android.support.v7.widget.CardView>
+    <android.support.constraint.ConstraintLayout
+            android:id="@+id/cliclEVesdf"
+            android:layout_width="0dp"
+            android:clickable="true"
+            android:focusable="true"
+            style="@style/HomeCardStyle"
+            android:layout_height="100dp"
+            android:layout_margin="40dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cv_home_activity_sogal">
+
+        <TextView
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="asfsdfsdfdf"/>
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>

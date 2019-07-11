@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/RowLineStyle"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
-    android:foreground="@drawable/ripple_grey">
+    android:layout_height="80dp">
 
     <android.support.v7.widget.CardView
         android:layout_width="0dp"
