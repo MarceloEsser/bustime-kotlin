@@ -9,9 +9,9 @@
     </style>
 
     <style name="RowLineStyle">
-        <item name="android:elevation">5dp</item>
         <item name="android:layout_margin">5dp</item>
-        <item name="android:background">@drawable/row_line_background</item>
+        <item name="android:background">@drawable/ripple_lines</item>
+        <item name="android:elevation">6dp</item>
     </style>
 
     <style name="TabBarStyle">
@@ -26,10 +26,14 @@
     </style>
 
     <style name="HomeCardStyle">
-        <item name="android:foreground">@drawable/ripple_grey</item>
-        <item name="android:layout_margin">20dp</item>
+        <item name="android:background">@drawable/background_white_ripple_grey</item>
         <item name="android:elevation">6dp</item>
-        <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="RowCardStyle">
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:background">@drawable/ripple_lines</item>
+        <item name="android:elevation">6dp</item>
     </style>
 
     <style name="HomeCardContentStyle">

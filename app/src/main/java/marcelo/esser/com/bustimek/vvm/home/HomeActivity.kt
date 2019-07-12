@@ -3,6 +3,7 @@ package marcelo.esser.com.bustimek.vvm.home
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_home.*
 import marcelo.esser.com.bustimek.R
 import marcelo.esser.com.bustimek.vvm.sogal.lines.SogalLinesActivity
@@ -20,6 +21,10 @@ class HomeActivity : AppCompatActivity() {
 
         cv_home_activity_vicasa.setOnClickListener {
             startActivity(Intent(activityContext, VicasaLinesActivity::class.java))
+        }
+
+        cliclEVesdf.setOnClickListener {
+            Toast.makeText(activityContext, "ll clicado", Toast.LENGTH_LONG).show()
         }
 
         cv_home_activity_sogal.setOnClickListener {
