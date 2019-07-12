@@ -1,6 +1,6 @@
 package marcelo.esser.com.bustimek.helper
 
-object Constants {
+object BaseUrls {
     const val VICASA_LINE_NAME: String = "nomelinha"
 
     const val SOGAL_BASE_URL: String = "http://sogal.com.br/"

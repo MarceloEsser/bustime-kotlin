@@ -1,6 +1,6 @@
 package marcelo.esser.com.bustimek.service.sogalServices
 
-import marcelo.esser.com.bustimek.helper.Constants.SOGAL_BASE_URL
+import marcelo.esser.com.bustimek.helper.BaseUrls.SOGAL_BASE_URL
 import marcelo.esser.com.bustimek.service.NetworkHandler
 
 /**

@@ -12,6 +12,8 @@ interface IVicasaService {
     @POST("busca_linhas_submit.asp")
     @FormUrlEncoded
     fun postVicasaLines(
+        @Field("destino") destination: String,
+        @Field("origem") origin: String,
         @Field("linha") line: String,
         @Field("tipo") type: String,
         @Field("servicolinha") lineService: String,

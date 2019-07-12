@@ -1,10 +1,8 @@
 package marcelo.esser.com.bustimek.vvm.vicasa.lines
 
-import marcelo.esser.com.bustimek.dao.DataOnHold
-import marcelo.esser.com.bustimek.helper.Constants
+import marcelo.esser.com.bustimek.helper.BaseUrls
 import marcelo.esser.com.bustimek.service.vicasaServices.VicasaService
 import okhttp3.ResponseBody
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -17,10 +15,13 @@ class VicasaLinesActivityViewModel {
     private val service = VicasaService().vicasaService()
 
     fun loadVicasaLines(
+        lineOrigin: String = "",
+        lineDestination: String = "",
+        linService: String = "",
         onSucces: (succes: List<String>) -> Unit,
         onError: (errorMessage: String) -> Unit
     ) {
-        service.postVicasaLines("", Constants.VICASA_LINE_NAME, "T", "17", "7")
+        service.postVicasaLines(lineDestination,lineOrigin,"","cidadeLinha",linService,"","")
             .enqueue(object : Callback<ResponseBody> {
                 override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                     t.message?.let { onError(it) }

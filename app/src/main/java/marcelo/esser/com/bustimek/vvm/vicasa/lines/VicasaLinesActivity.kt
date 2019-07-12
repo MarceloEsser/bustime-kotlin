@@ -10,11 +10,12 @@ import kotlinx.android.synthetic.main.activity_lines.*
 import marcelo.esser.com.bustimek.R
 import marcelo.esser.com.bustimek.adapter.VicasaLinesAdapter
 import marcelo.esser.com.bustimek.helper.ProgressDialogHelper
+import marcelo.esser.com.bustimek.interfaces.FilterDialogInteraction
 import marcelo.esser.com.bustimek.interfaces.SogalLinesAdapterDelegate
 import marcelo.esser.com.bustimek.vvm.sogal.schedules.SogalSchedulesActivity
 import marcelo.esser.com.bustimek.vvm.vicasa.filterDialog.VicasaFilterDialog
 
-class VicasaLinesActivity : AppCompatActivity() {
+class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction {
 
     private val viewModel: VicasaLinesActivityViewModel by lazy {
         VicasaLinesActivityViewModel()
@@ -24,6 +25,8 @@ class VicasaLinesActivity : AppCompatActivity() {
         ProgressDialogHelper(this@VicasaLinesActivity)
     }
 
+    private lateinit var dialog: VicasaFilterDialog
+
     private lateinit var adapter: VicasaLinesAdapter
     private var lineWay: String = "buscaHorarioLinhaCB"
 
@@ -32,12 +35,13 @@ class VicasaLinesActivity : AppCompatActivity() {
         setContentView(R.layout.activity_lines)
 
         this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        dialog = VicasaFilterDialog()
+        dialog.interaction = this
 
         loadLines()
 
         bottomNavigationBarListener()
         activity_lines_imgbtn_filter.setOnClickListener {
-            val dialog = VicasaFilterDialog()
             dialog.show(supportFragmentManager, "teste")
         }
     }
@@ -74,5 +78,20 @@ class VicasaLinesActivity : AppCompatActivity() {
         adapter = VicasaLinesAdapter(it, this@VicasaLinesActivity)
         lines_activity_rv_lines.adapter = adapter
         progressDialog.hideLoader()
+    }
+
+    override fun filter(countryOridin: String, countryDestination: String, serviceType: String) {
+        progressDialog.showLoader()
+        viewModel.loadVicasaLines(
+            lineOrigin = countryOridin,
+            lineDestination = countryDestination,
+            linService = serviceType,
+            onSucces = {
+                progressDialog.hideLoader()
+                adapterConstruct(it)
+            }, onError = {
+                progressDialog.hideLoader()
+                Toast.makeText(this@VicasaLinesActivity, "Ops", Toast.LENGTH_SHORT).show()
+            })
     }
 }

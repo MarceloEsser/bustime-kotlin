@@ -9,8 +9,8 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_lines.*
 import marcelo.esser.com.bustimek.R
 import marcelo.esser.com.bustimek.adapter.SogalLinesAdapter
-import marcelo.esser.com.bustimek.interfaces.SogalLinesAdapterDelegate
 import marcelo.esser.com.bustimek.helper.ProgressDialogHelper
+import marcelo.esser.com.bustimek.interfaces.SogalLinesAdapterDelegate
 import marcelo.esser.com.bustimek.model.sogal.LinesDTO
 import marcelo.esser.com.bustimek.vvm.sogal.schedules.SogalSchedulesActivity
 
