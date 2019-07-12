@@ -23,10 +23,6 @@ class HomeActivity : AppCompatActivity() {
             startActivity(Intent(activityContext, VicasaLinesActivity::class.java))
         }
 
-        cliclEVesdf.setOnClickListener {
-            Toast.makeText(activityContext, "ll clicado", Toast.LENGTH_LONG).show()
-        }
-
         cv_home_activity_sogal.setOnClickListener {
             startActivity(Intent(activityContext, SogalLinesActivity::class.java))
         }
