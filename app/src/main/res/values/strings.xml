@@ -17,4 +17,10 @@
     <string name="cancel">Cancelar</string>
     <string name="vicasa">Vicasa</string>
     <string name="sogal">Sogal</string>
+    <string name="origin_city">Município de origem</string>
+    <string name="destination_city">Município de destino</string>
+    <string name="service_type">Tipo de serviço</string>
+    <string name="confirm">Confirmar</string>
+    <string name="filter_options">Opções de filtro</string>
+    <string name="filter_description">Botão para realizar filtro das linhas de onibus da vicasa</string>
 </resources>

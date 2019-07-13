@@ -2,7 +2,6 @@ package marcelo.esser.com.bustimek.service
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import marcelo.esser.com.bustimek.helper.Constants.VICASA_BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

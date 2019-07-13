@@ -30,16 +30,14 @@
         <item name="android:elevation">6dp</item>
     </style>
 
-    <style name="RowCardStyle">
-        <item name="android:layout_margin">5dp</item>
-        <item name="android:background">@drawable/ripple_lines</item>
-        <item name="android:elevation">6dp</item>
-    </style>
-
     <style name="HomeCardContentStyle">
         <item name="android:layout_margin">15dp</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="SpinnerStyle">
+        <item name="android:background">@drawable/background_spinner</item>
     </style>
 
 </resources>

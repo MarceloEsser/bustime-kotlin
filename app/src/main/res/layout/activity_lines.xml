@@ -103,7 +103,8 @@
                 android:background="@drawable/background_transparent_ripple_white"
                 android:padding="15dp"
                 android:layout_width="50dp"
-                android:layout_height="0dp"/>
+                android:layout_height="0dp"
+                android:contentDescription="@string/filter_description"/>
 
     </android.support.constraint.ConstraintLayout>
 
