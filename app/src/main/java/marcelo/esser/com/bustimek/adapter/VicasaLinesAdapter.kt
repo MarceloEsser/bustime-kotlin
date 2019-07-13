@@ -7,10 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.row_line.view.*
 import marcelo.esser.com.bustimek.R
+import marcelo.esser.com.bustimek.interfaces.VicasaLinesAdapterDelegate
+import marcelo.esser.com.bustimek.model.vicasa.VicasaFilterObject
 
 class VicasaLinesAdapter(
-    val linesList: List<String>,
-    val context: Context
+    val linesList: List<VicasaFilterObject>,
+    val context: Context,
+    val delegate: VicasaLinesAdapterDelegate
 ) : RecyclerView.Adapter<VicasaLinesAdapter.VicasaLinesViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): VicasaLinesViewHolder {
@@ -26,9 +29,15 @@ class VicasaLinesAdapter(
 
     override fun onBindViewHolder(viewHolder: VicasaLinesViewHolder, position: Int) {
         val line = linesList[position]
+
         with(viewHolder) {
-            lineName.text = line
+            lineName.text = line.description
             lineCode.visibility = View.GONE
+
+            this.itemView.setOnClickListener {
+                delegate.test(line.id)
+            }
+
         }
     }
 

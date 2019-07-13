@@ -5,6 +5,6 @@ package marcelo.esser.com.bustimek.extensions
 
 fun MutableList<String>.takeAllVicasaLines(){
     /*var vicasaLines = mutableListOf<String>(
-        filter { it.equals("") }
+        doFilter { it.equals("") }
     )*/
 }

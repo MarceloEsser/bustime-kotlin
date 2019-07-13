@@ -1,6 +1,6 @@
 package marcelo.esser.com.bustimek.vvm.vicasa.lines
 
-import marcelo.esser.com.bustimek.helper.BaseUrls
+import marcelo.esser.com.bustimek.model.vicasa.VicasaFilterObject
 import marcelo.esser.com.bustimek.service.vicasaServices.VicasaService
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -13,41 +13,56 @@ import retrofit2.Response
  */
 class VicasaLinesActivityViewModel {
     private val service = VicasaService().vicasaService()
+    var resultsList: ArrayList<VicasaFilterObject> = ArrayList()
 
-    fun loadVicasaLines(
+
+    fun loadVicasaLinesBy(
         lineOrigin: String = "",
         lineDestination: String = "",
-        linService: String = "",
-        onSucces: (succes: List<String>) -> Unit,
+        lineService: String = "",
+        onSuccess: (succes: List<VicasaFilterObject>) -> Unit,
         onError: (errorMessage: String) -> Unit
     ) {
-        service.postVicasaLines(lineDestination,lineOrigin,"","cidadeLinha",linService,"","")
+        service.postLoadVicasaLinesBy(lineDestination, lineOrigin, lineService)
             .enqueue(object : Callback<ResponseBody> {
                 override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                     t.message?.let { onError(it) }
                 }
 
                 override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                    val resultsList: ArrayList<String> = ArrayList()
 
-                    val matchResults: Sequence<MatchResult> =
-                        Regex(">(.*?)</a>", RegexOption.MULTILINE).findAll(response.body()?.string() ?: "")
+                    findVicasaObjects(response)
 
-                    matchResults.groupBy {
-                        if (!resultsList.contains(it.value))
-                            resultsList.add(
-                                it.value
-                                    .replace(">", "")
-                                    .replace(">", "")
-                                    .replace("a", "")
-                                    .replace("/", " ")
-                                    .replace("<", "")
-                            )
-                    }
-
-                    onSucces(resultsList)
+                    onSuccess(resultsList)
                 }
 
             })
+    }
+
+    private fun findVicasaObjects(
+        response: Response<ResponseBody>
+    ) {
+        val matchResults: Sequence<MatchResult> =
+            Regex("asp\\?(.*?)</a>", RegexOption.MULTILINE).findAll(response.body()?.string() ?: "")
+
+        matchResults.groupBy {
+            val vicasaLineDescription = formatVicasaLineDescription(it)
+            val vicasaLineId: String = formatVicasaLineId(it)
+
+            resultsList.add(VicasaFilterObject(vicasaLineDescription, vicasaLineId))
+
+        }
+    }
+
+    fun formatVicasaLineId(it: MatchResult): String {
+        var vicasaLineId = it.value.replace(Regex("""((.*?)LineId=)"""), "")
+        vicasaLineId = vicasaLineId.replace(Regex("""',.*"""), "")
+        return vicasaLineId
+    }
+
+    private fun formatVicasaLineDescription(it: MatchResult): String {
+        var vicasaLineDescription = it.value.replace(Regex("""(.*?)">"""), "")
+        vicasaLineDescription = vicasaLineDescription.replace("</a>", "")
+        return vicasaLineDescription
     }
 }

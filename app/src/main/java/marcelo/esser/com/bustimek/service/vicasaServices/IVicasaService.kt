@@ -16,9 +16,16 @@ interface IVicasaService {
         @Field("origem") origin: String,
         @Field("linha") line: String,
         @Field("tipo") type: String,
-        @Field("servicolinha") lineService: String,
-        @Field("x") xCoordinate: String,
-        @Field("y") yCoordinate: String
+        @Field("servicolinha") lineService: String
     ): Call<ResponseBody>
+
+    @POST("busca_linhas_submit.asp")
+    @FormUrlEncoded
+    fun postLoadVicasaLinesBy(
+        @Field("destino") destination: String,
+        @Field("origem") origin: String,
+        @Field("servico") lineService: String
+        ): Call<ResponseBody>
+
 
 }

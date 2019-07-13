@@ -68,7 +68,7 @@ class VicasaFilterDialog : DialogFragment() {
             serviceType = filter_dialog_sp_service_type.selectedItem as VicasaFilterObject
         }
 
-        interaction.filter(countryOrigin.id, countryDestination.id, serviceType.id)
+        interaction.doFilter(countryOrigin.id, countryDestination.id, serviceType.id)
 
         dismiss()
     }
