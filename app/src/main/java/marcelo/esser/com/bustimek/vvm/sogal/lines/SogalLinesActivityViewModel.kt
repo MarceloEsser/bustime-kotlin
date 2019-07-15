@@ -1,6 +1,6 @@
 package marcelo.esser.com.bustimek.vvm.sogal.lines
 
-import marcelo.esser.com.bustimek.dao.DataOnHold
+import marcelo.esser.com.bustimek.dao.LinesDAO
 import marcelo.esser.com.bustimek.model.sogal.LinesDTO
 import marcelo.esser.com.bustimek.service.sogalServices.SogalService
 import retrofit2.Call
@@ -36,9 +36,8 @@ class SogalLinesActivityViewModel {
     }
 
     fun saveData(lineCode: String, lineName: String, lineWay: String) {
-        DataOnHold.setLineCode(lineCode)
-        DataOnHold.setLineName(lineName)
-        DataOnHold.setLineWay(lineWay)
-
+        LinesDAO.lineName = lineName
+        LinesDAO.lineCode= lineCode
+        LinesDAO.lineWay= lineWay
     }
 }

@@ -1,6 +1,6 @@
 package marcelo.esser.com.bustimek.vvm.sogal.itineraries
 
-import marcelo.esser.com.bustimek.dao.DataOnHold
+import marcelo.esser.com.bustimek.dao.LinesDAO
 import marcelo.esser.com.bustimek.model.sogal.ItinerariesDTO
 import marcelo.esser.com.bustimek.model.sogal.LinesDTO
 import marcelo.esser.com.bustimek.service.sogalServices.SogalService
@@ -16,7 +16,7 @@ class SogalItinerariesActivityViewModel {
         onSucces: (itineraries: List<ItinerariesDTO>?) -> Unit,
         onError: (erroMessage: String) -> Unit
     ) {
-        service.getSogalItineraries(action = SEARCH_ITINERARIES, linha = DataOnHold().lineCode!!)
+        service.getSogalItineraries(action = SEARCH_ITINERARIES, linha = LinesDAO.lineCode)
             .enqueue(object : Callback<LinesDTO> {
                 override fun onFailure(call: Call<LinesDTO>, t: Throwable) {
                     onError(t.message!!)

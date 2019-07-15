@@ -1,6 +1,6 @@
 package marcelo.esser.com.bustimek.helper
 
-object FilterConstants {
+object Constants {
 
     //Country constants
     const val CACHOEIRINHA: String = "CACHOEIRINHA"
@@ -17,4 +17,8 @@ object FilterConstants {
     const val ROTAS:String = "R"
     const val SELETIVA:String = "S"
     const val URBANA:String = "U"
+
+    //line ways
+    const val CB_WAY = "buscaHorarioLinhaCB"
+    const val BC_WAY = "buscaHorarioLinhaBC"
 }

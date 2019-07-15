@@ -1,6 +1,7 @@
 package marcelo.esser.com.bustimek.vvm.vicasa.lines
 
-import marcelo.esser.com.bustimek.model.vicasa.VicasaFilterObject
+import marcelo.esser.com.bustimek.dao.LinesDAO
+import marcelo.esser.com.bustimek.model.vicasa.Vicasa
 import marcelo.esser.com.bustimek.service.vicasaServices.VicasaService
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -13,14 +14,14 @@ import retrofit2.Response
  */
 class VicasaLinesActivityViewModel {
     private val service = VicasaService().vicasaService()
-    var resultsList: ArrayList<VicasaFilterObject> = ArrayList()
+    var resultsList: ArrayList<Vicasa> = ArrayList()
 
 
     fun loadVicasaLinesBy(
         lineOrigin: String = "",
         lineDestination: String = "",
         lineService: String = "",
-        onSuccess: (succes: List<VicasaFilterObject>) -> Unit,
+        onSuccess: (succes: List<Vicasa>) -> Unit,
         onError: (errorMessage: String) -> Unit
     ) {
         service.postLoadVicasaLinesBy(lineDestination, lineOrigin, lineService)
@@ -49,7 +50,7 @@ class VicasaLinesActivityViewModel {
             val vicasaLineDescription = formatVicasaLineDescription(it)
             val vicasaLineId: String = formatVicasaLineId(it)
 
-            resultsList.add(VicasaFilterObject(vicasaLineDescription, vicasaLineId))
+            resultsList.add(Vicasa(vicasaLineDescription, vicasaLineId))
 
         }
     }
@@ -64,5 +65,12 @@ class VicasaLinesActivityViewModel {
         var vicasaLineDescription = it.value.replace(Regex("""(.*?)">"""), "")
         vicasaLineDescription = vicasaLineDescription.replace("</a>", "")
         return vicasaLineDescription
+    }
+
+    fun saveData(lineCode: String, lineName: String, lineWay: String) {
+        LinesDAO.lineName = lineName
+        LinesDAO.lineCode = lineCode
+        LinesDAO.lineWay = lineWay
+
     }
 }
