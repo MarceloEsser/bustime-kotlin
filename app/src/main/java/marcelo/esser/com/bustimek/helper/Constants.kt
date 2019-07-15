@@ -5,7 +5,7 @@ object Constants {
     //Country constants
     const val CACHOEIRINHA: String = "CACHOEIRINHA"
     const val CANOAS: String = "CANOAS"
-    const val GRAVATAI: String = "GRAVATAÍ"
+    const val GRAVATAI: String = "GRAVATA%CD"
     const val POA: String = "PORTO ALEGRE"
 
     //Service type ids

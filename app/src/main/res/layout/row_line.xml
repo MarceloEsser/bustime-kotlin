@@ -4,7 +4,7 @@
         android:layout_width="match_parent"
         android:focusable="true"
         style="@style/RowLineStyle"
-        android:layout_height="80dp">
+        android:layout_height="70dp">
 
     <TextView
             android:id="@+id/tv_line_name"
@@ -17,7 +17,7 @@
             android:layout_alignParentTop="true"
             android:text="nome da linha"
             android:textColor="@color/black"
-            android:textSize="16sp"/>
+            android:textSize="14sp"/>
 
     <TextView
             android:id="@+id/tv_line_code"

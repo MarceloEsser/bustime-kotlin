@@ -75,6 +75,7 @@ class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction, Generi
     }
 
     override fun onItemClickLitener(lineCode: String, lineName: String) {
+        viewModel.saveData(lineCode, lineName, lineWay)
         Toast.makeText(this@VicasaLinesActivity, lineCode, Toast.LENGTH_LONG).show()
     }
 

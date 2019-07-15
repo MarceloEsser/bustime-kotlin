@@ -6,6 +6,7 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_itineraries.*
 import marcelo.esser.com.bustimek.R
 import marcelo.esser.com.bustimek.adapter.ItinerariesAdapter
+import marcelo.esser.com.bustimek.dao.LinesDAO
 import marcelo.esser.com.bustimek.helper.ProgressDialogHelper
 import marcelo.esser.com.bustimek.model.sogal.ItinerariesDTO
 
@@ -27,6 +28,8 @@ class SogalItinerariesActivity : AppCompatActivity() {
 
         btnBack()
         loadItineraries()
+
+        itineraries_activity_tv_line_name.text = LinesDAO.lineName
     }
 
     private fun btnBack() {

@@ -1,5 +1,6 @@
 package marcelo.esser.com.bustimek.vvm.vicasa.lines
 
+import marcelo.esser.com.bustimek.dao.LinesDAO
 import marcelo.esser.com.bustimek.model.vicasa.Vicasa
 import marcelo.esser.com.bustimek.service.vicasaServices.VicasaService
 import okhttp3.ResponseBody
@@ -64,5 +65,12 @@ class VicasaLinesActivityViewModel {
         var vicasaLineDescription = it.value.replace(Regex("""(.*?)">"""), "")
         vicasaLineDescription = vicasaLineDescription.replace("</a>", "")
         return vicasaLineDescription
+    }
+
+    fun saveData(lineCode: String, lineName: String, lineWay: String) {
+        LinesDAO.lineName = lineName
+        LinesDAO.lineCode = lineCode
+        LinesDAO.lineWay = lineWay
+
     }
 }

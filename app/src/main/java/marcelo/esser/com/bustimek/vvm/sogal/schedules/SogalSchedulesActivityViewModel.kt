@@ -1,9 +1,7 @@
 package marcelo.esser.com.bustimek.vvm.sogal.schedules
 
-import marcelo.esser.com.bustimek.dao.DataOnHold
-import marcelo.esser.com.bustimek.extensions.box
+import marcelo.esser.com.bustimek.dao.LinesDAO
 import marcelo.esser.com.bustimek.model.sogal.SchedulesDTO
-import marcelo.esser.com.bustimek.model.sogal.SogalFavoriteLine
 import marcelo.esser.com.bustimek.model.sogal.SogalResponse
 import marcelo.esser.com.bustimek.service.sogalServices.ISogalService
 import marcelo.esser.com.bustimek.service.sogalServices.SogalService
@@ -29,10 +27,10 @@ class SogalSchedulesActivityViewModel {
         onSuccess: (response: SogalResponse) -> Unit,
         onError: (errorMessage: String) -> Unit
     ) {
-        val lineWay: String? = DataOnHold().lineWay
-        val lineCode: String? = DataOnHold().lineCode
+        val lineWay: String = LinesDAO.lineWay
+        val lineCode: String = LinesDAO.lineCode
 
-        sogalService.getSogalSchedulesBy(lineWay = lineWay!!, lineCode = lineCode!!)
+        sogalService.getSogalSchedulesBy(lineWay = lineWay, lineCode = lineCode)
             .enqueue(object : Callback<SogalResponse> {
                 override fun onFailure(call: Call<SogalResponse>, t: Throwable) {
                     onError(t.message.toString())
@@ -51,16 +49,4 @@ class SogalSchedulesActivityViewModel {
             })
     }
 
-    fun addOrRemoveLine() {
-        box<SogalFavoriteLine>().put(
-            SogalFavoriteLine(
-                workingDays = workingDays,
-                saturdays = saturdays,
-                sundays = sundays,
-                lineCode = DataOnHold().lineCode,
-                lineName = DataOnHold().lineName,
-                lineWay = DataOnHold().lineWay
-            )
-        )
-    }
 }

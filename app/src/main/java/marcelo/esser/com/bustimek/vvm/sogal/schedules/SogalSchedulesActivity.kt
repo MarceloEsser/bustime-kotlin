@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_schedules.*
 import marcelo.esser.com.bustimek.R
 import marcelo.esser.com.bustimek.adapter.SchedulesAdapter
+import marcelo.esser.com.bustimek.dao.LinesDAO
 import marcelo.esser.com.bustimek.helper.ProgressDialogHelper
 import marcelo.esser.com.bustimek.model.sogal.SchedulesDTO
 import marcelo.esser.com.bustimek.model.sogal.SogalResponse
@@ -40,6 +41,8 @@ class SogalSchedulesActivity : AppCompatActivity() {
         schedules_activity_img_btn_back.setOnClickListener {
             finish()
         }
+
+        shcedule_activity_tv_line_name.text = LinesDAO.lineName
     }
 
     private fun btnGoToItineraries() {
