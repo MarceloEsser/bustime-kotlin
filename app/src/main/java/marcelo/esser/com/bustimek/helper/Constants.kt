@@ -1,11 +1,11 @@
 package marcelo.esser.com.bustimek.helper
 
-object FilterConstants {
+object Constants {
 
     //Country constants
     const val CACHOEIRINHA: String = "CACHOEIRINHA"
     const val CANOAS: String = "CANOAS"
-    const val GRAVATAI: String = "GRAVATA%CD"
+    const val GRAVATAI: String = "GRAVATAÍ"
     const val POA: String = "PORTO ALEGRE"
 
     //Service type ids
@@ -17,4 +17,8 @@ object FilterConstants {
     const val ROTAS:String = "R"
     const val SELETIVA:String = "S"
     const val URBANA:String = "U"
+
+    //line ways
+    const val CB_WAY = "buscaHorarioLinhaCB"
+    const val BC_WAY = "buscaHorarioLinhaBC"
 }

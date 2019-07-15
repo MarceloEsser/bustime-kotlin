@@ -36,9 +36,6 @@ class SogalSchedulesActivity : AppCompatActivity() {
         btnGoToItineraries()
 
         bottomNavigationBarListener()
-        img_btn_add_remove_line.setOnClickListener {
-            viewModelSogal.addOrRemoveLine()
-        }
 
         schedules_activity_img_btn_back.setOnClickListener {
             finish()

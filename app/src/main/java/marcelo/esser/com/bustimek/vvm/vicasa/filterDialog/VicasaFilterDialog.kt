@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.vicasa_filter_dialog.*
 import marcelo.esser.com.bustimek.R
 import marcelo.esser.com.bustimek.interfaces.FilterDialogInteraction
-import marcelo.esser.com.bustimek.model.vicasa.VicasaFilterObject
+import marcelo.esser.com.bustimek.model.vicasa.Vicasa
 
 class VicasaFilterDialog : DialogFragment() {
 
@@ -25,20 +25,7 @@ class VicasaFilterDialog : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = ArrayAdapter(
-            this.activity!!, android.R.layout.simple_spinner_item, viewModel.getCountryList()
-        )
-
-        val serviceTypeAdapter = ArrayAdapter(
-            this.activity!!, android.R.layout.simple_spinner_item, viewModel.getServiceTypeList()
-        )
-
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        serviceTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-
-        filter_dialog_sp_county_origin.adapter = adapter
-        filter_dialog_sp_destination_county.adapter = adapter
-        filter_dialog_sp_service_type.adapter = serviceTypeAdapter
+        buildAdapter()
 
         filter_dialog_btn_cancel.setOnClickListener {
             dismiss()
@@ -49,30 +36,6 @@ class VicasaFilterDialog : DialogFragment() {
         }
 
     }
-
-    private fun doFilter() {
-
-        var countryOrigin = VicasaFilterObject()
-        var countryDestination = VicasaFilterObject()
-        var serviceType = VicasaFilterObject()
-
-        if (filter_dialog_sp_county_origin.selectedItem != null) {
-            countryOrigin = filter_dialog_sp_county_origin.selectedItem as VicasaFilterObject
-        }
-
-        if (filter_dialog_sp_destination_county.selectedItem != null) {
-            countryDestination = filter_dialog_sp_destination_county.selectedItem as VicasaFilterObject
-        }
-
-        if (filter_dialog_sp_service_type.selectedItem != null) {
-            serviceType = filter_dialog_sp_service_type.selectedItem as VicasaFilterObject
-        }
-
-        interaction.doFilter(countryOrigin.id, countryDestination.id, serviceType.id)
-
-        dismiss()
-    }
-
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val onCreateDialog = super.onCreateDialog(savedInstanceState)
@@ -93,4 +56,45 @@ class VicasaFilterDialog : DialogFragment() {
             window?.setGravity(Gravity.CENTER)
         }
     }
+
+    private fun buildAdapter() {
+        val adapter = ArrayAdapter(
+            this.activity!!, android.R.layout.simple_spinner_item, viewModel.getCountryList()
+        )
+
+        val serviceTypeAdapter = ArrayAdapter(
+            this.activity!!, android.R.layout.simple_spinner_item, viewModel.getServiceTypeList()
+        )
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        serviceTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+        filter_dialog_sp_county_origin.adapter = adapter
+        filter_dialog_sp_destination_county.adapter = adapter
+        filter_dialog_sp_service_type.adapter = serviceTypeAdapter
+    }
+
+    private fun doFilter() {
+
+        var countryOrigin = Vicasa()
+        var countryDestination = Vicasa()
+        var serviceType = Vicasa()
+
+        if (filter_dialog_sp_county_origin.selectedItem != null) {
+            countryOrigin = filter_dialog_sp_county_origin.selectedItem as Vicasa
+        }
+
+        if (filter_dialog_sp_destination_county.selectedItem != null) {
+            countryDestination = filter_dialog_sp_destination_county.selectedItem as Vicasa
+        }
+
+        if (filter_dialog_sp_service_type.selectedItem != null) {
+            serviceType = filter_dialog_sp_service_type.selectedItem as Vicasa
+        }
+
+        interaction.doFilter(countryOrigin.code, countryDestination.code, serviceType.code)
+
+        dismiss()
+    }
+
 }

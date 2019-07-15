@@ -8,14 +8,15 @@ import android.view.WindowManager
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_lines.*
 import marcelo.esser.com.bustimek.R
-import marcelo.esser.com.bustimek.adapter.SogalLinesAdapter
+import marcelo.esser.com.bustimek.adapter.GenericLinesAdapter
+import marcelo.esser.com.bustimek.helper.Constants.BC_WAY
+import marcelo.esser.com.bustimek.helper.Constants.CB_WAY
 import marcelo.esser.com.bustimek.helper.ProgressDialogHelper
-import marcelo.esser.com.bustimek.interfaces.SogalLinesAdapterDelegate
+import marcelo.esser.com.bustimek.interfaces.GenericLinesAdapterDelegate
 import marcelo.esser.com.bustimek.model.sogal.LinesDTO
 import marcelo.esser.com.bustimek.vvm.sogal.schedules.SogalSchedulesActivity
 
-class SogalLinesActivity : AppCompatActivity(), SogalLinesAdapterDelegate {
-
+class SogalLinesActivity : AppCompatActivity(), GenericLinesAdapterDelegate {
     private val viewModelSogal: SogalLinesActivityViewModel by lazy {
         SogalLinesActivityViewModel()
     }
@@ -24,8 +25,8 @@ class SogalLinesActivity : AppCompatActivity(), SogalLinesAdapterDelegate {
         ProgressDialogHelper(this@SogalLinesActivity)
     }
 
-    private lateinit var adapter: SogalLinesAdapter
-    private var lineWay: String = "buscaHorarioLinhaCB"
+    private lateinit var adapter: GenericLinesAdapter
+    var lineWay: String  = CB_WAY
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,11 +56,11 @@ class SogalLinesActivity : AppCompatActivity(), SogalLinesAdapterDelegate {
         lines_bottom_navigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.action_cb -> {
-                    lineWay = "buscaHorarioLinhaCB"
+                    lineWay = CB_WAY
                     true
                 }
                 R.id.action_bc -> {
-                    lineWay = "buscaHorarioLinhaBC"
+                    lineWay = BC_WAY
                     true
                 }
                 else -> false
@@ -68,12 +69,12 @@ class SogalLinesActivity : AppCompatActivity(), SogalLinesAdapterDelegate {
     }
 
     private fun adapterConstruct(it: List<LinesDTO>) {
-        adapter = SogalLinesAdapter(this@SogalLinesActivity, it, this)
+        adapter = GenericLinesAdapter(it,this@SogalLinesActivity, this)
         lines_activity_rv_lines.adapter = adapter
         progressDialog.hideLoader()
     }
 
-    override fun onLineCLickListener(lineCode: String, lineName: String) {
+    override fun onItemClickLitener(lineCode: String, lineName: String) {
         viewModelSogal.saveData(lineCode, lineName, lineWay)
         startActivity(Intent(this@SogalLinesActivity, SogalSchedulesActivity::class.java))
     }

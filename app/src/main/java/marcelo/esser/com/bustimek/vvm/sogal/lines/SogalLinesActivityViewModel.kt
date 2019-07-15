@@ -34,11 +34,4 @@ class SogalLinesActivityViewModel {
 
         })
     }
-
-    fun saveData(lineCode: String, lineName: String, lineWay: String) {
-        DataOnHold.setLineCode(lineCode)
-        DataOnHold.setLineName(lineName)
-        DataOnHold.setLineWay(lineWay)
-
-    }
 }
