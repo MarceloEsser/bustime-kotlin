@@ -8,10 +8,10 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.row_line.view.*
 import marcelo.esser.com.bustimek.R
 import marcelo.esser.com.bustimek.interfaces.GenericLinesAdapterDelegate
-import marcelo.esser.com.bustimek.model.LineCodeLineName
+import marcelo.esser.com.bustimek.model.BaseLine
 
 class GenericLinesAdapter(
-    val lines: List<LineCodeLineName>,
+    val lines: List<BaseLine>,
     val context: Context,
     val delegate: GenericLinesAdapterDelegate
 ) : RecyclerView.Adapter<GenericLinesAdapter.GenericLinesViewHolder>() {
@@ -34,9 +34,9 @@ class GenericLinesAdapter(
         }
     }
 
-    private fun GenericLinesViewHolder.onItemClicListener(line: LineCodeLineName) {
+    private fun GenericLinesViewHolder.onItemClicListener(line: BaseLine) {
         this.itemView.setOnClickListener {
-            delegate.onItemClickLitener(lineCode = line.code, lineName = line.name)
+            delegate.onItemClickLitener(line)
         }
     }
 

@@ -1,5 +1,7 @@
 package marcelo.esser.com.bustimek.interfaces
 
+import marcelo.esser.com.bustimek.model.BaseLine
+
 interface GenericLinesAdapterDelegate {
-    fun onItemClickLitener(lineCode: String, lineName: String)
+    fun onItemClickLitener(line: BaseLine)
 }

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                             xmlns:app="http://schemas.android.com/apk/res-auto"
-                                             xmlns:tools="http://schemas.android.com/tools"
-                                             android:layout_width="match_parent"
-                                             android:layout_height="match_parent"
-                                             android:background="@color/white"
-                                             tools:context=".vvm.vicasa.lines.VicasaLinesActivity">
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context=".vvm.vicasa.lines.VicasaLinesActivity">
 
     <android.support.constraint.ConstraintLayout
             android:id="@+id/lines_toolbar"
@@ -55,23 +56,25 @@
         <EditText
                 android:id="@+id/activity_lines_et_search"
                 android:layout_width="0dp"
-                android:layout_height="35dp"
+                android:layout_height="28dp"
                 android:background="@drawable/background_search"
+                android:textSize="14sp"
                 android:inputType="text"
                 android:maxLines="1"
                 android:layout_margin="10dp"
                 android:paddingEnd="5dp"
-                android:paddingStart="40dp"
+                android:paddingStart="32dp"
                 app:layout_constraintEnd_toStartOf="@+id/textView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintHorizontal_bias="0.5"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"/>
 
         <ImageView
                 android:id="@+id/activity_lines_img_search"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginStart="10dp"
                 app:layout_constraintBottom_toBottomOf="@+id/activity_lines_et_search"
                 app:layout_constraintStart_toStartOf="@+id/activity_lines_et_search"
                 app:layout_constraintTop_toTopOf="@+id/activity_lines_et_search"
@@ -138,7 +141,7 @@
             android:id="@+id/lines_bottom_navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@color/colorPrimary"
             app:itemIconTint="@drawable/selector_lines_bottom_navigation"
             app:itemTextColor="@drawable/selector_lines_bottom_navigation"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -12,6 +12,7 @@ import marcelo.esser.com.bustimek.helper.Constants.CB_WAY
 import marcelo.esser.com.bustimek.helper.ProgressDialogHelper
 import marcelo.esser.com.bustimek.interfaces.FilterDialogInteraction
 import marcelo.esser.com.bustimek.interfaces.GenericLinesAdapterDelegate
+import marcelo.esser.com.bustimek.model.BaseLine
 import marcelo.esser.com.bustimek.model.vicasa.Vicasa
 import marcelo.esser.com.bustimek.vvm.vicasa.filterDialog.VicasaFilterDialog
 
@@ -74,9 +75,9 @@ class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction, Generi
         progressDialog.hideLoader()
     }
 
-    override fun onItemClickLitener(lineCode: String, lineName: String) {
-        viewModel.saveData(lineCode, lineName, lineWay)
-        Toast.makeText(this@VicasaLinesActivity, lineCode, Toast.LENGTH_LONG).show()
+    override fun onItemClickLitener(line: BaseLine) {
+        viewModel.saveData(line.code, line.name, lineWay)
+        Toast.makeText(this@VicasaLinesActivity, line.code, Toast.LENGTH_LONG).show()
     }
 
     override fun doFilter(countryOridin: String, countryDestination: String, serviceType: String) {

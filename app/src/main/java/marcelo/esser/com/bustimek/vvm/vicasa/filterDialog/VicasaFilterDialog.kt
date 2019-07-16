@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.view.*
 import android.widget.ArrayAdapter
-import kotlinx.android.synthetic.main.vicasa_filter_dialog.*
+import kotlinx.android.synthetic.main.dialog_vicasa_filter.*
 import marcelo.esser.com.bustimek.R
 import marcelo.esser.com.bustimek.interfaces.FilterDialogInteraction
 import marcelo.esser.com.bustimek.model.vicasa.Vicasa
@@ -19,7 +19,7 @@ class VicasaFilterDialog : DialogFragment() {
     lateinit var interaction: FilterDialogInteraction
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.vicasa_filter_dialog, container, false)
+        return inflater.inflate(R.layout.dialog_vicasa_filter, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
