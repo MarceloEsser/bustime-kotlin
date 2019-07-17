@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
-          package="marcelo.esser.com.bustimek">
+          package="esser.marcelo.busoclock">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
@@ -14,24 +14,24 @@
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name=".vvm.home.HomeActivity"
+        <activity android:name="esser.marcelo.busoclock.vvm.home.HomeActivity"
                   android:screenOrientation="portrait">
         </activity>
 
-        <activity android:name=".vvm.sogal.itineraries.SogalItinerariesActivity"
+        <activity android:name="esser.marcelo.busoclock.vvm.sogal.itineraries.SogalItinerariesActivity"
                   android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".vvm.sogal.lines.SogalLinesActivity">
+        <activity android:name="esser.marcelo.busoclock.vvm.sogal.lines.SogalLinesActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".vvm.sogal.schedules.SogalSchedulesActivity"
+        <activity android:name="esser.marcelo.busoclock.vvm.sogal.schedules.SogalSchedulesActivity"
                   android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".vvm.vicasa.lines.VicasaLinesActivity"
+        <activity android:name="esser.marcelo.busoclock.vvm.vicasa.lines.VicasaLinesActivity"
                   android:screenOrientation="portrait">
         </activity>
     </application>

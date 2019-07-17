@@ -19,3 +19,41 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+-ignorewarnings
+-keepattributes Signature
+-keepattributes Annotation
+-keepattributes SourceFile,LineNumberTable
+
+-keep class org.jetbrains.kotlin.** {
+*;
+}
+-keep class androidx.room.** {
+*;
+}
+-keep class com.android.support.** {
+*;
+}
+-keep class org.jetbrains.kotlinx.** {
+*;
+}
+-keep class com.squareup.retrofit2.** {
+*;
+}
+-keep class com.squareup.okhttp3.** {
+*;
+}
+-keep class com.airbnb.android.** {
+*;
+}
+-keep class marcelo.esser.com.bustimek.model.** {
+*;
+}
+-keep class marcelo.esser.com.bustimek.helper.** {
+*;
+}
+-keep class marcelo.esser.com.bustimek.interfaces.** {
+*;
+}
+-keep class marcelo.esser.com.bustimek.service.** {
+*;
+}
