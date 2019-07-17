@@ -6,7 +6,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.view.*
+import com.airbnb.lottie.LottieAnimationView
 import kotlinx.android.synthetic.main.dialog_line_menu.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import marcelo.esser.com.bustimek.R
 import marcelo.esser.com.bustimek.dao.LinesDAO
 import marcelo.esser.com.bustimek.helper.Constants.CB_WAY
@@ -15,19 +19,18 @@ import marcelo.esser.com.bustimek.vvm.sogal.schedules.SogalSchedulesActivity
 
 class LineMenuDialog : DialogFragment() {
 
-    var control = false
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.dialog_line_menu, container, false)
     }
 
+    private var animationView: LottieAnimationView? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        lineSetup()
+        animationView = lottie_animation_view_radio_button
 
         lottieAnimationSetup()
-
+        lineSetup()
         clickEvent()
     }
 
@@ -51,14 +54,15 @@ class LineMenuDialog : DialogFragment() {
     }
 
     private fun lottieAnimationSetup() {
-        lottie_animation_view_radio_button.setOnClickListener {
-            control = !control
-            val animator = if (control) ValueAnimator.ofFloat(0f, 0.5f) else ValueAnimator.ofFloat(0.5f, 1f)
-            animator.addUpdateListener { animation ->
-                lottie_animation_view_radio_button.progress = animation.animatedValue as Float
+        if (animationView != null) {
+            animationView!!.setOnClickListener {
+                val animator = if (animationView!!.progress == 0f) ValueAnimator.ofFloat(0f, 0.5f) else ValueAnimator.ofFloat(0.5f, 1f)
+                animator.addUpdateListener { animation ->
+                    animationView!!.progress = animation.animatedValue as Float
+                }
+                animator.duration = 700
+                animator.start()
             }
-            animator.duration = 700
-            animator.start()
         }
     }
 
@@ -73,6 +77,7 @@ class LineMenuDialog : DialogFragment() {
 
     override fun onStart() {
         super.onStart()
+        animationView!!.progress = 0.5f
         setupDialog(dialog)
     }
 

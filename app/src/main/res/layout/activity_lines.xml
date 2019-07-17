@@ -47,7 +47,7 @@
             android:id="@+id/clSearch"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/colorPrimary"
             android:elevation="6dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
