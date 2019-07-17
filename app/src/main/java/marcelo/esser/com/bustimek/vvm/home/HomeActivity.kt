@@ -4,12 +4,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import marcelo.esser.com.bustimek.R
 import marcelo.esser.com.bustimek.service.vicasaServices.VicasaService
-import okhttp3.ResponseBody
-import org.w3c.dom.Document
-import org.w3c.dom.Element
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class HomeActivity : AppCompatActivity() {
 
@@ -25,7 +19,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        chamaServico()
+        //chamaServico()
 
         /*cv_home_activity_vicasa.setOnClickListener {
             chamaServico()
@@ -36,7 +30,7 @@ class HomeActivity : AppCompatActivity() {
         }*/
     }
 
-    private fun chamaServico() {
+    /*private fun chamaServico() {
         vicasaString.vicasaService().getVicasaSchedules("I307C").enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
 
@@ -46,9 +40,9 @@ class HomeActivity : AppCompatActivity() {
                 parseResponse(response.body()!!.string())
             }
         })
-    }
+    }*/
 
-    fun parseResponse(response: String) {
+    /*fun parseResponse(response: String) {
         print(response)
         val diasUteisCBCCSelector =
             "body > table:nth-child(2) > tbody > tr > td > table.texto_linhas > tbody > tr:nth-child(5) > td:nth-child(4)"
@@ -60,5 +54,5 @@ class HomeActivity : AppCompatActivity() {
             println(texto)
         }
 
-    }
+    }*/
 }

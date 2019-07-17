@@ -116,6 +116,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:clickable="true"
+            android:visibility="invisible"
             android:focusable="true"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@id/lines_bottom_navigation"
@@ -136,6 +137,31 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
+
+    <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lines_activity_img_lottie_conection"
+            app:layout_constraintTop_toBottomOf="@id/clSearch"
+            android:layout_margin="30dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            android:visibility="gone"
+            app:lottie_fileName="wihtout_conection.json"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/lines_activity_tv_connection_error"/>
+
+    <TextView
+            app:layout_constraintBottom_toTopOf="@id/lines_bottom_navigation"
+            app:layout_constraintTop_toBottomOf="@id/clSearch"
+            app:layout_constraintVertical_bias="0.9"
+            android:layout_margin="10dp"
+            android:textSize="18sp"
+            android:visibility="gone"
+            android:textColor="@color/blueGrey800"
+            android:textAlignment="center"
+            android:text="@string/error_conection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/lines_activity_tv_connection_error"/>
 
     <android.support.design.widget.BottomNavigationView
             android:id="@+id/lines_bottom_navigation"

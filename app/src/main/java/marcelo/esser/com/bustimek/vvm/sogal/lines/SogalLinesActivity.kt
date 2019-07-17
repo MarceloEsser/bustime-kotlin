@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import android.view.View.*
 import android.view.WindowManager
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_lines.*
@@ -41,7 +42,6 @@ class SogalLinesActivity : AppCompatActivity(), GenericLinesAdapterDelegate {
         this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         activity_lines_imgbtn_filter.visibility = View.GONE
 
-
         loadLines()
 
         bottomNavigationBarListener()
@@ -54,8 +54,17 @@ class SogalLinesActivity : AppCompatActivity(), GenericLinesAdapterDelegate {
                 adapterConstruct(it)
             }, onError = {
                 progressDialog.hideLoader()
-                Toast.makeText(this@SogalLinesActivity, "Ops", Toast.LENGTH_SHORT).show()
+                onError()
             })
+    }
+
+    private fun onError() {
+        lines_activity_rv_lines.setOnClickListener {
+            loadLines()
+            lines_activity_img_lottie_conection.visibility = VISIBLE
+            lines_activity_tv_connection_error.visibility = VISIBLE
+            lines_activity_rv_lines.visibility = INVISIBLE
+        }
     }
 
     private fun bottomNavigationBarListener() {
@@ -78,6 +87,14 @@ class SogalLinesActivity : AppCompatActivity(), GenericLinesAdapterDelegate {
         adapter = GenericLinesAdapter(it, this@SogalLinesActivity, this)
         lines_activity_rv_lines.adapter = adapter
         progressDialog.hideLoader()
+        successConfig()
+    }
+
+    private fun successConfig() {
+        lines_activity_rv_lines.setOnClickListener(null)
+        lines_activity_rv_lines.visibility = VISIBLE
+        lines_activity_img_lottie_conection.visibility = GONE
+        lines_activity_tv_connection_error.visibility = GONE
     }
 
     override fun onItemClickLitener(line: BaseLine) {
