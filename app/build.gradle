@@ -22,10 +22,16 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    def room_version = "2.2.0-alpha01"
+
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.0-M1"
     apply plugin: 'kotlin-android-extensions'
     testImplementation 'junit:junit:4.12'
     //Service Implementation
@@ -38,4 +44,5 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:28.0.0'
     implementation 'com.android.support:design:28.0.0'
     implementation files('/Users/esser/Desktop/AndroidStudioProjects/bustime-kotlin/jsoup-1.12.1.jar')
+    implementation 'com.airbnb.android:lottie:2.5.0-rc1'
 }

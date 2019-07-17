@@ -16,17 +16,18 @@
 
         <activity android:name=".vvm.home.HomeActivity"
                   android:screenOrientation="portrait">
+        </activity>
+
+        <activity android:name=".vvm.sogal.itineraries.SogalItinerariesActivity"
+                  android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".vvm.sogal.lines.SogalLinesActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
-        <activity android:name=".vvm.sogal.itineraries.SogalItinerariesActivity"
-                  android:screenOrientation="portrait">
-        </activity>
-        <activity android:name=".vvm.sogal.lines.SogalLinesActivity"/>
         <activity android:name=".vvm.sogal.schedules.SogalSchedulesActivity"
                   android:screenOrientation="portrait">
         </activity>

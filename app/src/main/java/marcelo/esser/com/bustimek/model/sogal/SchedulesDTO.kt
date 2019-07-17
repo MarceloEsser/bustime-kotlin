@@ -1,8 +1,13 @@
 package marcelo.esser.com.bustimek.model.sogal
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+@Entity
 class SchedulesDTO(
+
+    @PrimaryKey(autoGenerate = true)
     var id: Long?,
 
     @SerializedName("hora")

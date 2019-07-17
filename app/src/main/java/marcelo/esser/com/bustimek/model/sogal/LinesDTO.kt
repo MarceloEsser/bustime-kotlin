@@ -2,10 +2,10 @@ package marcelo.esser.com.bustimek.model.sogal
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import marcelo.esser.com.bustimek.model.LineCodeLineName
+import marcelo.esser.com.bustimek.model.BaseLine
 
 class LinesDTO(
     @SerializedName("itinerarios")
     @Expose
     var itineraries: List<ItinerariesDTO>? = null
-) : LineCodeLineName()
+) : BaseLine()

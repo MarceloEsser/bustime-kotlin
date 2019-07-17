@@ -13,7 +13,9 @@ import marcelo.esser.com.bustimek.helper.Constants.BC_WAY
 import marcelo.esser.com.bustimek.helper.Constants.CB_WAY
 import marcelo.esser.com.bustimek.helper.ProgressDialogHelper
 import marcelo.esser.com.bustimek.interfaces.GenericLinesAdapterDelegate
+import marcelo.esser.com.bustimek.model.BaseLine
 import marcelo.esser.com.bustimek.model.sogal.LinesDTO
+import marcelo.esser.com.bustimek.vvm.lineDialog.LineMenuDialog
 import marcelo.esser.com.bustimek.vvm.sogal.schedules.SogalSchedulesActivity
 
 class SogalLinesActivity : AppCompatActivity(), GenericLinesAdapterDelegate {
@@ -25,8 +27,12 @@ class SogalLinesActivity : AppCompatActivity(), GenericLinesAdapterDelegate {
         ProgressDialogHelper(this@SogalLinesActivity)
     }
 
+    private val lineMenuDialog: LineMenuDialog by lazy {
+        LineMenuDialog()
+    }
+
     private lateinit var adapter: GenericLinesAdapter
-    var lineWay: String  = CB_WAY
+    var lineWay: String = CB_WAY
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,13 +75,13 @@ class SogalLinesActivity : AppCompatActivity(), GenericLinesAdapterDelegate {
     }
 
     private fun adapterConstruct(it: List<LinesDTO>) {
-        adapter = GenericLinesAdapter(it,this@SogalLinesActivity, this)
+        adapter = GenericLinesAdapter(it, this@SogalLinesActivity, this)
         lines_activity_rv_lines.adapter = adapter
         progressDialog.hideLoader()
     }
 
-    override fun onItemClickLitener(lineCode: String, lineName: String) {
-        viewModelSogal.saveData(lineCode, lineName, lineWay)
-        startActivity(Intent(this@SogalLinesActivity, SogalSchedulesActivity::class.java))
+    override fun onItemClickLitener(line: BaseLine) {
+        viewModelSogal.saveData(line.code, line.name, lineWay)
+        lineMenuDialog.show(supportFragmentManager, "lineMenuDialog")
     }
 }

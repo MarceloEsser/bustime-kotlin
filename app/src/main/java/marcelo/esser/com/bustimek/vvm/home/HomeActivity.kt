@@ -1,21 +1,15 @@
 package marcelo.esser.com.bustimek.vvm.home
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_home.*
 import marcelo.esser.com.bustimek.R
 import marcelo.esser.com.bustimek.service.vicasaServices.VicasaService
-import marcelo.esser.com.bustimek.vvm.sogal.lines.SogalLinesActivity
-import marcelo.esser.com.bustimek.vvm.vicasa.lines.VicasaLinesActivity
 import okhttp3.ResponseBody
-import org.jsoup.Jsoup
-import org.jsoup.nodes.Document
-import org.jsoup.nodes.Element
+import org.w3c.dom.Document
+import org.w3c.dom.Element
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import javax.xml.parsers.DocumentBuilderFactory
 
 class HomeActivity : AppCompatActivity() {
 
@@ -33,13 +27,13 @@ class HomeActivity : AppCompatActivity() {
 
         chamaServico()
 
-        cv_home_activity_vicasa.setOnClickListener {
+        /*cv_home_activity_vicasa.setOnClickListener {
             chamaServico()
         }
 
         cv_home_activity_sogal.setOnClickListener {
             startActivity(Intent(activityContext, SogalLinesActivity::class.java))
-        }
+        }*/
     }
 
     private fun chamaServico() {
