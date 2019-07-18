@@ -1,6 +1,6 @@
 package esser.marcelo.busoclock.vvm.sogal.lines
 
-import esser.marcelo.busoclock.dao.LinesDAO
+import esser.marcelo.busoclock.dao.LineDAO
 import esser.marcelo.busoclock.model.sogal.LinesDTO
 import esser.marcelo.busoclock.service.sogalServices.SogalService
 import retrofit2.Call
@@ -36,8 +36,8 @@ class SogalLinesActivityViewModel {
     }
 
     fun saveData(lineCode: String, lineName: String, lineWay: String) {
-        LinesDAO.lineName = lineName
-        LinesDAO.lineCode= lineCode
-        LinesDAO.lineWay= lineWay
+        LineDAO.lineName = lineName
+        LineDAO.lineCode= lineCode
+        LineDAO.lineWay= lineWay
     }
 }

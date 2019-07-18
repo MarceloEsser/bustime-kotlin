@@ -2,6 +2,8 @@ package esser.marcelo.busoclock.vvm.vicasa.lines
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
+import android.view.View.VISIBLE
 import android.view.WindowManager
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_lines.*
@@ -14,6 +16,7 @@ import esser.marcelo.busoclock.interfaces.FilterDialogInteraction
 import esser.marcelo.busoclock.interfaces.GenericLinesAdapterDelegate
 import esser.marcelo.busoclock.model.BaseLine
 import esser.marcelo.busoclock.model.vicasa.Vicasa
+import esser.marcelo.busoclock.vvm.lineDialog.LineMenuDialog
 import esser.marcelo.busoclock.vvm.vicasa.filterDialog.VicasaFilterDialog
 
 class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction, GenericLinesAdapterDelegate {
@@ -26,9 +29,17 @@ class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction, Generi
         ProgressDialogHelper(this@VicasaLinesActivity)
     }
 
+    private val lineMenuDialog: LineMenuDialog by lazy {
+        LineMenuDialog(true)
+    }
+
     private lateinit var dialog: VicasaFilterDialog
     private lateinit var adapter: GenericLinesAdapter
+
     private var lineWay: String = CB_WAY
+    private var countryOrigin: String = ""
+    private var countryDestination: String = ""
+    private var serviceType: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,20 +81,46 @@ class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction, Generi
     }
 
     private fun adapterConstruct(it: List<Vicasa>) {
+        successConfig()
         adapter = GenericLinesAdapter(it, this@VicasaLinesActivity, this)
         lines_activity_rv_lines.adapter = adapter
+        lines_activity_rv_lines.visibility = VISIBLE
         progressDialog.hideLoader()
     }
 
     override fun onItemClickLitener(line: BaseLine) {
         viewModel.saveData(line.code, line.name, lineWay)
-        Toast.makeText(this@VicasaLinesActivity, line.code, Toast.LENGTH_LONG).show()
+        lineMenuDialog.show(supportFragmentManager, "lineMenuDialog")
     }
 
-    override fun doFilter(countryOridin: String, countryDestination: String, serviceType: String) {
+    private fun successConfig() {
+        lines_activity_rv_lines.setOnClickListener(null)
+        lines_activity_rv_lines.visibility = VISIBLE
+        lines_activity_img_lottie_conection.visibility = View.GONE
+        lines_activity_tv_connection_error.visibility = View.GONE
+    }
+
+    private fun onError() {
+        lines_activity_img_lottie_conection.resumeAnimation()
+
+        lines_activity_img_lottie_conection.setOnClickListener {
+            lines_activity_img_lottie_conection.pauseAnimation()
+            doFilter(countryOrigin, countryDestination, serviceType)
+        }
+
+        lines_activity_img_lottie_conection.visibility = VISIBLE
+        lines_activity_tv_connection_error.visibility = VISIBLE
+        lines_activity_rv_lines.visibility = View.INVISIBLE
+    }
+
+    override fun doFilter(countryOrigin: String, countryDestination: String, serviceType: String) {
         progressDialog.showLoader()
+        this.countryOrigin = countryOrigin
+        this.countryDestination = countryDestination
+        this.serviceType = serviceType
+
         viewModel.loadVicasaLinesBy(
-            lineOrigin = countryOridin,
+            lineOrigin = countryOrigin,
             lineDestination = countryDestination,
             lineService = serviceType,
             onSuccess = {
@@ -91,7 +128,7 @@ class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction, Generi
                 adapterConstruct(it)
             }, onError = {
                 progressDialog.hideLoader()
-                Toast.makeText(this@VicasaLinesActivity, "Ops", Toast.LENGTH_SHORT).show()
+                onError()
             })
     }
 }

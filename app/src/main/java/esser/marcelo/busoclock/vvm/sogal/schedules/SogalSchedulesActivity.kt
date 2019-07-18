@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_schedules.*
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.adapter.SchedulesAdapter
-import esser.marcelo.busoclock.dao.LinesDAO
+import esser.marcelo.busoclock.dao.LineDAO
 import esser.marcelo.busoclock.helper.ProgressDialogHelper
 import esser.marcelo.busoclock.model.sogal.SchedulesDTO
 import esser.marcelo.busoclock.model.sogal.SogalResponse
@@ -42,7 +42,7 @@ class SogalSchedulesActivity : AppCompatActivity() {
             finish()
         }
 
-        shcedule_activity_tv_line_name.text = LinesDAO.lineName
+        shcedule_activity_tv_line_name.text = LineDAO.lineName
     }
 
     private fun btnGoToItineraries() {

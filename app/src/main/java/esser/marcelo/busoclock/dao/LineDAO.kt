@@ -2,7 +2,7 @@ package esser.marcelo.busoclock.dao
 
 import esser.marcelo.busoclock.model.sogal.SchedulesDTO
 
-object LinesDAO {
+object LineDAO {
 
     var lineName: String = ""
     var lineCode: String = ""

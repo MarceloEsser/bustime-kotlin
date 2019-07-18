@@ -1,9 +1,16 @@
 package esser.marcelo.busoclock.vvm.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.service.vicasaServices.VicasaService
+import esser.marcelo.busoclock.vvm.sogal.lines.SogalLinesActivity
+import esser.marcelo.busoclock.vvm.vicasa.lines.VicasaLinesActivity
+import kotlinx.android.synthetic.main.activity_home.*
+import org.jsoup.Jsoup
+import org.jsoup.nodes.Document
+import org.jsoup.nodes.Element
 
 class HomeActivity : AppCompatActivity() {
 
@@ -21,38 +28,13 @@ class HomeActivity : AppCompatActivity() {
 
         //chamaServico()
 
-        /*cv_home_activity_vicasa.setOnClickListener {
-            chamaServico()
+        cv_home_activity_vicasa.setOnClickListener {
+            startActivity(Intent(activityContext, VicasaLinesActivity::class.java))
         }
 
         cv_home_activity_sogal.setOnClickListener {
             startActivity(Intent(activityContext, SogalLinesActivity::class.java))
-        }*/
+        }
     }
 
-    /*private fun chamaServico() {
-        vicasaString.vicasaService().getVicasaSchedules("I307C").enqueue(object : Callback<ResponseBody> {
-            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-
-            }
-
-            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                parseResponse(response.body()!!.string())
-            }
-        })
-    }*/
-
-    /*fun parseResponse(response: String) {
-        print(response)
-        val diasUteisCBCCSelector =
-            "body > table:nth-child(2) > tbody > tr > td > table.texto_linhas > tbody > tr:nth-child(5) > td:nth-child(4)"
-        val document: Document = Jsoup.parse(response)
-        val diasCBElement: Element? = document.selectFirst(diasUteisCBCCSelector)
-
-        for (element in diasCBElement!!.children()) {
-            val texto = element.text()
-            println(texto)
-        }
-
-    }*/
 }

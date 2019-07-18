@@ -8,16 +8,16 @@ import com.google.gson.annotations.SerializedName
 class SchedulesDTO(
 
     @PrimaryKey(autoGenerate = true)
-    var id: Long?,
+    var id: Long = 0,
 
     @SerializedName("hora")
-    var hour: String? = null,
+    var hour: String = "",
 
     @SerializedName("abrev")
-    var abrev: String? = null,
+    var abrev: String =  "",
 
     @SerializedName("apd")
-    var apd: String? = null
+    var apd: String = "N"
 ) {
     fun isApd(): Boolean {
         return apd != null && apd.equals("S")

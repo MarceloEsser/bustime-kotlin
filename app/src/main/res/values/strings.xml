@@ -24,4 +24,5 @@
     <string name="filter_options">Opções de filtro</string>
     <string name="filter_description">Botão para realizar filtro das linhas de onibus da vicasa</string>
     <string name="error_conection">Parece que ocorreu algum problema, verifique sua conexão e tente novamente</string>
+    <string name="no_items">Não há horários</string>
 </resources>

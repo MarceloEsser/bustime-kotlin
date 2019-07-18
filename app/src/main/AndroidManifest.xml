@@ -13,26 +13,31 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
-
-        <activity android:name="esser.marcelo.busoclock.vvm.home.HomeActivity"
+        <activity android:name=".vvm.vicasa.schedules.VicasaSchedulesActivity"
                   android:screenOrientation="portrait">
         </activity>
-
-        <activity android:name="esser.marcelo.busoclock.vvm.sogal.itineraries.SogalItinerariesActivity"
-                  android:screenOrientation="portrait">
-        </activity>
-        <activity android:name="esser.marcelo.busoclock.vvm.sogal.lines.SogalLinesActivity">
+        <activity
+                android:name=".vvm.home.HomeActivity"
+                android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="esser.marcelo.busoclock.vvm.sogal.schedules.SogalSchedulesActivity"
-                  android:screenOrientation="portrait">
+        <activity
+                android:name=".vvm.sogal.itineraries.SogalItinerariesActivity"
+                android:screenOrientation="portrait">
         </activity>
-        <activity android:name="esser.marcelo.busoclock.vvm.vicasa.lines.VicasaLinesActivity"
-                  android:screenOrientation="portrait">
+        <activity android:name=".vvm.sogal.lines.SogalLinesActivity">
+        </activity>
+        <activity
+                android:name=".vvm.sogal.schedules.SogalSchedulesActivity"
+                android:screenOrientation="portrait">
+        </activity>
+        <activity
+                android:name=".vvm.vicasa.lines.VicasaLinesActivity"
+                android:screenOrientation="portrait">
         </activity>
     </application>
 

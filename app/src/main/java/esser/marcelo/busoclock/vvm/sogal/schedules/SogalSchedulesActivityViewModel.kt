@@ -1,6 +1,6 @@
 package esser.marcelo.busoclock.vvm.sogal.schedules
 
-import esser.marcelo.busoclock.dao.LinesDAO
+import esser.marcelo.busoclock.dao.LineDAO
 import esser.marcelo.busoclock.model.sogal.SchedulesDTO
 import esser.marcelo.busoclock.model.sogal.SogalResponse
 import esser.marcelo.busoclock.service.sogalServices.ISogalService
@@ -27,8 +27,8 @@ class SogalSchedulesActivityViewModel {
         onSuccess: (response: SogalResponse) -> Unit,
         onError: (errorMessage: String) -> Unit
     ) {
-        val lineWay: String = LinesDAO.lineWay
-        val lineCode: String = LinesDAO.lineCode
+        val lineWay: String = LineDAO.lineWay
+        val lineCode: String = LineDAO.lineCode
 
         sogalService.getSogalSchedulesBy(lineWay = lineWay, lineCode = lineCode)
             .enqueue(object : Callback<SogalResponse> {

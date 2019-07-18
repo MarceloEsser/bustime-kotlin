@@ -6,7 +6,7 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_itineraries.*
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.adapter.ItinerariesAdapter
-import esser.marcelo.busoclock.dao.LinesDAO
+import esser.marcelo.busoclock.dao.LineDAO
 import esser.marcelo.busoclock.helper.ProgressDialogHelper
 import esser.marcelo.busoclock.model.sogal.ItinerariesDTO
 
@@ -29,7 +29,7 @@ class SogalItinerariesActivity : AppCompatActivity() {
         btnBack()
         loadItineraries()
 
-        itineraries_activity_tv_line_name.text = LinesDAO.lineName
+        itineraries_activity_tv_line_name.text = LineDAO.lineName
     }
 
     private fun btnBack() {

@@ -1,6 +1,6 @@
 package esser.marcelo.busoclock.vvm.vicasa.lines
 
-import esser.marcelo.busoclock.dao.LinesDAO
+import esser.marcelo.busoclock.dao.LineDAO
 import esser.marcelo.busoclock.model.vicasa.Vicasa
 import esser.marcelo.busoclock.service.vicasaServices.VicasaService
 import okhttp3.ResponseBody
@@ -68,9 +68,9 @@ class VicasaLinesActivityViewModel {
     }
 
     fun saveData(lineCode: String, lineName: String, lineWay: String) {
-        LinesDAO.lineName = lineName
-        LinesDAO.lineCode = lineCode
-        LinesDAO.lineWay = lineWay
+        LineDAO.lineName = lineName
+        LineDAO.lineCode = lineCode
+        LineDAO.lineWay = lineWay
 
     }
 }

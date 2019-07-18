@@ -29,7 +29,7 @@ class SogalLinesActivity : AppCompatActivity(), GenericLinesAdapterDelegate {
     }
 
     private val lineMenuDialog: LineMenuDialog by lazy {
-        LineMenuDialog()
+        LineMenuDialog(false)
     }
 
     private lateinit var adapter: GenericLinesAdapter

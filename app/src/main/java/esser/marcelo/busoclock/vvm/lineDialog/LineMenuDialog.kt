@@ -1,20 +1,26 @@
 package esser.marcelo.busoclock.vvm.lineDialog
 
 import android.animation.ValueAnimator
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.view.*
+import android.view.View.GONE
 import com.airbnb.lottie.LottieAnimationView
 import kotlinx.android.synthetic.main.dialog_line_menu.*
 import esser.marcelo.busoclock.R
-import esser.marcelo.busoclock.dao.LinesDAO
+import esser.marcelo.busoclock.dao.LineDAO
 import esser.marcelo.busoclock.helper.Constants.CB_WAY
 import esser.marcelo.busoclock.vvm.sogal.itineraries.SogalItinerariesActivity
 import esser.marcelo.busoclock.vvm.sogal.schedules.SogalSchedulesActivity
+import esser.marcelo.busoclock.vvm.vicasa.schedules.VicasaSchedulesActivity
 
-class LineMenuDialog : DialogFragment() {
+@SuppressLint("ValidFragment")
+class LineMenuDialog @SuppressLint("ValidFragment") constructor(
+    val isFromVicasa: Boolean
+) : DialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.dialog_line_menu, container, false)
@@ -29,6 +35,10 @@ class LineMenuDialog : DialogFragment() {
         lottieAnimationSetup()
         lineSetup()
         clickEvent()
+
+        if (isFromVicasa) {
+            btn_line_menu_dialog_itineraries.visibility = GONE
+        }
     }
 
     private fun clickEvent() {
@@ -38,7 +48,11 @@ class LineMenuDialog : DialogFragment() {
 
     private fun goToSchedules() {
         btn_line_menu_dialog_schedules.setOnClickListener {
-            startActivity(Intent(context, SogalSchedulesActivity::class.java))
+            if (isFromVicasa) {
+                startActivity(Intent(context, VicasaSchedulesActivity::class.java))
+            } else {
+                startActivity(Intent(context, SogalSchedulesActivity::class.java))
+            }
             dismiss()
         }
     }
@@ -53,7 +67,11 @@ class LineMenuDialog : DialogFragment() {
     private fun lottieAnimationSetup() {
         if (animationView != null) {
             animationView!!.setOnClickListener {
-                val animator = if (animationView!!.progress == 0f) ValueAnimator.ofFloat(0f, 0.5f) else ValueAnimator.ofFloat(0.5f, 1f)
+                val animator =
+                    if (animationView!!.progress == 0f) ValueAnimator.ofFloat(0f, 0.5f) else ValueAnimator.ofFloat(
+                        0.5f,
+                        1f
+                    )
                 animator.addUpdateListener { animation ->
                     animationView!!.progress = animation.animatedValue as Float
                 }
@@ -64,10 +82,10 @@ class LineMenuDialog : DialogFragment() {
     }
 
     private fun lineSetup() {
-        tv_line_menu_dialog_line_name.text = LinesDAO.lineName
-        tv_line_menu_dialog_line_code.text = LinesDAO.lineCode
+        tv_line_menu_dialog_line_name.text = LineDAO.lineName
+        tv_line_menu_dialog_line_code.text = LineDAO.lineCode
 
-        if (LinesDAO.lineWay.equals(CB_WAY))
+        if (LineDAO.lineWay.equals(CB_WAY))
             tv_line_menu_dialog_line_way.text = "Centro Bairro"
         else tv_line_menu_dialog_line_way.text = "Bairro Centro"
     }
