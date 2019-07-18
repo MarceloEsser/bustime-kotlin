@@ -1,23 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:focusable="true"
         style="@style/RowLineStyle"
         android:layout_height="70dp">
 
+    <ImageView
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/ic_bookmark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="16dp"
+            android:layout_height="20dp" android:id="@+id/imageView"/>
+
     <TextView
             android:id="@+id/tv_line_name"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             android:text="nome da linha"
             android:textColor="@color/black"
-            android:textSize="14sp"/>
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/imageView"/>
 
     <TextView
             android:id="@+id/tv_line_code"
@@ -26,7 +36,7 @@
             android:text="numero da linha"
             android:textColor="@color/black"
             android:layout_margin="10dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             android:textSize="12sp"/>
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

@@ -15,6 +15,9 @@ import esser.marcelo.busoclock.interfaces.GenericLinesAdapterDelegate
 import esser.marcelo.busoclock.model.BaseLine
 import esser.marcelo.busoclock.model.sogal.LinesDTO
 import esser.marcelo.busoclock.vvm.lineDialog.LineMenuDialog
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class SogalLinesActivity : AppCompatActivity(), GenericLinesAdapterDelegate {
     private val viewModelSogal: SogalLinesActivityViewModel by lazy {
@@ -37,31 +40,36 @@ class SogalLinesActivity : AppCompatActivity(), GenericLinesAdapterDelegate {
         setContentView(R.layout.activity_lines)
 
         this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        activity_lines_imgbtn_filter.visibility = View.GONE
-
-        loadLines()
+        activity_lines_imgbtn_filter.visibility = GONE
 
         bottomNavigationBarListener()
     }
 
     private fun loadLines() {
         progressDialog.showLoader()
-        viewModelSogal.loadSogalLines(
-            onSucces = {
-                adapterConstruct(it)
-            }, onError = {
-                progressDialog.hideLoader()
-                onError()
-            })
+        GlobalScope.launch {
+            delay(400L)
+            viewModelSogal.loadSogalLines(
+                onSucces = {
+                    adapterConstruct(it)
+                }, onError = {
+                    progressDialog.hideLoader()
+                    onError()
+                })
+        }
     }
 
     private fun onError() {
-        lines_activity_rv_lines.setOnClickListener {
+        lines_activity_img_lottie_conection.resumeAnimation()
+
+        lines_activity_img_lottie_conection.setOnClickListener {
+            lines_activity_img_lottie_conection.pauseAnimation()
             loadLines()
-            lines_activity_img_lottie_conection.visibility = VISIBLE
-            lines_activity_tv_connection_error.visibility = VISIBLE
-            lines_activity_rv_lines.visibility = INVISIBLE
         }
+
+        lines_activity_img_lottie_conection.visibility = VISIBLE
+        lines_activity_tv_connection_error.visibility = VISIBLE
+        lines_activity_rv_lines.visibility = INVISIBLE
     }
 
     private fun bottomNavigationBarListener() {
@@ -79,6 +87,13 @@ class SogalLinesActivity : AppCompatActivity(), GenericLinesAdapterDelegate {
             }
         }
     }
+
+
+    override fun onStart() {
+        super.onStart()
+        loadLines()
+    }
+
 
     private fun adapterConstruct(it: List<LinesDTO>) {
         adapter = GenericLinesAdapter(it, this@SogalLinesActivity, this)
