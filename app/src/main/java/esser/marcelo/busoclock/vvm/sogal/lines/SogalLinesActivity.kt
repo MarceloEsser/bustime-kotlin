@@ -2,10 +2,10 @@ package esser.marcelo.busoclock.vvm.sogal.lines
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.View
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View.*
 import android.view.WindowManager
-import kotlinx.android.synthetic.main.activity_lines.*
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.adapter.GenericLinesAdapter
 import esser.marcelo.busoclock.helper.Constants.BC_WAY
@@ -15,12 +15,14 @@ import esser.marcelo.busoclock.interfaces.GenericLinesAdapterDelegate
 import esser.marcelo.busoclock.model.BaseLine
 import esser.marcelo.busoclock.model.sogal.LinesDTO
 import esser.marcelo.busoclock.vvm.lineDialog.LineMenuDialog
+import kotlinx.android.synthetic.main.activity_lines.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+
 class SogalLinesActivity : AppCompatActivity(), GenericLinesAdapterDelegate {
-    private val viewModelSogal: SogalLinesActivityViewModel by lazy {
+    private val viewModel: SogalLinesActivityViewModel by lazy {
         SogalLinesActivityViewModel()
     }
 
@@ -43,13 +45,38 @@ class SogalLinesActivity : AppCompatActivity(), GenericLinesAdapterDelegate {
         activity_lines_imgbtn_filter.visibility = GONE
 
         bottomNavigationBarListener()
+
+        searchEvent()
+
+        lines_activity_img_btn_back.setOnClickListener {
+            onBackPressed()
+        }
+    }
+
+    private fun searchEvent() {
+        activity_lines_et_search.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                adapterConstruct(viewModel.linesList.filter {
+                    it.name.toLowerCase().contains(activity_lines_et_search.text.toString().toLowerCase())
+                            || it.code.toLowerCase().contains(activity_lines_et_search.text.toString().toLowerCase())
+                })
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+        })
     }
 
     private fun loadLines() {
         progressDialog.showLoader()
         GlobalScope.launch {
             delay(400L)
-            viewModelSogal.loadSogalLines(
+            viewModel.loadSogalLines(
                 onSucces = {
                     adapterConstruct(it)
                 }, onError = {
@@ -110,7 +137,7 @@ class SogalLinesActivity : AppCompatActivity(), GenericLinesAdapterDelegate {
     }
 
     override fun onItemClickLitener(line: BaseLine) {
-        viewModelSogal.saveData(line.code, line.name, lineWay)
+        viewModel.saveData(line.code, line.name, lineWay)
         lineMenuDialog.show(supportFragmentManager, "lineMenuDialog")
     }
 }

@@ -5,10 +5,12 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.row_line.view.*
+import com.airbnb.lottie.LottieDrawable
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.interfaces.GenericLinesAdapterDelegate
 import esser.marcelo.busoclock.model.BaseLine
+import kotlinx.android.synthetic.main.row_line.view.*
+
 
 class GenericLinesAdapter(
     val lines: List<BaseLine>,
@@ -27,6 +29,9 @@ class GenericLinesAdapter(
 
     override fun onBindViewHolder(viewHolder: GenericLinesViewHolder, position: Int) {
         val line = lines[position]
+        val drawable = LottieDrawable()
+
+
         with(viewHolder) {
             tvLineName.text = line.name
             tvLineCode.text = line.code

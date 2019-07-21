@@ -14,6 +14,7 @@ import retrofit2.Response
 class SogalLinesActivityViewModel {
     private val service = SogalService().sogalSerivce()
     private val SEARCH_LINES: String = "buscaLinhas"
+    var linesList: MutableList<LinesDTO> = ArrayList()
 
     fun loadSogalLines(
         onSucces: (linesDTO: List<LinesDTO>) -> Unit,
@@ -27,6 +28,7 @@ class SogalLinesActivityViewModel {
             override fun onResponse(call: Call<List<LinesDTO>>, response: Response<List<LinesDTO>>) {
                 if (response.body() != null) {
                     onSucces(response.body()!!)
+                    linesList = response.body()!! as MutableList<LinesDTO>
                 } else {
                     onError("Houve algum erro em buscar as linhas")
                 }
@@ -37,7 +39,7 @@ class SogalLinesActivityViewModel {
 
     fun saveData(lineCode: String, lineName: String, lineWay: String) {
         LineDAO.lineName = lineName
-        LineDAO.lineCode= lineCode
-        LineDAO.lineWay= lineWay
+        LineDAO.lineCode = lineCode
+        LineDAO.lineWay = lineWay
     }
 }

@@ -25,4 +25,17 @@
     <string name="filter_description">Botão para realizar filtro das linhas de onibus da vicasa</string>
     <string name="error_conection">Parece que ocorreu algum problema, verifique sua conexão e tente novamente</string>
     <string name="no_items">Não há horários</string>
+    <string name="home_title">Canoas horários</string>
+    <string name="about">Sobre o aplicativo</string>
+    <string name="about_content">Este aplicativo tem o inuito de informar os horários de partidas dos ônibus seja sentido bairro centro, centro bairro, centro circular ou bairro circular (em Canoas).
+        Não contendo nem um vínculo com as empresas de transporte público.
+    </string>
+    <string name="sogal_wpp">(51) 98194-9917 </string>
+    <string name="sogal_residential_phone">(51) 3472-6233</string>
+    <string name="contacts">Contatos:</string>
+    <string name="vicasa_phone">(51) 3462-3200</string>
+    <string name="about_me">Sobre mim</string>
+    <string name="github_profile">MarceloEsser</string>
+    <string name="gmail_profile">marcelo.v.esser@gmail.com</string>
+    <string name="linkedin_profile">Marcelo Esser</string>
 </resources>

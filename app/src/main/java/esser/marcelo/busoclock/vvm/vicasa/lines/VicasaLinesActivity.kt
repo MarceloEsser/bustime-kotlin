@@ -2,10 +2,11 @@ package esser.marcelo.busoclock.vvm.vicasa.lines
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.view.View.VISIBLE
 import android.view.WindowManager
-import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_lines.*
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.adapter.GenericLinesAdapter
@@ -49,6 +50,31 @@ class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction, Generi
         buildDialog()
         bottomNavigationBarListener()
         dialogDoFilter()
+
+        searchEvent()
+
+        lines_activity_img_btn_back.setOnClickListener {
+            onBackPressed()
+        }
+    }
+
+    private fun searchEvent() {
+        activity_lines_et_search.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                buildAdapter(viewModel.resultsList.filter {
+                    it.name.toLowerCase().contains(activity_lines_et_search.text.toString().toLowerCase())
+                            || it.code.toLowerCase().contains(activity_lines_et_search.text.toString().toLowerCase())
+                })
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+        })
     }
 
     private fun buildDialog() {
@@ -80,12 +106,10 @@ class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction, Generi
         }
     }
 
-    private fun adapterConstruct(it: List<Vicasa>) {
-        successConfig()
+    private fun buildAdapter(it: List<Vicasa>) {
         adapter = GenericLinesAdapter(it, this@VicasaLinesActivity, this)
         lines_activity_rv_lines.adapter = adapter
         lines_activity_rv_lines.visibility = VISIBLE
-        progressDialog.hideLoader()
     }
 
     override fun onItemClickLitener(line: BaseLine) {
@@ -103,18 +127,23 @@ class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction, Generi
     private fun onError() {
         lines_activity_img_lottie_conection.resumeAnimation()
 
-        lines_activity_img_lottie_conection.setOnClickListener {
-            lines_activity_img_lottie_conection.pauseAnimation()
-            doFilter(countryOrigin, countryDestination, serviceType)
-        }
+        lottieAnimationClick()
 
         lines_activity_img_lottie_conection.visibility = VISIBLE
         lines_activity_tv_connection_error.visibility = VISIBLE
         lines_activity_rv_lines.visibility = View.INVISIBLE
     }
 
+    private fun lottieAnimationClick() {
+        lines_activity_img_lottie_conection.setOnClickListener {
+            lines_activity_img_lottie_conection.pauseAnimation()
+            doFilter(countryOrigin, countryDestination, serviceType)
+        }
+    }
+
     override fun doFilter(countryOrigin: String, countryDestination: String, serviceType: String) {
         progressDialog.showLoader()
+
         this.countryOrigin = countryOrigin
         this.countryDestination = countryDestination
         this.serviceType = serviceType
@@ -124,11 +153,12 @@ class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction, Generi
             lineDestination = countryDestination,
             lineService = serviceType,
             onSuccess = {
+                successConfig()
+                buildAdapter(it)
                 progressDialog.hideLoader()
-                adapterConstruct(it)
             }, onError = {
-                progressDialog.hideLoader()
                 onError()
+                progressDialog.hideLoader()
             })
     }
 }
