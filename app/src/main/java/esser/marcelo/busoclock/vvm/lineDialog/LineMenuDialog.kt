@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.view.*
 import android.view.View.GONE
+import android.widget.ArrayAdapter
 import com.airbnb.lottie.LottieAnimationView
 import kotlinx.android.synthetic.main.dialog_line_menu.*
 import esser.marcelo.busoclock.R
@@ -22,23 +23,40 @@ class LineMenuDialog @SuppressLint("ValidFragment") constructor(
     val isFromVicasa: Boolean
 ) : DialogFragment() {
 
+    private val viewModel: LineMenuDialogViewModel by lazy {
+        LineMenuDialogViewModel()
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.dialog_line_menu, container, false)
     }
 
-    private var animationView: LottieAnimationView? = null
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        animationView = lottie_animation_view_radio_button
 
-        lottieAnimationSetup()
         lineSetup()
         clickEvent()
 
+        validateWhatIsToDo()
+    }
+
+    private fun validateWhatIsToDo() {
         if (isFromVicasa) {
             btn_line_menu_dialog_itineraries.visibility = GONE
+            tv_line_menu_dialog_line_way.visibility = GONE
+            lineWaySpinner()
+        } else {
+            menu_dialog_sp_line_way.visibility = GONE
+            menu_dialog_tv_lineway_header.visibility = GONE
         }
+    }
+
+    private fun lineWaySpinner() {
+        val adapter = ArrayAdapter(
+            this.activity!!, android.R.layout.simple_spinner_item, viewModel.getWaysList()
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        menu_dialog_sp_line_way.adapter = adapter
     }
 
     private fun clickEvent() {
@@ -64,23 +82,6 @@ class LineMenuDialog @SuppressLint("ValidFragment") constructor(
         }
     }
 
-    private fun lottieAnimationSetup() {
-        if (animationView != null) {
-            animationView!!.setOnClickListener {
-                val animator =
-                    if (animationView!!.progress == 0f) ValueAnimator.ofFloat(0f, 0.5f) else ValueAnimator.ofFloat(
-                        0.5f,
-                        1f
-                    )
-                animator.addUpdateListener { animation ->
-                    animationView!!.progress = animation.animatedValue as Float
-                }
-                animator.duration = 700
-                animator.start()
-            }
-        }
-    }
-
     private fun lineSetup() {
         tv_line_menu_dialog_line_name.text = LineDAO.lineName
         tv_line_menu_dialog_line_code.text = LineDAO.lineCode
@@ -92,7 +93,6 @@ class LineMenuDialog @SuppressLint("ValidFragment") constructor(
 
     override fun onStart() {
         super.onStart()
-        animationView!!.progress = 0.5f
         setupDialog(dialog)
     }
 

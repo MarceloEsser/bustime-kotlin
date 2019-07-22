@@ -42,4 +42,9 @@
     <string name="github_profile_wottrich">Wottrich</string>
     <string name="gmail_profile_wottrich">wottrich78@gmail.com</string>
     <string name="linkedin_profile_wottrich">Lucas Cruz Wottrich</string>
+    <string name="cc_way">Centro Circular</string>
+    <string name="bb_way">Bairro Circular</string>
+    <string name="bc_way">Bairro Centro</string>
+    <string name="cb_way">Centro Bairro</string>
+    <string name="line_way">Sentido da linha</string>
 </resources>

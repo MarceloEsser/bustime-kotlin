@@ -7,11 +7,15 @@ import android.text.TextWatcher
 import android.view.View
 import android.view.View.VISIBLE
 import android.view.WindowManager
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_lines.*
 import esser.marcelo.busoclock.R
+import esser.marcelo.busoclock.R.menu.vicasa_lines_bottom_navigation_menu
 import esser.marcelo.busoclock.adapter.GenericLinesAdapter
+import esser.marcelo.busoclock.helper.Constants.BB_WAY
 import esser.marcelo.busoclock.helper.Constants.BC_WAY
 import esser.marcelo.busoclock.helper.Constants.CB_WAY
+import esser.marcelo.busoclock.helper.Constants.CC_WAY
 import esser.marcelo.busoclock.helper.ProgressDialogHelper
 import esser.marcelo.busoclock.interfaces.FilterDialogInteraction
 import esser.marcelo.busoclock.interfaces.GenericLinesAdapterDelegate
@@ -42,9 +46,13 @@ class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction, Generi
         setContentView(R.layout.activity_lines)
         this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
+        buildDialog()
+
         dialogDoFilter()
 
         listeners()
+
+        lines_bottom_navigation.inflateMenu(vicasa_lines_bottom_navigation_menu)
     }
 
     private fun listeners() {
@@ -57,11 +65,6 @@ class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction, Generi
         lines_activity_img_btn_back.setOnClickListener {
             onBackPressed()
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        buildDialog()
     }
 
     private fun searchEvent() {
@@ -103,6 +106,14 @@ class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction, Generi
                 }
                 R.id.action_bc -> {
                     viewModel.lineWay = BC_WAY
+                    true
+                }
+                R.id.action_cc -> {
+                    viewModel.lineWay = CC_WAY
+                    true
+                }
+                R.id.action_bb -> {
+                    viewModel.lineWay = BB_WAY
                     true
                 }
                 else -> false

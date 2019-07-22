@@ -29,8 +29,6 @@ class GenericLinesAdapter(
 
     override fun onBindViewHolder(viewHolder: GenericLinesViewHolder, position: Int) {
         val line = lines[position]
-        val drawable = LottieDrawable()
-
 
         with(viewHolder) {
             tvLineName.text = line.name

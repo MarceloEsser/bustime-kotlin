@@ -23,4 +23,6 @@ object Constants {
     //line ways
     const val CB_WAY = "buscaHorarioLinhaCB"
     const val BC_WAY = "buscaHorarioLinhaBC"
+    const val CC_WAY = "centroCircular"
+    const val BB_WAY = "bairroCircular"
 }

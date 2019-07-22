@@ -64,10 +64,12 @@ class SogalLinesActivity : AppCompatActivity(), GenericLinesAdapterDelegate {
         lines_bottom_navigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.action_cb -> {
+                    setTitle(R.string.cb_way)
                     lineWay = CB_WAY
                     true
                 }
                 R.id.action_bc -> {
+                    setTitle(R.string.bc_way)
                     lineWay = BC_WAY
                     true
                 }

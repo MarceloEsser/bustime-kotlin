@@ -2,15 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-            android:id="@+id/action_cb"
+            android:id="@+id/action_cc"
             android:enabled="true"
-            android:title="@string/cb_way"
-            android:icon="@drawable/icon_cb"
+            android:title="@string/cc_way"
+            android:icon="@drawable/icon_cc"
             app:showAsAction="ifRoom"/>
     <item
-            android:id="@+id/action_bc"
+            android:id="@+id/action_bb"
             android:enabled="true"
-            android:icon="@drawable/icon_bc"
-            android:title="@string/bc_way"
+            android:icon="@drawable/icon_bb"
+            android:title="@string/bb_way"
             app:showAsAction="ifRoom"/>
 </menu>

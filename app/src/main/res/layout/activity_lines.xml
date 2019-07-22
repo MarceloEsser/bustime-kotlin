@@ -160,19 +160,4 @@
             app:layout_constraintVertical_bias="1.0"
             app:menu="@menu/lines_bottom_navigation_menu"/>
 
-    <android.support.design.widget.BottomNavigationView
-            android:id="@+id/favorites_bottom_navigation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:visibility="gone"
-            app:itemIconTint="@drawable/selector_lines_bottom_navigation"
-            app:itemTextColor="@drawable/selector_lines_bottom_navigation"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            app:menu="@menu/favorites_bottom_navigation_menu"/>
-
 </android.support.constraint.ConstraintLayout>

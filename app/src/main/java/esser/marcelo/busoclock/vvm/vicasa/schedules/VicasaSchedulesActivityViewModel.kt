@@ -1,7 +1,10 @@
 package esser.marcelo.busoclock.vvm.vicasa.schedules
 
 import esser.marcelo.busoclock.dao.LineDAO
+import esser.marcelo.busoclock.helper.Constants.BB_WAY
+import esser.marcelo.busoclock.helper.Constants.BC_WAY
 import esser.marcelo.busoclock.helper.Constants.CB_WAY
+import esser.marcelo.busoclock.helper.Constants.CC_WAY
 import esser.marcelo.busoclock.model.sogal.SchedulesDTO
 import esser.marcelo.busoclock.service.vicasaServices.VicasaService
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -17,22 +20,40 @@ import retrofit2.Response
 
 class VicasaSchedulesActivityViewModel {
 
-    private val WORKINGDAYS_BC_SELECTOR: String =
+    private val WORKINGDAYS_BB_SELECTOR: String =
         "body > table:nth-child(2) > tbody > tr > td > table.texto_linhas > tbody > tr:nth-child(5) > td:nth-child(1)"
 
-    private val SATURDAYS_BC_SELECTOR: String =
+    private val SATURDAYS_BB_SELECTOR: String =
         "body > table:nth-child(2) > tbody > tr > td > table.texto_linhas > tbody > tr:nth-child(5) > td:nth-child(2)"
 
-    private val SUNDAYS_BC_SELECTOR: String =
+    private val SUNDAYS_BB_SELECTOR: String =
         "body > table:nth-child(2) > tbody > tr > td > table.texto_linhas > tbody > tr:nth-child(5) > td:nth-child(3)"
 
+    private val WORKINGDAYS_BC_SELECTOR: String =
+        "body > table:nth-child(2) > tbody > tr > td > table.texto_linhas > tbody > tr:nth-child(2) > td:nth-child(1)"
+
+    private val SATURDAYS_BC_SELECTOR: String =
+        "body > table:nth-child(2) > tbody > tr > td > table.texto_linhas > tbody > tr:nth-child(2) > td:nth-child(2)"
+
+    private val SUNDAYS_BC_SELECTOR: String =
+        "body > table:nth-child(2) > tbody > tr > td > table.texto_linhas > tbody > tr:nth-child(2) > td:nth-child(3)"
+
     private val WORKINGDAYS_CB_SELECTOR: String =
-        "body > table:nth-child(2) > tbody > tr > td > table.texto_linhas > tbody > tr:nth-child(5) > td:nth-child(4)"
+        "body > table:nth-child(2) > tbody > tr > td > table.texto_linhas > tbody > tr:nth-child(2) > td:nth-child(4)"
 
     private val SATURDAYS_CB_SELECTOR: String =
-        "body > table:nth-child(2) > tbody > tr > td > table.texto_linhas > tbody > tr:nth-child(5) > td:nth-child(5)"
+        "body > table:nth-child(2) > tbody > tr > td > table.texto_linhas > tbody > tr:nth-child(2) > td:nth-child(5)"
 
     private val SUNDAYS_CB_SELECTOR: String =
+        "body > table:nth-child(2) > tbody > tr > td > table.texto_linhas > tbody > tr:nth-child(2) > td:nth-child(6)"
+
+    private val WORKINGDAYS_CC_SELECTOR: String =
+        "body > table:nth-child(2) > tbody > tr > td > table.texto_linhas > tbody > tr:nth-child(5) > td:nth-child(4)"
+
+    private val SATURDAYS_CC_SELECTOR: String =
+        "body > table:nth-child(2) > tbody > tr > td > table.texto_linhas > tbody > tr:nth-child(5) > td:nth-child(5)"
+
+    private val SUNDAYS_CC_SELECTOR: String =
         "body > table:nth-child(2) > tbody > tr > td > table.texto_linhas > tbody > tr:nth-child(5) > td:nth-child(6)"
 
     var workingdaysList: MutableList<SchedulesDTO> = ArrayList()
@@ -67,10 +88,11 @@ class VicasaSchedulesActivityViewModel {
     fun parseResponse(response: String, onSuccess: (schedules: List<SchedulesDTO>) -> Unit) = runBlocking {
         val document: Document = Jsoup.parse(response)
 
-        if (LineDAO.lineWay == CB_WAY) {
-            fillCBElements(document)
-        } else {
-            fillBCElements(document)
+        when (LineDAO.lineWay) {
+            CC_WAY -> fillCCElements(document)
+            BB_WAY -> fillBBElements(document)
+            BC_WAY -> fillBCElements(document)
+            CB_WAY -> fillCBElements(document)
         }
 
         val workingdaysListAsync = async { getSchedulesListBy(workingdaysElement) }
@@ -85,16 +107,28 @@ class VicasaSchedulesActivityViewModel {
         )
     }
 
-    private fun fillCBElements(document: Document) {
-        workingdaysElement = document.selectFirst(WORKINGDAYS_CB_SELECTOR)
-        saturdaysElement = document.selectFirst(SATURDAYS_CB_SELECTOR)
-        sundaysElement = document.selectFirst(SUNDAYS_CB_SELECTOR)
+    private fun fillCCElements(document: Document) {
+        workingdaysElement = document.selectFirst(WORKINGDAYS_CC_SELECTOR)
+        saturdaysElement = document.selectFirst(SATURDAYS_CC_SELECTOR)
+        sundaysElement = document.selectFirst(SUNDAYS_CC_SELECTOR)
     }
 
     private fun fillBCElements(document: Document) {
         workingdaysElement = document.selectFirst(WORKINGDAYS_BC_SELECTOR)
         saturdaysElement = document.selectFirst(SATURDAYS_BC_SELECTOR)
         sundaysElement = document.selectFirst(SUNDAYS_BC_SELECTOR)
+    }
+
+    private fun fillBBElements(document: Document) {
+        workingdaysElement = document.selectFirst(WORKINGDAYS_BB_SELECTOR)
+        saturdaysElement = document.selectFirst(SATURDAYS_BB_SELECTOR)
+        sundaysElement = document.selectFirst(SUNDAYS_BB_SELECTOR)
+    }
+
+    private fun fillCBElements(document: Document) {
+        workingdaysElement = document.selectFirst(WORKINGDAYS_CB_SELECTOR)
+        saturdaysElement = document.selectFirst(SATURDAYS_CB_SELECTOR)
+        sundaysElement = document.selectFirst(SUNDAYS_CB_SELECTOR)
     }
 
     fun getSchedulesListBy(element: Element?): MutableList<SchedulesDTO> {
