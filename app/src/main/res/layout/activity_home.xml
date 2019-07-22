@@ -33,7 +33,6 @@
                 android:id="@+id/lines_activity_img_btn_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/background_transparent_ripple_white"
                 android:padding="10dp"
                 android:src="@drawable/icon_back"
                 android:visibility="invisible"

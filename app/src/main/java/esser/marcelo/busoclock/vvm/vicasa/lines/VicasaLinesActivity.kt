@@ -47,7 +47,6 @@ class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction, Generi
         setContentView(R.layout.activity_lines)
         this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        buildDialog()
         bottomNavigationBarListener()
         dialogDoFilter()
 
@@ -58,24 +57,28 @@ class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction, Generi
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        buildDialog()
+    }
+
     private fun searchEvent() {
         activity_lines_et_search.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 buildAdapter(viewModel.resultsList.filter {
                     it.name.toLowerCase().contains(activity_lines_et_search.text.toString().toLowerCase())
                             || it.code.toLowerCase().contains(activity_lines_et_search.text.toString().toLowerCase())
                 })
             }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
-            }
         })
     }
+
 
     private fun buildDialog() {
         dialog = VicasaFilterDialog()

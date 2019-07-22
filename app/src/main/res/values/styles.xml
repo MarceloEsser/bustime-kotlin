@@ -50,7 +50,6 @@
     </style>
 
     <style name="SpinnerStyle">
-        <item name="android:fontFamily">@font/ubuntu_regular</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:background">@drawable/background_spinner</item>
     </style>
@@ -79,13 +78,18 @@
 
     <style name="HomeCardStyleBlue">
         <item name="android:paddingEnd">30dp</item>
-        <item name="android:background">@drawable/background_blue_ripple_whit</item>
+        <item name="android:background">@drawable/background_blue_ripple_blue</item>
         <item name="android:elevation">6dp</item>
     </style>
     <style name="HomeCardStyleGreen">
         <item name="android:paddingEnd">30dp</item>
         <item name="android:background">@drawable/background_green_ripple_white</item>
         <item name="android:elevation">6dp</item>
+    </style>
+    <style name="IBActionStyle">
+        <item name="android:background">@drawable/background_ib_action</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:src">@drawable/icon_back</item>
     </style>
 
 </resources>

@@ -3,14 +3,14 @@ package esser.marcelo.busoclock.vvm.sogal.schedules
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_schedules.*
+import android.view.View.*
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.adapter.SchedulesAdapter
 import esser.marcelo.busoclock.dao.LineDAO
 import esser.marcelo.busoclock.helper.ProgressDialogHelper
 import esser.marcelo.busoclock.model.sogal.SchedulesDTO
-import esser.marcelo.busoclock.model.sogal.SogalResponse
 import esser.marcelo.busoclock.vvm.sogal.itineraries.SogalItinerariesActivity
+import kotlinx.android.synthetic.main.activity_schedules.*
 
 class SogalSchedulesActivity : AppCompatActivity() {
 
@@ -32,7 +32,7 @@ class SogalSchedulesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_schedules)
 
-        loadSchedules(WORKINGDAY)
+        loadSchedules()
 
         btnGoToItineraries()
 
@@ -56,15 +56,15 @@ class SogalSchedulesActivity : AppCompatActivity() {
         schedules_bottom_navigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.action_workingdays -> {
-                    loadSchedules(WORKINGDAY)
+                    adapterConstructor(viewModelSogal.workingDays)
                     true
                 }
                 R.id.action_saturday -> {
-                    loadSchedules(SATURDAY)
+                    adapterConstructor(viewModelSogal.saturdays)
                     true
                 }
                 R.id.action_sunday -> {
-                    loadSchedules(SUNDAY)
+                    adapterConstructor(viewModelSogal.sundays)
                     true
                 }
 
@@ -73,35 +73,60 @@ class SogalSchedulesActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadSchedules(scheduleDay: Int) {
+    private fun loadSchedules() {
         progressDialog.showLoader()
-        viewModelSogal.loadSchedulesBy(onSuccess = { sogalResponse ->
-            adapterConstructor(sogalResponse, scheduleDay)
+        viewModelSogal.loadSchedulesBy(onSuccess = { schedules ->
+            adapterConstructor(schedules)
+            successConfig()
         }, onError = { errorMessage ->
-
+            onError()
         })
     }
 
-    private fun adapterConstructor(sogalResponse: SogalResponse, scheduleDay: Int) {
-        when (scheduleDay) {
-            WORKINGDAY -> {
-                configureList(sogalResponse.workingDays)
-            }
-            SATURDAY -> {
-                configureList(sogalResponse.saturdays)
-            }
-            SUNDAY -> {
-                configureList(sogalResponse.sundays)
-            }
+    private fun successConfig() {
+        progressDialog.hideLoader()
+        schedules_activity_rv_schedules.setOnClickListener(null)
+        schedules_activity_rv_schedules.visibility = VISIBLE
+        schedules_activity_img_lottie_conection.visibility = GONE
+        schedules_activity_tv_connection_error.visibility = GONE
+    }
+
+    private fun onError() {
+        progressDialog.hideLoader()
+        schedules_activity_img_lottie_conection.resumeAnimation()
+
+        lottieAnimationClick()
+
+        schedules_activity_img_lottie_conection.visibility = VISIBLE
+        schedules_activity_tv_connection_error.visibility = VISIBLE
+        schedules_activity_rv_schedules.visibility = INVISIBLE
+    }
+
+    private fun lottieAnimationClick() {
+        schedules_activity_img_lottie_conection.setOnClickListener {
+            schedules_activity_img_lottie_conection.pauseAnimation()
+            loadSchedules()
         }
     }
+
+    private fun adapterConstructor(schedules: List<SchedulesDTO>?) {
+        configureList(schedules)
+    }
+
 
     private fun configureList(sogalResponse: List<SchedulesDTO>?) {
         progressDialog.hideLoader()
         sogalResponse?.let {
-            adapter = SchedulesAdapter(this@SogalSchedulesActivity, sogalResponse)
-            adapter.notifyDataSetChanged()
-            schedules_activity_rv_schedules.adapter = adapter
+            if (it.size > 0) {
+                adapter = SchedulesAdapter(this@SogalSchedulesActivity, sogalResponse)
+                adapter.notifyDataSetChanged()
+                schedules_activity_rv_schedules.adapter = adapter
+                tv_schedules_activity_without_items.visibility = GONE
+                schedules_activity_rv_schedules.visibility = VISIBLE
+            } else {
+                tv_schedules_activity_without_items.visibility = VISIBLE
+                schedules_activity_rv_schedules.visibility = INVISIBLE
+            }
         }
     }
 }

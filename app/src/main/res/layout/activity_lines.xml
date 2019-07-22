@@ -34,9 +34,7 @@
                 android:id="@+id/lines_activity_img_btn_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/background_transparent_ripple_white"
-                android:padding="10dp"
-                android:src="@drawable/icon_back"
+                style="@style/IBActionStyle"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
@@ -85,7 +83,6 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:textColor="@color/white"
-                android:background="@drawable/background_transparent_ripple_white"
                 android:visibility="gone"
                 tools:visibility="visible"
                 android:text="@string/cancel"
@@ -102,7 +99,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginStart="5dp"
-                android:background="@drawable/background_transparent_ripple_white"
+                android:background="@drawable/background_ib_action"
                 android:padding="15dp"
                 android:layout_width="50dp"
                 android:layout_height="0dp"
@@ -123,19 +120,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/clSearch"
             app:layout_constraintVertical_bias="0.0"/>
-
-    <ImageButton
-            android:id="@+id/lines_activity_load_fav"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:layout_marginBottom="35dp"
-            android:elevation="9dp"
-            android:visibility="gone"
-            android:background="@drawable/background_red_ripple_white"
-            android:src="@drawable/icon_star"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
 
     <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/lines_activity_img_lottie_conection"

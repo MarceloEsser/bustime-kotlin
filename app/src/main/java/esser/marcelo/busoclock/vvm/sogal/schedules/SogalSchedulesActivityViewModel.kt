@@ -24,7 +24,7 @@ class SogalSchedulesActivityViewModel {
     }
 
     fun loadSchedulesBy(
-        onSuccess: (response: SogalResponse) -> Unit,
+        onSuccess: (schedules: List<SchedulesDTO>) -> Unit,
         onError: (errorMessage: String) -> Unit
     ) {
         val lineWay: String = LineDAO.lineWay
@@ -38,12 +38,11 @@ class SogalSchedulesActivityViewModel {
 
                 override fun onResponse(call: Call<SogalResponse>, response: Response<SogalResponse>) {
                     response.body()?.let { sogalResponse ->
-                        onSuccess(sogalResponse)
+                        onSuccess(sogalResponse.workingDays!!)
                         workingDays = sogalResponse.workingDays
                         saturdays = sogalResponse.saturdays
                         sundays = sogalResponse.sundays
                     }
-
                 }
 
             })
