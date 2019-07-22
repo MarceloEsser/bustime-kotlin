@@ -43,20 +43,7 @@ class LineMenuDialog @SuppressLint("ValidFragment") constructor(
     private fun validateWhatIsToDo() {
         if (isFromVicasa) {
             btn_line_menu_dialog_itineraries.visibility = GONE
-            tv_line_menu_dialog_line_way.visibility = GONE
-            lineWaySpinner()
-        } else {
-            menu_dialog_sp_line_way.visibility = GONE
-            menu_dialog_tv_lineway_header.visibility = GONE
         }
-    }
-
-    private fun lineWaySpinner() {
-        val adapter = ArrayAdapter(
-            this.activity!!, android.R.layout.simple_spinner_item, viewModel.getWaysList()
-        )
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        menu_dialog_sp_line_way.adapter = adapter
     }
 
     private fun clickEvent() {

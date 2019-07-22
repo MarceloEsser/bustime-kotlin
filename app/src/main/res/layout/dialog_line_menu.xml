@@ -61,43 +61,9 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"/>
 
-    <TextView
-            android:id="@+id/menu_dialog_tv_lineway_header"
-            android:text="@string/line_way"
-            android:layout_marginTop="50dp"
-            android:layout_marginStart="20dp"
-            android:textColor="@color/grey900"
-            android:fontFamily="@font/ubuntu_medium"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_line_menu_dialog_line_way"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-    <Spinner
-            android:layout_marginEnd="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            style="@style/SpinnerStyle"
-            app:layout_constraintTop_toBottomOf="@id/menu_dialog_tv_lineway_header"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:id="@+id/menu_dialog_sp_line_way"
-            android:layout_width="0dp"
-            android:layout_height="40dp">
-    </Spinner>
-
-    <ImageView
-            app:layout_constraintBottom_toBottomOf="@+id/menu_dialog_sp_line_way"
-            app:layout_constraintTop_toTopOf="@+id/menu_dialog_sp_line_way"
-            app:layout_constraintEnd_toEndOf="@id/menu_dialog_sp_line_way"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/ic_arrow_drop_down"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
     <Button
             android:layout_marginStart="20dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="60dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
             android:text="Horários"
@@ -108,7 +74,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:textSize="14sp"
             android:fontFamily="@font/ubuntu_medium"
-            app:layout_constraintTop_toBottomOf="@id/menu_dialog_sp_line_way"
+            app:layout_constraintTop_toBottomOf="@id/tv_line_menu_dialog_line_way"
             app:layout_constraintBottom_toTopOf="@id/btn_line_menu_dialog_itineraries"
             android:layout_width="match_parent"
             android:layout_height="55dp"/>
