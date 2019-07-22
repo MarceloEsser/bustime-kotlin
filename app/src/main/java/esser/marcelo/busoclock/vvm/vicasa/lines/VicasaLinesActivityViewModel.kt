@@ -1,9 +1,12 @@
 package esser.marcelo.busoclock.vvm.vicasa.lines
 
+import android.net.Uri.encode
 import esser.marcelo.busoclock.dao.LineDAO
+import esser.marcelo.busoclock.helper.Constants.CB_WAY
 import esser.marcelo.busoclock.model.vicasa.Vicasa
 import esser.marcelo.busoclock.service.vicasaServices.VicasaService
 import okhttp3.ResponseBody
+import org.jsoup.nodes.Entities.escape
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -16,15 +19,16 @@ class VicasaLinesActivityViewModel {
     private val service = VicasaService().vicasaService()
     var resultsList: ArrayList<Vicasa> = ArrayList()
 
+    var countryOrigin: String = ""
+    var countryDestination: String = ""
+    var serviceType: String = ""
+    var lineWay: String = CB_WAY
 
     fun loadVicasaLinesBy(
-        lineOrigin: String = "",
-        lineDestination: String = "",
-        lineService: String = "",
         onSuccess: (succes: List<Vicasa>) -> Unit,
         onError: (errorMessage: String) -> Unit
     ) {
-        service.postLoadVicasaLinesBy(lineDestination, lineOrigin, lineService)
+        service.postLoadVicasaLinesBy(escape(countryDestination), escape(countryOrigin), serviceType)
             .enqueue(object : Callback<ResponseBody> {
                 override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                     t.message?.let { onError(it) }
@@ -48,14 +52,14 @@ class VicasaLinesActivityViewModel {
 
         matchResults.groupBy {
             val vicasaLineDescription = formatVicasaLineDescription(it)
-            val vicasaLineId: String = formatVicasaLineId(it)
+            val vicasaLineCode: String = formatVicasaLineCode(it)
 
-            resultsList.add(Vicasa(vicasaLineDescription, vicasaLineId))
+            resultsList.add(Vicasa(vicasaLineDescription, vicasaLineCode))
 
         }
     }
 
-    fun formatVicasaLineId(it: MatchResult): String {
+    fun formatVicasaLineCode(it: MatchResult): String {
         var vicasaLineId = it.value.replace(Regex("""((.*?)LineId=)"""), "")
         vicasaLineId = vicasaLineId.replace(Regex("""',.*"""), "")
         return vicasaLineId
@@ -67,10 +71,16 @@ class VicasaLinesActivityViewModel {
         return vicasaLineDescription
     }
 
-    fun saveData(lineCode: String, lineName: String, lineWay: String) {
+    fun saveLineData(lineCode: String, lineName: String, lineWay: String) {
         LineDAO.lineName = lineName
         LineDAO.lineCode = lineCode
         LineDAO.lineWay = lineWay
 
+    }
+
+    fun saveFilterData(countryOrigin: String, countryDestination: String, serviceType: String) {
+        this.countryOrigin = countryOrigin
+        this.countryDestination = countryDestination
+        this.serviceType = serviceType
     }
 }

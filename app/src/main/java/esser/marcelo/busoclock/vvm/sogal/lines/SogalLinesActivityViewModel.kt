@@ -13,7 +13,9 @@ import retrofit2.Response
  */
 class SogalLinesActivityViewModel {
     private val service = SogalService().sogalSerivce()
+
     private val SEARCH_LINES: String = "buscaLinhas"
+
     var linesList: MutableList<LinesDTO> = ArrayList()
 
     fun loadSogalLines(

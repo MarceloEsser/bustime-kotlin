@@ -27,6 +27,11 @@ class VicasaFilterDialog : DialogFragment() {
 
         buildAdapter()
 
+        listeners()
+
+    }
+
+    private fun listeners() {
         filter_dialog_btn_cancel.setOnClickListener {
             dismiss()
         }
@@ -34,7 +39,6 @@ class VicasaFilterDialog : DialogFragment() {
         filter_dialog_btn_confirm.setOnClickListener {
             doFilter()
         }
-
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

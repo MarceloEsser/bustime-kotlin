@@ -19,15 +19,15 @@ interface IVicasaService {
     @POST("busca_linhas_submit.asp")
     @FormUrlEncoded
     fun postLoadVicasaLinesBy(
-        @Field("destino") destination: String,
-        @Field("origem") origin: String,
+        @Field("destino", encoded = true) destination: String,
+        @Field("origem", encoded = true) origin: String,
         @Field("servico") lineService: String
-        ): Call<ResponseBody>
+    ): Call<ResponseBody>
 
     @GET("_mostra_linhas.asp")
     fun getVicasaSchedules(
         @Query("LineId") lineCode: String
-        ): Call<ResponseBody>
+    ): Call<ResponseBody>
 
 
 }

@@ -192,19 +192,18 @@
                     style="@style/AboutTitleStyle"
                     app:layout_constraintStart_toStartOf="@id/firstCard"
                     app:layout_constraintTop_toBottomOf="@+id/firstCard"
-                    android:text="@string/about_me"
+                    android:text="@string/marcelo_esser"
                     android:id="@+id/contacts"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
             <android.support.v7.widget.CardView
-                    android:layout_marginTop="15dp"
                     android:layout_marginBottom="30dp"
+                    android:layout_marginTop="15dp"
                     style="@style/CardStyle"
-                    app:layout_constraintTop_toBottomOf="@id/contacts"
+                    app:layout_constraintTop_toBottomOf="@+id/contacts"
                     app:layout_constraintStart_toStartOf="@+id/contacts"
                     app:layout_constraintEnd_toEndOf="@id/cv_home_activity_sogal"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     android:id="@+id/secondCard"
                     android:layout_width="0dp"
                     android:layout_height="200dp">
@@ -274,6 +273,98 @@
                             android:layout_height="wrap_content"/>
                 </android.support.constraint.ConstraintLayout>
             </android.support.v7.widget.CardView>
+
+
+            <TextView
+                    android:layout_marginTop="30dp"
+                    style="@style/AboutTitleStyle"
+                    app:layout_constraintStart_toStartOf="@id/secondCard"
+                    app:layout_constraintTop_toBottomOf="@+id/secondCard"
+                    android:text="@string/lucas_wottrich"
+                    android:id="@+id/lucas_wottrich"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+
+            <android.support.v7.widget.CardView
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="30dp"
+                    style="@style/CardStyle"
+                    app:layout_constraintTop_toBottomOf="@id/lucas_wottrich"
+                    app:layout_constraintStart_toStartOf="@id/lucas_wottrich"
+                    app:layout_constraintEnd_toEndOf="@id/cv_home_activity_sogal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:id="@+id/lucas_wottrich_card"
+                    android:layout_width="0dp"
+                    android:layout_height="200dp">
+
+                <android.support.constraint.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    <TextView
+                            style="@style/HomeCardContentStyle"
+                            android:text="@string/github_profile_wottrich"
+                            android:layout_marginStart="10dp"
+                            app:layout_constraintBottom_toBottomOf="@id/home_activity_img_github_logo_wottrich"
+                            app:layout_constraintTop_toTopOf="@id/home_activity_img_github_logo_wottrich"
+                            app:layout_constraintStart_toEndOf="@id/home_activity_img_github_logo_wottrich"
+                            android:id="@+id/home_activity_tv_github_description_wottrich"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    <ImageView
+                            android:id="@+id/home_activity_img_github_logo_wottrich"
+                            android:src="@drawable/ic_github_logo"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="15dp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    <TextView
+                            style="@style/HomeCardContentStyle"
+                            android:text="@string/gmail_profile_wottrich"
+                            android:layout_marginStart="10dp"
+                            app:layout_constraintBottom_toBottomOf="@id/home_activity_img_gmail_logo_wottrich"
+                            app:layout_constraintTop_toTopOf="@id/home_activity_img_gmail_logo_wottrich"
+                            app:layout_constraintStart_toEndOf="@id/home_activity_img_gmail_logo_wottrich"
+                            android:id="@+id/home_activity_tv_gmail_description_wottrich"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    <ImageView
+                            android:id="@+id/home_activity_img_gmail_logo_wottrich"
+                            android:layout_marginTop="15dp"
+                            app:layout_constraintStart_toStartOf="@id/home_activity_img_github_logo_wottrich"
+                            app:layout_constraintTop_toBottomOf="@id/home_activity_img_github_logo_wottrich"
+                            android:src="@drawable/ic_gmail_logo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    <TextView
+                            style="@style/HomeCardContentStyle"
+                            android:text="@string/linkedin_profile_wottrich"
+                            android:layout_marginStart="10dp"
+                            app:layout_constraintBottom_toBottomOf="@id/home_activity_img_linkedin_logo_wottrich"
+                            app:layout_constraintTop_toTopOf="@id/home_activity_img_linkedin_logo_wottrich"
+                            app:layout_constraintStart_toEndOf="@id/home_activity_img_linkedin_logo_wottrich"
+                            android:id="@+id/home_activity_tv_linkedin_description_wottrich"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    <ImageView
+                            android:id="@+id/home_activity_img_linkedin_logo_wottrich"
+                            android:layout_marginTop="15dp"
+                            app:layout_constraintStart_toStartOf="@id/home_activity_img_gmail_logo_wottrich"
+                            app:layout_constraintTop_toBottomOf="@id/home_activity_img_gmail_logo_wottrich"
+                            android:src="@drawable/ic_linkedin_logo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                </android.support.constraint.ConstraintLayout>
+            </android.support.v7.widget.CardView>
+
+
         </android.support.constraint.ConstraintLayout>
     </android.support.v4.widget.NestedScrollView>
 </android.support.constraint.ConstraintLayout>

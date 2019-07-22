@@ -11,12 +11,11 @@ import esser.marcelo.busoclock.helper.ProgressDialogHelper
 import esser.marcelo.busoclock.model.sogal.SchedulesDTO
 import esser.marcelo.busoclock.vvm.sogal.itineraries.SogalItinerariesActivity
 import kotlinx.android.synthetic.main.activity_schedules.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class SogalSchedulesActivity : AppCompatActivity() {
-
-    private val WORKINGDAY: Int = 1
-    private val SATURDAY: Int = 2
-    private val SUNDAY: Int = 3
 
     private val viewModelSogal: SogalSchedulesActivityViewModel by lazy {
         SogalSchedulesActivityViewModel()
@@ -32,17 +31,28 @@ class SogalSchedulesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_schedules)
 
-        loadSchedules()
+        listeners()
 
+        shcedule_activity_tv_line_name.text = LineDAO.lineName
+    }
+
+    override fun onStart() {
+        super.onStart()
+        loadSchedules()
+    }
+
+    private fun listeners() {
         btnGoToItineraries()
 
         bottomNavigationBarListener()
 
+        ibBackAction()
+    }
+
+    private fun ibBackAction() {
         schedules_activity_img_btn_back.setOnClickListener {
             finish()
         }
-
-        shcedule_activity_tv_line_name.text = LineDAO.lineName
     }
 
     private fun btnGoToItineraries() {
@@ -56,15 +66,15 @@ class SogalSchedulesActivity : AppCompatActivity() {
         schedules_bottom_navigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.action_workingdays -> {
-                    adapterConstructor(viewModelSogal.workingDays)
+                    configureList(viewModelSogal.workingDays)
                     true
                 }
                 R.id.action_saturday -> {
-                    adapterConstructor(viewModelSogal.saturdays)
+                    configureList(viewModelSogal.saturdays)
                     true
                 }
                 R.id.action_sunday -> {
-                    adapterConstructor(viewModelSogal.sundays)
+                    configureList(viewModelSogal.sundays)
                     true
                 }
 
@@ -75,24 +85,26 @@ class SogalSchedulesActivity : AppCompatActivity() {
 
     private fun loadSchedules() {
         progressDialog.showLoader()
-        viewModelSogal.loadSchedulesBy(onSuccess = { schedules ->
-            adapterConstructor(schedules)
-            successConfig()
-        }, onError = { errorMessage ->
-            onError()
-        })
+        GlobalScope.launch {
+            delay(400L)
+            viewModelSogal.loadSchedulesBy(onSuccess = { schedules ->
+                configureList(schedules)
+                successConfig()
+            }, onError = { errorMessage ->
+                errorConfig()
+            })
+        }
     }
 
     private fun successConfig() {
-        progressDialog.hideLoader()
         schedules_activity_rv_schedules.setOnClickListener(null)
         schedules_activity_rv_schedules.visibility = VISIBLE
         schedules_activity_img_lottie_conection.visibility = GONE
         schedules_activity_tv_connection_error.visibility = GONE
+        progressDialog.hideLoader()
     }
 
-    private fun onError() {
-        progressDialog.hideLoader()
+    private fun errorConfig() {
         schedules_activity_img_lottie_conection.resumeAnimation()
 
         lottieAnimationClick()
@@ -100,6 +112,8 @@ class SogalSchedulesActivity : AppCompatActivity() {
         schedules_activity_img_lottie_conection.visibility = VISIBLE
         schedules_activity_tv_connection_error.visibility = VISIBLE
         schedules_activity_rv_schedules.visibility = INVISIBLE
+
+        progressDialog.hideLoader()
     }
 
     private fun lottieAnimationClick() {
@@ -108,11 +122,6 @@ class SogalSchedulesActivity : AppCompatActivity() {
             loadSchedules()
         }
     }
-
-    private fun adapterConstructor(schedules: List<SchedulesDTO>?) {
-        configureList(schedules)
-    }
-
 
     private fun configureList(sogalResponse: List<SchedulesDTO>?) {
         progressDialog.hideLoader()

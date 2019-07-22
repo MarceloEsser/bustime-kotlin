@@ -40,14 +40,43 @@ class SogalLinesActivity : AppCompatActivity(), GenericLinesAdapterDelegate {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lines)
-
         this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
         activity_lines_imgbtn_filter.visibility = GONE
 
+        listeners()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        loadLines()
+    }
+
+    private fun listeners() {
         bottomNavigationBarListener()
 
         searchEvent()
 
+        ibBacAction()
+    }
+
+    private fun bottomNavigationBarListener() {
+        lines_bottom_navigation.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.action_cb -> {
+                    lineWay = CB_WAY
+                    true
+                }
+                R.id.action_bc -> {
+                    lineWay = BC_WAY
+                    true
+                }
+                else -> false
+            }
+        }
+    }
+
+    private fun ibBacAction() {
         lines_activity_img_btn_back.setOnClickListener {
             onBackPressed()
         }
@@ -81,12 +110,12 @@ class SogalLinesActivity : AppCompatActivity(), GenericLinesAdapterDelegate {
                     adapterConstruct(it)
                 }, onError = {
                     progressDialog.hideLoader()
-                    onError()
+                    errorConfig()
                 })
         }
     }
 
-    private fun onError() {
+    private fun errorConfig() {
         lines_activity_img_lottie_conection.resumeAnimation()
 
         lines_activity_img_lottie_conection.setOnClickListener {
@@ -99,41 +128,20 @@ class SogalLinesActivity : AppCompatActivity(), GenericLinesAdapterDelegate {
         lines_activity_rv_lines.visibility = INVISIBLE
     }
 
-    private fun bottomNavigationBarListener() {
-        lines_bottom_navigation.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.action_cb -> {
-                    lineWay = CB_WAY
-                    true
-                }
-                R.id.action_bc -> {
-                    lineWay = BC_WAY
-                    true
-                }
-                else -> false
-            }
-        }
-    }
-
-
-    override fun onStart() {
-        super.onStart()
-        loadLines()
-    }
-
-
-    private fun adapterConstruct(it: List<LinesDTO>) {
-        adapter = GenericLinesAdapter(it, this@SogalLinesActivity, this)
-        lines_activity_rv_lines.adapter = adapter
-        progressDialog.hideLoader()
-        successConfig()
-    }
-
     private fun successConfig() {
+
         lines_activity_rv_lines.setOnClickListener(null)
         lines_activity_rv_lines.visibility = VISIBLE
         lines_activity_img_lottie_conection.visibility = GONE
         lines_activity_tv_connection_error.visibility = GONE
+
+        progressDialog.hideLoader()
+    }
+
+    private fun adapterConstruct(it: List<LinesDTO>) {
+        adapter = GenericLinesAdapter(it, this@SogalLinesActivity, this)
+        lines_activity_rv_lines.adapter = adapter
+        successConfig()
     }
 
     override fun onItemClickLitener(line: BaseLine) {

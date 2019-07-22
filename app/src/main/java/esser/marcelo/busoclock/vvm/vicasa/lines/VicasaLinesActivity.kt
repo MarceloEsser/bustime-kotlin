@@ -30,28 +30,30 @@ class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction, Generi
         ProgressDialogHelper(this@VicasaLinesActivity)
     }
 
-    private val lineMenuDialog: LineMenuDialog by lazy {
+    private val menuDialog: LineMenuDialog by lazy {
         LineMenuDialog(true)
     }
 
-    private lateinit var dialog: VicasaFilterDialog
+    private lateinit var filterDialog: VicasaFilterDialog
     private lateinit var adapter: GenericLinesAdapter
-
-    private var lineWay: String = CB_WAY
-    private var countryOrigin: String = ""
-    private var countryDestination: String = ""
-    private var serviceType: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lines)
         this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        bottomNavigationBarListener()
         dialogDoFilter()
 
-        searchEvent()
+        listeners()
+    }
 
+    private fun listeners() {
+        bottomNavigationBarListener()
+        searchEvent()
+        ibBackAction()
+    }
+
+    private fun ibBackAction() {
         lines_activity_img_btn_back.setOnClickListener {
             onBackPressed()
         }
@@ -71,7 +73,7 @@ class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction, Generi
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                buildAdapter(viewModel.resultsList.filter {
+                configureList(viewModel.resultsList.filter {
                     it.name.toLowerCase().contains(activity_lines_et_search.text.toString().toLowerCase())
                             || it.code.toLowerCase().contains(activity_lines_et_search.text.toString().toLowerCase())
                 })
@@ -79,17 +81,16 @@ class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction, Generi
         })
     }
 
-
     private fun buildDialog() {
-        dialog = VicasaFilterDialog()
-        dialog.interaction = this
+        filterDialog = VicasaFilterDialog()
+        filterDialog.interaction = this
 
-        dialog.show(supportFragmentManager, "teste")
+        filterDialog.show(supportFragmentManager, "teste")
     }
 
     private fun dialogDoFilter() {
         activity_lines_imgbtn_filter.setOnClickListener {
-            dialog.show(supportFragmentManager, "teste")
+            filterDialog.show(supportFragmentManager, "teste")
         }
     }
 
@@ -97,11 +98,11 @@ class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction, Generi
         lines_bottom_navigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.action_cb -> {
-                    lineWay = CB_WAY
+                    viewModel.lineWay = CB_WAY
                     true
                 }
                 R.id.action_bc -> {
-                    lineWay = BC_WAY
+                    viewModel.lineWay = BC_WAY
                     true
                 }
                 else -> false
@@ -109,15 +110,15 @@ class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction, Generi
         }
     }
 
-    private fun buildAdapter(it: List<Vicasa>) {
+    private fun configureList(it: List<Vicasa>) {
         adapter = GenericLinesAdapter(it, this@VicasaLinesActivity, this)
         lines_activity_rv_lines.adapter = adapter
         lines_activity_rv_lines.visibility = VISIBLE
     }
 
     override fun onItemClickLitener(line: BaseLine) {
-        viewModel.saveData(line.code, line.name, lineWay)
-        lineMenuDialog.show(supportFragmentManager, "lineMenuDialog")
+        viewModel.saveLineData(line.code, line.name, viewModel.lineWay)
+        menuDialog.show(supportFragmentManager, "menuDialog")
     }
 
     private fun successConfig() {
@@ -125,9 +126,11 @@ class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction, Generi
         lines_activity_rv_lines.visibility = VISIBLE
         lines_activity_img_lottie_conection.visibility = View.GONE
         lines_activity_tv_connection_error.visibility = View.GONE
+
+        progressDialog.hideLoader()
     }
 
-    private fun onError() {
+    private fun errorConfig() {
         lines_activity_img_lottie_conection.resumeAnimation()
 
         lottieAnimationClick()
@@ -135,33 +138,28 @@ class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction, Generi
         lines_activity_img_lottie_conection.visibility = VISIBLE
         lines_activity_tv_connection_error.visibility = VISIBLE
         lines_activity_rv_lines.visibility = View.INVISIBLE
+
+        progressDialog.hideLoader()
     }
 
     private fun lottieAnimationClick() {
         lines_activity_img_lottie_conection.setOnClickListener {
             lines_activity_img_lottie_conection.pauseAnimation()
-            doFilter(countryOrigin, countryDestination, serviceType)
+            doFilter(viewModel.countryOrigin, viewModel.countryDestination, viewModel.serviceType)
         }
     }
 
     override fun doFilter(countryOrigin: String, countryDestination: String, serviceType: String) {
         progressDialog.showLoader()
 
-        this.countryOrigin = countryOrigin
-        this.countryDestination = countryDestination
-        this.serviceType = serviceType
+        viewModel.saveFilterData(countryOrigin, countryDestination, serviceType)
 
         viewModel.loadVicasaLinesBy(
-            lineOrigin = countryOrigin,
-            lineDestination = countryDestination,
-            lineService = serviceType,
             onSuccess = {
                 successConfig()
-                buildAdapter(it)
-                progressDialog.hideLoader()
+                configureList(it)
             }, onError = {
-                onError()
-                progressDialog.hideLoader()
+                errorConfig()
             })
     }
 }

@@ -12,7 +12,7 @@ import esser.marcelo.busoclock.model.sogal.ItinerariesDTO
 
 class SogalItinerariesActivity : AppCompatActivity() {
 
-    private val viewModelSogal: SogalItinerariesActivityViewModel by lazy {
+    private val viewModel: SogalItinerariesActivityViewModel by lazy {
         SogalItinerariesActivityViewModel()
     }
 
@@ -40,7 +40,7 @@ class SogalItinerariesActivity : AppCompatActivity() {
 
     private fun loadItineraries() {
         progressDialog.showLoader()
-        viewModelSogal.loadItineraries(
+        viewModel.loadItineraries(
             onSucces = {
                 adapterConstruct(it)
             }, onError = {
