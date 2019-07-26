@@ -24,7 +24,7 @@ class SogalItinerariesActivityViewModel {
 
                 override fun onResponse(call: Call<LinesDTO>, response: Response<LinesDTO>) {
                     if (response.body() != null && response.body()!!.itineraries != null) {
-                        onSucces(response.body()!!.itineraries!!)
+                        onSucces(response.body()!!.itineraries)
                     }
                 }
 

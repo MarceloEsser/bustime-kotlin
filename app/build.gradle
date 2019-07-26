@@ -3,6 +3,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
+apply plugin: 'io.objectbox'
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -34,15 +36,20 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.0-M1"
     apply plugin: 'kotlin-android-extensions'
     testImplementation 'junit:junit:4.12'
+
     //Service Implementation
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.squareup.okhttp3:okhttp:3.12.1'
     implementation 'org.jsoup:jsoup:1.12.1'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.12.1'
+
     //Design implementation
     implementation 'com.android.support:cardview-v7:28.0.0'
     implementation 'com.android.support:recyclerview-v7:28.0.0'
     implementation 'com.android.support:design:28.0.0'
     implementation 'com.airbnb.android:lottie:2.5.0-rc1'
+
+    //ObjectBox
+    implementation "io.objectbox:objectbox-kotlin:$objectboxVersion"
 }
