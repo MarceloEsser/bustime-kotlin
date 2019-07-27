@@ -122,7 +122,7 @@ class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction, Generi
     }
 
     private fun configureList(it: List<Vicasa>) {
-        adapter = GenericLinesAdapter(it, this@VicasaLinesActivity, this)
+        adapter = GenericLinesAdapter(it, this@VicasaLinesActivity, this, this::onFavoriteLine)
         lines_activity_rv_lines.adapter = adapter
         lines_activity_rv_lines.visibility = VISIBLE
     }
@@ -130,6 +130,10 @@ class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction, Generi
     override fun onItemClickLitener(line: BaseLine) {
         viewModel.saveLineData(line.code, line.name, viewModel.lineWay)
         menuDialog.show(supportFragmentManager, "menuDialog")
+    }
+
+    private fun onFavoriteLine (line: BaseLine) {
+
     }
 
     private fun successConfig() {

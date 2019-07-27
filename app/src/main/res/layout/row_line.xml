@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:focusable="true"
-        style="@style/RowLineStyle"
-        android:layout_height="70dp">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:focusable="true"
+    style="@style/RowLineStyle"
+    android:layout_height="70dp">
 
     <TextView
             android:id="@+id/tv_line_name"
@@ -13,10 +13,11 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             style="@style/RowLineDescriptionStyle"
+            android:maxLines="2"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:text="nome da linha"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            tools:text="CT X VIA VERDES CAMPOS X 5 COL X CIRC"
+            app:layout_constraintEnd_toStartOf="@id/lottie_favorite__line"/>
 
     <TextView
             android:id="@+id/tv_line_code"
@@ -25,6 +26,17 @@
             android:text="numero da linha"
             android:layout_margin="10dp"
             style="@style/RowLineCodeStyle"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/lottie_favorite__line"
             app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:focusable="true"
+        android:clickable="true"
+        android:id="@+id/lottie_favorite__line"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="64dp"
+        android:layout_height="0dp"
+        app:lottie_fileName="favorite.json"/>
 </android.support.constraint.ConstraintLayout>
