@@ -11,7 +11,7 @@ import io.objectbox.relation.ToMany
  */
 
 @Entity
-open class BoxLine {
+open class BoxLine() {
 
     @Id var id: Long = 0
 
@@ -19,6 +19,13 @@ open class BoxLine {
     var code: String? = null
     var way: String? = null
     var isSogalLine: Boolean = false
+
+    constructor(name: String, code: String, way: String, isSogalLine: Boolean) : this() {
+        this.name = name
+        this.code = code
+        this.way = way
+        this.isSogalLine = isSogalLine
+    }
 
     @Backlink(to = "boxLineWorkdays")
     lateinit var workingDays: ToMany<BoxSchedule>

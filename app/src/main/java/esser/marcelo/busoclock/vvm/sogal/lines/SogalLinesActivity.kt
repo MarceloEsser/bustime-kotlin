@@ -9,11 +9,13 @@ import android.view.WindowManager
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.adapter.GenericLinesAdapter
 import esser.marcelo.busoclock.adapter.GenericLinesAdapter2
+import esser.marcelo.busoclock.box.Bus
 import esser.marcelo.busoclock.helper.Constants.BC_WAY
 import esser.marcelo.busoclock.helper.Constants.CB_WAY
 import esser.marcelo.busoclock.helper.ProgressDialogHelper
 import esser.marcelo.busoclock.interfaces.GenericLinesAdapterDelegate
 import esser.marcelo.busoclock.model.BaseLine
+import esser.marcelo.busoclock.model.boxModels.BoxLine
 import esser.marcelo.busoclock.model.sogal.LinesDTO
 import esser.marcelo.busoclock.vvm.lineDialog.LineMenuDialog
 import kotlinx.android.synthetic.main.activity_lines.*
@@ -88,19 +90,17 @@ class SogalLinesActivity : AppCompatActivity() {
     private fun searchEvent() {
         activity_lines_et_search.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                /*adapterConstruct(viewModel.linesList.filter {
-                    it.name.toLowerCase().contains(activity_lines_et_search.text.toString().toLowerCase())
-                            || it.code.toLowerCase().contains(activity_lines_et_search.text.toString().toLowerCase())
-                })*/
+                if (s.toString().isNotEmpty()) {
+                    adapterConstruct(viewModel.buildFilter {
+                        this.name.toLowerCase().contains(activity_lines_et_search.text.toString().toLowerCase())
+                                || this.code.toLowerCase().contains(activity_lines_et_search.text.toString().toLowerCase())
+                    })
+                } else {
+                    adapterConstruct(viewModel.buildList())
+                }
             }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
-            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) = Unit
         })
     }
 
@@ -155,6 +155,14 @@ class SogalLinesActivity : AppCompatActivity() {
     }
 
     private fun onFavoriteClickListener (line: GenericLinesAdapter2.Line) {
-
+        if (line.isFavorite) {
+            viewModel.deleteFavorite(line) {
+                adapterConstruct(viewModel.buildList())
+            }
+        } else {
+            viewModel.saveFavorite(lineWay, line) {
+                adapterConstruct(viewModel.buildList())
+            }
+        }
     }
 }

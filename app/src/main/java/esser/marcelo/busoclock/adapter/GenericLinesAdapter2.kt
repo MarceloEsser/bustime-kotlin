@@ -1,5 +1,6 @@
 package esser.marcelo.busoclock.adapter
 
+import android.animation.Animator
 import android.animation.ValueAnimator
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -57,12 +58,17 @@ class GenericLinesAdapter2(
                         holder.lottieFavorite.progress = it.animatedValue as Float
                     }
 
+                    animate.addListener(object : Animator.AnimatorListener {
+                        override fun onAnimationRepeat(animation: Animator?) = Unit
+                        override fun onAnimationCancel(animation: Animator?) = Unit
+                        override fun onAnimationStart(animation: Animator?) = Unit
+                        override fun onAnimationEnd(animation: Animator?) {
+                            onFavoriteClickListener?.invoke(line)
+                        }
+                    })
+
                     animate.duration = 2000
                     animate.start()
-
-                    line.isFavorite = !line.isFavorite
-
-                    onFavoriteClickListener?.invoke(line)
                 }
 
                 holder.itemView.setOnClickListener {

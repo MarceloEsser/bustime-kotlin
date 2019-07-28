@@ -9,7 +9,7 @@ import io.objectbox.relation.ToOne
  * @since 25/07/2019.
  */
 @Entity
-open class BoxSchedule {
+open class BoxSchedule() {
 
     @Id var id: Long = 0
 
@@ -17,6 +17,11 @@ open class BoxSchedule {
     var abrev: String? = null
     var apd: String = "N"
 
+    constructor(hour: String, abrev: String, apd: String = "N") : this() {
+        this.hour = hour
+        this.abrev = abrev
+        this.apd = apd
+    }
 
     lateinit var boxLineWorkdays: ToOne<BoxLine>
 

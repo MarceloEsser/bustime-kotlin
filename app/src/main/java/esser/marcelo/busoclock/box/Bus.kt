@@ -1,5 +1,6 @@
 package esser.marcelo.busoclock.box
 
+import esser.marcelo.busoclock.adapter.GenericLinesAdapter2
 import esser.marcelo.busoclock.model.boxModels.BoxItineraries
 import esser.marcelo.busoclock.model.boxModels.BoxLine
 import esser.marcelo.busoclock.model.boxModels.BoxSchedule
@@ -52,6 +53,11 @@ object Bus {
 
     fun getSogalItineraries(idBoxLine: Long) : List<BoxItineraries> {
         return box<BoxLine>().get(idBoxLine).sogalItineraries
+    }
+
+    fun deleteLine(id: Long, success: () -> Unit = {}) {
+        box<BoxLine>().remove(id)
+        success()
     }
 
     fun putLine(vararg boxLine: BoxLine, success: () -> Unit = {}) {
