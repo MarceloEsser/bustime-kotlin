@@ -8,6 +8,7 @@ import android.view.View.*
 import android.view.WindowManager
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.adapter.GenericLinesAdapter
+import esser.marcelo.busoclock.adapter.GenericLinesAdapter2
 import esser.marcelo.busoclock.helper.Constants.BC_WAY
 import esser.marcelo.busoclock.helper.Constants.CB_WAY
 import esser.marcelo.busoclock.helper.ProgressDialogHelper
@@ -21,7 +22,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
-class SogalLinesActivity : AppCompatActivity(), GenericLinesAdapterDelegate {
+class SogalLinesActivity : AppCompatActivity() {
     private val viewModel: SogalLinesActivityViewModel by lazy {
         SogalLinesActivityViewModel()
     }
@@ -34,7 +35,7 @@ class SogalLinesActivity : AppCompatActivity(), GenericLinesAdapterDelegate {
         LineMenuDialog(false)
     }
 
-    private lateinit var adapter: GenericLinesAdapter
+    private lateinit var adapter: GenericLinesAdapter2
     var lineWay: String = CB_WAY
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -87,10 +88,10 @@ class SogalLinesActivity : AppCompatActivity(), GenericLinesAdapterDelegate {
     private fun searchEvent() {
         activity_lines_et_search.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                adapterConstruct(viewModel.linesList.filter {
+                /*adapterConstruct(viewModel.linesList.filter {
                     it.name.toLowerCase().contains(activity_lines_et_search.text.toString().toLowerCase())
                             || it.code.toLowerCase().contains(activity_lines_et_search.text.toString().toLowerCase())
-                })
+                })*/
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -140,14 +141,20 @@ class SogalLinesActivity : AppCompatActivity(), GenericLinesAdapterDelegate {
         progressDialog.hideLoader()
     }
 
-    private fun adapterConstruct(it: List<LinesDTO>) {
-        adapter = GenericLinesAdapter(it, this@SogalLinesActivity, this)
+    private fun adapterConstruct(it: List<GenericLinesAdapter2.Base>) {
+        adapter = GenericLinesAdapter2(it, this)
+        adapter.onItemClickListener = this::onItemClickListener
+        adapter.onFavoriteClickListener = this::onFavoriteClickListener
         lines_activity_rv_lines.adapter = adapter
         successConfig()
     }
 
-    override fun onItemClickLitener(line: BaseLine) {
+    private fun onItemClickListener(line: GenericLinesAdapter2.Line) {
         viewModel.saveData(line.code, line.name, lineWay)
         lineMenuDialog.show(supportFragmentManager, "lineMenuDialog")
+    }
+
+    private fun onFavoriteClickListener (line: GenericLinesAdapter2.Line) {
+
     }
 }

@@ -25,7 +25,7 @@ object ObjectBoxFile {
 
 inline fun <reified T> box () : Box<T> = ObjectBoxFile.boxStore.boxFor()
 
-inline fun <reified T> boxList () : List<T> = ObjectBoxFile.boxStore.boxFor<T>().all
+inline fun <reified T> boxList () : MutableList<T> = ObjectBoxFile.boxStore.boxFor<T>().all
 
 inline fun <reified T> put (vararg items: T) = box<T>().put(items.asList())
 

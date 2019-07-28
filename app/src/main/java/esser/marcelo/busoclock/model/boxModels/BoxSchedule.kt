@@ -18,7 +18,11 @@ open class BoxSchedule {
     var apd: String = "N"
 
 
-    lateinit var boxLine: ToOne<BoxLine>
+    lateinit var boxLineWorkdays: ToOne<BoxLine>
+
+    lateinit var boxLineSaturdays: ToOne<BoxLine>
+
+    lateinit var boxLineSundays: ToOne<BoxLine>
 
 
 }

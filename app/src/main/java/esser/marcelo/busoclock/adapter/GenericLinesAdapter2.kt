@@ -1,13 +1,11 @@
 package esser.marcelo.busoclock.adapter
 
-import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
 import esser.marcelo.busoclock.R
 import kotlinx.android.synthetic.main.row_line.view.*
 import kotlinx.android.synthetic.main.row_section.view.*
@@ -31,7 +29,7 @@ class GenericLinesAdapter2(
         }
     }
 
-    override fun getItemCount(): Int = 0
+    override fun getItemCount(): Int = lines.size
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
@@ -47,20 +45,22 @@ class GenericLinesAdapter2(
                 holder.tvLineName.text = line.name
                 holder.tvLineCode.text = line.code
 
-                val progress = if(line.isFavorite) 60f else 0f
+                val progress = if(line.isFavorite) 0.9f else 0f
                 holder.lottieFavorite.progress = progress
 
                 holder.lottieFavorite.setOnClickListener {
 
 
-                    val animate = if(line.isFavorite) ValueAnimator.ofFloat(60f,  0f) else ValueAnimator.ofFloat(0f,  60f)
+                    val animate = if(line.isFavorite) ValueAnimator.ofFloat(0.9f,  0f) else ValueAnimator.ofFloat(0f,  0.9f)
 
                     animate.addUpdateListener {
                         holder.lottieFavorite.progress = it.animatedValue as Float
                     }
 
-                    animate.duration = 250
+                    animate.duration = 2000
                     animate.start()
+
+                    line.isFavorite = !line.isFavorite
 
                     onFavoriteClickListener?.invoke(line)
                 }
@@ -89,6 +89,7 @@ class GenericLinesAdapter2(
     ) : Base()
 
     class Line(
+            var boxId: Long? = -1,
             var name: String = "",
             var code: String = "",
             var isFavorite: Boolean = false

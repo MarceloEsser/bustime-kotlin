@@ -9,7 +9,7 @@ import esser.marcelo.busoclock.model.boxModels.BoxSchedule
  * @since 25/07/2019.
  */
 
-/*object Bus {
+object Bus {
 
     fun getLine (idBoxLine: Long) : BoxLine {
         return box<BoxLine>().get(idBoxLine)
@@ -22,6 +22,20 @@ import esser.marcelo.busoclock.model.boxModels.BoxSchedule
 
     fun getLines () : List<BoxLine> {
         return boxList()
+    }
+
+    fun getSogalLines () : List<BoxLine> {
+
+        val sogalLines: MutableList<BoxLine> = boxList()
+
+        return sogalLines.filter { it.isSogalLine }
+    }
+
+    fun getVicasaLines () : List<BoxLine> {
+
+        val vicasaLines: MutableList<BoxLine> = boxList()
+
+        return vicasaLines.filter { !it.isSogalLine }
     }
 
     fun getWorkingDays(idBoxLine: Long) : List<BoxSchedule> {
@@ -45,4 +59,4 @@ import esser.marcelo.busoclock.model.boxModels.BoxSchedule
         success()
     }
 
-}*/
+}

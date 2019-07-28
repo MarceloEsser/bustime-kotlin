@@ -7,7 +7,6 @@ import android.text.TextWatcher
 import android.view.View
 import android.view.View.VISIBLE
 import android.view.WindowManager
-import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_lines.*
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.R.menu.vicasa_lines_bottom_navigation_menu
@@ -122,7 +121,7 @@ class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction, Generi
     }
 
     private fun configureList(it: List<Vicasa>) {
-        adapter = GenericLinesAdapter(it, this@VicasaLinesActivity, this, this::onFavoriteLine)
+        adapter = GenericLinesAdapter(it, this@VicasaLinesActivity, this)
         lines_activity_rv_lines.adapter = adapter
         lines_activity_rv_lines.visibility = VISIBLE
     }
@@ -130,10 +129,6 @@ class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction, Generi
     override fun onItemClickLitener(line: BaseLine) {
         viewModel.saveLineData(line.code, line.name, viewModel.lineWay)
         menuDialog.show(supportFragmentManager, "menuDialog")
-    }
-
-    private fun onFavoriteLine (line: BaseLine) {
-
     }
 
     private fun successConfig() {

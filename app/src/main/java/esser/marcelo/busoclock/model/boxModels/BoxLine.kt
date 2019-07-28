@@ -18,14 +18,20 @@ open class BoxLine {
     var name: String? = null
     var code: String? = null
     var way: String? = null
+    var isSogalLine: Boolean = false
 
-    //@Backlink(to = "boxLine")
-    //lateinit var workingDays: ToMany<BoxSchedule>
-    //lateinit var saturdays: ToMany<BoxSchedule>
-    //lateinit var sundays: ToMany<BoxSchedule>
+    @Backlink(to = "boxLineWorkdays")
+    lateinit var workingDays: ToMany<BoxSchedule>
+
+    @Backlink(to = "boxLineSaturdays")
+    lateinit var saturdays: ToMany<BoxSchedule>
+
+    @Backlink(to = "boxLineSundays")
+    lateinit var sundays: ToMany<BoxSchedule>
 
 
     //LinesSogal
-    //@Backlink(to = "boxLineItineraries")
-    //lateinit var sogalItineraries: List<BoxItineraries>
+    @Backlink(to = "boxLineItineraries")
+    lateinit var sogalItineraries: ToMany<BoxItineraries>
+
 }
