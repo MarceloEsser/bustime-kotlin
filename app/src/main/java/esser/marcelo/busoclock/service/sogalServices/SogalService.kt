@@ -8,5 +8,5 @@ import esser.marcelo.busoclock.service.NetworkHandler
  * @since 19/02/19
  */
 class SogalService {
-    fun sogalSerivce(): ISogalService = NetworkHandler.getInstance(ISogalService::class.java).build(SOGAL_BASE_URL)
+    fun sogalService(): ISogalService = NetworkHandler.getInstance(ISogalService::class.java).build(SOGAL_BASE_URL)
 }

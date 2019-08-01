@@ -82,6 +82,23 @@
         <item name="android:fontFamily">@font/ubuntu_medium</item>
     </style>
 
+    <style name="HomeCardButtonTextStyleGreen">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/green900</item>
+        <item name="android:fontFamily">@font/ubuntu_medium</item>
+    </style>
+
+    <style name="HomeCardSubcontentStyleGreen">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/green900</item>
+        <item name="android:fontFamily">@font/ubuntu_regular</item>
+    </style>
+    <style name="HomeCardSubcontentHeaderStyleGreen">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/green900</item>
+        <item name="android:fontFamily">@font/ubuntu_medium</item>
+    </style>
+
     <style name="HomeCardStyleBlue">
         <item name="android:paddingEnd">30dp</item>
         <item name="android:background">@drawable/background_blue_ripple_blue</item>
@@ -90,6 +107,11 @@
     <style name="HomeCardStyleGreen">
         <item name="android:paddingEnd">30dp</item>
         <item name="android:background">@drawable/background_green_ripple_white</item>
+        <item name="android:elevation">6dp</item>
+    </style>
+    <style name="HomeCardStyleFavorite">
+        <item name="android:paddingEnd">30dp</item>
+        <item name="android:background">@drawable/background_white_ripple_white</item>
         <item name="android:elevation">6dp</item>
     </style>
     <style name="IBActionStyle">

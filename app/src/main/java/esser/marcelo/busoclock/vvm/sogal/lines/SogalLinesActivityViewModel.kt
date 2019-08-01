@@ -22,7 +22,7 @@ import retrofit2.Response
  * @since 19/02/19
  */
 class SogalLinesActivityViewModel {
-    private val service = SogalService().sogalSerivce()
+    private val service = SogalService().sogalService()
 
     private val SEARCH_LINES: String = "buscaLinhas"
 
@@ -78,23 +78,18 @@ class SogalLinesActivityViewModel {
     fun buildList (firstTime: Boolean = false) : List<GenericLinesAdapter2.Base> {
         val list = mutableListOf<GenericLinesAdapter2.Base>()
 
-        if (Bus.getSogalLines().isNotEmpty()) {
-
-            list.add(GenericLinesAdapter2.Section("Favoritos"))
-
-            for (line in Bus.getSogalLines()) {
-
-                val baseLine = GenericLinesAdapter2.Line(line.id, line.name ?: "", line.code ?: "", true)
-                list.add(baseLine)
-
-            }
-
-            list.add(GenericLinesAdapter2.Section("Outras linhas"))
-        }
-
         for (line in linesList) {
 
-            val baseLine = GenericLinesAdapter2.Line(-1, line.name, line.code, false)
+            var isFavorite = false
+            var boxId = -1L
+            Bus.getSogalLines().find { it.code == line.code }?.let { boxLine ->
+                if (boxLine.code == line.code) {
+                    isFavorite = true
+                    boxId = boxLine.id
+                }
+            }
+
+            val baseLine = GenericLinesAdapter2.Line(boxId, line.name, line.code, isFavorite)
             list.add(baseLine)
             if (firstTime)
                 lines.add(baseLine)

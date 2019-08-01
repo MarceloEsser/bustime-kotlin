@@ -9,7 +9,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class SogalItinerariesActivityViewModel {
-    private val service = SogalService().sogalSerivce()
+    private val service = SogalService().sogalService()
     private val SEARCH_ITINERARIES: String = "buscaItinerarios"
 
     fun loadItineraries(

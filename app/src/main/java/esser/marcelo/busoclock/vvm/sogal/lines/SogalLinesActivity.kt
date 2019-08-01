@@ -154,8 +154,8 @@ class SogalLinesActivity : AppCompatActivity() {
         lineMenuDialog.show(supportFragmentManager, "lineMenuDialog")
     }
 
-    private fun onFavoriteClickListener (line: GenericLinesAdapter2.Line) {
-        if (line.isFavorite) {
+    private fun onFavoriteClickListener (line: GenericLinesAdapter2.Line, delete: Boolean) {
+        if (delete) {
             viewModel.deleteFavorite(line) {
                 adapterConstruct(viewModel.buildList())
             }

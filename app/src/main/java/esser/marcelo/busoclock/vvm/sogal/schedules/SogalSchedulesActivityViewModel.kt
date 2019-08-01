@@ -20,7 +20,7 @@ class SogalSchedulesActivityViewModel {
     var sundays: List<SchedulesDTO>? = null
 
     private val sogalService: ISogalService by lazy {
-        SogalService().sogalSerivce()
+        SogalService().sogalService()
     }
 
     fun loadSchedulesBy(

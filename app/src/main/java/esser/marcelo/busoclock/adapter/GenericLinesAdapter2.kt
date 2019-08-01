@@ -18,7 +18,10 @@ class GenericLinesAdapter2(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var onItemClickListener: ((Line) -> Unit)? = null
-    var onFavoriteClickListener: ((Line) -> Unit)? = null
+    var onFavoriteClickListener: ((Line, Boolean) -> Unit)? = null
+
+    //used to avoid multiple clicks
+    private var unclickable = false
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
@@ -51,6 +54,8 @@ class GenericLinesAdapter2(
 
                 holder.lottieFavorite.setOnClickListener {
 
+                    if (unclickable)
+                        return@setOnClickListener
 
                     val animate = if(line.isFavorite) ValueAnimator.ofFloat(0.9f,  0f) else ValueAnimator.ofFloat(0f,  0.9f)
 
@@ -61,9 +66,13 @@ class GenericLinesAdapter2(
                     animate.addListener(object : Animator.AnimatorListener {
                         override fun onAnimationRepeat(animation: Animator?) = Unit
                         override fun onAnimationCancel(animation: Animator?) = Unit
-                        override fun onAnimationStart(animation: Animator?) = Unit
+                        override fun onAnimationStart(animation: Animator?) {
+                            this@GenericLinesAdapter2.unclickable = true
+                        }
                         override fun onAnimationEnd(animation: Animator?) {
-                            onFavoriteClickListener?.invoke(line)
+                            onFavoriteClickListener?.invoke(line, line.isFavorite)
+                            line.isFavorite = !line.isFavorite
+                            this@GenericLinesAdapter2.unclickable = false
                         }
                     })
 
@@ -86,6 +95,11 @@ class GenericLinesAdapter2(
             else -> R.layout.row_section
         }
 
+    }
+
+    fun updateList (lines: List<Base>) {
+        this.lines = lines
+        this.notifyDataSetChanged()
     }
 
     abstract class Base
