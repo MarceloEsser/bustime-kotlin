@@ -405,7 +405,7 @@
                 android:id="@+id/secondCard"
                 style="@style/CardStyle"
                 android:layout_width="0dp"
-                android:layout_height="180dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="30dp"
                 app:layout_constraintEnd_toEndOf="@id/cv_home_activity_sogal"
@@ -416,66 +416,93 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <TextView
-                        android:id="@+id/home_activity_tv_github_description"
-                        style="@style/HomeCardContentStyle"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:id="@+id/llEsserGitHub"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:text="@string/github_profile"
-                        app:layout_constraintBottom_toBottomOf="@id/home_activity_img_github_logo"
-                        app:layout_constraintStart_toEndOf="@id/home_activity_img_github_logo"
-                        app:layout_constraintTop_toTopOf="@id/home_activity_img_github_logo" />
-
-                    <ImageView
-                        android:id="@+id/home_activity_img_github_logo"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="15dp"
-                        android:src="@drawable/ic_github_logo"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/background_transparent_ripple_grey"
+                        android:orientation="horizontal"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent">
 
-                    <TextView
-                        android:id="@+id/home_activity_tv_gmail_description"
-                        style="@style/HomeCardContentStyle"
-                        android:layout_width="wrap_content"
+                        <ImageView
+                            android:id="@+id/home_activity_img_github_logo_esser"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="top"
+                            android:layout_margin="5dp"
+                            android:src="@drawable/ic_github_logo" />
+
+                        <TextView
+                            android:id="@+id/home_activity_tv_github_description_esser"
+                            style="@style/HomeCardContentStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/github_profile" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llEsserEmail"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:text="@string/gmail_profile"
-                        app:layout_constraintBottom_toBottomOf="@id/home_activity_img_gmail_logo"
-                        app:layout_constraintStart_toEndOf="@id/home_activity_img_gmail_logo"
-                        app:layout_constraintTop_toTopOf="@id/home_activity_img_gmail_logo" />
+                        android:layout_margin="10dp"
+                        android:background="@drawable/background_transparent_ripple_grey"
+                        android:orientation="horizontal"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/llEsserGitHub">
 
-                    <ImageView
-                        android:id="@+id/home_activity_img_gmail_logo"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginTop="15dp"
-                        android:src="@drawable/ic_gmail_logo"
-                        app:layout_constraintStart_toStartOf="@id/home_activity_img_github_logo"
-                        app:layout_constraintTop_toBottomOf="@id/home_activity_img_github_logo" />
+                        <ImageView
+                            android:id="@+id/home_activity_img_gmail_logo_esser"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="top"
+                            android:layout_margin="5dp"
+                            android:src="@drawable/ic_gmail_logo" />
 
-                    <TextView
-                        android:id="@+id/home_activity_tv_linkedin_description"
-                        style="@style/HomeCardContentStyle"
-                        android:layout_width="wrap_content"
+                        <TextView
+                            android:id="@+id/home_activity_tv_gmail_description_esser"
+                            style="@style/HomeCardContentStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/gmail_profile" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llEsserLinkedIn"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:text="@string/linkedin_profile"
-                        app:layout_constraintBottom_toBottomOf="@id/home_activity_img_linkedin_logo"
-                        app:layout_constraintStart_toEndOf="@id/home_activity_img_linkedin_logo"
-                        app:layout_constraintTop_toTopOf="@id/home_activity_img_linkedin_logo" />
+                        android:layout_margin="10dp"
+                        android:background="@drawable/background_transparent_ripple_grey"
+                        android:orientation="horizontal"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/llEsserEmail">
 
-                    <ImageView
-                        android:id="@+id/home_activity_img_linkedin_logo"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginTop="15dp"
-                        android:src="@drawable/ic_linkedin_logo"
-                        app:layout_constraintStart_toStartOf="@id/home_activity_img_gmail_logo"
-                        app:layout_constraintTop_toBottomOf="@id/home_activity_img_gmail_logo" />
+                        <ImageView
+                            android:id="@+id/home_activity_img_linkedin_logo_esser"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="top"
+                            android:layout_margin="5dp"
+                            android:src="@drawable/ic_linkedin_logo" />
+
+                        <TextView
+                            android:id="@+id/home_activity_tv_linkedin_description_esser"
+                            style="@style/HomeCardContentStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/linkedin_profile" />
+                    </LinearLayout>
                 </android.support.constraint.ConstraintLayout>
             </android.support.v7.widget.CardView>
 
@@ -508,31 +535,31 @@
                     android:layout_height="match_parent">
 
                     <LinearLayout
-                        android:orientation="horizontal"
                         android:id="@+id/llWottrichGitHub"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:background="@drawable/background_transparent_ripple_grey"
+                        android:orientation="horizontal"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" >
+                        app:layout_constraintTop_toTopOf="parent">
 
-                    <ImageView
-                        android:id="@+id/home_activity_img_github_logo_wottrich"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_margin="5dp"
-                        android:layout_gravity="top"
-                        android:src="@drawable/ic_github_logo"/>
+                        <ImageView
+                            android:id="@+id/home_activity_img_github_logo_wottrich"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="top"
+                            android:layout_margin="5dp"
+                            android:src="@drawable/ic_github_logo" />
 
                         <TextView
                             android:id="@+id/home_activity_tv_github_description_wottrich"
                             style="@style/HomeCardContentStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
                             android:layout_gravity="center"
+                            android:layout_marginStart="10dp"
                             android:text="@string/github_profile_wottrich" />
                     </LinearLayout>
 
@@ -542,27 +569,27 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:orientation="horizontal"
                         android:background="@drawable/background_transparent_ripple_grey"
-                        app:layout_constraintTop_toBottomOf="@id/llWottrichGitHub"
+                        android:orientation="horizontal"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent">
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/llWottrichGitHub">
 
                         <ImageView
                             android:id="@+id/home_activity_img_gmail_logo_wottrich"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:layout_margin="5dp"
                             android:layout_gravity="top"
-                            android:src="@drawable/ic_gmail_logo"/>
+                            android:layout_margin="5dp"
+                            android:src="@drawable/ic_gmail_logo" />
 
                         <TextView
                             android:id="@+id/home_activity_tv_gmail_description_wottrich"
                             style="@style/HomeCardContentStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
                             android:layout_gravity="center"
+                            android:layout_marginStart="10dp"
                             android:text="@string/gmail_profile_wottrich" />
                     </LinearLayout>
 
@@ -571,29 +598,29 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:orientation="horizontal"
                         android:background="@drawable/background_transparent_ripple_grey"
+                        android:orientation="horizontal"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/llWottrichEmail"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent">
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/llWottrichEmail">
 
                         <ImageView
                             android:id="@+id/home_activity_img_linkedin_logo_wottrich"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:layout_margin="5dp"
                             android:layout_gravity="top"
-                            android:src="@drawable/ic_linkedin_logo"/>
+                            android:layout_margin="5dp"
+                            android:src="@drawable/ic_linkedin_logo" />
 
                         <TextView
                             android:id="@+id/home_activity_tv_linkedin_description_wottrich"
                             style="@style/HomeCardContentStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
                             android:layout_gravity="center"
-                            android:text="@string/linkedin_profile_wottrich"/>
+                            android:layout_marginStart="10dp"
+                            android:text="@string/linkedin_profile_wottrich" />
                     </LinearLayout>
 
                 </android.support.constraint.ConstraintLayout>

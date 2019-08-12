@@ -6,10 +6,8 @@ import android.net.Uri.fromParts
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import android.widget.Toast
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.box.Bus
-import esser.marcelo.busoclock.service.vicasaServices.VicasaService
 import esser.marcelo.busoclock.vvm.favorite.FavoriteActivity
 import esser.marcelo.busoclock.vvm.sogal.lines.SogalLinesActivity
 import esser.marcelo.busoclock.vvm.vicasa.lines.VicasaLinesActivity
@@ -24,19 +22,64 @@ class HomeActivity : AppCompatActivity() {
         this@HomeActivity
     }
 
-    private val vicasaString: VicasaService by lazy {
-        VicasaService()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        cardsEvents()
-
-        wottrichEvents()
+        events()
 
         loadFavorites()
+    }
+
+    private fun loadFavorites() {
+
+        val favoritesSize = Bus.getLines().size
+        if (favoritesSize > 0) {
+            tv_favorite_count.text = "$favoritesSize Linha(s) salva(s)"
+            cv_home_activity_favorities.visibility = View.VISIBLE
+        } else {
+            cv_home_activity_favorities.visibility = View.GONE
+        }
+
+    }
+
+    private fun events() {
+        cardsEvents()
+
+        esserEvents()
+
+        wottrichEvents()
+    }
+
+    private fun esserEvents() {
+        esserGitHubEvent()
+
+        esserEmailEvent()
+
+        esserLinkedInEvent()
+    }
+
+    private fun esserGitHubEvent() {
+        llEsserGitHub.setOnClickListener {
+            openAUrl("https://github.com/MarceloEsser")
+        }
+    }
+
+    private fun esserEmailEvent() {
+        llEsserEmail.setOnClickListener {
+            val emailIntent = Intent(
+                Intent.ACTION_SENDTO, fromParts(
+                    "mailto", "marcelo.v.esser@gmail.com", null
+                )
+            )
+            startActivity(Intent.createChooser(emailIntent, "Enviar email..."))
+        }
+    }
+
+    private fun esserLinkedInEvent() {
+        llEsserLinkedIn.setOnClickListener {
+            openAUrl("https://www.linkedin.com/in/marcelo-esser/")
+        }
     }
 
     private fun cardsEvents() {
@@ -100,18 +143,6 @@ class HomeActivity : AppCompatActivity() {
             )
             startActivity(Intent.createChooser(emailIntent, "Enviar email..."))
         }
-    }
-
-    private fun loadFavorites() {
-
-        val favoritesSize = Bus.getLines().size
-        if (favoritesSize > 0) {
-            tv_favorite_count.text = "$favoritesSize Linha(s) salva(s)"
-            cv_home_activity_favorities.visibility = View.VISIBLE
-        } else {
-            cv_home_activity_favorities.visibility = View.GONE
-        }
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
