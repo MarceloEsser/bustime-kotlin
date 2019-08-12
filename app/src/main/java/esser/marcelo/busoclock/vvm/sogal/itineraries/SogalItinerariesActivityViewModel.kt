@@ -14,8 +14,8 @@ class SogalItinerariesActivityViewModel {
 
     fun loadItineraries(
         onSucces: (itineraries: List<ItinerariesDTO>?) -> Unit,
-        onError: (erroMessage: String) -> Unit
-    ) {
+        onError: (erroMessage: String) -> Unit    ) {
+
         service.getSogalItineraries(action = SEARCH_ITINERARIES, linha = LineDAO.lineCode)
             .enqueue(object : Callback<LinesDTO> {
                 override fun onFailure(call: Call<LinesDTO>, t: Throwable) {
