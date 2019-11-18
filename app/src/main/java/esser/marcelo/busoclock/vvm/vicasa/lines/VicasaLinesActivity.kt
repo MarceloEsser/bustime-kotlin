@@ -98,6 +98,7 @@ class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction, Generi
     }
 
     private fun bottomNavigationBarListener() {
+        lines_bottom_navigation.isSelected = false
         lines_bottom_navigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.action_cb -> {

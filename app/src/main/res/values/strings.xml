@@ -47,4 +47,5 @@
     <string name="bc_way">Bairro Centro</string>
     <string name="cb_way">Centro Bairro</string>
     <string name="line_way">Sentido da linha</string>
+    <string name="line_code_or_line_name">Código da linha ou nome da linha</string>
 </resources>

@@ -100,4 +100,16 @@
         <item name="android:textColor">@color/grey800</item>
     </style>
 
+
+    <style name="LinesBottomSheetTitleStyle">
+        <item name="android:fontFamily">@font/ubuntu_medium</item>
+        <item name="android:textColor">@color/grey800</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="LinesBottomSheetDefaultTextStyle">
+        <item name="android:fontFamily">@font/ubuntu_regular</item>
+        <item name="android:textColor">@color/grey800</item>
+        <item name="android:textSize">16sp</item>
+    </style>
 </resources>
