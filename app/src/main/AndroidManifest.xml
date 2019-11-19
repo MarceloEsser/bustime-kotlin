@@ -13,8 +13,16 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true"
-            tools:ignore="GoogleAppIndexingWarning">
+            tools:ignore="GoogleAppIndexingWarning"
+            tools:targetApi="m">
         <activity android:name=".vvm.MainActivity">
+        </activity>
+        <activity
+                android:name=".vvm.vicasa.schedules.VicasaSchedulesActivity"
+                android:screenOrientation="portrait" />
+        <activity
+                android:name=".vvm.home.HomeActivity"
+                android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,23 +30,18 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".vvm.vicasa.schedules.VicasaSchedulesActivity"
-                android:screenOrientation="portrait"></activity>
-        <activity
-                android:name=".vvm.home.HomeActivity"
-                android:screenOrientation="portrait">
-
-        </activity>
-        <activity
                 android:name=".vvm.sogal.itineraries.SogalItinerariesActivity"
-                android:screenOrientation="portrait"></activity>
-        <activity android:name=".vvm.sogal.lines.SogalLinesActivity"></activity>
+                android:screenOrientation="portrait" />
+        <activity
+                android:name=".vvm.sogal.lines.SogalLinesActivity"
+                android:windowSoftInputMode="adjustResize" />
         <activity
                 android:name=".vvm.sogal.schedules.SogalSchedulesActivity"
-                android:screenOrientation="portrait"></activity>
+                android:screenOrientation="portrait" />
         <activity
                 android:name=".vvm.vicasa.lines.VicasaLinesActivity"
-                android:screenOrientation="portrait"></activity>
+                android:screenOrientation="portrait"
+                android:windowSoftInputMode="adjustResize"/>
     </application>
 
 </manifest>

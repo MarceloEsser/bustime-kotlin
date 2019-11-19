@@ -4,7 +4,6 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/yellow300"
         tools:context=".vvm.MainActivity">
 
     <android.support.design.widget.CoordinatorLayout
@@ -16,8 +15,9 @@
             android:layout_height="0dp">
 
         <android.support.design.card.MaterialCardView
+                android:id="@+id/mcvBottomSheet"
                 app:cardElevation="0dp"
-                app:behavior_peekHeight="60dp"
+                tools:behavior_peekHeight="70dp"
                 app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
                 style="Widget.MaterialComponents.BottomSheet.Modal"
                 android:layout_width="match_parent"

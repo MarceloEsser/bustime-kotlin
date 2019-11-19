@@ -1,11 +1,15 @@
 package esser.marcelo.busoclock.vvm.sogal.lines
 
+import android.app.Activity
 import android.os.Bundle
+import android.support.design.card.MaterialCardView
+import android.support.design.widget.BottomSheetBehavior
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View.*
 import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.adapter.GenericLinesAdapter
 import esser.marcelo.busoclock.helper.Constants.BC_WAY
@@ -16,10 +20,11 @@ import esser.marcelo.busoclock.model.BaseLine
 import esser.marcelo.busoclock.model.sogal.LinesDTO
 import esser.marcelo.busoclock.vvm.lineDialog.LineMenuDialog
 import kotlinx.android.synthetic.main.activity_lines.*
+import kotlinx.android.synthetic.main.activity_lines.activity_lines_et_search
+import kotlinx.android.synthetic.main.activity_lines.activity_lines_imgbtn_filter
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-
 
 class SogalLinesActivity : AppCompatActivity(), GenericLinesAdapterDelegate {
     private val viewModel: SogalLinesActivityViewModel by lazy {
@@ -61,7 +66,7 @@ class SogalLinesActivity : AppCompatActivity(), GenericLinesAdapterDelegate {
     }
 
     private fun bottomNavigationBarListener() {
-        lines_bottom_navigation.setOnNavigationItemSelectedListener {
+        /*lines_bottom_navigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.action_cb -> {
                     setTitle(R.string.cb_way)
@@ -75,7 +80,7 @@ class SogalLinesActivity : AppCompatActivity(), GenericLinesAdapterDelegate {
                 }
                 else -> false
             }
-        }
+        }*/
     }
 
     private fun ibBacAction() {
@@ -150,4 +155,5 @@ class SogalLinesActivity : AppCompatActivity(), GenericLinesAdapterDelegate {
         viewModel.saveData(line.code, line.name, lineWay)
         lineMenuDialog.show(supportFragmentManager, "lineMenuDialog")
     }
+
 }

@@ -1,13 +1,14 @@
 package esser.marcelo.busoclock.vvm.vicasa.lines
 
 import android.os.Bundle
+import android.support.design.card.MaterialCardView
+import android.support.design.widget.BottomSheetBehavior
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.View.VISIBLE
 import android.view.WindowManager
-import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_lines.*
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.R.menu.vicasa_lines_bottom_navigation_menu
@@ -52,7 +53,7 @@ class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction, Generi
 
         listeners()
 
-        lines_bottom_navigation.inflateMenu(vicasa_lines_bottom_navigation_menu)
+        //bn_line_way_selector.inflateMenu(vicasa_lines_bottom_navigation_menu)
     }
 
     private fun listeners() {
@@ -98,8 +99,8 @@ class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction, Generi
     }
 
     private fun bottomNavigationBarListener() {
-        lines_bottom_navigation.isSelected = false
-        lines_bottom_navigation.setOnNavigationItemSelectedListener {
+        /*bn_line_way_selector.isSelected = false
+        bn_line_way_selector.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.action_cb -> {
                     viewModel.lineWay = CB_WAY
@@ -119,7 +120,7 @@ class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction, Generi
                 }
                 else -> false
             }
-        }
+        }*/
     }
 
     private fun configureList(it: List<Vicasa>) {

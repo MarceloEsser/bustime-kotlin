@@ -46,26 +46,25 @@
             android:layout_height="50dp"
             android:background="@color/colorPrimary"
             android:elevation="6dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lines_toolbar">
+            app:layout_constraintStart_toStartOf="parent">
 
         <EditText
                 android:id="@+id/activity_lines_et_search"
                 android:layout_width="0dp"
                 android:layout_height="28dp"
+                android:layout_margin="10dp"
                 android:background="@drawable/background_search"
-                android:textSize="14sp"
                 android:inputType="text"
                 android:maxLines="1"
-                android:layout_margin="10dp"
-                android:paddingEnd="5dp"
                 android:paddingStart="32dp"
-                app:layout_constraintEnd_toStartOf="@+id/textView"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                android:paddingEnd="5dp"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"/>
+                app:layout_constraintEnd_toStartOf="@+id/activity_lines_imgbtn_filter"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
                 android:id="@+id/activity_lines_img_search"
@@ -75,35 +74,20 @@
                 app:layout_constraintBottom_toBottomOf="@+id/activity_lines_et_search"
                 app:layout_constraintStart_toStartOf="@+id/activity_lines_et_search"
                 app:layout_constraintTop_toTopOf="@+id/activity_lines_et_search"
-                app:srcCompat="@drawable/icon_search"/>
-
-        <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:textColor="@color/white"
-                android:visibility="gone"
-                tools:visibility="visible"
-                android:text="@string/cancel"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/activity_lines_imgbtn_filter"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/activity_lines_et_search"
-                app:layout_constraintHorizontal_bias="0.5"/>
+                app:srcCompat="@drawable/icon_search" />
 
         <ImageButton
-                android:src="@drawable/ic_filter"
                 android:id="@+id/activity_lines_imgbtn_filter"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginStart="5dp"
-                android:background="@drawable/background_ib_action"
-                android:padding="15dp"
                 android:layout_width="50dp"
                 android:layout_height="0dp"
-                android:contentDescription="@string/filter_description"/>
+                android:layout_marginStart="5dp"
+                android:background="@drawable/background_ib_action"
+                android:contentDescription="@string/filter_description"
+                android:padding="15dp"
+                android:src="@drawable/ic_filter"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 
@@ -112,14 +96,13 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:clickable="true"
-            android:visibility="invisible"
             android:focusable="true"
+            android:visibility="invisible"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@id/lines_bottom_navigation"
+            app:layout_constraintBottom_toTopOf="@+id/clSearch"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/clSearch"
-            app:layout_constraintVertical_bias="0.0"/>
+            app:layout_constraintTop_toBottomOf="@+id/lines_toolbar" />
 
     <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/lines_activity_img_lottie_conection"
@@ -134,30 +117,18 @@
             app:layout_constraintBottom_toTopOf="@+id/lines_activity_tv_connection_error"/>
 
     <TextView
-            app:layout_constraintBottom_toTopOf="@id/lines_bottom_navigation"
-            app:layout_constraintTop_toBottomOf="@id/clSearch"
-            app:layout_constraintVertical_bias="0.9"
-            android:layout_margin="10dp"
-            android:textSize="18sp"
-            android:visibility="gone"
-            android:textColor="@color/blueGrey800"
-            android:textAlignment="center"
-            android:text="@string/error_conection"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/lines_activity_tv_connection_error"/>
-
-    <android.support.design.widget.BottomNavigationView
-            android:id="@+id/lines_bottom_navigation"
+            android:id="@+id/lines_activity_tv_connection_error"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            app:itemIconTint="@drawable/selector_lines_bottom_navigation"
-            app:itemTextColor="@drawable/selector_lines_bottom_navigation"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="10dp"
+            android:text="@string/error_conection"
+            android:textAlignment="center"
+            android:textColor="@color/blueGrey800"
+            android:textSize="18sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/clSearch"
+            app:layout_constraintEnd_toEndOf="@+id/lines_activity_rv_lines"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            app:menu="@menu/lines_bottom_navigation_menu"/>
+            app:layout_constraintTop_toTopOf="@id/lines_toolbar" />
 
 </android.support.constraint.ConstraintLayout>
