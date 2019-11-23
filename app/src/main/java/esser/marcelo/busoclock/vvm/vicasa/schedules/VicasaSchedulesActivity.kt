@@ -38,6 +38,10 @@ class VicasaSchedulesActivity : AppCompatActivity() {
 
         listeners()
 
+        LineDAO.lineWay?.let {
+            tv_line_way.text = it.description
+        }
+
     }
 
     private fun listeners() {

@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.activity_lines.*
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.R.menu.vicasa_lines_bottom_navigation_menu
 import esser.marcelo.busoclock.adapter.GenericLinesAdapter
+import esser.marcelo.busoclock.dao.LineDAO
 import esser.marcelo.busoclock.helper.Constants.BB_WAY
 import esser.marcelo.busoclock.helper.Constants.BC_WAY
 import esser.marcelo.busoclock.helper.Constants.CB_WAY
@@ -24,6 +25,7 @@ import esser.marcelo.busoclock.model.BaseLine
 import esser.marcelo.busoclock.model.vicasa.Vicasa
 import esser.marcelo.busoclock.vvm.lineDialog.LineMenuDialog
 import esser.marcelo.busoclock.vvm.vicasa.filterDialog.VicasaFilterDialog
+import kotlinx.android.synthetic.main.activity_schedules.*
 
 class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction, GenericLinesAdapterDelegate {
 

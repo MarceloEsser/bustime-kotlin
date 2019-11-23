@@ -34,6 +34,10 @@ class SogalSchedulesActivity : AppCompatActivity() {
         listeners()
 
         shcedule_activity_tv_line_name.text = LineDAO.lineName
+        LineDAO.lineWay?.let {
+            tv_line_way.text = it.description
+        }
+
     }
 
     override fun onStart() {

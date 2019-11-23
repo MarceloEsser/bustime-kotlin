@@ -39,7 +39,7 @@
     <android.support.constraint.ConstraintLayout
             android:id="@+id/tab_bar"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:background="@color/colorPrimaryDark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,14 +51,30 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="10dp"
+                android:layout_marginBottom="5dp"
                 android:ellipsize="end"
+                android:layout_marginTop="10dp"
                 android:maxLines="1"
                 android:textColor="@color/white"
+                android:fontFamily="@font/ubuntu_regular"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/tv_line_way"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
+
+
+        <TextView
+                tools:text ="5001"
+                android:layout_marginBottom="10dp"
+                android:textSize="14sp"
+                android:fontFamily="@font/ubuntu_regular"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="@id/shcedule_activity_tv_line_name"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/tv_line_way"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
     </android.support.constraint.ConstraintLayout>
 
     <TextView
