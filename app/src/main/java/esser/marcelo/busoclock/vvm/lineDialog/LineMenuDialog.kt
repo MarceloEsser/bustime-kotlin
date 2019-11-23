@@ -1,33 +1,39 @@
 package esser.marcelo.busoclock.vvm.lineDialog
 
-import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.view.*
 import android.view.View.GONE
-import android.widget.ArrayAdapter
-import com.airbnb.lottie.LottieAnimationView
-import kotlinx.android.synthetic.main.dialog_line_menu.*
+import android.widget.AdapterView
+import android.widget.Toast
 import esser.marcelo.busoclock.R
+import esser.marcelo.busoclock.adapter.spinner.SpinnerDefaultAdapter
 import esser.marcelo.busoclock.dao.LineDAO
-import esser.marcelo.busoclock.helper.Constants.CB_WAY
 import esser.marcelo.busoclock.vvm.sogal.itineraries.SogalItinerariesActivity
 import esser.marcelo.busoclock.vvm.sogal.schedules.SogalSchedulesActivity
 import esser.marcelo.busoclock.vvm.vicasa.schedules.VicasaSchedulesActivity
+import kotlinx.android.synthetic.main.dialog_line_menu.*
+
 
 @SuppressLint("ValidFragment")
 class LineMenuDialog @SuppressLint("ValidFragment") constructor(
-    val isFromVicasa: Boolean
+    val isFromVicasa: Boolean,
+    val activityContext: Context
 ) : DialogFragment() {
 
     private val viewModel: LineMenuDialogViewModel by lazy {
-        LineMenuDialogViewModel()
+        LineMenuDialogViewModel(isFromVicasa)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.dialog_line_menu, container, false)
     }
 
@@ -36,8 +42,37 @@ class LineMenuDialog @SuppressLint("ValidFragment") constructor(
 
         lineSetup()
         clickEvent()
+        spinnerAdapterConfig()
 
         validateWhatIsToDo()
+
+    }
+
+    private fun spinnerAdapterConfig() {
+        val lineWayAdapter = SpinnerDefaultAdapter(activityContext, viewModel.getWaysList())
+
+        sp_menu_dialog_select_way.adapter = lineWayAdapter
+
+        sp_menu_dialog_select_way.onItemSelectedListener = spItemSelectListener()
+    }
+
+    private fun spItemSelectListener(): AdapterView.OnItemSelectedListener {
+        return object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View,
+                position: Int,
+                id: Long
+            ) {
+
+                viewModel.selectedWay = viewModel.getWaysList()[position]
+                LineDAO.lineWay = viewModel.selectedWay
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+
+            }
+        }
     }
 
     private fun validateWhatIsToDo() {
@@ -53,12 +88,16 @@ class LineMenuDialog @SuppressLint("ValidFragment") constructor(
 
     private fun goToSchedules() {
         btn_line_menu_dialog_schedules.setOnClickListener {
-            if (isFromVicasa) {
-                startActivity(Intent(context, VicasaSchedulesActivity::class.java))
+            if (viewModel.selectedWay.way != "none") {
+                if (isFromVicasa) {
+                    startActivity(Intent(context, VicasaSchedulesActivity::class.java))
+                } else {
+                    startActivity(Intent(context, SogalSchedulesActivity::class.java))
+                }
+                dismiss()
             } else {
-                startActivity(Intent(context, SogalSchedulesActivity::class.java))
+                Toast.makeText(context, "Por favor selecione um sentido para a linha <3", Toast.LENGTH_SHORT).show()
             }
-            dismiss()
         }
     }
 
@@ -72,10 +111,6 @@ class LineMenuDialog @SuppressLint("ValidFragment") constructor(
     private fun lineSetup() {
         tv_line_menu_dialog_line_name.text = LineDAO.lineName
         tv_line_menu_dialog_line_code.text = LineDAO.lineCode
-
-        if (LineDAO.lineWay.equals(CB_WAY))
-            tv_line_menu_dialog_line_way.text = "Centro Bairro"
-        else tv_line_menu_dialog_line_way.text = "Bairro Centro"
     }
 
     override fun onStart() {
@@ -86,14 +121,14 @@ class LineMenuDialog @SuppressLint("ValidFragment") constructor(
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val onCreateDialog = super.onCreateDialog(savedInstanceState)
         setupDialog(onCreateDialog)
-        onCreateDialog.window.requestFeature(Window.FEATURE_NO_TITLE)
+        onCreateDialog.window?.requestFeature(Window.FEATURE_NO_TITLE)
         return onCreateDialog
     }
 
     fun setupDialog(dialog: Dialog) {
         dialog?.run {
-            window.attributes.height = ViewGroup.LayoutParams.WRAP_CONTENT
-            window.attributes.width = ViewGroup.LayoutParams.MATCH_PARENT
+            window?.attributes?.height = ViewGroup.LayoutParams.WRAP_CONTENT
+            window?.attributes?.width = ViewGroup.LayoutParams.MATCH_PARENT
             window?.setGravity(Gravity.CENTER)
         }
     }

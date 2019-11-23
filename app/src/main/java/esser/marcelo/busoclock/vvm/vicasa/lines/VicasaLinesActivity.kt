@@ -35,9 +35,7 @@ class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction, Generi
         ProgressDialogHelper(this@VicasaLinesActivity)
     }
 
-    private val menuDialog: LineMenuDialog by lazy {
-        LineMenuDialog(true)
-    }
+    lateinit var menuDialog: LineMenuDialog
 
     private lateinit var filterDialog: VicasaFilterDialog
     private lateinit var adapter: GenericLinesAdapter
@@ -130,7 +128,9 @@ class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction, Generi
     }
 
     override fun onItemClickLitener(line: BaseLine) {
-        viewModel.saveLineData(line.code, line.name, viewModel.lineWay)
+        viewModel.saveLineData(line.code, line.name)
+
+        menuDialog = LineMenuDialog(true, this@VicasaLinesActivity)
         menuDialog.show(supportFragmentManager, "menuDialog")
     }
 

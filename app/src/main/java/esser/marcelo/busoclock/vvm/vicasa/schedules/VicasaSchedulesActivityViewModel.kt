@@ -88,7 +88,7 @@ class VicasaSchedulesActivityViewModel {
     fun parseResponse(response: String, onSuccess: (schedules: List<SchedulesDTO>) -> Unit) = runBlocking {
         val document: Document = Jsoup.parse(response)
 
-        when (LineDAO.lineWay) {
+        when (LineDAO.lineWay!!.way) {
             CC_WAY -> fillCCElements(document)
             BB_WAY -> fillBBElements(document)
             BC_WAY -> fillBCElements(document)

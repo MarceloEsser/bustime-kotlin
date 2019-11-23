@@ -121,4 +121,10 @@
     <style name="DropDownBottomSheetStyle">
         <item name="android:background">@drawable/shape_drop_down_bottom_sheet</item>
     </style>
+
+    <style name="RowDefaultSpinnerStyle">
+        <item name="android:fontFamily">@font/ubuntu_regular</item>
+        <item name="android:textColor">@color/grey800</item>
+        <item name="android:textSize">16sp</item>
+    </style>
 </resources>
