@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <android.support.constraint.ConstraintLayout
+            android:id="@+id/cl_header"
+            style="@style/LinesBottomSheetDialogStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+        <View
+                android:id="@+id/imgArrowDown"
+                style="@style/DropDownBottomSheetStyle"
+                android:layout_width="30dp"
+                android:layout_height="6dp"
+                android:layout_marginTop="10dp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+                android:id="@+id/activity_lines_et_search"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/background_search"
+                android:hint="@string/line_code_or_line_name"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingStart="10dp"
+                android:paddingEnd="32dp"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/activity_lines_imgbtn_filter"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imgArrowDown" />
+
+        <ImageButton
+                android:id="@+id/activity_lines_imgbtn_filter"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:background="@drawable/background_ib_action"
+                android:contentDescription="@string/filter_description"
+                android:src="@drawable/ic_filter"
+                app:layout_constraintBottom_toBottomOf="@+id/activity_lines_et_search"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/activity_lines_et_search" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+            android:id="@+id/tv_line_name"
+            style="@style/LinesBottomSheetTitleStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="Mathias Velho 116"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cl_header" />
+
+    <TextView
+            android:id="@+id/tv_line_code"
+            style="@style/LinesBottomSheetDefaultTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5001"
+            app:layout_constraintStart_toStartOf="@id/tv_line_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_line_name" />
+
+
+    <View
+            android:id="@+id/divider1"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
+            android:background="@color/transparentGgrey300"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_line_code" />
+
+    <View
+            android:id="@+id/divider2"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginBottom="40dp"
+            android:background="@color/transparentGgrey300"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/bn_line_way_selector"
+            app:layout_constraintStart_toStartOf="@id/bn_line_way_selector"
+            tools:layout_editor_absoluteY="463dp" />
+
+    <TextView
+            android:id="@+id/textView2"
+            style="@style/LinesBottomSheetDefaultTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Em qual sentido?"
+            app:layout_constraintStart_toStartOf="@+id/tv_line_code"
+            app:layout_constraintTop_toBottomOf="@+id/btn_line_menu_dialog_itineraries" />
+
+    <android.support.design.widget.BottomNavigationView
+            android:id="@+id/bn_line_way_selector"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/transparent"
+            android:clipToPadding="false"
+            app:itemIconTint="@drawable/bottom_sheet_line_way_selector"
+            app:itemTextColor="@drawable/bottom_sheet_line_way_selector"
+            app:layout_constraintBottom_toTopOf="@id/divider2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            app:menu="@menu/lines_bottom_navigation_menu" />
+
+    <Button
+            android:id="@+id/btn_line_menu_dialog_schedules"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/background_white_ripple_grey"
+            android:fontFamily="@font/ubuntu_regular"
+            android:paddingStart="20dp"
+            android:text="@string/schedules"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/divider1"
+            app:layout_constraintStart_toStartOf="@+id/divider1"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <Button
+            android:id="@+id/btn_line_menu_dialog_itineraries"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/background_white_ripple_grey"
+            android:fontFamily="@font/ubuntu_regular"
+            android:paddingStart="20dp"
+            android:text="@string/itineraries"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/btn_line_menu_dialog_schedules"
+            app:layout_constraintStart_toStartOf="@+id/btn_line_menu_dialog_schedules"
+            app:layout_constraintTop_toBottomOf="@+id/btn_line_menu_dialog_schedules" />
+
+    <TextView
+            android:id="@+id/textView3"
+            style="@style/LinesBottomSheetDefaultTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="O que você quer ver?"
+            app:layout_constraintStart_toStartOf="@+id/textView2"
+            app:layout_constraintTop_toBottomOf="@+id/divider1" />
+
+
+</android.support.constraint.ConstraintLayout>

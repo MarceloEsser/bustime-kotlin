@@ -8,7 +8,6 @@ import android.view.View.*
 import android.view.WindowManager
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.adapter.GenericLinesAdapter
-import esser.marcelo.busoclock.helper.Constants.BC_WAY
 import esser.marcelo.busoclock.helper.Constants.CB_WAY
 import esser.marcelo.busoclock.helper.ProgressDialogHelper
 import esser.marcelo.busoclock.interfaces.GenericLinesAdapterDelegate
@@ -20,7 +19,6 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-
 class SogalLinesActivity : AppCompatActivity(), GenericLinesAdapterDelegate {
     private val viewModel: SogalLinesActivityViewModel by lazy {
         SogalLinesActivityViewModel()
@@ -30,9 +28,7 @@ class SogalLinesActivity : AppCompatActivity(), GenericLinesAdapterDelegate {
         ProgressDialogHelper(this@SogalLinesActivity)
     }
 
-    private val lineMenuDialog: LineMenuDialog by lazy {
-        LineMenuDialog(false)
-    }
+    lateinit var lineMenuDialog: LineMenuDialog
 
     private lateinit var adapter: GenericLinesAdapter
     var lineWay: String = CB_WAY
@@ -61,7 +57,7 @@ class SogalLinesActivity : AppCompatActivity(), GenericLinesAdapterDelegate {
     }
 
     private fun bottomNavigationBarListener() {
-        lines_bottom_navigation.setOnNavigationItemSelectedListener {
+        /*lines_bottom_navigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.action_cb -> {
                     setTitle(R.string.cb_way)
@@ -75,7 +71,7 @@ class SogalLinesActivity : AppCompatActivity(), GenericLinesAdapterDelegate {
                 }
                 else -> false
             }
-        }
+        }*/
     }
 
     private fun ibBacAction() {
@@ -147,7 +143,10 @@ class SogalLinesActivity : AppCompatActivity(), GenericLinesAdapterDelegate {
     }
 
     override fun onItemClickLitener(line: BaseLine) {
-        viewModel.saveData(line.code, line.name, lineWay)
+        lineMenuDialog = LineMenuDialog(false, this)
+
+        viewModel.saveData(line.code, line.name)
         lineMenuDialog.show(supportFragmentManager, "lineMenuDialog")
     }
+
 }

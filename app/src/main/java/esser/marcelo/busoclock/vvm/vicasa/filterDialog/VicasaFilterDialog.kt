@@ -73,7 +73,7 @@ class VicasaFilterDialog : DialogFragment() {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         serviceTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
-        filter_dialog_sp_county_origin.adapter = adapter
+        sp_menu_dialog_select_way.adapter = adapter
         filter_dialog_sp_destination_county.adapter = adapter
         filter_dialog_sp_service_type.adapter = serviceTypeAdapter
     }
@@ -84,8 +84,8 @@ class VicasaFilterDialog : DialogFragment() {
         var countryDestination = Vicasa()
         var serviceType = Vicasa()
 
-        if (filter_dialog_sp_county_origin.selectedItem != null) {
-            countryOrigin = filter_dialog_sp_county_origin.selectedItem as Vicasa
+        if (sp_menu_dialog_select_way.selectedItem != null) {
+            countryOrigin = sp_menu_dialog_select_way.selectedItem as Vicasa
         }
 
         if (filter_dialog_sp_destination_county.selectedItem != null) {

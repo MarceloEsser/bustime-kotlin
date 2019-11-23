@@ -25,4 +25,10 @@ object Constants {
     const val BC_WAY = "buscaHorarioLinhaBC"
     const val CC_WAY = "centroCircular"
     const val BB_WAY = "bairroCircular"
+
+    //line ways description (adapter row)
+    const val WAY_CC_DESCRIPTION = "Centro Circular - CC"
+    const val WAY_BB_DESCRIPTION = "Bairro Circular - BB"
+    const val WAY_CB_DESCRIPTION = "Centro Bairro - CB"
+    const val WAT_BC_DESCRIPTION = "Bairro Centro - BC"
 }

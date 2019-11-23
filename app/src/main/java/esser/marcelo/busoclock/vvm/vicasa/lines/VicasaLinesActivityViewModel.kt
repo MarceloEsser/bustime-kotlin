@@ -71,11 +71,9 @@ class VicasaLinesActivityViewModel {
         return vicasaLineDescription
     }
 
-    fun saveLineData(lineCode: String, lineName: String, lineWay: String) {
+    fun saveLineData(lineCode: String, lineName: String) {
         LineDAO.lineName = lineName
         LineDAO.lineCode = lineCode
-        LineDAO.lineWay = lineWay
-
     }
 
     fun saveFilterData(countryOrigin: String, countryDestination: String, serviceType: String) {

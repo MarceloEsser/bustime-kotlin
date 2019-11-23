@@ -40,7 +40,7 @@
     </style>
 
     <style name="TabBarStyle">
-        <item name="android:background">@color/colorPrimaryDark</item>
+        <item name="android:background">@color/colorPrimary</item>
     </style>
 
     <style name="TitleStyle">
@@ -100,4 +100,31 @@
         <item name="android:textColor">@color/grey800</item>
     </style>
 
+
+    <style name="LinesBottomSheetTitleStyle">
+        <item name="android:fontFamily">@font/ubuntu_medium</item>
+        <item name="android:textColor">@color/grey800</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="LinesBottomSheetDefaultTextStyle">
+        <item name="android:fontFamily">@font/ubuntu_regular</item>
+        <item name="android:textColor">@color/grey800</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="LinesBottomSheetDialogStyle">
+        <item name="android:background">@drawable/shape_bottom_sheet_dialog</item>
+        <item name="android:elevation">6dp</item>
+    </style>
+
+    <style name="DropDownBottomSheetStyle">
+        <item name="android:background">@drawable/shape_drop_down_bottom_sheet</item>
+    </style>
+
+    <style name="RowDefaultSpinnerStyle">
+        <item name="android:fontFamily">@font/ubuntu_regular</item>
+        <item name="android:textColor">@color/grey800</item>
+        <item name="android:textSize">16sp</item>
+    </style>
 </resources>

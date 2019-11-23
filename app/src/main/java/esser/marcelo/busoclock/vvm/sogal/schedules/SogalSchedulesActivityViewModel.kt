@@ -27,7 +27,7 @@ class SogalSchedulesActivityViewModel {
         onSuccess: (schedules: List<SchedulesDTO>) -> Unit,
         onError: (errorMessage: String) -> Unit
     ) {
-        sogalService.getSogalSchedulesBy(lineWay = LineDAO.lineWay, lineCode = LineDAO.lineCode)
+        sogalService.getSogalSchedulesBy(lineWay = LineDAO.lineWay!!.way, lineCode = LineDAO.lineCode)
             .enqueue(object : Callback<SogalResponse> {
                 override fun onFailure(call: Call<SogalResponse>, t: Throwable) {
                     onError(t.message.toString())
