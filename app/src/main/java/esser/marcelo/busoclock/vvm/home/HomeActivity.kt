@@ -2,6 +2,7 @@ package esser.marcelo.busoclock.vvm.home
 
 import android.content.Intent
 import android.net.Uri
+import android.net.Uri.fromParts
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import esser.marcelo.busoclock.R
@@ -28,6 +29,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
         //chamaServico()
+        events()
 
         cv_home_activity_vicasa.setOnClickListener {
             startActivity(Intent(activityContext, VicasaLinesActivity::class.java))
@@ -39,7 +41,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun events() {
-        cardsEvents()
+        //cardsEvents()
 
         esserEvents()
 
@@ -77,7 +79,7 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    private fun cardsEvents() {
+    /*private fun cardsEvents() {
         cv_home_activity_vicasa.setOnClickListener {
             startActivityForResult(
                 Intent(activityContext, VicasaLinesActivity::class.java),
@@ -92,13 +94,13 @@ class HomeActivity : AppCompatActivity() {
             )
         }
 
-        cv_home_activity_favorities.setOnClickListener {
+        *//*cv_home_activity_favorities.setOnClickListener {
             startActivityForResult(
                 Intent(activityContext, FavoriteActivity::class.java),
                 updateScreen
             )
-        }
-    }
+        }*//*
+    }*/
 
     private fun wottrichEvents() {
         wottrichGitHubEvent()
@@ -140,7 +142,7 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
         when (requestCode) {
             updateScreen -> {
@@ -149,8 +151,6 @@ class HomeActivity : AppCompatActivity() {
         }
 
         super.onActivityResult(requestCode, resultCode, data)
-    }
-
-}
+    }*/
 
 }
