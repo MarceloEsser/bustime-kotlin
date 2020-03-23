@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.WindowManager
 import kotlinx.android.synthetic.main.activity_lines.*
@@ -14,6 +15,7 @@ import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.R.menu.vicasa_lines_bottom_navigation_menu
 import esser.marcelo.busoclock.adapter.GenericLinesAdapter
 import esser.marcelo.busoclock.dao.LineDAO
+import esser.marcelo.busoclock.extensions.hideKeyboard
 import esser.marcelo.busoclock.helper.Constants.BB_WAY
 import esser.marcelo.busoclock.helper.Constants.BC_WAY
 import esser.marcelo.busoclock.helper.Constants.CB_WAY
@@ -27,7 +29,8 @@ import esser.marcelo.busoclock.vvm.lineDialog.LineMenuDialog
 import esser.marcelo.busoclock.vvm.vicasa.filterDialog.VicasaFilterDialog
 import kotlinx.android.synthetic.main.activity_schedules.*
 
-class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction, GenericLinesAdapterDelegate {
+class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction,
+    GenericLinesAdapterDelegate {
 
     private val viewModel: VicasaLinesActivityViewModel by lazy {
         VicasaLinesActivityViewModel()
@@ -45,7 +48,7 @@ class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction, Generi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lines)
-        this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
 
         buildDialog()
 
@@ -53,11 +56,9 @@ class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction, Generi
 
         listeners()
 
-        //bn_line_way_selector.inflateMenu(vicasa_lines_bottom_navigation_menu)
     }
 
     private fun listeners() {
-        bottomNavigationBarListener()
         searchEvent()
         ibBackAction()
     }
@@ -98,31 +99,6 @@ class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction, Generi
         }
     }
 
-    private fun bottomNavigationBarListener() {
-        /*bn_line_way_selector.isSelected = false
-        bn_line_way_selector.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.action_cb -> {
-                    viewModel.lineWay = CB_WAY
-                    true
-                }
-                R.id.action_bc -> {
-                    viewModel.lineWay = BC_WAY
-                    true
-                }
-                R.id.action_cc -> {
-                    viewModel.lineWay = CC_WAY
-                    true
-                }
-                R.id.action_bb -> {
-                    viewModel.lineWay = BB_WAY
-                    true
-                }
-                else -> false
-            }
-        }*/
-    }
-
     private fun configureList(it: List<Vicasa>) {
         adapter = GenericLinesAdapter(it, this@VicasaLinesActivity, this)
         lines_activity_rv_lines.adapter = adapter
@@ -139,8 +115,8 @@ class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction, Generi
     private fun successConfig() {
         lines_activity_rv_lines.setOnClickListener(null)
         lines_activity_rv_lines.visibility = VISIBLE
-        lines_activity_img_lottie_conection.visibility = View.GONE
-        lines_activity_tv_connection_error.visibility = View.GONE
+        lines_activity_img_lottie_conection.visibility = GONE
+        lines_activity_tv_connection_error.visibility = GONE
 
         progressDialog.hideLoader()
     }
@@ -160,6 +136,7 @@ class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction, Generi
     private fun lottieAnimationClick() {
         lines_activity_img_lottie_conection.setOnClickListener {
             lines_activity_img_lottie_conection.pauseAnimation()
+            this.hideKeyboard()
             doFilter(viewModel.countryOrigin, viewModel.countryDestination, viewModel.serviceType)
         }
     }
@@ -172,7 +149,12 @@ class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction, Generi
         viewModel.loadVicasaLinesBy(
             onSuccess = {
                 successConfig()
-                configureList(it)
+                if (it.isNotEmpty()) {
+                    lines_activity_tv_without_lines.visibility = GONE
+                    configureList(it)
+                } else {
+                    lines_activity_tv_without_lines.visibility = VISIBLE
+                }
             }, onError = {
                 errorConfig()
             })

@@ -1,5 +1,6 @@
 package esser.marcelo.busoclock.vvm.sogal.lines
 
+import android.animation.ValueAnimator
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
@@ -8,6 +9,7 @@ import android.view.View.*
 import android.view.WindowManager
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.adapter.GenericLinesAdapter
+import esser.marcelo.busoclock.extensions.hideKeyboard
 import esser.marcelo.busoclock.helper.Constants.CB_WAY
 import esser.marcelo.busoclock.helper.ProgressDialogHelper
 import esser.marcelo.busoclock.interfaces.GenericLinesAdapterDelegate
@@ -19,7 +21,9 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+
 class SogalLinesActivity : AppCompatActivity(), GenericLinesAdapterDelegate {
+
     private val viewModel: SogalLinesActivityViewModel by lazy {
         SogalLinesActivityViewModel()
     }
@@ -49,29 +53,15 @@ class SogalLinesActivity : AppCompatActivity(), GenericLinesAdapterDelegate {
     }
 
     private fun listeners() {
-        bottomNavigationBarListener()
-
+        lav_cancel_search_action.setOnClickListener {
+            if (activity_lines_et_search.text.isNotEmpty()) {
+                this.hideKeyboard()
+                activity_lines_et_search.setText("")
+            }
+        }
         searchEvent()
 
         ibBacAction()
-    }
-
-    private fun bottomNavigationBarListener() {
-        /*lines_bottom_navigation.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.action_cb -> {
-                    setTitle(R.string.cb_way)
-                    lineWay = CB_WAY
-                    true
-                }
-                R.id.action_bc -> {
-                    setTitle(R.string.bc_way)
-                    lineWay = BC_WAY
-                    true
-                }
-                else -> false
-            }
-        }*/
     }
 
     private fun ibBacAction() {
@@ -87,6 +77,7 @@ class SogalLinesActivity : AppCompatActivity(), GenericLinesAdapterDelegate {
                     it.name.toLowerCase().contains(activity_lines_et_search.text.toString().toLowerCase())
                             || it.code.toLowerCase().contains(activity_lines_et_search.text.toString().toLowerCase())
                 })
+                searchAnimationControll()
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -97,6 +88,28 @@ class SogalLinesActivity : AppCompatActivity(), GenericLinesAdapterDelegate {
 
             }
         })
+    }
+
+    private fun searchAnimationControll() {
+        if (activity_lines_et_search.text.isNotEmpty() && lav_cancel_search_action.progress == 0f) {
+            val animate = ValueAnimator.ofFloat(0f, 0.5f)
+
+            animate.addUpdateListener {
+                lav_cancel_search_action.progress = it.animatedValue as Float
+            }
+
+            animate.duration = 1500
+            animate.start()
+        } else if (activity_lines_et_search.text.isNullOrEmpty() &&lav_cancel_search_action.progress == 0.5f) {
+            val animate = ValueAnimator.ofFloat(0.5f, 0f)
+
+            animate.addUpdateListener {
+                lav_cancel_search_action.progress = it.animatedValue as Float
+            }
+
+            animate.duration = 1500
+            animate.start()
+        }
     }
 
     private fun loadLines() {

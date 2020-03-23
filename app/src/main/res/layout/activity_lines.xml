@@ -60,12 +60,14 @@
                 android:paddingStart="15dp"
                 android:paddingEnd="50dp"
                 android:textSize="14sp"
+                android:hint="@string/line_or_line_way"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/activity_lines_imgbtn_filter"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lav_cancel_search_action"
                 app:lottie_fileName="search_cancel.json"
                 app:layout_constraintEnd_toEndOf="@id/activity_lines_et_search"
                 app:layout_constraintTop_toTopOf="@id/activity_lines_et_search"
