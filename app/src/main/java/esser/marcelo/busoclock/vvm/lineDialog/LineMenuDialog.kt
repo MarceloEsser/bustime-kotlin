@@ -22,7 +22,8 @@ import kotlinx.android.synthetic.main.dialog_line_menu.*
 @SuppressLint("ValidFragment")
 class LineMenuDialog @SuppressLint("ValidFragment") constructor(
     val isFromVicasa: Boolean,
-    val activityContext: Context
+    val activityContext: Context,
+    var isFavorite: Boolean = true
 ) : DialogFragment() {
 
     private val viewModel: LineMenuDialogViewModel by lazy {
@@ -45,6 +46,22 @@ class LineMenuDialog @SuppressLint("ValidFragment") constructor(
         spinnerAdapterConfig()
 
         validateWhatIsToDo()
+
+        if (isFavorite) {
+            favorite_image_button.setImageResource(R.drawable.ic_favorite)
+        } else {
+            favorite_image_button.setImageResource(R.drawable.ic_favorite_border)
+        }
+
+        favorite_image_button.setOnClickListener {
+            if (isFavorite) {
+                favorite_image_button.setImageResource(R.drawable.ic_favorite)
+                this.isFavorite = false
+            } else {
+                favorite_image_button.setImageResource(R.drawable.ic_favorite_border)
+                this.isFavorite = true
+            }
+        }
 
     }
 

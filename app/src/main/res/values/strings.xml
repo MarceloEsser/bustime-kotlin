@@ -31,7 +31,7 @@
     <string name="no_items">Não há horários</string>
     <string name="home_title">Canoas horários</string>
     <string name="about">Sobre o aplicativo</string>
-    <string name="about_content">Este aplicativo tem o inuito de informar os horários de partidas dos ônibus seja sentido bairro centro, centro bairro, centro circular ou bairro circular (em Canoas).
+    <string name="about_content">Este aplicativo tem o inuito de informar os horários de partida dos ônibus seja sentido bairro centro, centro bairro, centro circular ou bairro circular (em Canoas).
         Não contendo nem um vínculo com as empresas de transporte público.
     </string>
     <string name="sogal_wpp">(51) 98194-9917 </string>
@@ -56,4 +56,5 @@
     <string name="itineraries">Itinerários</string>
     <string name="without_lines">Não há linhas</string>
     <string name="line_or_line_way">Linha ou sentido da linha</string>
+    <string name="favorite_image_button">Botão para adicionar ou remover a linha da lista de favoritos</string>
 </resources>

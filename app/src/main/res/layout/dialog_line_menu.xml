@@ -4,46 +4,51 @@
         xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:paddingBottom="20dp"
-        android:paddingTop="20dp"
         android:layout_gravity="center"
         android:layout_height="wrap_content">
 
-    <TextView
-            app:layout_constraintStart_toStartOf="parent"
+    <ImageButton
+            android:id="@+id/favorite_image_button"
+            style="@style/FavoriteButtonStyle"
+            android:contentDescription="@string/favorite_image_button"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_line_menu_dialog_line_code"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            android:fontFamily="@font/ubuntu_medium"
-            tools:text="Mathias velho"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:id="@+id/tv_line_menu_dialog_line_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            app:layout_constraintTop_toTopOf="@+id/tv_line_menu_dialog_line_name" />
 
     <TextView
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:textSize="14sp"
+            android:id="@+id/tv_line_menu_dialog_line_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="20dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/ubuntu_medium"
+            android:maxLines="2"
             android:textColor="@color/black"
-            android:fontFamily="@font/ubuntu_regular"
-            tools:text="12345"
-            app:layout_constraintTop_toBottomOf="@id/tv_line_menu_dialog_line_name"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/favorite_image_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Mathias velho" />
+
+    <TextView
             android:id="@+id/tv_line_menu_dialog_line_code"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/ubuntu_regular"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_line_menu_dialog_line_name"
+            tools:text="12345" />
 
     <View
             android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:background="@color/grey300"
             app:layout_constraintTop_toBottomOf="@id/tv_line_menu_dialog_line_code"
             tools:layout_editor_absoluteX="20dp" />
@@ -52,12 +57,12 @@
             android:id="@+id/tv_menu_dialog_select_way"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:fontFamily="@font/ubuntu_medium"
             android:text="@string/line_way"
+            android:layout_marginTop="20dp"
             android:textColor="@color/grey900"
             app:layout_constraintStart_toStartOf="@+id/tv_line_menu_dialog_line_code"
-            app:layout_constraintTop_toBottomOf="@id/tv_line_menu_dialog_line_code" />
+            app:layout_constraintTop_toBottomOf="@+id/view" />
 
     <Spinner
             android:id="@+id/sp_menu_dialog_select_way"
@@ -81,7 +86,7 @@
 
     <Button
             android:layout_marginStart="20dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
             android:text="@string/schedules"

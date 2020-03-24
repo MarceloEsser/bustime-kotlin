@@ -72,8 +72,9 @@
     </style>
     <style name="IBActionStyle">
         <item name="android:background">@drawable/background_ib_action</item>
-        <item name="android:padding">10dp</item>
-        <item name="android:src">@drawable/icon_back</item>
+        <item name="android:src">@drawable/ic_arrow_back</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_width">48dp</item>
     </style>
 
     <style name="RadioButtonMenuDialogStyle">
@@ -166,6 +167,15 @@
         <item name="android:layout_height">32dp</item>
         <item name="android:layout_margin">5dp</item>
         <item name="android:gravity">top</item>
+    </style>
+
+    <style name="FavoriteButtonStyle">
+        <item name="android:background">@drawable/background_transparent_ripple_grey</item>
+        <item name="android:src">@drawable/ic_favorite_border</item>
+        <item name="android:layout_height">42dp</item>
+        <item name="android:layout_width">42dp</item>
+        <item name="android:layout_marginEnd">10dp</item>
+        <item name="android:padding">10dp</item>
     </style>
 
 </resources>
