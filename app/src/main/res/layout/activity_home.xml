@@ -433,7 +433,9 @@
                             android:id="@+id/llEsserGitHub"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
                             android:background="@drawable/background_transparent_ripple_grey"
                             android:orientation="horizontal"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -442,8 +444,8 @@
 
                         <ImageView
                                 android:id="@+id/home_activity_img_github_logo_esser"
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
                                 android:layout_gravity="top"
                                 android:layout_margin="5dp"
                                 android:src="@drawable/ic_github_logo" />
@@ -462,7 +464,8 @@
                             android:id="@+id/llEsserEmail"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
                             android:background="@drawable/background_transparent_ripple_grey"
                             android:orientation="horizontal"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -471,10 +474,7 @@
 
                         <ImageView
                                 android:id="@+id/home_activity_img_gmail_logo_esser"
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:layout_gravity="top"
-                                android:layout_margin="5dp"
+                                style="@style/RefferenceImageStyle"
                                 android:src="@drawable/ic_gmail_logo" />
 
                         <TextView
@@ -491,7 +491,9 @@
                             android:id="@+id/llEsserLinkedIn"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="10dp"
                             android:background="@drawable/background_transparent_ripple_grey"
                             android:orientation="horizontal"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -501,10 +503,7 @@
 
                         <ImageView
                                 android:id="@+id/home_activity_img_linkedin_logo_esser"
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:layout_gravity="top"
-                                android:layout_margin="5dp"
+                                style="@style/RefferenceImageStyle"
                                 android:src="@drawable/ic_linkedin_logo" />
 
                         <TextView
@@ -551,7 +550,9 @@
                             android:id="@+id/llWottrichGitHub"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
                             android:background="@drawable/background_transparent_ripple_grey"
                             android:orientation="horizontal"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -560,10 +561,7 @@
 
                         <ImageView
                                 android:id="@+id/home_activity_img_github_logo_wottrich"
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:layout_gravity="top"
-                                android:layout_margin="5dp"
+                                style="@style/RefferenceImageStyle"
                                 android:src="@drawable/ic_github_logo" />
 
                         <TextView
@@ -581,7 +579,8 @@
                             android:id="@+id/llWottrichEmail"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
                             android:background="@drawable/background_transparent_ripple_grey"
                             android:orientation="horizontal"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -590,10 +589,7 @@
 
                         <ImageView
                                 android:id="@+id/home_activity_img_gmail_logo_wottrich"
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:layout_gravity="top"
-                                android:layout_margin="5dp"
+                                style="@style/RefferenceImageStyle"
                                 android:src="@drawable/ic_gmail_logo" />
 
                         <TextView
@@ -610,7 +606,9 @@
                             android:id="@+id/llWottrichLinkedIn"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="10dp"
                             android:background="@drawable/background_transparent_ripple_grey"
                             android:orientation="horizontal"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -620,10 +618,7 @@
 
                         <ImageView
                                 android:id="@+id/home_activity_img_linkedin_logo_wottrich"
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:layout_gravity="top"
-                                android:layout_margin="5dp"
+                                style="@style/RefferenceImageStyle"
                                 android:src="@drawable/ic_linkedin_logo" />
 
                         <TextView

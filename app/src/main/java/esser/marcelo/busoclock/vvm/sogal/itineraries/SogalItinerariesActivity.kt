@@ -1,23 +1,18 @@
 package esser.marcelo.busoclock.vvm.sogal.itineraries
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_itineraries.*
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.adapter.ItinerariesAdapter
 import esser.marcelo.busoclock.dao.LineDAO
-import esser.marcelo.busoclock.helper.ProgressDialogHelper
 import esser.marcelo.busoclock.model.sogal.ItinerariesDTO
+import esser.marcelo.busoclock.vvm.BaseActivity
+import kotlinx.android.synthetic.main.activity_itineraries.*
 
-class SogalItinerariesActivity : AppCompatActivity() {
+class SogalItinerariesActivity : BaseActivity() {
 
     private val viewModel: SogalItinerariesActivityViewModel by lazy {
         SogalItinerariesActivityViewModel()
-    }
-
-    private val progressDialog: ProgressDialogHelper by lazy {
-        ProgressDialogHelper(this@SogalItinerariesActivity)
     }
 
     private lateinit var itinerariesAdapter: ItinerariesAdapter
@@ -39,7 +34,7 @@ class SogalItinerariesActivity : AppCompatActivity() {
     }
 
     private fun loadItineraries() {
-        progressDialog.showLoader()
+        showLoader()
         viewModel.loadItineraries(
             onSucces = {
                 adapterConstruct(it)
@@ -49,7 +44,7 @@ class SogalItinerariesActivity : AppCompatActivity() {
     }
 
     private fun adapterConstruct(it: List<ItinerariesDTO>?) {
-        progressDialog.hideLoader()
+        hideLoader()
         itinerariesAdapter = ItinerariesAdapter(this@SogalItinerariesActivity, it)
         itineraries_activity_rv_itineraries.adapter = itinerariesAdapter
     }

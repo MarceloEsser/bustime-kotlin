@@ -9,20 +9,17 @@ import esser.marcelo.busoclock.adapter.SchedulesAdapter
 import esser.marcelo.busoclock.dao.LineDAO
 import esser.marcelo.busoclock.helper.ProgressDialogHelper
 import esser.marcelo.busoclock.model.sogal.SchedulesDTO
+import esser.marcelo.busoclock.vvm.BaseActivity
 import esser.marcelo.busoclock.vvm.sogal.itineraries.SogalItinerariesActivity
 import kotlinx.android.synthetic.main.activity_schedules.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class SogalSchedulesActivity : AppCompatActivity() {
+class SogalSchedulesActivity : BaseActivity() {
 
     private val viewModelSogal: SogalSchedulesActivityViewModel by lazy {
         SogalSchedulesActivityViewModel()
-    }
-
-    private val progressDialog: ProgressDialogHelper by lazy {
-        ProgressDialogHelper(this@SogalSchedulesActivity)
     }
 
     private lateinit var adapter: SchedulesAdapter
@@ -88,7 +85,7 @@ class SogalSchedulesActivity : AppCompatActivity() {
     }
 
     private fun loadSchedules() {
-        progressDialog.showLoader()
+        showLoader()
         GlobalScope.launch {
             delay(400L)
             viewModelSogal.loadSchedulesBy(onSuccess = { schedules ->
@@ -105,7 +102,7 @@ class SogalSchedulesActivity : AppCompatActivity() {
         schedules_activity_rv_schedules.visibility = VISIBLE
         schedules_activity_img_lottie_conection.visibility = GONE
         schedules_activity_tv_connection_error.visibility = GONE
-        progressDialog.hideLoader()
+        hideLoader()
     }
 
     private fun errorConfig() {
@@ -117,7 +114,7 @@ class SogalSchedulesActivity : AppCompatActivity() {
         schedules_activity_tv_connection_error.visibility = VISIBLE
         schedules_activity_rv_schedules.visibility = INVISIBLE
 
-        progressDialog.hideLoader()
+        hideLoader()
     }
 
     private fun lottieAnimationClick() {
@@ -128,7 +125,7 @@ class SogalSchedulesActivity : AppCompatActivity() {
     }
 
     private fun configureList(sogalResponse: List<SchedulesDTO>?) {
-        progressDialog.hideLoader()
+        hideLoader()
         sogalResponse?.let {
             if (it.size > 0) {
                 adapter = SchedulesAdapter(this@SogalSchedulesActivity, sogalResponse)

@@ -4,17 +4,14 @@ import android.content.Intent
 import android.net.Uri
 import android.net.Uri.fromParts
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.service.vicasaServices.VicasaService
+import esser.marcelo.busoclock.vvm.BaseActivity
 import esser.marcelo.busoclock.vvm.sogal.lines.SogalLinesActivity
 import esser.marcelo.busoclock.vvm.vicasa.lines.VicasaLinesActivity
 import kotlinx.android.synthetic.main.activity_home.*
-import org.jsoup.Jsoup
-import org.jsoup.nodes.Document
-import org.jsoup.nodes.Element
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : BaseActivity() {
 
     private val activityContext by lazy {
         this@HomeActivity

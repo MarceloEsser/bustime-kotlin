@@ -25,19 +25,16 @@ import esser.marcelo.busoclock.interfaces.FilterDialogInteraction
 import esser.marcelo.busoclock.interfaces.GenericLinesAdapterDelegate
 import esser.marcelo.busoclock.model.BaseLine
 import esser.marcelo.busoclock.model.vicasa.Vicasa
+import esser.marcelo.busoclock.vvm.BaseActivity
 import esser.marcelo.busoclock.vvm.lineDialog.LineMenuDialog
 import esser.marcelo.busoclock.vvm.vicasa.filterDialog.VicasaFilterDialog
 import kotlinx.android.synthetic.main.activity_schedules.*
 
-class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction,
+class VicasaLinesActivity : BaseActivity(), FilterDialogInteraction,
     GenericLinesAdapterDelegate {
 
     private val viewModel: VicasaLinesActivityViewModel by lazy {
         VicasaLinesActivityViewModel()
-    }
-
-    private val progressDialog: ProgressDialogHelper by lazy {
-        ProgressDialogHelper(this@VicasaLinesActivity)
     }
 
     lateinit var menuDialog: LineMenuDialog
@@ -118,7 +115,7 @@ class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction,
         lines_activity_img_lottie_conection.visibility = GONE
         lines_activity_tv_connection_error.visibility = GONE
 
-        progressDialog.hideLoader()
+        hideLoader()
     }
 
     private fun errorConfig() {
@@ -130,7 +127,7 @@ class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction,
         lines_activity_tv_connection_error.visibility = VISIBLE
         lines_activity_rv_lines.visibility = View.INVISIBLE
 
-        progressDialog.hideLoader()
+        hideLoader()
     }
 
     private fun lottieAnimationClick() {
@@ -142,7 +139,7 @@ class VicasaLinesActivity : AppCompatActivity(), FilterDialogInteraction,
     }
 
     override fun doFilter(countryOrigin: String, countryDestination: String, serviceType: String) {
-        progressDialog.showLoader()
+        showLoader()
 
         viewModel.saveFilterData(countryOrigin, countryDestination, serviceType)
 

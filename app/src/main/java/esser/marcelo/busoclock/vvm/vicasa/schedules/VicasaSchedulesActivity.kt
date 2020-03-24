@@ -10,18 +10,15 @@ import esser.marcelo.busoclock.adapter.SchedulesAdapter
 import esser.marcelo.busoclock.dao.LineDAO
 import esser.marcelo.busoclock.helper.ProgressDialogHelper
 import esser.marcelo.busoclock.model.sogal.SchedulesDTO
+import esser.marcelo.busoclock.vvm.BaseActivity
 import kotlinx.android.synthetic.main.activity_lines.*
 import kotlinx.android.synthetic.main.activity_schedules.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-class VicasaSchedulesActivity : AppCompatActivity() {
+class VicasaSchedulesActivity : BaseActivity() {
 
     private val viewModel: VicasaSchedulesActivityViewModel by lazy {
         VicasaSchedulesActivityViewModel()
-    }
-
-    private val progressDialog: ProgressDialogHelper by lazy {
-        ProgressDialogHelper(this@VicasaSchedulesActivity)
     }
 
     private lateinit var adapter: SchedulesAdapter
@@ -61,7 +58,7 @@ class VicasaSchedulesActivity : AppCompatActivity() {
         schedules_activity_img_lottie_conection.visibility = GONE
         schedules_activity_tv_connection_error.visibility = GONE
 
-        progressDialog.hideLoader()
+        hideLoader()
     }
 
     @ExperimentalCoroutinesApi
@@ -74,7 +71,7 @@ class VicasaSchedulesActivity : AppCompatActivity() {
         schedules_activity_tv_connection_error.visibility = VISIBLE
         schedules_activity_rv_schedules.visibility = INVISIBLE
 
-        progressDialog.hideLoader()
+        hideLoader()
     }
 
     @ExperimentalCoroutinesApi
@@ -108,7 +105,7 @@ class VicasaSchedulesActivity : AppCompatActivity() {
 
     @ExperimentalCoroutinesApi
     private fun loadSchedules() {
-        progressDialog.showLoader()
+        showLoader()
 
         viewModel.loadSchedules(
             onSuccess = { schedulesList ->
@@ -121,7 +118,7 @@ class VicasaSchedulesActivity : AppCompatActivity() {
     }
 
     private fun configureList(schedulesList: List<SchedulesDTO>) {
-        if (schedulesList.size == 0) {
+        if (schedulesList.isEmpty()) {
             tv_schedules_activity_without_items.visibility = VISIBLE
             schedules_activity_rv_schedules.visibility = GONE
         } else {

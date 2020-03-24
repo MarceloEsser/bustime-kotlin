@@ -43,6 +43,8 @@
                 android:name=".vvm.vicasa.lines.VicasaLinesActivity"
                 android:screenOrientation="portrait"
                 android:windowSoftInputMode="adjustResize"/>
+
+        <activity android:name=".vvm.BaseActivity"/>
     </application>
 
 </manifest>

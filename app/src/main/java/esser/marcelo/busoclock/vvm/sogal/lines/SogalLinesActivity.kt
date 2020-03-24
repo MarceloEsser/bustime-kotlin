@@ -15,6 +15,7 @@ import esser.marcelo.busoclock.helper.ProgressDialogHelper
 import esser.marcelo.busoclock.interfaces.GenericLinesAdapterDelegate
 import esser.marcelo.busoclock.model.BaseLine
 import esser.marcelo.busoclock.model.sogal.LinesDTO
+import esser.marcelo.busoclock.vvm.BaseActivity
 import esser.marcelo.busoclock.vvm.lineDialog.LineMenuDialog
 import kotlinx.android.synthetic.main.activity_lines.*
 import kotlinx.coroutines.GlobalScope
@@ -22,14 +23,10 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
-class SogalLinesActivity : AppCompatActivity(), GenericLinesAdapterDelegate {
+class SogalLinesActivity : BaseActivity(), GenericLinesAdapterDelegate {
 
     private val viewModel: SogalLinesActivityViewModel by lazy {
         SogalLinesActivityViewModel()
-    }
-
-    private val progressDialog: ProgressDialogHelper by lazy {
-        ProgressDialogHelper(this@SogalLinesActivity)
     }
 
     lateinit var lineMenuDialog: LineMenuDialog
@@ -55,8 +52,8 @@ class SogalLinesActivity : AppCompatActivity(), GenericLinesAdapterDelegate {
     private fun listeners() {
         lav_cancel_search_action.setOnClickListener {
             if (activity_lines_et_search.text.isNotEmpty()) {
-                this.hideKeyboard()
                 activity_lines_et_search.setText("")
+                this.hideKeyboard()
             }
         }
         searchEvent()
@@ -98,7 +95,7 @@ class SogalLinesActivity : AppCompatActivity(), GenericLinesAdapterDelegate {
                 lav_cancel_search_action.progress = it.animatedValue as Float
             }
 
-            animate.duration = 1500
+            animate.duration = 900
             animate.start()
         } else if (activity_lines_et_search.text.isNullOrEmpty() &&lav_cancel_search_action.progress == 0.5f) {
             val animate = ValueAnimator.ofFloat(0.5f, 0f)
@@ -106,21 +103,20 @@ class SogalLinesActivity : AppCompatActivity(), GenericLinesAdapterDelegate {
             animate.addUpdateListener {
                 lav_cancel_search_action.progress = it.animatedValue as Float
             }
-
-            animate.duration = 1500
+            animate.duration = 900
             animate.start()
         }
     }
 
     private fun loadLines() {
-        progressDialog.showLoader()
+        showLoader()
         GlobalScope.launch {
             delay(400L)
             viewModel.loadSogalLines(
                 onSucces = {
                     adapterConstruct(it)
                 }, onError = {
-                    progressDialog.hideLoader()
+                    hideLoader()
                     errorConfig()
                 })
         }
@@ -146,7 +142,7 @@ class SogalLinesActivity : AppCompatActivity(), GenericLinesAdapterDelegate {
         lines_activity_img_lottie_conection.visibility = GONE
         lines_activity_tv_connection_error.visibility = GONE
 
-        progressDialog.hideLoader()
+        hideLoader()
     }
 
     private fun adapterConstruct(it: List<LinesDTO>) {
