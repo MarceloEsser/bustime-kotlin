@@ -1,7 +1,7 @@
 package esser.marcelo.busoclock.vvm.sogal.schedules
 
-import esser.marcelo.busoclock.dao.LineDAO
-import esser.marcelo.busoclock.model.sogal.SchedulesDTO
+import esser.marcelo.busoclock.sla.LineDAO
+import esser.marcelo.busoclock.model.schedules.BaseSchedule
 import esser.marcelo.busoclock.model.sogal.SogalResponse
 import esser.marcelo.busoclock.service.sogalServices.ISogalService
 import esser.marcelo.busoclock.service.sogalServices.SogalService
@@ -15,16 +15,16 @@ import retrofit2.Response
  */
 class SogalSchedulesActivityViewModel {
 
-    var workingDays: List<SchedulesDTO>? = null
-    var saturdays: List<SchedulesDTO>? = null
-    var sundays: List<SchedulesDTO>? = null
+    var workingDays: List<BaseSchedule>? = null
+    var saturdays: List<BaseSchedule>? = null
+    var sundays: List<BaseSchedule>? = null
 
     private val sogalService: ISogalService by lazy {
         SogalService().sogalSerivce()
     }
 
     fun loadSchedulesBy(
-        onSuccess: (schedules: List<SchedulesDTO>) -> Unit,
+        onSuccess: (schedules: List<BaseSchedule>) -> Unit,
         onError: (errorMessage: String) -> Unit
     ) {
         sogalService.getSogalSchedulesBy(lineWay = LineDAO.lineWay!!.way, lineCode = LineDAO.lineCode)

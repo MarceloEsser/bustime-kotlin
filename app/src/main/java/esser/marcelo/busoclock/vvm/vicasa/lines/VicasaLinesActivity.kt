@@ -1,9 +1,6 @@
 package esser.marcelo.busoclock.vvm.vicasa.lines
 
 import android.os.Bundle
-import android.support.design.card.MaterialCardView
-import android.support.design.widget.BottomSheetBehavior
-import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -12,15 +9,8 @@ import android.view.View.VISIBLE
 import android.view.WindowManager
 import kotlinx.android.synthetic.main.activity_lines.*
 import esser.marcelo.busoclock.R
-import esser.marcelo.busoclock.R.menu.vicasa_lines_bottom_navigation_menu
 import esser.marcelo.busoclock.adapter.GenericLinesAdapter
-import esser.marcelo.busoclock.dao.LineDAO
 import esser.marcelo.busoclock.extensions.hideKeyboard
-import esser.marcelo.busoclock.helper.Constants.BB_WAY
-import esser.marcelo.busoclock.helper.Constants.BC_WAY
-import esser.marcelo.busoclock.helper.Constants.CB_WAY
-import esser.marcelo.busoclock.helper.Constants.CC_WAY
-import esser.marcelo.busoclock.helper.ProgressDialogHelper
 import esser.marcelo.busoclock.interfaces.FilterDialogInteraction
 import esser.marcelo.busoclock.interfaces.GenericLinesAdapterDelegate
 import esser.marcelo.busoclock.model.BaseLine
@@ -28,7 +18,6 @@ import esser.marcelo.busoclock.model.vicasa.Vicasa
 import esser.marcelo.busoclock.vvm.BaseActivity
 import esser.marcelo.busoclock.vvm.lineDialog.LineMenuDialog
 import esser.marcelo.busoclock.vvm.vicasa.filterDialog.VicasaFilterDialog
-import kotlinx.android.synthetic.main.activity_schedules.*
 
 class VicasaLinesActivity : BaseActivity(), FilterDialogInteraction,
     GenericLinesAdapterDelegate {

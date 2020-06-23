@@ -2,13 +2,11 @@ package esser.marcelo.busoclock.vvm.sogal.schedules
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.View.*
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.adapter.SchedulesAdapter
-import esser.marcelo.busoclock.dao.LineDAO
-import esser.marcelo.busoclock.helper.ProgressDialogHelper
-import esser.marcelo.busoclock.model.sogal.SchedulesDTO
+import esser.marcelo.busoclock.sla.LineDAO
+import esser.marcelo.busoclock.model.schedules.BaseSchedule
 import esser.marcelo.busoclock.vvm.BaseActivity
 import esser.marcelo.busoclock.vvm.sogal.itineraries.SogalItinerariesActivity
 import kotlinx.android.synthetic.main.activity_schedules.*
@@ -124,7 +122,7 @@ class SogalSchedulesActivity : BaseActivity() {
         }
     }
 
-    private fun configureList(sogalResponse: List<SchedulesDTO>?) {
+    private fun configureList(sogalResponse: List<BaseSchedule>?) {
         hideLoader()
         sogalResponse?.let {
             if (it.size > 0) {

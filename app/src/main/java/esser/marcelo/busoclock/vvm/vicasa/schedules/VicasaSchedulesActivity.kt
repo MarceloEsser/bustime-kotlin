@@ -1,15 +1,12 @@
 package esser.marcelo.busoclock.vvm.vicasa.schedules
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.view.View
 import android.view.View.*
 import android.widget.Toast
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.adapter.SchedulesAdapter
-import esser.marcelo.busoclock.dao.LineDAO
-import esser.marcelo.busoclock.helper.ProgressDialogHelper
-import esser.marcelo.busoclock.model.sogal.SchedulesDTO
+import esser.marcelo.busoclock.sla.LineDAO
+import esser.marcelo.busoclock.model.schedules.BaseSchedule
 import esser.marcelo.busoclock.vvm.BaseActivity
 import kotlinx.android.synthetic.main.activity_lines.*
 import kotlinx.android.synthetic.main.activity_schedules.*
@@ -117,7 +114,7 @@ class VicasaSchedulesActivity : BaseActivity() {
             })
     }
 
-    private fun configureList(schedulesList: List<SchedulesDTO>) {
+    private fun configureList(schedulesList: List<BaseSchedule>) {
         if (schedulesList.isEmpty()) {
             tv_schedules_activity_without_items.visibility = VISIBLE
             schedules_activity_rv_schedules.visibility = GONE
@@ -128,7 +125,7 @@ class VicasaSchedulesActivity : BaseActivity() {
         }
     }
 
-    private fun adapterConstruct(schedulesList: List<SchedulesDTO>) {
+    private fun adapterConstruct(schedulesList: List<BaseSchedule>) {
         adapter = SchedulesAdapter(this@VicasaSchedulesActivity, schedulesList)
         adapter.notifyDataSetChanged()
         schedules_activity_rv_schedules.adapter = adapter

@@ -9,7 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import kotlinx.android.synthetic.main.row_schedule.view.*
 import esser.marcelo.busoclock.R
-import esser.marcelo.busoclock.model.sogal.SchedulesDTO
+import esser.marcelo.busoclock.model.schedules.BaseSchedule
 
 /**
  * @author Marcelo Esser
@@ -17,7 +17,7 @@ import esser.marcelo.busoclock.model.sogal.SchedulesDTO
  */
 class SchedulesAdapter(
     private val context: Context,
-    private val schedules: List<SchedulesDTO>
+    private val schedules: List<BaseSchedule>
 ) : RecyclerView.Adapter<SchedulesAdapter.SchedulesViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): SchedulesViewHolder {

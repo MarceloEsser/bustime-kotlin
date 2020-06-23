@@ -12,7 +12,7 @@ import android.widget.AdapterView
 import android.widget.Toast
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.adapter.spinner.SpinnerDefaultAdapter
-import esser.marcelo.busoclock.dao.LineDAO
+import esser.marcelo.busoclock.sla.LineDAO
 import esser.marcelo.busoclock.vvm.sogal.itineraries.SogalItinerariesActivity
 import esser.marcelo.busoclock.vvm.sogal.schedules.SogalSchedulesActivity
 import esser.marcelo.busoclock.vvm.vicasa.schedules.VicasaSchedulesActivity

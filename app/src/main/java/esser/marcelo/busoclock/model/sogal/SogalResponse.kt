@@ -2,19 +2,20 @@ package esser.marcelo.busoclock.model.sogal
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import esser.marcelo.busoclock.model.schedules.BaseSchedule
 
 class SogalResponse(
     @SerializedName("nomeLinha")
     var lineName: String? = null,
 
     @SerializedName(value = "horariosBCUteis", alternate = arrayOf("horariosCBUteis"))
-    var workingDays: List<SchedulesDTO>? = null,
+    var workingDays: List<BaseSchedule>? = null,
 
     @SerializedName(value = "horariosBCSabado", alternate = arrayOf("horariosCBSabado"))
-    var saturdays: List<SchedulesDTO>? = null,
+    var saturdays: List<BaseSchedule>? = null,
 
     @SerializedName(value = "horariosBCDomingo", alternate = ["horariosCBDomingo"])
-    var sundays: List<SchedulesDTO>? = null,
+    var sundays: List<BaseSchedule>? = null,
 
     @SerializedName("hora")
     var hour: String? = null,

@@ -1,6 +1,6 @@
 package esser.marcelo.busoclock.vvm.sogal.itineraries
 
-import esser.marcelo.busoclock.dao.LineDAO
+import esser.marcelo.busoclock.sla.LineDAO
 import esser.marcelo.busoclock.model.sogal.ItinerariesDTO
 import esser.marcelo.busoclock.model.sogal.LinesDTO
 import esser.marcelo.busoclock.service.sogalServices.SogalService

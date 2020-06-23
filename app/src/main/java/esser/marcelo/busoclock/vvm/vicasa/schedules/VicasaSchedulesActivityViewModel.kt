@@ -1,11 +1,11 @@
 package esser.marcelo.busoclock.vvm.vicasa.schedules
 
-import esser.marcelo.busoclock.dao.LineDAO
+import esser.marcelo.busoclock.sla.LineDAO
 import esser.marcelo.busoclock.helper.Constants.BB_WAY
 import esser.marcelo.busoclock.helper.Constants.BC_WAY
 import esser.marcelo.busoclock.helper.Constants.CB_WAY
 import esser.marcelo.busoclock.helper.Constants.CC_WAY
-import esser.marcelo.busoclock.model.sogal.SchedulesDTO
+import esser.marcelo.busoclock.model.schedules.BaseSchedule
 import esser.marcelo.busoclock.service.vicasaServices.VicasaService
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
@@ -56,9 +56,9 @@ class VicasaSchedulesActivityViewModel {
     private val SUNDAYS_CC_SELECTOR: String =
         "body > table:nth-child(2) > tbody > tr > td > table.texto_linhas > tbody > tr:nth-child(5) > td:nth-child(6)"
 
-    var workingdaysList: MutableList<SchedulesDTO> = ArrayList()
-    var saturdaysList: MutableList<SchedulesDTO> = ArrayList()
-    var sundaysList: MutableList<SchedulesDTO> = ArrayList()
+    var workingdaysList: MutableList<BaseSchedule> = ArrayList()
+    var saturdaysList: MutableList<BaseSchedule> = ArrayList()
+    var sundaysList: MutableList<BaseSchedule> = ArrayList()
 
     var workingdaysElement: Element? = null
     var saturdaysElement: Element? = null
@@ -70,7 +70,7 @@ class VicasaSchedulesActivityViewModel {
 
     @ExperimentalCoroutinesApi
     fun loadSchedules(
-        onSuccess: (schedules: List<SchedulesDTO>) -> Unit,
+        onSuccess: (schedules: List<BaseSchedule>) -> Unit,
         onError: (errorMessage: String) -> Unit
     ) {
         vicasaService.vicasaService().getVicasaSchedules(LineDAO.lineCode).enqueue(object : Callback<ResponseBody> {
@@ -85,7 +85,7 @@ class VicasaSchedulesActivityViewModel {
     }
 
     @ExperimentalCoroutinesApi
-    fun parseResponse(response: String, onSuccess: (schedules: List<SchedulesDTO>) -> Unit) = runBlocking {
+    fun parseResponse(response: String, onSuccess: (schedules: List<BaseSchedule>) -> Unit) = runBlocking {
         val document: Document = Jsoup.parse(response)
 
         when (LineDAO.lineWay!!.way) {
@@ -131,21 +131,25 @@ class VicasaSchedulesActivityViewModel {
         sundaysElement = document.selectFirst(SUNDAYS_CB_SELECTOR)
     }
 
-    fun getSchedulesListBy(element: Element?): MutableList<SchedulesDTO> {
-        val schedulesList: MutableList<SchedulesDTO> = ArrayList()
+    fun getSchedulesListBy(element: Element?): MutableList<BaseSchedule> {
+        val schedulesList: MutableList<BaseSchedule> = ArrayList()
 
         for (sarturdayElement in element!!.children()) {
             val schedule = sarturdayElement.text()
-            schedulesList.add(SchedulesDTO(hour = schedule))
+            schedulesList.add(
+                BaseSchedule(
+                    hour = schedule
+                )
+            )
         }
         return schedulesList
     }
 
     private fun getAllCompletedList(
-        workingdaysList: MutableList<SchedulesDTO>,
-        saturdaysList: MutableList<SchedulesDTO>,
-        sundaysList: MutableList<SchedulesDTO>,
-        onSuccess: (schedules: List<SchedulesDTO>) -> Unit
+        workingdaysList: MutableList<BaseSchedule>,
+        saturdaysList: MutableList<BaseSchedule>,
+        sundaysList: MutableList<BaseSchedule>,
+        onSuccess: (schedules: List<BaseSchedule>) -> Unit
     ) {
         this.workingdaysList = workingdaysList
         this.saturdaysList = saturdaysList

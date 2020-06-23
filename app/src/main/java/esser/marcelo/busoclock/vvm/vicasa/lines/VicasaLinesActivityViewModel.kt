@@ -1,7 +1,6 @@
 package esser.marcelo.busoclock.vvm.vicasa.lines
 
-import android.net.Uri.encode
-import esser.marcelo.busoclock.dao.LineDAO
+import esser.marcelo.busoclock.sla.LineDAO
 import esser.marcelo.busoclock.helper.Constants.CB_WAY
 import esser.marcelo.busoclock.model.vicasa.Vicasa
 import esser.marcelo.busoclock.service.vicasaServices.VicasaService
