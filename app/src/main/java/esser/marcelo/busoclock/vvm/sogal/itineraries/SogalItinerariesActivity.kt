@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.widget.Toast
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.adapter.ItinerariesAdapter
-import esser.marcelo.busoclock.sla.LineDAO
+import esser.marcelo.busoclock.dao.LineDAO
 import esser.marcelo.busoclock.model.sogal.ItinerariesDTO
 import esser.marcelo.busoclock.vvm.BaseActivity
 import kotlinx.android.synthetic.main.activity_itineraries.*

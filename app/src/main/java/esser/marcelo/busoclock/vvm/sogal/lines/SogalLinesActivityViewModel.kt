@@ -1,6 +1,6 @@
 package esser.marcelo.busoclock.vvm.sogal.lines
 
-import esser.marcelo.busoclock.sla.LineDAO
+import esser.marcelo.busoclock.dao.LineDAO
 import esser.marcelo.busoclock.model.sogal.LinesDTO
 import esser.marcelo.busoclock.service.sogalServices.SogalService
 import retrofit2.Call

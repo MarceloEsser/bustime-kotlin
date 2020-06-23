@@ -1,4 +1,3 @@
-
 import android.content.Context
 import androidx.room.Room
 import esser.marcelo.busoclock.model.LineWithSchedules

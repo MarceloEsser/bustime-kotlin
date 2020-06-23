@@ -1,6 +1,6 @@
 package esser.marcelo.busoclock.vvm.sogal.schedules
 
-import esser.marcelo.busoclock.sla.LineDAO
+import esser.marcelo.busoclock.dao.LineDAO
 import esser.marcelo.busoclock.model.schedules.BaseSchedule
 import esser.marcelo.busoclock.model.sogal.SogalResponse
 import esser.marcelo.busoclock.service.sogalServices.ISogalService

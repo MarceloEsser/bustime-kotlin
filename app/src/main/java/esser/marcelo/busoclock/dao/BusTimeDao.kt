@@ -1,22 +1,20 @@
-package com.example.kotlin_unit_tests_examples.dao
-
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.kotlin_unit_tests_examples.models.ViaCep
+import esser.marcelo.busoclock.model.LineWithSchedules
 
 @Dao
 internal interface BusTimeDao {
-    @Query("SELECT * FROM viacep")
-    fun getAll(): List<ViaCep>
+    @Query("SELECT * FROM baseline")
+    fun getAll(): List<LineWithSchedules>
 
-    @Query("SELECT * FROM viacep WHERE uid IN (:userIds)")
-    fun loadAllByIds(userIds: IntArray): List<ViaCep>
+    @Query("SELECT * FROM baseline WHERE lineId IN (:userIds)")
+    fun loadAllByIds(userIds: IntArray): List<LineWithSchedules>
 
     @Insert
-    fun insertAll(vararg users: ViaCep)
+    fun insertAll(vararg users: LineWithSchedules)
 
     @Delete
-    fun delete(user: ViaCep)
+    fun delete(user: LineWithSchedules)
 }

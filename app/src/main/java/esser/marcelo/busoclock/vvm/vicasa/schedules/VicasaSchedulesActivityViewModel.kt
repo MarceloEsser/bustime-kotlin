@@ -1,6 +1,6 @@
 package esser.marcelo.busoclock.vvm.vicasa.schedules
 
-import esser.marcelo.busoclock.sla.LineDAO
+import esser.marcelo.busoclock.dao.LineDAO
 import esser.marcelo.busoclock.helper.Constants.BB_WAY
 import esser.marcelo.busoclock.helper.Constants.BC_WAY
 import esser.marcelo.busoclock.helper.Constants.CB_WAY

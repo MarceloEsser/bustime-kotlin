@@ -1,4 +1,4 @@
-package esser.marcelo.busoclock.sla
+package esser.marcelo.busoclock.dao
 
 import esser.marcelo.busoclock.model.LineWay
 import esser.marcelo.busoclock.model.schedules.BaseSchedule

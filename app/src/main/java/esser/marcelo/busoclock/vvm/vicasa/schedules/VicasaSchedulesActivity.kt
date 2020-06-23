@@ -5,7 +5,7 @@ import android.view.View.*
 import android.widget.Toast
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.adapter.SchedulesAdapter
-import esser.marcelo.busoclock.sla.LineDAO
+import esser.marcelo.busoclock.dao.LineDAO
 import esser.marcelo.busoclock.model.schedules.BaseSchedule
 import esser.marcelo.busoclock.vvm.BaseActivity
 import kotlinx.android.synthetic.main.activity_lines.*
