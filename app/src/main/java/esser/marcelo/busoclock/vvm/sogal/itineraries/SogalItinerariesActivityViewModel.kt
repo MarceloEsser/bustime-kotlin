@@ -11,6 +11,7 @@ import retrofit2.Response
 class SogalItinerariesActivityViewModel {
     private val service = SogalService().sogalSerivce()
     private val SEARCH_ITINERARIES: String = "buscaItinerarios"
+    lateinit var itineraries: List<ItinerariesDTO>
 
     fun loadItineraries(
         onSucces: (itineraries: List<ItinerariesDTO>?) -> Unit,
@@ -24,6 +25,7 @@ class SogalItinerariesActivityViewModel {
 
                 override fun onResponse(call: Call<LinesDTO>, response: Response<LinesDTO>) {
                     if (response.body() != null && response.body()!!.itineraries != null) {
+                        itineraries = response.body()?.itineraries ?: listOf()
                         onSucces(response.body()!!.itineraries!!)
                     }
                 }

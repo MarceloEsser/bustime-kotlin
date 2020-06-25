@@ -2,7 +2,6 @@ package esser.marcelo.busoclock.vvm.sogal.lines
 
 import android.animation.ValueAnimator
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View.*
@@ -11,7 +10,6 @@ import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.adapter.GenericLinesAdapter
 import esser.marcelo.busoclock.extensions.hideKeyboard
 import esser.marcelo.busoclock.helper.Constants.CB_WAY
-import esser.marcelo.busoclock.helper.ProgressDialogHelper
 import esser.marcelo.busoclock.interfaces.GenericLinesAdapterDelegate
 import esser.marcelo.busoclock.model.BaseLine
 import esser.marcelo.busoclock.model.sogal.LinesDTO

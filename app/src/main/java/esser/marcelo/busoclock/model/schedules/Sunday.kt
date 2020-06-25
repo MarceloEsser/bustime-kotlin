@@ -1,9 +1,13 @@
 package esser.marcelo.busoclock.model.schedules
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-class Sunday(
+data class Sunday (
     @PrimaryKey(autoGenerate = true)
-    val sundayId: Long): BaseSchedule()
+    val sundayId: Long,
+    @ColumnInfo(name = "sundayKey")
+    val sundayKey: Long
+)

@@ -86,7 +86,7 @@ class SogalSchedulesActivity : BaseActivity() {
         showLoader()
         GlobalScope.launch {
             delay(400L)
-            viewModelSogal.loadSchedulesBy(onSuccess = { schedules ->
+            viewModelSogal.loadSchedules(onSuccess = { schedules ->
                 configureList(schedules)
                 successConfig()
             }, onError = { errorMessage ->

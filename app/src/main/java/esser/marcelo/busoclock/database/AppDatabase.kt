@@ -1,10 +1,13 @@
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.example.kotlin_unit_tests_examples.dao.BusTimeDao
-import esser.marcelo.busoclock.model.LineWithSchedules
+import esser.marcelo.busoclock.model.favorite.FavoriteItineraries
+import esser.marcelo.busoclock.model.favorite.FavoriteLine
+import esser.marcelo.busoclock.model.schedules.Saturday
+import esser.marcelo.busoclock.model.schedules.Sunday
+import esser.marcelo.busoclock.model.schedules.Workingday
 
-@Database(entities = arrayOf(LineWithSchedules::class), version = 1)
+@Database(entities = arrayOf(FavoriteLine::class, Workingday::class, Saturday::class, Sunday::class, FavoriteItineraries::class), version = 1)
 abstract class AppDatabase : RoomDatabase() {
-    internal abstract fun viaCepDao(): BusTimeDao
+    internal abstract fun busTimeDao(): BusTimeDao
 }

@@ -1,20 +1,16 @@
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
-import esser.marcelo.busoclock.model.LineWithSchedules
+import androidx.room.*
+import esser.marcelo.busoclock.model.favorite.SogalLineWithSchedules
 
 @Dao
-internal interface BusTimeDao {
-    @Query("SELECT * FROM baseline")
-    fun getAll(): List<LineWithSchedules>
+interface BusTimeDao {
 
-    @Query("SELECT * FROM baseline WHERE lineId IN (:userIds)")
-    fun loadAllByIds(userIds: IntArray): List<LineWithSchedules>
+    @Transaction
+    @Query("SELECT * FROM favorite_line")
+    fun getAll(): List<SogalLineWithSchedules>
 
     @Insert
-    fun insertAll(vararg users: LineWithSchedules)
+    fun insertAll(lines: SogalLineWithSchedules)
 
     @Delete
-    fun delete(user: LineWithSchedules)
+    fun delete(line: SogalLineWithSchedules)
 }

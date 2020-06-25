@@ -23,7 +23,7 @@ class SogalSchedulesActivityViewModel {
         SogalService().sogalSerivce()
     }
 
-    fun loadSchedulesBy(
+    fun loadSchedules(
         onSuccess: (schedules: List<BaseSchedule>) -> Unit,
         onError: (errorMessage: String) -> Unit
     ) {

@@ -1,31 +1,30 @@
-package esser.marcelo.busoclock.model
+package esser.marcelo.busoclock.model.favorite
 
 import androidx.room.Embedded
 import androidx.room.Relation
 import esser.marcelo.busoclock.model.schedules.Saturday
 import esser.marcelo.busoclock.model.schedules.Sunday
 import esser.marcelo.busoclock.model.schedules.Workingday
-import org.jsoup.Connection
 
-data class LineWithSchedules(
+data class SogalLineWithSchedules(
 
-    @Embedded val line: BaseLine,
-
-    @Relation(
-        parentColumn = "lineId",
-        entityColumn = "workingdayId"
-    )
-    val workingdays: List<Workingday>,
+    @Embedded var line: FavoriteLine? = null,
 
     @Relation(
         parentColumn = "lineId",
-        entityColumn = "saturdayId"
+        entityColumn = "workingdayKey"
     )
-    val saturdays: List<Saturday>,
+    var workingdays: List<Workingday>? = null,
 
     @Relation(
         parentColumn = "lineId",
-        entityColumn = "sundayId"
+        entityColumn = "saturdayKey"
     )
-    val sundays: List<Sunday>
+    var saturdays: List<Saturday>? = null,
+
+    @Relation(
+        parentColumn = "lineId",
+        entityColumn = "sundayKey"
+    )
+    var sundays: List<Sunday>? = null
 )
