@@ -8,6 +8,6 @@ import androidx.room.PrimaryKey
 data class Sunday (
     @PrimaryKey(autoGenerate = true)
     val sundayId: Long,
-    @ColumnInfo(name = "sundayKey")
+    @ColumnInfo(name = "lineId")
     val sundayKey: Long
 )

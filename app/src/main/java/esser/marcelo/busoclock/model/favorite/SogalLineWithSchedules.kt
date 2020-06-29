@@ -11,20 +11,23 @@ data class SogalLineWithSchedules(
     @Embedded var line: FavoriteLine? = null,
 
     @Relation(
-        parentColumn = "lineId",
-        entityColumn = "workingdayKey"
+        parentColumn = "id",
+        entityColumn = "lineId",
+        entity = Workingday::class
     )
     var workingdays: List<Workingday>? = null,
 
     @Relation(
-        parentColumn = "lineId",
-        entityColumn = "saturdayKey"
+        parentColumn = "id",
+        entityColumn = "lineId",
+        entity = Saturday::class
     )
     var saturdays: List<Saturday>? = null,
 
     @Relation(
-        parentColumn = "lineId",
-        entityColumn = "sundayKey"
+        parentColumn = "id",
+        entityColumn = "lineId",
+        entity = Sunday::class
     )
     var sundays: List<Sunday>? = null
 )

@@ -5,9 +5,9 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import esser.marcelo.busoclock.model.schedules.BaseSchedule
 
-@Entity(tableName = "favorite_line")
+@Entity
 data class FavoriteLine(
-    @PrimaryKey var lineId : Long? = null
+    @PrimaryKey var id : Long? = null
     ) {
     @ColumnInfo(name = "line_name")
     var name: String = ""

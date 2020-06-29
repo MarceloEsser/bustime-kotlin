@@ -8,6 +8,6 @@ import androidx.room.PrimaryKey
 data class Workingday(
     @PrimaryKey(autoGenerate = true)
     val workingdayId: Long,
-    @ColumnInfo(name = "workingdayKey")
+    @ColumnInfo(name = "lineId")
     val workindayKey: Long
 )

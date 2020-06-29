@@ -68,8 +68,7 @@ class SaveLineHelper(val saveLindeDelegate: SaveLindeDelegate, val context: Cont
             baseLine,
             workingdays,
             saturdays,
-            sunday,
-            sogalItinerariesViewModel.itineraries
+            sunday
         )
         val dao  = DaoHelper(context = this.context)
         dao.insert(line)

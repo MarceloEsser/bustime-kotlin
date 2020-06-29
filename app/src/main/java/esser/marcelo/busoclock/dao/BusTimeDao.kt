@@ -5,7 +5,7 @@ import esser.marcelo.busoclock.model.favorite.SogalLineWithSchedules
 interface BusTimeDao {
 
     @Transaction
-    @Query("SELECT * FROM favorite_line")
+    @Query("SELECT * FROM FavoriteLine")
     fun getAll(): List<SogalLineWithSchedules>
 
     @Insert
