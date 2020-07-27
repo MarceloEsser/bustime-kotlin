@@ -10,11 +10,14 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel() {
 
-    val favSize = MutableLiveData<List<SogalLineWithSchedules>>()
+    var favSize: MutableLiveData<Int> = MutableLiveData()
     lateinit var daoHelper: DaoHelper
 
     fun getLinesQuantity() {
-        favSize.value = daoHelper.getAll()
+        GlobalScope.launch {
+            val size = daoHelper.getAll().size
+            favSize.postValue(size)
+        }
     }
 
     fun initializeDao(context: Context) {

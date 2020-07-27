@@ -45,13 +45,18 @@ class HomeActivity : BaseActivity() {
             startActivity(Intent(activityContext, SogalLinesActivity::class.java))
         }
 
-        viewModel.getLinesQuantity()
-
-        val favSizeObserver = Observer<List<SogalLineWithSchedules>> {value ->
-            if (value != null && value.isNotEmpty()) {
+        val favSizeObserver = Observer<Int> {value ->
+            if (value != null && value > 0) {
                 cv_home_activity_favorities.visibility = VISIBLE
+                cl_favorites_button_content.visibility = VISIBLE
+                if (value > 1) {
+                    tv_favorite_count.text = "$value linhas salvas"
+                } else {
+                    tv_favorite_count.text = "$value linha salva"
+                }
             } else {
                 cv_home_activity_favorities.visibility = GONE
+                cl_favorites_button_content.visibility = GONE
             }
         }
 
@@ -73,6 +78,11 @@ class HomeActivity : BaseActivity() {
         esserEmailEvent()
 
         esserLinkedInEvent()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getLinesQuantity()
     }
 
     private fun esserGitHubEvent() {
