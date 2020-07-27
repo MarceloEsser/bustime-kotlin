@@ -1,6 +1,6 @@
 package esser.marcelo.busoclock.vvm.home
 
-import android.arch.lifecycle.Observer
+import androidx.lifecycle.Observer
 import android.content.Intent
 import android.net.Uri
 import android.net.Uri.fromParts

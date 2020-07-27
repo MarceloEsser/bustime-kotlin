@@ -1,7 +1,7 @@
 package esser.marcelo.busoclock.adapter
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +12,7 @@ import esser.marcelo.busoclock.model.sogal.ItinerariesDTO
 class ItinerariesAdapter(
     private val context: Context,
     private val itinerariesDTO: List<ItinerariesDTO>?
-) : RecyclerView.Adapter<ItinerariesAdapter.ItinerariesViewHolder>() {
+) : androidx.recyclerview.widget.RecyclerView.Adapter<ItinerariesAdapter.ItinerariesViewHolder>() {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, position: Int): ItinerariesViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.row_itineraries, viewGroup, false)
@@ -30,7 +30,7 @@ class ItinerariesAdapter(
         }
     }
 
-    class ItinerariesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ItinerariesViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
         val tvItinerarie = itemView.findViewById<TextView>(R.id.tv_itinerarie_street)
         val tvItinerarieCity = itemView.findViewById<TextView>(R.id.tv_itinerarie_city)
     }

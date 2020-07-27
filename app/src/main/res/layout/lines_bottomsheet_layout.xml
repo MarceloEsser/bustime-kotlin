@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_header"
             style="@style/LinesBottomSheetDialogStyle"
             android:layout_width="0dp"
@@ -54,7 +54,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/activity_lines_et_search" />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
             android:id="@+id/tv_line_name"
@@ -109,7 +109,7 @@
             app:layout_constraintStart_toStartOf="@+id/tv_line_code"
             app:layout_constraintTop_toBottomOf="@+id/btn_line_menu_dialog_itineraries" />
 
-    <android.support.design.widget.BottomNavigationView
+    <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bn_line_way_selector"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -167,4 +167,4 @@
             app:layout_constraintTop_toBottomOf="@+id/divider1" />
 
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

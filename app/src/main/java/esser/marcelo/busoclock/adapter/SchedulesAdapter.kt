@@ -1,7 +1,7 @@
 package esser.marcelo.busoclock.adapter
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +18,7 @@ import esser.marcelo.busoclock.model.schedules.BaseSchedule
 class SchedulesAdapter(
     private val context: Context,
     private val schedules: List<BaseSchedule>
-) : RecyclerView.Adapter<SchedulesAdapter.SchedulesViewHolder>() {
+) : androidx.recyclerview.widget.RecyclerView.Adapter<SchedulesAdapter.SchedulesViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): SchedulesViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.row_schedule, parent, false)
@@ -49,7 +49,7 @@ class SchedulesAdapter(
     }
 
 
-    class SchedulesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class SchedulesViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
         val imgAPD: ImageView = itemView.img_apd
         val tvSchedule: TextView = itemView.row_schedule_tv_bus_hour
     }

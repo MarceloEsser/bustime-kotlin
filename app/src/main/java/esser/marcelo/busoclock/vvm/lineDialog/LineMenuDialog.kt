@@ -5,7 +5,7 @@ import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
+import androidx.fragment.app.DialogFragment
 import android.view.*
 import android.view.View.GONE
 import android.widget.AdapterView
@@ -26,7 +26,7 @@ class LineMenuDialog @SuppressLint("ValidFragment") constructor(
     val isFromVicasa: Boolean,
     val activityContext: Context,
     var isFavorite: Boolean = false
-) : DialogFragment(), SaveLindeDelegate {
+) : androidx.fragment.app.DialogFragment(), SaveLindeDelegate {
 
     private val viewModel: LineMenuDialogViewModel by lazy {
         LineMenuDialogViewModel(isFromVicasa)

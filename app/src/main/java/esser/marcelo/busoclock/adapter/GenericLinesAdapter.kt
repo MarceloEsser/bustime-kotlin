@@ -1,7 +1,7 @@
 package esser.marcelo.busoclock.adapter
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +15,7 @@ class GenericLinesAdapter(
     val lines: List<BaseLine>,
     val context: Context,
     val delegate: GenericLinesAdapterDelegate
-) : RecyclerView.Adapter<GenericLinesAdapter.GenericLinesViewHolder>() {
+) : androidx.recyclerview.widget.RecyclerView.Adapter<GenericLinesAdapter.GenericLinesViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): GenericLinesViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.row_line, parent, false)
@@ -42,7 +42,7 @@ class GenericLinesAdapter(
         }
     }
 
-    class GenericLinesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class GenericLinesViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
         val tvLineName = itemView.tv_line_name
         val tvLineCode = itemView.tv_line_code
     }

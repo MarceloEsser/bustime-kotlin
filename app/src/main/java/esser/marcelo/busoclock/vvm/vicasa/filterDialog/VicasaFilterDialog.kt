@@ -2,7 +2,7 @@ package esser.marcelo.busoclock.vvm.vicasa.filterDialog
 
 import android.app.Dialog
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
+import androidx.fragment.app.DialogFragment
 import android.view.*
 import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.dialog_vicasa_filter.*
@@ -10,7 +10,7 @@ import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.interfaces.FilterDialogInteraction
 import esser.marcelo.busoclock.model.vicasa.Vicasa
 
-class VicasaFilterDialog : DialogFragment() {
+class VicasaFilterDialog : androidx.fragment.app.DialogFragment() {
 
     val viewModel: VicasaFilterDialogViewModel by lazy {
         VicasaFilterDialogViewModel()

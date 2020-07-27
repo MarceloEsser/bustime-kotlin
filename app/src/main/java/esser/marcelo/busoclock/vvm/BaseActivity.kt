@@ -1,6 +1,6 @@
 package esser.marcelo.busoclock.vvm
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import esser.marcelo.busoclock.helper.ProgressDialogHelper
 
 open class BaseActivity : AppCompatActivity() {

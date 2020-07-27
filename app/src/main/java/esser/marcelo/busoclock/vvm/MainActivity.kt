@@ -1,9 +1,9 @@
 package esser.marcelo.busoclock.vvm
 
 import android.os.Bundle
-import android.support.design.card.MaterialCardView
-import android.support.design.widget.BottomSheetBehavior
-import android.support.v7.app.AppCompatActivity
+import com.google.android.material.card.MaterialCardView
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import androidx.appcompat.app.AppCompatActivity
 import esser.marcelo.busoclock.R
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.lines_bottomsheet_layout.*
