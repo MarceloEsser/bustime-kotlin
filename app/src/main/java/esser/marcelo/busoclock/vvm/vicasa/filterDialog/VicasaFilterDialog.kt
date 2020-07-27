@@ -44,7 +44,7 @@ class VicasaFilterDialog : androidx.fragment.app.DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val onCreateDialog = super.onCreateDialog(savedInstanceState)
         setupDialog(onCreateDialog)
-        onCreateDialog.window.requestFeature(Window.FEATURE_NO_TITLE)
+        onCreateDialog.window?.requestFeature(Window.FEATURE_NO_TITLE)
         return onCreateDialog
     }
 
@@ -53,10 +53,10 @@ class VicasaFilterDialog : androidx.fragment.app.DialogFragment() {
         setupDialog(dialog)
     }
 
-    fun setupDialog(dialog: Dialog) {
+    fun setupDialog(dialog: Dialog?) {
         dialog?.run {
-            window.attributes.height = ViewGroup.LayoutParams.WRAP_CONTENT
-            window.attributes.width = ViewGroup.LayoutParams.MATCH_PARENT
+            window?.attributes?.height = ViewGroup.LayoutParams.WRAP_CONTENT
+            window?.attributes?.width = ViewGroup.LayoutParams.MATCH_PARENT
             window?.setGravity(Gravity.CENTER)
         }
     }

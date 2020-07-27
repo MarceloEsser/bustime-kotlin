@@ -4,11 +4,11 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         applicationId "esser.marcelo.busoclock"
         minSdkVersion 21
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 3
         versionName "1.0.0"
         testInstrumentationRunner "android.support.onItemClickLitener.runner.AndroidJUnitRunner"
@@ -19,30 +19,46 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
 }
 
 dependencies {
-    def room_version = "2.2.0-alpha01"
 
+    //Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines"
+
+    //AppCompat and UI Things
+    implementation "androidx.appcompat:appcompat:$app_compat"
+    implementation "androidx.recyclerview:recyclerview:$recycler_view"
+    implementation "androidx.cardview:cardview:$card_view"
+    implementation "com.google.android.material:material:$material"
+    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout"
+
+    //Gif
+    implementation "com.airbnb.android:lottie:$lottie"
+
+
+    //Retrofit and api things
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.okhttp3:okhttp:$logging_interceptor"
+    implementation "com.squareup.okhttp3:logging-interceptor:$logging_interceptor"
+    implementation "org.jsoup:jsoup:$jsoup"
+
+    //Database
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
+    //File
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.0.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.0-M1"
-    apply plugin: 'kotlin-android-extensions'
-    testImplementation 'junit:junit:4.12'
-    //Service Implementation
-    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
-    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
-    implementation 'com.squareup.okhttp3:okhttp:3.12.1'
-    implementation 'org.jsoup:jsoup:1.12.1'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.12.1'
-    //Design implementation
-    implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'androidx.recyclerview:recyclerview:1.0.0'
-    implementation 'com.google.android.material:material:1.0.0'
-    implementation 'com.airbnb.android:lottie:2.5.0-rc1'
+
+    //Tests
+    testImplementation "junit:junit:$junit"
+
 }

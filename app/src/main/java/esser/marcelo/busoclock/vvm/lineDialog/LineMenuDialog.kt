@@ -153,7 +153,7 @@ class LineMenuDialog @SuppressLint("ValidFragment") constructor(
         return onCreateDialog
     }
 
-    fun setupDialog(dialog: Dialog) {
+    fun setupDialog(dialog: Dialog?) {
         dialog?.run {
             window?.attributes?.height = ViewGroup.LayoutParams.WRAP_CONTENT
             window?.attributes?.width = ViewGroup.LayoutParams.MATCH_PARENT
