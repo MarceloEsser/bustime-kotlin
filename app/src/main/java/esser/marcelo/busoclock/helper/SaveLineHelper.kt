@@ -1,11 +1,9 @@
 package esser.marcelo.busoclock.helper
 
-import DaoHelper
+import esser.marcelo.busoclock.dao.DaoHelper
 import android.content.Context
 import esser.marcelo.busoclock.dao.LineDAO
 import esser.marcelo.busoclock.interfaces.SaveLindeDelegate
-import esser.marcelo.busoclock.model.BaseLine
-import esser.marcelo.busoclock.model.favorite.FavoriteItineraries
 import esser.marcelo.busoclock.model.favorite.FavoriteLine
 import esser.marcelo.busoclock.model.favorite.SogalLineWithSchedules
 import esser.marcelo.busoclock.model.schedules.Saturday
@@ -15,6 +13,8 @@ import esser.marcelo.busoclock.vvm.sogal.itineraries.SogalItinerariesActivityVie
 import esser.marcelo.busoclock.vvm.sogal.schedules.SogalSchedulesActivityViewModel
 import esser.marcelo.busoclock.vvm.vicasa.lines.VicasaLinesActivityViewModel
 import esser.marcelo.busoclock.vvm.vicasa.schedules.VicasaSchedulesActivityViewModel
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class SaveLineHelper(val saveLindeDelegate: SaveLindeDelegate, val context: Context) {
 
@@ -38,40 +38,56 @@ class SaveLineHelper(val saveLindeDelegate: SaveLindeDelegate, val context: Cont
         VicasaSchedulesActivityViewModel()
     }
 
-    fun saveSogalLineFrom() {
+    fun saveSogalLine(onLineSaved: () -> Unit, onError: () -> Unit) {
         baseLine = FavoriteLine()
+
         baseLine.name = LineDAO.lineName
         baseLine.code = LineDAO.lineCode
+
         sogalSchedulesViewModel.loadSchedules(onSuccess = {
 
-            loadItineraries()
+            loadItineraries(onLineSaved, onError)
 
         }, onError = { errorMessage ->
             saveLindeDelegate.onError(errorMessage)
         })
     }
 
-    private fun loadItineraries() {
+    private fun loadItineraries(onLineSaved: () -> Unit, onError: () -> Unit) {
         sogalItinerariesViewModel.loadItineraries(onSucces = {
-            fillSogalWithSchedulesValues()
+            fillSogalWithSchedulesValues(onLineSaved, onError)
         }, onError = { errorMessage ->
 
         })
     }
 
-    private fun fillSogalWithSchedulesValues() {
-        val workingdays = sogalSchedulesViewModel.workingDays as List<Workingday>
-        val saturdays = sogalSchedulesViewModel.saturdays as List<Saturday>
-        val sunday = sogalSchedulesViewModel.sundays as List<Sunday>
+    private fun fillSogalWithSchedulesValues(onLineSaved: () -> Unit, onError: () -> Unit) {
+        val workingdays: MutableList<Workingday> = mutableListOf()
+            for (workingday in sogalSchedulesViewModel.workingDays!!) {
+                workingdays.add(Workingday(hour = workingday.hour, abrev = workingday.abrev, apd = workingday.apd))
+            }
+        val saturdays: MutableList<Saturday> = mutableListOf()
+            for (workingday in sogalSchedulesViewModel.saturdays!!) {
+                saturdays.add(Saturday(hour = workingday.hour, abrev = workingday.abrev, apd = workingday.apd))
+            }
+
+        val sundays: MutableList<Sunday> = mutableListOf()
+            for (workingday in sogalSchedulesViewModel.saturdays!!) {
+                sundays.add(Sunday(hour = workingday.hour, abrev = workingday.abrev, apd = workingday.apd))
+            }
 
         line = SogalLineWithSchedules(
             baseLine,
             workingdays,
             saturdays,
-            sunday
+            sundays
         )
-        val dao  = DaoHelper(context = this.context)
-        dao.insert(line)
+        val dao: DaoHelper = DaoHelper(this.context.applicationContext)
+        GlobalScope.launch {
+            dao.insert(line, onAllSaved = {
+                onLineSaved()
+            })
+        }
     }
 
     fun saveVicasaLineFrom(lineCode: String) {

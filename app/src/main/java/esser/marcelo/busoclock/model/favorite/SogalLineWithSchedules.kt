@@ -12,22 +12,19 @@ data class SogalLineWithSchedules(
 
     @Relation(
         parentColumn = "id",
-        entityColumn = "lineId",
-        entity = Workingday::class
+        entityColumn = "lineId"
     )
     var workingdays: List<Workingday>? = null,
 
     @Relation(
         parentColumn = "id",
-        entityColumn = "lineId",
-        entity = Saturday::class
+        entityColumn = "lineId"
     )
     var saturdays: List<Saturday>? = null,
 
     @Relation(
         parentColumn = "id",
-        entityColumn = "lineId",
-        entity = Sunday::class
+        entityColumn = "lineId"
     )
     var sundays: List<Sunday>? = null
 )

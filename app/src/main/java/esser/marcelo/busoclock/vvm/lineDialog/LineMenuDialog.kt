@@ -13,6 +13,8 @@ import android.widget.Toast
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.adapter.spinner.SpinnerDefaultAdapter
 import esser.marcelo.busoclock.dao.LineDAO
+import esser.marcelo.busoclock.helper.SaveLineHelper
+import esser.marcelo.busoclock.interfaces.SaveLindeDelegate
 import esser.marcelo.busoclock.vvm.sogal.itineraries.SogalItinerariesActivity
 import esser.marcelo.busoclock.vvm.sogal.schedules.SogalSchedulesActivity
 import esser.marcelo.busoclock.vvm.vicasa.schedules.VicasaSchedulesActivity
@@ -23,11 +25,15 @@ import kotlinx.android.synthetic.main.dialog_line_menu.*
 class LineMenuDialog @SuppressLint("ValidFragment") constructor(
     val isFromVicasa: Boolean,
     val activityContext: Context,
-    var isFavorite: Boolean = true
-) : DialogFragment() {
+    var isFavorite: Boolean = false
+) : DialogFragment(), SaveLindeDelegate {
 
     private val viewModel: LineMenuDialogViewModel by lazy {
         LineMenuDialogViewModel(isFromVicasa)
+    }
+
+    private val saveLineHelper: SaveLineHelper by lazy {
+        SaveLineHelper(this, activityContext)
     }
 
     override fun onCreateView(
@@ -57,6 +63,11 @@ class LineMenuDialog @SuppressLint("ValidFragment") constructor(
             if (isFavorite) {
                 favorite_image_button.setImageResource(R.drawable.ic_favorite)
                 this.isFavorite = false
+                saveLineHelper.saveSogalLine(onLineSaved = {
+
+                }, onError = {
+
+                })
             } else {
                 favorite_image_button.setImageResource(R.drawable.ic_favorite_border)
                 this.isFavorite = true
@@ -148,5 +159,12 @@ class LineMenuDialog @SuppressLint("ValidFragment") constructor(
             window?.attributes?.width = ViewGroup.LayoutParams.MATCH_PARENT
             window?.setGravity(Gravity.CENTER)
         }
+    }
+
+    override fun onError(message: String) {
+
+    }
+
+    override fun onSuccess() {
     }
 }

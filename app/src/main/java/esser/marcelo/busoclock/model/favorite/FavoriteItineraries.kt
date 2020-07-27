@@ -8,6 +8,7 @@ import com.google.gson.annotations.SerializedName
 
 @Entity
 data class FavoriteItineraries (
+
     @PrimaryKey
     val itineraryId: Long,
 
@@ -21,6 +22,6 @@ data class FavoriteItineraries (
     @ColumnInfo(name = "street")
     var street: String? = null,
 
-    @ColumnInfo(name = "itineraryKey")
+    @ColumnInfo(name = "lineId")
     val itineraryKey: Long
 )
