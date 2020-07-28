@@ -1,6 +1,6 @@
 package esser.marcelo.busoclock.interfaces
 
-interface SaveLindeDelegate {
+interface SaveLineDelegate {
     fun onError(message: String)
     fun onSuccess()
 }

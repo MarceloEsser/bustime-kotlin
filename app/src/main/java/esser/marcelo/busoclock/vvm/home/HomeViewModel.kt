@@ -9,7 +9,7 @@ import esser.marcelo.busoclock.model.favorite.SogalLineWithSchedules
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class HomeViewModel {
+class HomeViewModel: ViewModel() {
 
     var favSize: MutableLiveData<Int> = MutableLiveData()
     lateinit var daoHelper: DaoHelper

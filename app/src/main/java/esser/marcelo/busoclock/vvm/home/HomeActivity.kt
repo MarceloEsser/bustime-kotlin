@@ -7,6 +7,7 @@ import android.net.Uri.fromParts
 import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import androidx.activity.viewModels
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.model.favorite.SogalLineWithSchedules
 import esser.marcelo.busoclock.service.vicasaServices.VicasaService
@@ -24,28 +25,31 @@ class HomeActivity : BaseActivity() {
         this@HomeActivity
     }
 
-    private val viewModel: HomeViewModel by lazy {
-        HomeViewModel()
-    }
+    private val viewModel: HomeViewModel by viewModels()
 
     @ExperimentalCoroutinesApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
         viewModel.initializeDao(this.applicationContext)
-        //chamaServico()
+
         events()
 
 
-        cv_home_activity_vicasa.setOnClickListener {
-            startActivity(Intent(activityContext, VicasaLinesActivity::class.java))
-        }
+        cardListeners()
 
-        cv_home_activity_sogal.setOnClickListener {
-            startActivity(Intent(activityContext, SogalLinesActivity::class.java))
-        }
+        favoriteCardValidations()
 
-        val favSizeObserver = Observer<Int> {value ->
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getLinesQuantity()
+    }
+
+    private fun favoriteCardValidations() {
+        val favSizeObserver = Observer<Int> { value ->
             if (value != null && value > 0) {
                 cv_home_activity_favorities.visibility = VISIBLE
                 cl_favorites_button_content.visibility = VISIBLE
@@ -61,7 +65,16 @@ class HomeActivity : BaseActivity() {
         }
 
         viewModel.favSize.observe(this, favSizeObserver)
+    }
 
+    private fun cardListeners() {
+        cv_home_activity_vicasa.setOnClickListener {
+            startActivity(Intent(activityContext, VicasaLinesActivity::class.java))
+        }
+
+        cv_home_activity_sogal.setOnClickListener {
+            startActivity(Intent(activityContext, SogalLinesActivity::class.java))
+        }
     }
 
     private fun events() {
@@ -78,11 +91,6 @@ class HomeActivity : BaseActivity() {
         esserEmailEvent()
 
         esserLinkedInEvent()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.getLinesQuantity()
     }
 
     private fun esserGitHubEvent() {
@@ -107,29 +115,6 @@ class HomeActivity : BaseActivity() {
             openAUrl("https://www.linkedin.com/in/marcelo-esser/")
         }
     }
-
-    /*private fun cardsEvents() {
-        cv_home_activity_vicasa.setOnClickListener {
-            startActivityForResult(
-                Intent(activityContext, VicasaLinesActivity::class.java),
-                updateScreen
-            )
-        }
-
-        cv_home_activity_sogal.setOnClickListener {
-            startActivityForResult(
-                Intent(activityContext, SogalLinesActivity::class.java),
-                updateScreen
-            )
-        }
-
-        *//*cv_home_activity_favorities.setOnClickListener {
-            startActivityForResult(
-                Intent(activityContext, FavoriteActivity::class.java),
-                updateScreen
-            )
-        }*//*
-    }*/
 
     private fun wottrichEvents() {
         wottrichGitHubEvent()
@@ -170,16 +155,4 @@ class HomeActivity : BaseActivity() {
             startActivity(Intent.createChooser(emailIntent, "Enviar email..."))
         }
     }
-
-    /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-
-        when (requestCode) {
-            updateScreen -> {
-                loadFavorites()
-            }
-        }
-
-        super.onActivityResult(requestCode, resultCode, data)
-    }*/
-
 }

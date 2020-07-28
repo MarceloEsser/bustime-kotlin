@@ -2,6 +2,7 @@ package esser.marcelo.busoclock.vvm.sogal.itineraries
 
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.viewModels
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.adapter.ItinerariesAdapter
 import esser.marcelo.busoclock.dao.LineDAO
@@ -11,9 +12,7 @@ import kotlinx.android.synthetic.main.activity_itineraries.*
 
 class SogalItinerariesActivity : BaseActivity() {
 
-    private val viewModel: SogalItinerariesActivityViewModel by lazy {
-        SogalItinerariesActivityViewModel()
-    }
+    private val viewModel: SogalItinerariesActivityViewModel by viewModels()
 
     private lateinit var itinerariesAdapter: ItinerariesAdapter
 

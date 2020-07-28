@@ -5,7 +5,6 @@ import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.DialogFragment
 import android.view.*
 import android.view.View.GONE
 import android.widget.AdapterView
@@ -14,7 +13,7 @@ import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.adapter.spinner.SpinnerDefaultAdapter
 import esser.marcelo.busoclock.dao.LineDAO
 import esser.marcelo.busoclock.helper.SaveLineHelper
-import esser.marcelo.busoclock.interfaces.SaveLindeDelegate
+import esser.marcelo.busoclock.interfaces.SaveLineDelegate
 import esser.marcelo.busoclock.vvm.sogal.itineraries.SogalItinerariesActivity
 import esser.marcelo.busoclock.vvm.sogal.schedules.SogalSchedulesActivity
 import esser.marcelo.busoclock.vvm.vicasa.schedules.VicasaSchedulesActivity
@@ -26,7 +25,7 @@ class LineMenuDialog @SuppressLint("ValidFragment") constructor(
     val isFromVicasa: Boolean,
     val activityContext: Context,
     var isFavorite: Boolean = false
-) : androidx.fragment.app.DialogFragment(), SaveLindeDelegate {
+) : androidx.fragment.app.DialogFragment(), SaveLineDelegate {
 
     private val viewModel: LineMenuDialogViewModel by lazy {
         LineMenuDialogViewModel(isFromVicasa)
@@ -64,9 +63,9 @@ class LineMenuDialog @SuppressLint("ValidFragment") constructor(
                 favorite_image_button.setImageResource(R.drawable.ic_favorite)
                 this.isFavorite = false
                 saveLineHelper.saveSogalLine(onLineSaved = {
-
+                    //TODO: Dialog de linha salva com sucesso
                 }, onError = {
-
+                    //TODO: Dialog de erro ao salvar linha
                 })
             } else {
                 favorite_image_button.setImageResource(R.drawable.ic_favorite_border)
@@ -116,7 +115,7 @@ class LineMenuDialog @SuppressLint("ValidFragment") constructor(
 
     private fun goToSchedules() {
         btn_line_menu_dialog_schedules.setOnClickListener {
-            if (viewModel.selectedWay.way != "none") {
+            if (viewModel.hasWay) {
                 if (isFromVicasa) {
                     startActivity(Intent(context, VicasaSchedulesActivity::class.java))
                 } else {
@@ -124,7 +123,11 @@ class LineMenuDialog @SuppressLint("ValidFragment") constructor(
                 }
                 dismiss()
             } else {
-                Toast.makeText(context, "Por favor selecione um sentido para a linha <3", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    context,
+                    "Por favor selecione um sentido para a linha <3",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }

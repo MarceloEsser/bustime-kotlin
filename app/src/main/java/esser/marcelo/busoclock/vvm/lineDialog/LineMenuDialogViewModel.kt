@@ -9,6 +9,9 @@ import esser.marcelo.busoclock.model.LineWay
 class LineMenuDialogViewModel(val isFromVicasa: Boolean = false) {
 
 
+    val hasWay: Boolean
+        get() { return selectedWay.way != "none"}
+
     lateinit var selectedWay: LineWay
 
     fun getWaysList(): ArrayList<LineWay> {

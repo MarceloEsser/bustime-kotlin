@@ -3,7 +3,7 @@ package esser.marcelo.busoclock.helper
 import esser.marcelo.busoclock.dao.DaoHelper
 import android.content.Context
 import esser.marcelo.busoclock.dao.LineDAO
-import esser.marcelo.busoclock.interfaces.SaveLindeDelegate
+import esser.marcelo.busoclock.interfaces.SaveLineDelegate
 import esser.marcelo.busoclock.model.favorite.FavoriteLine
 import esser.marcelo.busoclock.model.favorite.SogalLineWithSchedules
 import esser.marcelo.busoclock.model.schedules.Saturday
@@ -16,7 +16,7 @@ import esser.marcelo.busoclock.vvm.vicasa.schedules.VicasaSchedulesActivityViewM
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class SaveLineHelper(val saveLindeDelegate: SaveLindeDelegate, val context: Context) {
+class SaveLineHelper(val saveLineDelegate: SaveLineDelegate, val context: Context) {
 
     private lateinit var line: SogalLineWithSchedules
 
@@ -49,7 +49,7 @@ class SaveLineHelper(val saveLindeDelegate: SaveLindeDelegate, val context: Cont
             loadItineraries(onLineSaved, onError)
 
         }, onError = { errorMessage ->
-            saveLindeDelegate.onError(errorMessage)
+            saveLineDelegate.onError(errorMessage)
         })
     }
 

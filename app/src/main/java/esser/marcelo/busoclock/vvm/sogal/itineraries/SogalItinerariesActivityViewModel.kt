@@ -1,5 +1,7 @@
 package esser.marcelo.busoclock.vvm.sogal.itineraries
 
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import esser.marcelo.busoclock.dao.LineDAO
 import esser.marcelo.busoclock.model.sogal.ItinerariesDTO
 import esser.marcelo.busoclock.model.sogal.LinesDTO
@@ -8,10 +10,10 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class SogalItinerariesActivityViewModel {
+class SogalItinerariesActivityViewModel: ViewModel() {
     private val service = SogalService().sogalSerivce()
     private val SEARCH_ITINERARIES: String = "buscaItinerarios"
-    lateinit var itineraries: List<ItinerariesDTO>
+    var itineraries: MutableLiveData<List<ItinerariesDTO>> = MutableLiveData()
 
     fun loadItineraries(
         onSucces: (itineraries: List<ItinerariesDTO>?) -> Unit,
@@ -25,7 +27,7 @@ class SogalItinerariesActivityViewModel {
 
                 override fun onResponse(call: Call<LinesDTO>, response: Response<LinesDTO>) {
                     if (response.body() != null && response.body()!!.itineraries != null) {
-                        itineraries = response.body()?.itineraries ?: listOf()
+                        itineraries.value = response.body()?.itineraries ?: listOf()
                         onSucces(response.body()!!.itineraries!!)
                     }
                 }
