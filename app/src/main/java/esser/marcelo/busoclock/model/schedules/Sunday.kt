@@ -6,20 +6,19 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 @Entity
-data class Sunday (
+data class Sunday(
     @PrimaryKey(autoGenerate = true)
     var sundayId: Long? = null,
     @ColumnInfo(name = "lineId")
     var sundayKey: Long? = null,
     @SerializedName("hora")
-var hour: String = "",
+    var hour: String = "",
 
-@SerializedName("abrev")
-@ColumnInfo(name = "abrev")
-var abrev: String =  "",
+    @SerializedName("abrev")
+    var abrev: String = "",
 
-@SerializedName("apd")
-var apd: String = "N"
+    @SerializedName("apd")
+    var apd: String = "N"
 ) {
     fun isApd(): Boolean {
         return apd == "S"

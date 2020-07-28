@@ -40,6 +40,9 @@ dependencies {
     implementation "com.google.android.material:material:$material"
     implementation "androidx.constraintlayout:constraintlayout:$constraint_layout"
 
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle"
+    implementation "androidx.activity:activity-ktx:$activity_version"
+
     //Gif
     implementation "com.airbnb.android:lottie:$lottie"
 

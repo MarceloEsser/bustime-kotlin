@@ -84,7 +84,7 @@ class SaveLineHelper(val saveLindeDelegate: SaveLindeDelegate, val context: Cont
         )
         val dao: DaoHelper = DaoHelper(this.context.applicationContext)
         GlobalScope.launch {
-            dao.insert(line, onAllSaved = {
+            dao.insert(line, onLineInserted = {
                 onLineSaved()
             })
         }

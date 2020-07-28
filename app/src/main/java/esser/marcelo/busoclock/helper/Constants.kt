@@ -31,4 +31,9 @@ object Constants {
     const val WAY_BB_DESCRIPTION = "Bairro Circular - BB"
     const val WAY_CB_DESCRIPTION = "Centro Bairro - CB"
     const val WAT_BC_DESCRIPTION = "Bairro Centro - BC"
+
+    object BaseUrls {
+        const val SOGAL_BASE_URL: String = "http://sogal.com.br/"
+        const val VICASA_BASE_URL: String = "http://www.vicasa.com.br/"
+    }
 }

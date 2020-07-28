@@ -14,9 +14,7 @@ open class BaseLine() {
     var code: String = ""
     var way: String = ""
 
-
-
-    constructor(name: String, code: String, way: String): this() {
+    constructor(name: String, code: String, way: String) : this() {
         this.name = name
         this.code = code
         this.way = way

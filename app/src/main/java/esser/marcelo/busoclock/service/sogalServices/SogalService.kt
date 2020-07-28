@@ -1,6 +1,6 @@
 package esser.marcelo.busoclock.service.sogalServices
 
-import esser.marcelo.busoclock.helper.BaseUrls.SOGAL_BASE_URL
+import esser.marcelo.busoclock.helper.Constants.BaseUrls.SOGAL_BASE_URL
 import esser.marcelo.busoclock.service.NetworkHandler
 
 /**

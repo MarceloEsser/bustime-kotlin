@@ -4,10 +4,6 @@ import esser.marcelo.busoclock.database.AppDatabase
 import android.content.Context
 import androidx.room.Room
 import esser.marcelo.busoclock.model.favorite.SogalLineWithSchedules
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 class DaoHelper(context: Context) {
     private val db = Room.databaseBuilder(
@@ -15,30 +11,53 @@ class DaoHelper(context: Context) {
         AppDatabase::class.java, "bustime"
     ).build()
 
+    private var lineId: Long? = null
+    private lateinit var line: SogalLineWithSchedules
+
     fun getAll(): List<SogalLineWithSchedules> {
         return db.busTimeDao().getAll()
     }
 
     fun insert(
         line: SogalLineWithSchedules,
-        onAllSaved: () -> Unit
+        onLineInserted: () -> Unit
     ) {
-            val lineId = db.busTimeDao().insertLine(line.line!!)
+        this.line = line
 
-            for (schedule in line.workingdays!!) {
-                schedule.workindayKey = lineId
-            }
-            for (schedule in line.saturdays!!) {
-                schedule.saturdayKey = lineId
-            }
-            for (schedule in line.sundays!!) {
-                schedule.sundayKey = lineId
+        lineId = db.busTimeDao().insertLine(line.line!!)
+
+        insertSchedules()
+
+        onLineInserted()
+    }
+
+    private fun insertSchedules() {
+        insertWorkingday()
+        insertSaturday()
+        insertSunday()
+    }
+
+    private fun insertWorkingday() {
+        for (schedule in line.workingdays!!) {
+            schedule.workindayKey = lineId
         }
 
         db.busTimeDao().insertWorkingdays(line.workingdays!!)
-        db.busTimeDao().insertSaturdays(line.saturdays!!)
-        db.busTimeDao().insertSundays(line.sundays!!)
+    }
 
-        onAllSaved()
+    private fun insertSaturday() {
+        for (schedule in line.saturdays!!) {
+            schedule.saturdayKey = lineId
+        }
+
+        db.busTimeDao().insertSaturdays(line.saturdays!!)
+    }
+
+    private fun insertSunday() {
+        for (schedule in line.sundays!!) {
+            schedule.sundayKey = lineId
+        }
+
+        db.busTimeDao().insertSundays(line.sundays!!)
     }
 }
