@@ -9,10 +9,8 @@ import esser.marcelo.busoclock.model.favorite.SogalLineWithSchedules
 import esser.marcelo.busoclock.model.schedules.Saturday
 import esser.marcelo.busoclock.model.schedules.Sunday
 import esser.marcelo.busoclock.model.schedules.Workingday
-import esser.marcelo.busoclock.vvm.sogal.itineraries.SogalItinerariesActivityViewModel
+import esser.marcelo.busoclock.vvm.sogal.itineraries.SogalItinerariesViewModel
 import esser.marcelo.busoclock.vvm.sogal.schedules.SogalSchedulesActivityViewModel
-import esser.marcelo.busoclock.vvm.vicasa.lines.VicasaLinesActivityViewModel
-import esser.marcelo.busoclock.vvm.vicasa.schedules.VicasaSchedulesActivityViewModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -22,8 +20,8 @@ class SaveLineHelper(val saveLineDelegate: SaveLineDelegate, val context: Contex
 
     private lateinit var baseLine: FavoriteLine
 
-    private val sogalItinerariesViewModel: SogalItinerariesActivityViewModel by lazy {
-        SogalItinerariesActivityViewModel()
+    private val sogalItinerariesViewModel: SogalItinerariesViewModel by lazy {
+        SogalItinerariesViewModel()
     }
 
     private val sogalSchedulesViewModel: SogalSchedulesActivityViewModel by lazy {

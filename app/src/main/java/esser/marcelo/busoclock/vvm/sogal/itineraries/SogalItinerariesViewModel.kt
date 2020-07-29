@@ -10,7 +10,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class SogalItinerariesActivityViewModel: ViewModel() {
+class SogalItinerariesViewModel: ViewModel() {
 
     private val service = SogalService().sogalSerivce()
     private val SEARCH_ITINERARIES: String = "buscaItinerarios"

@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_itineraries.*
 
 class SogalItinerariesActivity : BaseActivity() {
 
-    private val viewModel: SogalItinerariesActivityViewModel by viewModels()
+    private val viewModel: SogalItinerariesViewModel by viewModels()
 
     private lateinit var itinerariesAdapter: ItinerariesAdapter
 

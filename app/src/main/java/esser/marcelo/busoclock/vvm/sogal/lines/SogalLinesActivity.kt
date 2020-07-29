@@ -6,6 +6,8 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View.*
 import android.view.WindowManager
+import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.adapter.GenericLinesAdapter
 import esser.marcelo.busoclock.extensions.hideKeyboard
@@ -16,34 +18,40 @@ import esser.marcelo.busoclock.model.sogal.LinesDTO
 import esser.marcelo.busoclock.vvm.BaseActivity
 import esser.marcelo.busoclock.vvm.lineDialog.LineMenuDialog
 import kotlinx.android.synthetic.main.activity_lines.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 
 class SogalLinesActivity : BaseActivity(), GenericLinesAdapterDelegate {
 
-    private val viewModel: SogalLinesActivityViewModel by lazy {
-        SogalLinesActivityViewModel()
-    }
+    private val viewModel: SogalLinesViewModel by viewModels()
 
-    lateinit var lineMenuDialog: LineMenuDialog
+    private lateinit var lineMenuDialog: LineMenuDialog
 
     private lateinit var adapter: GenericLinesAdapter
+
     var lineWay: String = CB_WAY
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lines)
+
         this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         activity_lines_imgbtn_filter.visibility = GONE
 
         listeners()
+
+        linesObserver()
     }
 
-    override fun onStart() {
-        super.onStart()
+    private fun linesObserver() {
+        val linesObserver = Observer<List<LinesDTO>> { lines ->
+            adapterConstruct(lines)
+        }
+        viewModel.lines.observe(this, linesObserver)
+    }
+
+    override fun onResume() {
+        super.onResume()
         loadLines()
     }
 
@@ -68,10 +76,9 @@ class SogalLinesActivity : BaseActivity(), GenericLinesAdapterDelegate {
     private fun searchEvent() {
         activity_lines_et_search.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                adapterConstruct(viewModel.linesList.filter {
-                    it.name.toLowerCase().contains(activity_lines_et_search.text.toString().toLowerCase())
-                            || it.code.toLowerCase().contains(activity_lines_et_search.text.toString().toLowerCase())
-                })
+                viewModel.filterBy(
+                    activity_lines_et_search.text.toString()
+                )
                 searchAnimationControll()
             }
 
@@ -93,31 +100,25 @@ class SogalLinesActivity : BaseActivity(), GenericLinesAdapterDelegate {
                 lav_cancel_search_action.progress = it.animatedValue as Float
             }
 
-            animate.duration = 900
+            animate.duration = 700
             animate.start()
-        } else if (activity_lines_et_search.text.isNullOrEmpty() &&lav_cancel_search_action.progress == 0.5f) {
+        } else if (activity_lines_et_search.text.isNullOrEmpty() && lav_cancel_search_action.progress == 0.5f) {
             val animate = ValueAnimator.ofFloat(0.5f, 0f)
 
             animate.addUpdateListener {
                 lav_cancel_search_action.progress = it.animatedValue as Float
             }
-            animate.duration = 900
+            animate.duration = 500
             animate.start()
         }
     }
 
     private fun loadLines() {
         showLoader()
-        GlobalScope.launch {
-            delay(400L)
-            viewModel.loadSogalLines(
-                onSucces = {
-                    adapterConstruct(it)
-                }, onError = {
-                    hideLoader()
-                    errorConfig()
-                })
-        }
+        viewModel.loadSogalLines(onError = {
+            hideLoader()
+            errorConfig()
+        })
     }
 
     private fun errorConfig() {
@@ -143,16 +144,19 @@ class SogalLinesActivity : BaseActivity(), GenericLinesAdapterDelegate {
         hideLoader()
     }
 
-    private fun adapterConstruct(it: List<LinesDTO>) {
-        adapter = GenericLinesAdapter(it, this@SogalLinesActivity, this)
+    private fun adapterConstruct(lines: List<LinesDTO>) {
+        adapter = GenericLinesAdapter(lines, this@SogalLinesActivity, this)
         lines_activity_rv_lines.adapter = adapter
         successConfig()
     }
 
     override fun onItemClickLitener(line: BaseLine) {
-        lineMenuDialog = LineMenuDialog(false, this)
-
         viewModel.saveData(line.code, line.name)
+        showDialog()
+    }
+
+    private fun showDialog() {
+        lineMenuDialog = LineMenuDialog(false, this)
         lineMenuDialog.show(supportFragmentManager, "lineMenuDialog")
     }
 
