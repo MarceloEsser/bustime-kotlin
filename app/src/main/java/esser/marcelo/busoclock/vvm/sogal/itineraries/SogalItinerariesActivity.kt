@@ -1,8 +1,8 @@
 package esser.marcelo.busoclock.vvm.sogal.itineraries
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.adapter.ItinerariesAdapter
 import esser.marcelo.busoclock.dao.LineDAO
@@ -18,12 +18,23 @@ class SogalItinerariesActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_itineraries)
 
         btnBack()
         loadItineraries()
 
         itineraries_activity_tv_line_name.text = LineDAO.lineName
+
+        itinerariesList()
+    }
+
+    private fun itinerariesList() {
+        val itinerariesListObserver = Observer<List<ItinerariesDTO>> { itineraries ->
+            adapterConstruct(itineraries)
+        }
+
+        viewModel.itineraries.observe(this, itinerariesListObserver)
     }
 
     private fun btnBack() {
@@ -34,15 +45,10 @@ class SogalItinerariesActivity : BaseActivity() {
 
     private fun loadItineraries() {
         showLoader()
-        viewModel.loadItineraries(
-            onSucces = {
-                adapterConstruct(it)
-            }, onError = {
-                Toast.makeText(this@SogalItinerariesActivity, it, Toast.LENGTH_SHORT).show()
-            })
+        viewModel.loadItineraries()
     }
 
-    private fun adapterConstruct(it: List<ItinerariesDTO>?) {
+    private fun adapterConstruct(it: List<ItinerariesDTO>) {
         hideLoader()
         itinerariesAdapter = ItinerariesAdapter(this@SogalItinerariesActivity, it)
         itineraries_activity_rv_itineraries.adapter = itinerariesAdapter

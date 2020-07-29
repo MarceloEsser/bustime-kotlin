@@ -30,14 +30,6 @@ class SaveLineHelper(val saveLineDelegate: SaveLineDelegate, val context: Contex
         SogalSchedulesActivityViewModel()
     }
 
-    private val vicasaLinesViewmodel: VicasaLinesActivityViewModel by lazy {
-        VicasaLinesActivityViewModel()
-    }
-
-    private val vicasaSchedulesViewModel: VicasaSchedulesActivityViewModel by lazy {
-        VicasaSchedulesActivityViewModel()
-    }
-
     fun saveSogalLine(onLineSaved: () -> Unit, onError: () -> Unit) {
         baseLine = FavoriteLine()
 
@@ -56,8 +48,6 @@ class SaveLineHelper(val saveLineDelegate: SaveLineDelegate, val context: Contex
     private fun loadItineraries(onLineSaved: () -> Unit, onError: () -> Unit) {
         sogalItinerariesViewModel.loadItineraries(onSucces = {
             fillSogalWithSchedulesValues(onLineSaved, onError)
-        }, onError = { errorMessage ->
-
         })
     }
 
