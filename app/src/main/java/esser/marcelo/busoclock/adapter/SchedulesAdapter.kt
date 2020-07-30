@@ -1,15 +1,14 @@
 package esser.marcelo.busoclock.adapter
 
 import android.content.Context
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import kotlinx.android.synthetic.main.row_schedule.view.*
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.model.schedules.BaseSchedule
+import kotlinx.android.synthetic.main.row_schedule.view.*
 
 /**
  * @author Marcelo Esser

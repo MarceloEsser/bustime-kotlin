@@ -9,15 +9,13 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.activity.viewModels
 import esser.marcelo.busoclock.R
-import esser.marcelo.busoclock.model.favorite.SogalLineWithSchedules
-import esser.marcelo.busoclock.service.vicasaServices.VicasaService
+import esser.marcelo.busoclock.adapter.FavoriteLinesAdapter
 import esser.marcelo.busoclock.vvm.BaseActivity
+import esser.marcelo.busoclock.vvm.favorite.FavoriteLinesActivity
 import esser.marcelo.busoclock.vvm.sogal.lines.SogalLinesActivity
 import esser.marcelo.busoclock.vvm.vicasa.lines.VicasaLinesActivity
 import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.dialog_line_menu.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import java.util.*
 
 class HomeActivity : BaseActivity() {
 
@@ -74,6 +72,10 @@ class HomeActivity : BaseActivity() {
 
         cv_home_activity_sogal.setOnClickListener {
             startActivity(Intent(activityContext, SogalLinesActivity::class.java))
+        }
+
+        cv_home_activity_favorities.setOnClickListener {
+            startActivity(Intent(activityContext, FavoriteLinesActivity::class.java))
         }
     }
 

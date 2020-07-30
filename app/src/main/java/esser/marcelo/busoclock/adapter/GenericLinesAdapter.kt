@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.interfaces.GenericLinesAdapterDelegate
 import esser.marcelo.busoclock.model.BaseLine
@@ -15,7 +16,7 @@ class GenericLinesAdapter(
     val lines: List<BaseLine>,
     val context: Context,
     val delegate: GenericLinesAdapterDelegate
-) : androidx.recyclerview.widget.RecyclerView.Adapter<GenericLinesAdapter.GenericLinesViewHolder>() {
+) : RecyclerView.Adapter<GenericLinesAdapter.GenericLinesViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): GenericLinesViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.row_line, parent, false)
@@ -32,19 +33,19 @@ class GenericLinesAdapter(
         with(viewHolder) {
             tvLineName.text = line.name
             tvLineCode.text = line.code
-            onItemClicListener(line)
+            onItemClickListener(line)
         }
     }
 
-    private fun GenericLinesViewHolder.onItemClicListener(line: BaseLine) {
+    private fun GenericLinesViewHolder.onItemClickListener(line: BaseLine) {
         this.itemView.setOnClickListener {
             delegate.onItemClickLitener(line)
         }
     }
 
-    class GenericLinesViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
-        val tvLineName = itemView.tv_line_name
-        val tvLineCode = itemView.tv_line_code
+    class GenericLinesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val tvLineName: TextView = itemView.tv_line_name
+        val tvLineCode: TextView = itemView.tv_line_code
     }
 
 }

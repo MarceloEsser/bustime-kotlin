@@ -5,7 +5,7 @@ import android.content.Context
 import esser.marcelo.busoclock.dao.LineDAO
 import esser.marcelo.busoclock.interfaces.SaveLineDelegate
 import esser.marcelo.busoclock.model.favorite.FavoriteLine
-import esser.marcelo.busoclock.model.favorite.SogalLineWithSchedules
+import esser.marcelo.busoclock.model.favorite.LineWithSchedules
 import esser.marcelo.busoclock.model.schedules.Saturday
 import esser.marcelo.busoclock.model.schedules.Sunday
 import esser.marcelo.busoclock.model.schedules.Workingday
@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 
 class SaveLineHelper(val saveLineDelegate: SaveLineDelegate, val context: Context) {
 
-    private lateinit var line: SogalLineWithSchedules
+    private lateinit var line: LineWithSchedules
 
     private lateinit var baseLine: FavoriteLine
 
@@ -64,7 +64,7 @@ class SaveLineHelper(val saveLineDelegate: SaveLineDelegate, val context: Contex
                 sundays.add(Sunday(hour = workingday.hour, abrev = workingday.abrev, apd = workingday.apd))
             }
 
-        line = SogalLineWithSchedules(
+        line = LineWithSchedules(
             baseLine,
             workingdays,
             saturdays,

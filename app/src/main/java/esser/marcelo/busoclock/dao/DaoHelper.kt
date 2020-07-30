@@ -3,7 +3,7 @@ package esser.marcelo.busoclock.dao
 import esser.marcelo.busoclock.database.AppDatabase
 import android.content.Context
 import androidx.room.Room
-import esser.marcelo.busoclock.model.favorite.SogalLineWithSchedules
+import esser.marcelo.busoclock.model.favorite.LineWithSchedules
 
 class DaoHelper(context: Context) {
     private val db = Room.databaseBuilder(
@@ -12,14 +12,14 @@ class DaoHelper(context: Context) {
     ).build()
 
     private var lineId: Long? = null
-    private lateinit var line: SogalLineWithSchedules
+    private lateinit var line: LineWithSchedules
 
-    fun getAll(): List<SogalLineWithSchedules> {
+    fun getAll(): List<LineWithSchedules> {
         return db.busTimeDao().getAll()
     }
 
     fun insert(
-        line: SogalLineWithSchedules,
+        line: LineWithSchedules,
         onLineInserted: () -> Unit
     ) {
         this.line = line

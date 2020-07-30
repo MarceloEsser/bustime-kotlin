@@ -9,6 +9,9 @@ import esser.marcelo.busoclock.model.schedules.BaseSchedule
 data class FavoriteLine(
     @PrimaryKey var id : Long? = null
     ) {
+    @ColumnInfo(name = "is_sogal")
+    var isSogal: Boolean = true
+
     @ColumnInfo(name = "line_name")
     var name: String = ""
 

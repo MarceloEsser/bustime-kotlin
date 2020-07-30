@@ -6,7 +6,7 @@ import esser.marcelo.busoclock.model.schedules.Saturday
 import esser.marcelo.busoclock.model.schedules.Sunday
 import esser.marcelo.busoclock.model.schedules.Workingday
 
-data class SogalLineWithSchedules(
+data class LineWithSchedules(
 
     @Embedded var line: FavoriteLine? = null,
 

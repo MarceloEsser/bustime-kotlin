@@ -6,7 +6,7 @@ import androidx.room.Query
 import androidx.room.Transaction
 import esser.marcelo.busoclock.model.favorite.FavoriteItineraries
 import esser.marcelo.busoclock.model.favorite.FavoriteLine
-import esser.marcelo.busoclock.model.favorite.SogalLineWithSchedules
+import esser.marcelo.busoclock.model.favorite.LineWithSchedules
 import esser.marcelo.busoclock.model.schedules.Saturday
 import esser.marcelo.busoclock.model.schedules.Sunday
 import esser.marcelo.busoclock.model.schedules.Workingday
@@ -16,7 +16,7 @@ interface BusTimeDao {
 
     @Transaction
     @Query("SELECT * FROM FavoriteLine")
-    fun getAll(): List<SogalLineWithSchedules>
+    fun getAll(): List<LineWithSchedules>
 
     @Insert
     fun insertLine(lines: FavoriteLine): Long
