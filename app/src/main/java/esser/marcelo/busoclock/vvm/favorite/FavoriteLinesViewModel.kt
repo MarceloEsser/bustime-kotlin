@@ -10,9 +10,10 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class FavoriteLinesViewModel : ViewModel() {
+
     private lateinit var daoHelper: DaoHelper
 
-    private lateinit var mLines: MutableList<FavoriteLine>
+    private var mLines: MutableList<FavoriteLine> = mutableListOf()
 
     val favoriteLines: MutableLiveData<List<FavoriteLine>> = MutableLiveData()
 

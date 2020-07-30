@@ -61,16 +61,21 @@ class LineMenuDialog @SuppressLint("ValidFragment") constructor(
         favorite_image_button.setOnClickListener {
             if (isFavorite) {
                 favorite_image_button.setImageResource(R.drawable.ic_favorite)
-                this.isFavorite = false
-                saveLineHelper.saveSogalLine(onLineSaved = {
-                    //TODO: Dialog de linha salva com sucesso
-                }, onError = {
-                    //TODO: Dialog de erro ao salvar linha
-                })
+                if (!isFromVicasa) {
+                    saveLineHelper.saveSogalLine(onLineSaved = {
+                        //TODO: Dialog de linha salva com sucesso
+                    }, onError = {
+                        //TODO: Dialog de erro ao salvar linha
+                    })
+                } else {
+                    saveLineHelper.saveVicasaLineFrom {
+                        //TODO: Dialog de linha salva com sucesso
+                    }
+                }
             } else {
                 favorite_image_button.setImageResource(R.drawable.ic_favorite_border)
-                this.isFavorite = true
             }
+            this.isFavorite = !this.isFavorite
         }
 
     }

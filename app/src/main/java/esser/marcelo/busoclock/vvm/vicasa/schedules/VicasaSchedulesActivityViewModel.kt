@@ -25,9 +25,9 @@ class VicasaSchedulesActivityViewModel {
     var saturdaysList: MutableList<BaseSchedule> = ArrayList()
     var sundaysList: MutableList<BaseSchedule> = ArrayList()
 
-    var workingdaysElement: Element? = null
-    var saturdaysElement: Element? = null
-    var sundaysElement: Element? = null
+    private var workingdaysElement: Element? = null
+    private var saturdaysElement: Element? = null
+    private var sundaysElement: Element? = null
 
     private val vicasaService: VicasaService by lazy {
         VicasaService()

@@ -2,6 +2,7 @@ package esser.marcelo.busoclock.vvm.favorite
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View.VISIBLE
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import esser.marcelo.busoclock.R
@@ -21,13 +22,16 @@ class FavoriteLinesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lines)
 
+        viewModel.initializeDao(this@FavoriteLinesActivity)
+
+        viewModel.fillFavoriteLinesList()
+
         val linesListObserver = Observer<List<FavoriteLine>> { lines ->
             adapter = FavoriteLinesAdapter(lines, this@FavoriteLinesActivity)
+            lines_activity_rv_lines.visibility = VISIBLE
             lines_activity_rv_lines.adapter = adapter
         }
 
         viewModel.favoriteLines.observe(this, linesListObserver)
-
-        viewModel.fillFavoriteLinesList()
     }
 }

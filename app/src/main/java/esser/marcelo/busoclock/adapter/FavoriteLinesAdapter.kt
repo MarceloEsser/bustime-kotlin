@@ -10,8 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.model.favorite.FavoriteLine
 import kotlinx.android.synthetic.main.row_favorite_line.view.*
-import kotlinx.android.synthetic.main.row_favorites.view.tv_line_code
-import kotlinx.android.synthetic.main.row_favorites.view.tv_line_name
 
 class FavoriteLinesAdapter(val lines: List<FavoriteLine>, val context: Context) :
     RecyclerView.Adapter<FavoriteLinesAdapter.FavoriteLinesViewHolder>() {
@@ -48,8 +46,8 @@ class FavoriteLinesAdapter(val lines: List<FavoriteLine>, val context: Context) 
                 tvSogalCompany.visibility = VISIBLE
                 tvVicasaCompany.visibility = GONE
             } else {
-                tvSogalCompany.visibility = VISIBLE
-                tvVicasaCompany.visibility = GONE
+                tvSogalCompany.visibility = GONE
+                tvVicasaCompany.visibility = VISIBLE
             }
         }
     }

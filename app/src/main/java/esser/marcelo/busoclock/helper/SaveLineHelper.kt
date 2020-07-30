@@ -11,6 +11,7 @@ import esser.marcelo.busoclock.model.schedules.Sunday
 import esser.marcelo.busoclock.model.schedules.Workingday
 import esser.marcelo.busoclock.vvm.sogal.itineraries.SogalItinerariesViewModel
 import esser.marcelo.busoclock.vvm.sogal.schedules.SogalSchedulesActivityViewModel
+import esser.marcelo.busoclock.vvm.vicasa.schedules.VicasaSchedulesActivityViewModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -20,12 +21,20 @@ class SaveLineHelper(val saveLineDelegate: SaveLineDelegate, val context: Contex
 
     private lateinit var baseLine: FavoriteLine
 
+    private val dao: DaoHelper by lazy {
+        DaoHelper(this.context.applicationContext)
+    }
+
     private val sogalItinerariesViewModel: SogalItinerariesViewModel by lazy {
         SogalItinerariesViewModel()
     }
 
     private val sogalSchedulesViewModel: SogalSchedulesActivityViewModel by lazy {
         SogalSchedulesActivityViewModel()
+    }
+
+    private val vicasaSchedulesViewModel: VicasaSchedulesActivityViewModel by lazy {
+        VicasaSchedulesActivityViewModel()
     }
 
     fun saveSogalLine(onLineSaved: () -> Unit, onError: () -> Unit) {
@@ -51,18 +60,38 @@ class SaveLineHelper(val saveLineDelegate: SaveLineDelegate, val context: Contex
 
     private fun fillSogalWithSchedulesValues(onLineSaved: () -> Unit, onError: () -> Unit) {
         val workingdays: MutableList<Workingday> = mutableListOf()
-            for (workingday in sogalSchedulesViewModel.workingDays!!) {
-                workingdays.add(Workingday(hour = workingday.hour, abrev = workingday.abrev, apd = workingday.apd))
-            }
+
+        for (workingday in sogalSchedulesViewModel.workingDays!!) {
+            workingdays.add(
+                Workingday(
+                    hour = workingday.hour,
+                    abrev = workingday.abrev,
+                    apd = workingday.apd
+                )
+            )
+        }
+
         val saturdays: MutableList<Saturday> = mutableListOf()
-            for (workingday in sogalSchedulesViewModel.saturdays!!) {
-                saturdays.add(Saturday(hour = workingday.hour, abrev = workingday.abrev, apd = workingday.apd))
-            }
+        for (saturday in sogalSchedulesViewModel.saturdays!!) {
+            saturdays.add(
+                Saturday(
+                    hour = saturday.hour,
+                    abrev = saturday.abrev,
+                    apd = saturday.apd
+                )
+            )
+        }
 
         val sundays: MutableList<Sunday> = mutableListOf()
-            for (workingday in sogalSchedulesViewModel.saturdays!!) {
-                sundays.add(Sunday(hour = workingday.hour, abrev = workingday.abrev, apd = workingday.apd))
-            }
+        for (sunday in sogalSchedulesViewModel.sundays!!) {
+            sundays.add(
+                Sunday(
+                    hour = sunday.hour,
+                    abrev = sunday.abrev,
+                    apd = sunday.apd
+                )
+            )
+        }
 
         line = LineWithSchedules(
             baseLine,
@@ -70,7 +99,7 @@ class SaveLineHelper(val saveLineDelegate: SaveLineDelegate, val context: Contex
             saturdays,
             sundays
         )
-        val dao: DaoHelper = DaoHelper(this.context.applicationContext)
+
         GlobalScope.launch {
             dao.insert(line, onLineInserted = {
                 onLineSaved()
@@ -78,8 +107,65 @@ class SaveLineHelper(val saveLineDelegate: SaveLineDelegate, val context: Contex
         }
     }
 
-    fun saveVicasaLineFrom(lineCode: String) {
+    fun saveVicasaLineFrom(onLineSaved: () -> Unit) {
+        baseLine = FavoriteLine()
+        baseLine.isSogal = false
+        baseLine.name = LineDAO.lineName
+        baseLine.code = LineDAO.lineCode
 
+        vicasaSchedulesViewModel.loadSchedules(onSuccess = {
+            fillVicasalWithSchedulesValues(onLineSaved, {})
+        }, onError = {
+
+        })
     }
 
+    private fun fillVicasalWithSchedulesValues(onLineSaved: () -> Unit, onError: () -> Unit) {
+        val workingdays: MutableList<Workingday> = mutableListOf()
+
+        for (workingday in vicasaSchedulesViewModel.workingdaysList) {
+            workingdays.add(
+                Workingday(
+                    hour = workingday.hour,
+                    abrev = workingday.abrev,
+                    apd = workingday.apd
+                )
+            )
+        }
+
+        val saturdays: MutableList<Saturday> = mutableListOf()
+        for (saturday in vicasaSchedulesViewModel.saturdaysList) {
+            saturdays.add(
+                Saturday(
+                    hour = saturday.hour,
+                    abrev = saturday.abrev,
+                    apd = saturday.apd
+                )
+            )
+        }
+
+        val sundays: MutableList<Sunday> = mutableListOf()
+        for (sunday in vicasaSchedulesViewModel.sundaysList) {
+            sundays.add(
+                Sunday(
+                    hour = sunday.hour,
+                    abrev = sunday.abrev,
+                    apd = sunday.apd
+                )
+            )
+        }
+
+        line = LineWithSchedules(
+            baseLine,
+            workingdays,
+            saturdays,
+            sundays
+        )
+
+        GlobalScope.launch {
+            dao.insert(line, onLineInserted = {
+                onLineSaved()
+            })
+        }
+    }
 }
