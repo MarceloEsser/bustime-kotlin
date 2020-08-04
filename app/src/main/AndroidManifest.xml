@@ -15,9 +15,10 @@
             android:usesCleartextTraffic="true"
             tools:ignore="GoogleAppIndexingWarning"
             tools:targetApi="m">
-        <activity android:name=".vvm.favorite.FavoriteLinesActivity"></activity>
-        <activity android:name=".vvm.favorite.FavoriteAcitivity"></activity>
-        <activity android:name=".vvm.MainActivity"></activity>
+        <activity android:name=".vvm.favorite.schedules.FavoriteSchedulesAcitivty"></activity>
+        <activity android:name=".vvm.favorite.FavoriteLinesActivity" />
+        <activity android:name=".vvm.favorite.FavoriteAcitivity" />
+        <activity android:name=".vvm.MainActivity" />
         <activity
                 android:name=".vvm.vicasa.schedules.VicasaSchedulesActivity"
                 android:screenOrientation="portrait" />
