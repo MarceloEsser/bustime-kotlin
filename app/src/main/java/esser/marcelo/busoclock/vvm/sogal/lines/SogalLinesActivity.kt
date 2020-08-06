@@ -36,8 +36,6 @@ class SogalLinesActivity : BaseActivity(), GenericLinesAdapterDelegate {
 
         this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        activity_lines_imgbtn_filter.visibility = GONE
-
         listeners()
 
         linesObserver()

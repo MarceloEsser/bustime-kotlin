@@ -6,7 +6,7 @@ import androidx.room.Room
 import esser.marcelo.busoclock.model.favorite.LineWithSchedules
 
 class DaoHelper(context: Context) {
-    private val db = Room.databaseBuilder(
+    private val database = Room.databaseBuilder(
         context,
         AppDatabase::class.java, "bustime"
     ).build()
@@ -14,12 +14,20 @@ class DaoHelper(context: Context) {
     private var lineId: Long? = null
     private lateinit var line: LineWithSchedules
 
+    private val bustimeDao by lazy {
+        database.busTimeDao()
+    }
+
     fun getAll(): List<LineWithSchedules> {
-        return db.busTimeDao().getAll()
+        return bustimeDao.getAll()
     }
 
     fun getLineBy(id: Long): List<LineWithSchedules> {
-        return db.busTimeDao().getLineBy(id)
+        return bustimeDao.getLineBy(id)
+    }
+
+    fun deleteAll() {
+        return bustimeDao.deleteAll()
     }
 
     fun insert(
@@ -28,7 +36,7 @@ class DaoHelper(context: Context) {
     ) {
         this.line = line
 
-        lineId = db.busTimeDao().insertLine(line.line!!)
+        lineId = bustimeDao.insertLine(line.line!!)
 
         insertSchedules()
 
@@ -46,7 +54,7 @@ class DaoHelper(context: Context) {
             schedule.workindayKey = lineId
         }
 
-        db.busTimeDao().insertWorkingdays(line.workingdays!!)
+        bustimeDao.insertWorkingdays(line.workingdays!!)
     }
 
     private fun insertSaturday() {
@@ -54,7 +62,7 @@ class DaoHelper(context: Context) {
             schedule.saturdayKey = lineId
         }
 
-        db.busTimeDao().insertSaturdays(line.saturdays!!)
+        bustimeDao.insertSaturdays(line.saturdays!!)
     }
 
     private fun insertSunday() {
@@ -62,6 +70,6 @@ class DaoHelper(context: Context) {
             schedule.sundayKey = lineId
         }
 
-        db.busTimeDao().insertSundays(line.sundays!!)
+        bustimeDao.insertSundays(line.sundays!!)
     }
 }

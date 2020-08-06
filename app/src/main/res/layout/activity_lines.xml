@@ -32,8 +32,16 @@
         <ImageButton
                 android:id="@+id/lines_activity_img_btn_back"
                 style="@style/IBActionStyle"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+                android:id="@+id/lines_activity_img_btn_delete_all"
+                style="@style/IBActionStyle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -82,6 +90,7 @@
                 android:background="@drawable/background_ib_action"
                 android:contentDescription="@string/filter_description"
                 android:padding="15dp"
+                android:visibility="gone"
                 android:src="@drawable/ic_filter"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

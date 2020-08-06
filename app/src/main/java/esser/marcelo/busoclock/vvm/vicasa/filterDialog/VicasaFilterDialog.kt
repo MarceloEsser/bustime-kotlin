@@ -10,7 +10,7 @@ import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.interfaces.FilterDialogInteraction
 import esser.marcelo.busoclock.model.vicasa.Vicasa
 
-class VicasaFilterDialog : androidx.fragment.app.DialogFragment() {
+class VicasaFilterDialog : DialogFragment() {
 
     val viewModel: VicasaFilterDialogViewModel by lazy {
         VicasaFilterDialogViewModel()

@@ -36,6 +36,8 @@ class VicasaLinesActivity : BaseActivity(), FilterDialogInteraction,
         setContentView(R.layout.activity_lines)
         this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
 
+        activity_lines_imgbtn_filter.visibility = VISIBLE
+
         buildDialog()
 
         dialogDoFilter()
@@ -65,8 +67,10 @@ class VicasaLinesActivity : BaseActivity(), FilterDialogInteraction,
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 configureList(viewModel.resultsList.filter {
-                    it.name.toLowerCase().contains(activity_lines_et_search.text.toString().toLowerCase())
-                            || it.code.toLowerCase().contains(activity_lines_et_search.text.toString().toLowerCase())
+                    it.name.toLowerCase()
+                        .contains(activity_lines_et_search.text.toString().toLowerCase())
+                            || it.code.toLowerCase()
+                        .contains(activity_lines_et_search.text.toString().toLowerCase())
                 })
             }
         })

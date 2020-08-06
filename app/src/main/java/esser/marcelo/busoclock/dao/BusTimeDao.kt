@@ -1,9 +1,6 @@
 package esser.marcelo.busoclock.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Transaction
+import androidx.room.*
 import esser.marcelo.busoclock.model.favorite.FavoriteItineraries
 import esser.marcelo.busoclock.model.favorite.FavoriteLine
 import esser.marcelo.busoclock.model.favorite.LineWithSchedules
@@ -21,6 +18,9 @@ interface BusTimeDao {
     @Transaction
     @Query("SELECT * FROM FavoriteLine WHERE id in (:id)")
     fun getLineBy(id: Long): List<LineWithSchedules>
+
+    @Query("DELETE FROM FavoriteLine")
+    fun deleteAll()
 
     @Insert
     fun insertLine(lines: FavoriteLine): Long

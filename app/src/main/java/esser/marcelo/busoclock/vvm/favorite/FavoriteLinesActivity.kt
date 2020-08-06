@@ -7,6 +7,7 @@ import android.view.View
 import android.view.View.VISIBLE
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
+import androidx.room.Delete
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.adapter.FavoriteLinesAdapter
 import esser.marcelo.busoclock.adapter.GenericLinesAdapter
@@ -14,7 +15,9 @@ import esser.marcelo.busoclock.dao.LineDAO
 import esser.marcelo.busoclock.interfaces.IFavoriteLineAdapterDelegate
 import esser.marcelo.busoclock.model.favorite.FavoriteLine
 import esser.marcelo.busoclock.model.favorite.LineWithSchedules
+import esser.marcelo.busoclock.vvm.deleteDialog.DeleteDialog
 import esser.marcelo.busoclock.vvm.favorite.schedules.FavoriteSchedulesAcitivty
+import esser.marcelo.busoclock.vvm.lineDialog.LineMenuDialog
 import kotlinx.android.synthetic.main.activity_lines.*
 import kotlinx.android.synthetic.main.activity_schedules.*
 import kotlinx.android.synthetic.main.dialog_line_menu.*
@@ -24,6 +27,8 @@ class FavoriteLinesActivity : AppCompatActivity(), IFavoriteLineAdapterDelegate 
     private val viewModel: FavoriteLinesViewModel by viewModels()
     private lateinit var adapter: FavoriteLinesAdapter
 
+    lateinit var deleteDialog: DeleteDialog
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lines)
@@ -32,7 +37,10 @@ class FavoriteLinesActivity : AppCompatActivity(), IFavoriteLineAdapterDelegate 
 
         viewModel.fillFavoriteLinesList()
 
-        activity_lines_imgbtn_filter.visibility = View.GONE
+        lines_activity_img_btn_delete_all.setOnClickListener {
+            deleteDialog = DeleteDialog()
+            deleteDialog.show(supportFragmentManager, "teste")
+        }
 
         lines_activity_img_btn_back.setOnClickListener {
             onBackPressed()
