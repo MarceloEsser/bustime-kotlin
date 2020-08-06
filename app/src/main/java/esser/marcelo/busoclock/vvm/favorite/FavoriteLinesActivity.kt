@@ -3,6 +3,7 @@ package esser.marcelo.busoclock.vvm.favorite
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.view.View.VISIBLE
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
@@ -15,6 +16,7 @@ import esser.marcelo.busoclock.model.favorite.FavoriteLine
 import esser.marcelo.busoclock.model.favorite.LineWithSchedules
 import esser.marcelo.busoclock.vvm.favorite.schedules.FavoriteSchedulesAcitivty
 import kotlinx.android.synthetic.main.activity_lines.*
+import kotlinx.android.synthetic.main.activity_schedules.*
 import kotlinx.android.synthetic.main.dialog_line_menu.*
 
 class FavoriteLinesActivity : AppCompatActivity(), IFavoriteLineAdapterDelegate {
@@ -30,6 +32,12 @@ class FavoriteLinesActivity : AppCompatActivity(), IFavoriteLineAdapterDelegate 
 
         viewModel.fillFavoriteLinesList()
 
+        activity_lines_imgbtn_filter.visibility = View.GONE
+
+        lines_activity_img_btn_back.setOnClickListener {
+            onBackPressed()
+        }
+
         val linesListObserver = Observer<List<FavoriteLine>> { lines ->
             adapter = FavoriteLinesAdapter(lines, this@FavoriteLinesActivity, this)
             lines_activity_rv_lines.visibility = VISIBLE
@@ -42,6 +50,7 @@ class FavoriteLinesActivity : AppCompatActivity(), IFavoriteLineAdapterDelegate 
     override fun onLineClicked(line: FavoriteLine) {
         LineDAO.lineCode = line.code
         LineDAO.lineName = line.name
+        LineDAO.lineId = line.id
         startActivity(Intent(this@FavoriteLinesActivity, FavoriteSchedulesAcitivty::class.java))
     }
 }

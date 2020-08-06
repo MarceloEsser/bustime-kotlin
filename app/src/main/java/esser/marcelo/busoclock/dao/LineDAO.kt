@@ -5,6 +5,7 @@ import esser.marcelo.busoclock.model.schedules.BaseSchedule
 
 object LineDAO {
 
+    var lineId: Long? = 0
     var lineName: String = ""
     var lineCode: String = ""
     var lineWay: LineWay? = null

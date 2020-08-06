@@ -35,7 +35,7 @@
                 app:layout_constraintVertical_bias="0.3" />
 
             <TextView
-                android:id="@+id/tv_line_way"
+                android:id="@+id/shcedule_activity_tv_line_code"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"

@@ -18,6 +18,10 @@ class DaoHelper(context: Context) {
         return db.busTimeDao().getAll()
     }
 
+    fun getLineBy(id: Long): List<LineWithSchedules> {
+        return db.busTimeDao().getLineBy(id)
+    }
+
     fun insert(
         line: LineWithSchedules,
         onLineInserted: () -> Unit

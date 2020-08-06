@@ -18,6 +18,10 @@ interface BusTimeDao {
     @Query("SELECT * FROM FavoriteLine")
     fun getAll(): List<LineWithSchedules>
 
+    @Transaction
+    @Query("SELECT * FROM FavoriteLine WHERE id in (:id)")
+    fun getLineBy(id: Long): List<LineWithSchedules>
+
     @Insert
     fun insertLine(lines: FavoriteLine): Long
 

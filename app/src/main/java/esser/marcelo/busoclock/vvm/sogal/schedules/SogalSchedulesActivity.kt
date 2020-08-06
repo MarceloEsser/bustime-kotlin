@@ -10,9 +10,6 @@ import esser.marcelo.busoclock.model.schedules.BaseSchedule
 import esser.marcelo.busoclock.vvm.BaseActivity
 import esser.marcelo.busoclock.vvm.sogal.itineraries.SogalItinerariesActivity
 import kotlinx.android.synthetic.main.activity_schedules.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class SogalSchedulesActivity : BaseActivity() {
 
@@ -30,7 +27,7 @@ class SogalSchedulesActivity : BaseActivity() {
 
         shcedule_activity_tv_line_name.text = LineDAO.lineName
         LineDAO.lineWay?.let {
-            tv_line_way.text = it.description
+            shcedule_activity_tv_line_code.text = it.description
         }
 
     }

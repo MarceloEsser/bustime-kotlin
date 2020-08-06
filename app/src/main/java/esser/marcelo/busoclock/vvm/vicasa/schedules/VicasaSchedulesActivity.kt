@@ -33,7 +33,7 @@ class VicasaSchedulesActivity : BaseActivity() {
         listeners()
 
         LineDAO.lineWay?.let {
-            tv_line_way.text = it.description
+            shcedule_activity_tv_line_code.text = it.description
         }
 
     }
