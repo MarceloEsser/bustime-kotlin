@@ -14,6 +14,7 @@ import esser.marcelo.busoclock.vvm.sogal.schedules.SogalSchedulesActivityViewMod
 import esser.marcelo.busoclock.vvm.vicasa.schedules.VicasaSchedulesActivityViewModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import okhttp3.internal.wait
 
 class SaveLineHelper(val saveLineDelegate: SaveLineDelegate, val context: Context) {
 
@@ -42,6 +43,7 @@ class SaveLineHelper(val saveLineDelegate: SaveLineDelegate, val context: Contex
 
         baseLine.name = LineDAO.lineName
         baseLine.code = LineDAO.lineCode
+        baseLine.way = LineDAO.lineWay?.description ?: ""
 
         sogalSchedulesViewModel.loadSchedules(onSuccess = {
 
@@ -109,9 +111,12 @@ class SaveLineHelper(val saveLineDelegate: SaveLineDelegate, val context: Contex
 
     fun saveVicasaLineFrom(onLineSaved: () -> Unit) {
         baseLine = FavoriteLine()
+
         baseLine.isSogal = false
+
         baseLine.name = LineDAO.lineName
         baseLine.code = LineDAO.lineCode
+        baseLine.way = LineDAO.lineWay?.description ?: ""
 
         vicasaSchedulesViewModel.loadSchedules(onSuccess = {
             fillVicasalWithSchedulesValues(onLineSaved, {})
@@ -128,7 +133,7 @@ class SaveLineHelper(val saveLineDelegate: SaveLineDelegate, val context: Contex
                 Workingday(
                     hour = workingday.hour,
                     abrev = workingday.abrev,
-                    apd = workingday.apd
+                    apd = "N"
                 )
             )
         }
@@ -139,7 +144,7 @@ class SaveLineHelper(val saveLineDelegate: SaveLineDelegate, val context: Contex
                 Saturday(
                     hour = saturday.hour,
                     abrev = saturday.abrev,
-                    apd = saturday.apd
+                    apd = "N"
                 )
             )
         }
@@ -150,7 +155,7 @@ class SaveLineHelper(val saveLineDelegate: SaveLineDelegate, val context: Contex
                 Sunday(
                     hour = sunday.hour,
                     abrev = sunday.abrev,
-                    apd = sunday.apd
+                    apd = "N"
                 )
             )
         }

@@ -12,7 +12,11 @@ import esser.marcelo.busoclock.interfaces.IFavoriteLineAdapterDelegate
 import esser.marcelo.busoclock.model.favorite.FavoriteLine
 import kotlinx.android.synthetic.main.row_favorite_line.view.*
 
-class FavoriteLinesAdapter(val lines: List<FavoriteLine>, val context: Context, val delegate: IFavoriteLineAdapterDelegate) :
+class FavoriteLinesAdapter(
+    val lines: List<FavoriteLine>,
+    val context: Context,
+    val delegate: IFavoriteLineAdapterDelegate
+) :
     RecyclerView.Adapter<FavoriteLinesAdapter.FavoriteLinesViewHolder>() {
 
     class FavoriteLinesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -20,6 +24,7 @@ class FavoriteLinesAdapter(val lines: List<FavoriteLine>, val context: Context, 
         val tvLineCode = itemView.tv_line_code
         val tvSogalCompany = itemView.tv_line_sogal_company
         val tvVicasaCompany = itemView.tv_line_vicasa_company
+        val tvLineWay = itemView.tv_line_way
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteLinesViewHolder {
@@ -43,6 +48,7 @@ class FavoriteLinesAdapter(val lines: List<FavoriteLine>, val context: Context, 
         with(holder) {
             tvLineCode.text = line.code
             tvLineName.text = line.name
+            tvLineWay.text = line.way
             if (line.isSogal) {
                 tvSogalCompany.visibility = VISIBLE
                 tvVicasaCompany.visibility = GONE

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.View.VISIBLE
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.room.Delete
@@ -12,6 +13,7 @@ import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.adapter.FavoriteLinesAdapter
 import esser.marcelo.busoclock.adapter.GenericLinesAdapter
 import esser.marcelo.busoclock.dao.LineDAO
+import esser.marcelo.busoclock.interfaces.DeleteDelegate
 import esser.marcelo.busoclock.interfaces.IFavoriteLineAdapterDelegate
 import esser.marcelo.busoclock.model.favorite.FavoriteLine
 import esser.marcelo.busoclock.model.favorite.LineWithSchedules
@@ -22,7 +24,7 @@ import kotlinx.android.synthetic.main.activity_lines.*
 import kotlinx.android.synthetic.main.activity_schedules.*
 import kotlinx.android.synthetic.main.dialog_line_menu.*
 
-class FavoriteLinesActivity : AppCompatActivity(), IFavoriteLineAdapterDelegate {
+class FavoriteLinesActivity : AppCompatActivity(), IFavoriteLineAdapterDelegate, DeleteDelegate {
 
     private val viewModel: FavoriteLinesViewModel by viewModels()
     private lateinit var adapter: FavoriteLinesAdapter
@@ -37,8 +39,10 @@ class FavoriteLinesActivity : AppCompatActivity(), IFavoriteLineAdapterDelegate 
 
         viewModel.fillFavoriteLinesList()
 
+        lines_activity_img_btn_delete_all.visibility = VISIBLE
+
         lines_activity_img_btn_delete_all.setOnClickListener {
-            deleteDialog = DeleteDialog()
+            deleteDialog = DeleteDialog(this)
             deleteDialog.show(supportFragmentManager, "teste")
         }
 
@@ -59,6 +63,13 @@ class FavoriteLinesActivity : AppCompatActivity(), IFavoriteLineAdapterDelegate 
         LineDAO.lineCode = line.code
         LineDAO.lineName = line.name
         LineDAO.lineId = line.id
+
         startActivity(Intent(this@FavoriteLinesActivity, FavoriteSchedulesAcitivty::class.java))
+    }
+
+    override fun doDelete() {
+        viewModel.deleteAll()
+        Toast.makeText(this, R.string.lines_deleted, Toast.LENGTH_SHORT).show()
+        finish()
     }
 }

@@ -60,4 +60,5 @@
     <string name="delete_confirmation">Tu tem certeza de que deseja deletar TODAS as linhas?</string>
     <string name="yeah_sure">É... acho que sim!</string>
     <string name="nooo">Nãooo!</string>
+    <string name="lines_deleted">Linhas deletas!</string>
 </resources>
