@@ -20,7 +20,16 @@ interface BusTimeDao {
     fun getLineBy(id: Long): List<LineWithSchedules>
 
     @Query("DELETE FROM FavoriteLine")
-    fun deleteAll()
+    fun deleteLines()
+
+    @Query("DELETE FROM Workingday")
+    fun deleteWorkingdays()
+
+    @Query("DELETE FROM Saturday")
+    fun deleteSaturdays()
+
+    @Query("DELETE FROM Sunday")
+    fun deleteSundays()
 
     @Insert
     fun insertLine(lines: FavoriteLine): Long

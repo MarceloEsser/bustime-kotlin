@@ -18,7 +18,7 @@ class DaoHelper(context: Context) {
         database.busTimeDao()
     }
 
-    fun getAll(): List<LineWithSchedules> {
+    fun getAll(): List<LineWithSchedules> { 
         return bustimeDao.getAll()
     }
 
@@ -27,7 +27,10 @@ class DaoHelper(context: Context) {
     }
 
     fun deleteAll() {
-        return bustimeDao.deleteAll()
+        bustimeDao.deleteLines()
+        bustimeDao.deleteSaturdays()
+        bustimeDao.deleteWorkingdays()
+        bustimeDao.deleteSundays()
     }
 
     fun insert(
