@@ -1,10 +1,17 @@
 package esser.marcelo.busoclock.vvm.sogal.lines
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import esser.marcelo.busoclock.dao.DaoHelper
 import esser.marcelo.busoclock.dao.LineDAO
+import esser.marcelo.busoclock.helper.Constants
+import esser.marcelo.busoclock.model.LineWay
+import esser.marcelo.busoclock.model.favorite.LineWithSchedules
 import esser.marcelo.busoclock.model.sogal.LinesDTO
 import esser.marcelo.busoclock.service.sogalServices.SogalService
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,6 +28,9 @@ class SogalLinesViewModel : ViewModel() {
     private lateinit var mLines: List<LinesDTO>
     val lines: MutableLiveData<List<LinesDTO>> = MutableLiveData()
 
+    val isFavorite: MutableLiveData<Boolean> = MutableLiveData()
+
+    private lateinit var daoHelper: DaoHelper
 
     /**
      * Function used to load the itineraries list
@@ -50,9 +60,22 @@ class SogalLinesViewModel : ViewModel() {
         })
     }
 
+    fun getWaysList(): ArrayList<LineWay> {
+        val waysList: ArrayList<LineWay> = ArrayList()
+        waysList.add(LineWay("Selecione um sentido", "none"))
+        waysList.add(LineWay("Centro Bairro - CB", Constants.CB_WAY))
+        waysList.add(LineWay("Bairro Centro - BC", Constants.BC_WAY))
+
+        return waysList
+    }
+
     fun saveData(lineCode: String, lineName: String) {
         LineDAO.lineName = lineName
         LineDAO.lineCode = lineCode
+    }
+
+    fun initializeDao(context: Context) {
+        daoHelper = DaoHelper(context)
     }
 
     fun filterBy(text: String) {
@@ -61,5 +84,14 @@ class SogalLinesViewModel : ViewModel() {
                     || it.code.toLowerCase(Locale.getDefault()).contains(text)
         }
         lines.value = filter ?: listOf()
+    }
+
+    fun findLine() {
+        GlobalScope.launch {
+            val lines: List<LineWithSchedules> =
+                daoHelper.findLineBy(LineDAO.lineName, LineDAO.lineCode, LineDAO.lineWay?.way ?: "")
+
+            isFavorite.postValue(lines.size == 1)
+        }
     }
 }

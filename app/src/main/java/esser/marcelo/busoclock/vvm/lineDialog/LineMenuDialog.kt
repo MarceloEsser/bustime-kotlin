@@ -3,37 +3,26 @@ package esser.marcelo.busoclock.vvm.lineDialog
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.AdapterView
-import android.widget.Toast
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.adapter.spinner.SpinnerDefaultAdapter
 import esser.marcelo.busoclock.dao.LineDAO
-import esser.marcelo.busoclock.helper.SaveLineHelper
-import esser.marcelo.busoclock.interfaces.SaveLineDelegate
-import esser.marcelo.busoclock.vvm.sogal.itineraries.SogalItinerariesActivity
-import esser.marcelo.busoclock.vvm.sogal.schedules.SogalSchedulesActivity
-import esser.marcelo.busoclock.vvm.vicasa.schedules.VicasaSchedulesActivity
+import esser.marcelo.busoclock.interfaces.LineMenuDelegate
+import esser.marcelo.busoclock.model.LineWay
 import kotlinx.android.synthetic.main.dialog_line_menu.*
 
 
 @SuppressLint("ValidFragment")
 class LineMenuDialog @SuppressLint("ValidFragment") constructor(
-    val isFromVicasa: Boolean,
-    val activityContext: Context,
-    var isFavorite: Boolean = false
-) : androidx.fragment.app.DialogFragment(), SaveLineDelegate {
-
-    private val viewModel: LineMenuDialogViewModel by lazy {
-        LineMenuDialogViewModel(isFromVicasa)
-    }
-
-    private val saveLineHelper: SaveLineHelper by lazy {
-        SaveLineHelper(this, activityContext)
-    }
+    private val activityContext: Context,
+    var isFavorite: Boolean = false,
+    val delegate: LineMenuDelegate,
+    val lineWays: List<LineWay>
+) : androidx.fragment.app.DialogFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,34 +39,30 @@ class LineMenuDialog @SuppressLint("ValidFragment") constructor(
         clickEvent()
         spinnerAdapterConfig()
 
-        validateWhatIsToDo()
+        if (lineWays.size == 3) {
+            btn_line_menu_dialog_itineraries.visibility = GONE
+        }
+
+        favoriteButtonEvent()
+
+    }
+
+    private fun favoriteButtonEvent() {
 
         validateImageButton()
 
         favorite_image_button.setOnClickListener {
-
             this.isFavorite = !this.isFavorite
 
             if (isFavorite) {
-                if (!isFromVicasa) {
-                    saveLineHelper.saveSogalLine(onLineSaved = {
-                        //TODO: Dialog de linha salva com sucesso
-                    }, onError = {
-                        //TODO: Dialog de erro ao salvar linha
-                    })
-                } else {
-                    saveLineHelper.saveVicasaLineFrom {
-                        //TODO: Dialog de linha salva com sucesso
-                    }
-                }
+                delegate.saveLine()
+            } else {
+                delegate.removeLine()
             }
-
-            validateImageButton()
         }
-
     }
 
-    private fun validateImageButton() {
+    fun validateImageButton() {
         if (isFavorite) {
             favorite_image_button.setImageResource(R.drawable.ic_favorite)
         } else {
@@ -86,7 +71,7 @@ class LineMenuDialog @SuppressLint("ValidFragment") constructor(
     }
 
     private fun spinnerAdapterConfig() {
-        val lineWayAdapter = SpinnerDefaultAdapter(activityContext, viewModel.getWaysList())
+        val lineWayAdapter = SpinnerDefaultAdapter(activityContext, lineWays)
 
         sp_menu_dialog_select_way.adapter = lineWayAdapter
 
@@ -102,19 +87,19 @@ class LineMenuDialog @SuppressLint("ValidFragment") constructor(
                 id: Long
             ) {
 
-                viewModel.selectedWay = viewModel.getWaysList()[position]
-                LineDAO.lineWay = viewModel.selectedWay
+                LineDAO.lineWay = lineWays[position]
+
+                if (lineWays[position].way != "none") {
+                    favorite_image_button.visibility = VISIBLE
+                    btn_line_menu_dialog_schedules.visibility = VISIBLE
+                    btn_line_menu_dialog_itineraries.visibility = VISIBLE
+                    delegate.findLine()
+                }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
 
             }
-        }
-    }
-
-    private fun validateWhatIsToDo() {
-        if (isFromVicasa) {
-            btn_line_menu_dialog_itineraries.visibility = GONE
         }
     }
 
@@ -125,28 +110,16 @@ class LineMenuDialog @SuppressLint("ValidFragment") constructor(
 
     private fun goToSchedules() {
         btn_line_menu_dialog_schedules.setOnClickListener {
-            if (viewModel.hasWay) {
-                if (isFromVicasa) {
-                    startActivity(Intent(context, VicasaSchedulesActivity::class.java))
-                } else {
-                    startActivity(Intent(context, SogalSchedulesActivity::class.java))
-                }
+            if (LineDAO.lineWay?.way != "none") {
+                delegate.goToSchedules()
                 dismiss()
-            } else {
-                Toast.makeText(
-                    context,
-                    "Por favor selecione um sentido para a linha <3",
-                    Toast.LENGTH_SHORT
-                ).show()
             }
         }
     }
 
     private fun goToItineraries() {
-        btn_line_menu_dialog_itineraries.setOnClickListener {
-            startActivity(Intent(context, SogalItinerariesActivity::class.java))
-            dismiss()
-        }
+        delegate.goToItineraries()
+        dismiss()
     }
 
     private fun lineSetup() {
@@ -172,12 +145,5 @@ class LineMenuDialog @SuppressLint("ValidFragment") constructor(
             window?.attributes?.width = ViewGroup.LayoutParams.MATCH_PARENT
             window?.setGravity(Gravity.CENTER)
         }
-    }
-
-    override fun onError(message: String) {
-
-    }
-
-    override fun onSuccess() {
     }
 }

@@ -19,6 +19,10 @@ interface BusTimeDao {
     @Query("SELECT * FROM FavoriteLine WHERE id in (:id)")
     fun getLineBy(id: Long): List<LineWithSchedules>
 
+    @Transaction
+    @Query("SELECT * FROM FavoriteLine WHERE line_name in (:name) and line_code in (:code) and line_way in (:way)")
+    fun getLineBy(name: String, code: String, way: String): List<LineWithSchedules>
+
     @Query("DELETE FROM FavoriteLine")
     fun deleteLines()
 

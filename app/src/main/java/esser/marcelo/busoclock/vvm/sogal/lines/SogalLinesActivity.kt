@@ -13,6 +13,7 @@ import esser.marcelo.busoclock.adapter.GenericLinesAdapter
 import esser.marcelo.busoclock.extensions.hideKeyboard
 import esser.marcelo.busoclock.helper.Constants.CB_WAY
 import esser.marcelo.busoclock.interfaces.GenericLinesAdapterDelegate
+import esser.marcelo.busoclock.interfaces.LineMenuDelegate
 import esser.marcelo.busoclock.model.BaseLine
 import esser.marcelo.busoclock.model.sogal.LinesDTO
 import esser.marcelo.busoclock.vvm.BaseActivity
@@ -20,7 +21,7 @@ import esser.marcelo.busoclock.vvm.lineDialog.LineMenuDialog
 import kotlinx.android.synthetic.main.activity_lines.*
 
 
-class SogalLinesActivity : BaseActivity(), GenericLinesAdapterDelegate {
+class SogalLinesActivity : BaseActivity(), GenericLinesAdapterDelegate, LineMenuDelegate {
 
     private val viewModel: SogalLinesViewModel by viewModels()
 
@@ -36,9 +37,22 @@ class SogalLinesActivity : BaseActivity(), GenericLinesAdapterDelegate {
 
         this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
+        viewModel.initializeDao(this)
+
         listeners()
 
         linesObserver()
+
+        isFavoriteObserver()
+    }
+
+    private fun isFavoriteObserver() {
+        val isFavoriteObserver = Observer<Boolean> {
+            lineMenuDialog.isFavorite = it
+            lineMenuDialog.validateImageButton()
+        }
+
+        viewModel.isFavorite.observe(this, isFavoriteObserver)
     }
 
     private fun linesObserver() {
@@ -154,8 +168,34 @@ class SogalLinesActivity : BaseActivity(), GenericLinesAdapterDelegate {
     }
 
     private fun showDialog() {
-        lineMenuDialog = LineMenuDialog(false, this)
+        lineMenuDialog = LineMenuDialog(
+            activityContext = this@SogalLinesActivity,
+            isFavorite = viewModel.isFavorite.value ?: false,
+            delegate = this,
+            lineWays = viewModel.getWaysList()
+        )
+
         lineMenuDialog.show(supportFragmentManager, "lineMenuDialog")
+    }
+
+    override fun goToSchedules() {
+
+    }
+
+    override fun findLine() {
+        viewModel.findLine()
+    }
+
+    override fun saveLine() {
+
+    }
+
+    override fun removeLine() {
+
+    }
+
+    override fun goToItineraries() {
+
     }
 
 }

@@ -1,27 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:paddingBottom="20dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_height="wrap_content">
+        android:paddingBottom="20dp">
 
     <ImageButton
             android:id="@+id/favorite_image_button"
             style="@style/FavoriteButtonStyle"
             android:contentDescription="@string/favorite_image_button"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/tv_line_menu_dialog_line_code"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tv_line_menu_dialog_line_name" />
+            app:layout_constraintTop_toTopOf="@+id/tv_line_menu_dialog_line_name"
+            tools:visibility="visible" />
 
     <TextView
             android:id="@+id/tv_line_menu_dialog_line_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginEnd="10dp"
             android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
             android:ellipsize="end"
             android:fontFamily="@font/ubuntu_medium"
             android:maxLines="2"
@@ -57,9 +59,9 @@
             android:id="@+id/tv_menu_dialog_select_way"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/ubuntu_medium"
             android:text="@string/line_way"
-            android:layout_marginTop="20dp"
             android:textColor="@color/grey900"
             app:layout_constraintStart_toStartOf="@+id/tv_line_menu_dialog_line_code"
             app:layout_constraintTop_toBottomOf="@+id/view" />
@@ -70,51 +72,61 @@
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_marginTop="5dp"
+            android:layout_marginBottom="15dp"
             android:spinnerMode="dropdown"
+            app:layout_constraintBottom_toTopOf="@+id/btn_line_menu_dialog_schedules"
             app:layout_constraintEnd_toEndOf="@+id/btn_line_menu_dialog_schedules"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/btn_line_menu_dialog_schedules"
             app:layout_constraintTop_toBottomOf="@+id/tv_menu_dialog_select_way" />
 
     <ImageView
-            app:layout_constraintBottom_toBottomOf="@+id/sp_menu_dialog_select_way"
-            app:layout_constraintTop_toTopOf="@+id/sp_menu_dialog_select_way"
-            app:layout_constraintEnd_toEndOf="@id/sp_menu_dialog_select_way"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:src="@drawable/ic_arrow_drop_down"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            app:layout_constraintBottom_toBottomOf="@+id/sp_menu_dialog_select_way"
+            app:layout_constraintEnd_toEndOf="@id/sp_menu_dialog_select_way"
+            app:layout_constraintTop_toTopOf="@+id/sp_menu_dialog_select_way" />
 
     <Button
+            android:id="@+id/btn_line_menu_dialog_schedules"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
+            android:background="@drawable/background_white_ripple_grey"
+            android:fontFamily="@font/ubuntu_medium"
             android:text="@string/schedules"
             android:textAllCaps="false"
-            android:background="@drawable/background_white_ripple_grey"
-            android:id="@+id/btn_line_menu_dialog_schedules"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             android:textSize="14sp"
-            android:fontFamily="@font/ubuntu_medium"
-            app:layout_constraintTop_toBottomOf="@id/sp_menu_dialog_select_way"
-            app:layout_constraintBottom_toTopOf="@id/btn_line_menu_dialog_itineraries"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"/>
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/btn_line_menu_dialog_itineraries"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sp_menu_dialog_select_way"
+            tools:visibility="visible" />
 
     <Button
             android:id="@+id/btn_line_menu_dialog_itineraries"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/background_white_ripple_grey"
+            android:fontFamily="@font/ubuntu_medium"
             android:text="@string/itineraries"
             android:textAllCaps="false"
             android:textSize="14sp"
-            android:fontFamily="@font/ubuntu_medium"
-            android:background="@drawable/background_white_ripple_grey"
-            android:layout_margin="20dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            tools:visibility="visible" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

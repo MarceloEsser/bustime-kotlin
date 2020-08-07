@@ -1,28 +1,21 @@
 package esser.marcelo.busoclock.vvm.favorite
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.view.View.VISIBLE
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.room.Delete
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.adapter.FavoriteLinesAdapter
-import esser.marcelo.busoclock.adapter.GenericLinesAdapter
 import esser.marcelo.busoclock.dao.LineDAO
 import esser.marcelo.busoclock.interfaces.DeleteDelegate
 import esser.marcelo.busoclock.interfaces.IFavoriteLineAdapterDelegate
 import esser.marcelo.busoclock.model.favorite.FavoriteLine
-import esser.marcelo.busoclock.model.favorite.LineWithSchedules
 import esser.marcelo.busoclock.vvm.deleteDialog.DeleteDialog
 import esser.marcelo.busoclock.vvm.favorite.schedules.FavoriteSchedulesAcitivty
-import esser.marcelo.busoclock.vvm.lineDialog.LineMenuDialog
 import kotlinx.android.synthetic.main.activity_lines.*
-import kotlinx.android.synthetic.main.activity_schedules.*
-import kotlinx.android.synthetic.main.dialog_line_menu.*
 
 class FavoriteLinesActivity : AppCompatActivity(), IFavoriteLineAdapterDelegate, DeleteDelegate {
 

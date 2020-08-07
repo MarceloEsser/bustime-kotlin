@@ -18,12 +18,16 @@ class DaoHelper(context: Context) {
         database.busTimeDao()
     }
 
-    fun getAll(): List<LineWithSchedules> { 
+    fun getAll(): List<LineWithSchedules> {
         return bustimeDao.getAll()
     }
 
     fun getLineBy(id: Long): List<LineWithSchedules> {
         return bustimeDao.getLineBy(id)
+    }
+
+    fun findLineBy(name: String, code: String, way: String): List<LineWithSchedules> {
+        return bustimeDao.getLineBy(name, code, way)
     }
 
     fun deleteAll() {

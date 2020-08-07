@@ -7,20 +7,21 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.WindowManager
-import kotlinx.android.synthetic.main.activity_lines.*
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.adapter.GenericLinesAdapter
 import esser.marcelo.busoclock.extensions.hideKeyboard
 import esser.marcelo.busoclock.interfaces.FilterDialogInteraction
 import esser.marcelo.busoclock.interfaces.GenericLinesAdapterDelegate
+import esser.marcelo.busoclock.interfaces.LineMenuDelegate
 import esser.marcelo.busoclock.model.BaseLine
 import esser.marcelo.busoclock.model.vicasa.Vicasa
 import esser.marcelo.busoclock.vvm.BaseActivity
 import esser.marcelo.busoclock.vvm.lineDialog.LineMenuDialog
 import esser.marcelo.busoclock.vvm.vicasa.filterDialog.VicasaFilterDialog
+import kotlinx.android.synthetic.main.activity_lines.*
 
 class VicasaLinesActivity : BaseActivity(), FilterDialogInteraction,
-    GenericLinesAdapterDelegate {
+    GenericLinesAdapterDelegate, LineMenuDelegate {
 
     private val viewModel: VicasaLinesActivityViewModel by lazy {
         VicasaLinesActivityViewModel()
@@ -97,8 +98,11 @@ class VicasaLinesActivity : BaseActivity(), FilterDialogInteraction,
 
     override fun onItemClickLitener(line: BaseLine) {
         viewModel.saveLineData(line.code, line.name)
-
-        menuDialog = LineMenuDialog(true, this@VicasaLinesActivity)
+        menuDialog = LineMenuDialog(
+            this@VicasaLinesActivity,
+            delegate = this,
+            lineWays = viewModel.getWaysList()
+        )
         menuDialog.show(supportFragmentManager, "menuDialog")
     }
 
@@ -149,4 +153,21 @@ class VicasaLinesActivity : BaseActivity(), FilterDialogInteraction,
                 errorConfig()
             })
     }
+
+    override fun saveLine() {
+
+    }
+
+    override fun removeLine() {
+
+    }
+
+    override fun goToItineraries() {
+
+    }
+
+    override fun findLine() {
+
+    }
+
 }

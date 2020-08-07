@@ -1,7 +1,9 @@
 package esser.marcelo.busoclock.vvm.vicasa.lines
 
 import esser.marcelo.busoclock.dao.LineDAO
+import esser.marcelo.busoclock.helper.Constants
 import esser.marcelo.busoclock.helper.Constants.CB_WAY
+import esser.marcelo.busoclock.model.LineWay
 import esser.marcelo.busoclock.model.vicasa.Vicasa
 import esser.marcelo.busoclock.service.vicasaServices.VicasaService
 import okhttp3.ResponseBody
@@ -41,6 +43,17 @@ class VicasaLinesActivityViewModel {
                 }
 
             })
+    }
+
+    fun getWaysList(): ArrayList<LineWay> {
+        val waysList: ArrayList<LineWay> = ArrayList()
+        waysList.add(LineWay("Selecione um sentido", "none"))
+        waysList.add(LineWay("Centro Bairro - CB", CB_WAY))
+        waysList.add(LineWay("Bairro Centro - BC", Constants.BC_WAY))
+        waysList.add(LineWay("Centro Circular - CC", Constants.CC_WAY))
+        waysList.add(LineWay("Bairro Circular - BB", Constants.BB_WAY))
+
+        return waysList
     }
 
     private fun findVicasaObjects(
