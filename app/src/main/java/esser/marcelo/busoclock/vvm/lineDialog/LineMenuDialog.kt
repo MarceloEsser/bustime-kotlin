@@ -52,15 +52,13 @@ class LineMenuDialog @SuppressLint("ValidFragment") constructor(
 
         validateWhatIsToDo()
 
-        if (isFavorite) {
-            favorite_image_button.setImageResource(R.drawable.ic_favorite)
-        } else {
-            favorite_image_button.setImageResource(R.drawable.ic_favorite_border)
-        }
+        validateImageButton()
 
         favorite_image_button.setOnClickListener {
+
+            this.isFavorite = !this.isFavorite
+
             if (isFavorite) {
-                favorite_image_button.setImageResource(R.drawable.ic_favorite)
                 if (!isFromVicasa) {
                     saveLineHelper.saveSogalLine(onLineSaved = {
                         //TODO: Dialog de linha salva com sucesso
@@ -72,12 +70,19 @@ class LineMenuDialog @SuppressLint("ValidFragment") constructor(
                         //TODO: Dialog de linha salva com sucesso
                     }
                 }
-            } else {
-                favorite_image_button.setImageResource(R.drawable.ic_favorite_border)
             }
-            this.isFavorite = !this.isFavorite
+
+            validateImageButton()
         }
 
+    }
+
+    private fun validateImageButton() {
+        if (isFavorite) {
+            favorite_image_button.setImageResource(R.drawable.ic_favorite)
+        } else {
+            favorite_image_button.setImageResource(R.drawable.ic_favorite_border)
+        }
     }
 
     private fun spinnerAdapterConfig() {
