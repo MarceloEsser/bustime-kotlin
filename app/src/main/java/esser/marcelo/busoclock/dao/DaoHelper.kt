@@ -31,10 +31,7 @@ class DaoHelper(context: Context) {
     }
 
     fun deleteAll() {
-        bustimeDao.deleteLines()
-        bustimeDao.deleteSaturdays()
-        bustimeDao.deleteWorkingdays()
-        bustimeDao.deleteSundays()
+        bustimeDao.clearDatabase()
     }
 
     fun insert(

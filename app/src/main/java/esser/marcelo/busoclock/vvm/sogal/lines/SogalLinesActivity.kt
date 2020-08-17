@@ -25,7 +25,7 @@ class SogalLinesActivity : BaseActivity(), GenericLinesAdapterDelegate, LineMenu
 
     private val viewModel: SogalLinesViewModel by viewModels()
 
-    private lateinit var lineMenuDialog: LineMenuDialog
+    lateinit var lineMenuDialog: LineMenuDialog
 
     private lateinit var adapter: GenericLinesAdapter
 

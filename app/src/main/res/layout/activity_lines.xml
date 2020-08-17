@@ -41,6 +41,7 @@
                 android:id="@+id/lines_activity_img_btn_delete_all"
                 style="@style/DeleteActionStyle"
                 android:visibility="gone"
+                tools:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

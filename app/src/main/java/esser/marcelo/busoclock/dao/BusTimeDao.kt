@@ -35,6 +35,9 @@ interface BusTimeDao {
     @Query("DELETE FROM Sunday")
     fun deleteSundays()
 
+    @Query("DELETE FROM FavoriteLine")
+    fun clearDatabase()
+
     @Insert
     fun insertLine(lines: FavoriteLine): Long
 

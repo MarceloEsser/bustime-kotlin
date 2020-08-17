@@ -8,7 +8,6 @@ import android.view.*
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.AdapterView
-import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.adapter.spinner.SpinnerDefaultAdapter
