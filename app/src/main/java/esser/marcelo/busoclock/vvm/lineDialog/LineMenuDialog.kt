@@ -8,6 +8,8 @@ import android.view.*
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.AdapterView
+import android.widget.Toast
+import androidx.fragment.app.DialogFragment
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.adapter.spinner.SpinnerDefaultAdapter
 import esser.marcelo.busoclock.dao.LineDAO
@@ -22,7 +24,7 @@ class LineMenuDialog @SuppressLint("ValidFragment") constructor(
     var isFavorite: Boolean = false,
     val delegate: LineMenuDelegate,
     val lineWays: List<LineWay>
-) : androidx.fragment.app.DialogFragment() {
+) : DialogFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -139,9 +141,9 @@ class LineMenuDialog @SuppressLint("ValidFragment") constructor(
         return onCreateDialog
     }
 
-    fun setupDialog(dialog: Dialog?) {
+    private fun setupDialog(dialog: Dialog?) {
         dialog?.run {
-            window?.attributes?.height = ViewGroup.LayoutParams.WRAP_CONTENT
+            window?.attributes?.height = ViewGroup.LayoutParams.MATCH_PARENT
             window?.attributes?.width = ViewGroup.LayoutParams.MATCH_PARENT
             window?.setGravity(Gravity.CENTER)
         }
