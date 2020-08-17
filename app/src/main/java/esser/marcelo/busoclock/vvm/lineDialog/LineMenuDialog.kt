@@ -1,6 +1,5 @@
 package esser.marcelo.busoclock.vvm.lineDialog
 
-import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
@@ -16,10 +15,7 @@ import esser.marcelo.busoclock.interfaces.LineMenuDelegate
 import esser.marcelo.busoclock.model.LineWay
 import kotlinx.android.synthetic.main.dialog_line_menu.*
 
-
-@SuppressLint("ValidFragment")
-class LineMenuDialog @SuppressLint("ValidFragment") constructor(
-    private val activityContext: Context,
+class LineMenuDialog(
     var isFavorite: Boolean = false,
     val delegate: LineMenuDelegate,
     val lineWays: List<LineWay>
@@ -72,7 +68,7 @@ class LineMenuDialog @SuppressLint("ValidFragment") constructor(
     }
 
     private fun spinnerAdapterConfig() {
-        val lineWayAdapter = SpinnerDefaultAdapter(activityContext, lineWays)
+        val lineWayAdapter = SpinnerDefaultAdapter(this.activity!!, lineWays)
 
         sp_menu_dialog_select_way.adapter = lineWayAdapter
 
@@ -119,8 +115,10 @@ class LineMenuDialog @SuppressLint("ValidFragment") constructor(
     }
 
     private fun goToItineraries() {
-        delegate.goToItineraries()
-        dismiss()
+        btn_line_menu_dialog_itineraries.setOnClickListener {
+            delegate.goToItineraries()
+            dismiss()
+        }
     }
 
     private fun lineSetup() {
@@ -142,7 +140,7 @@ class LineMenuDialog @SuppressLint("ValidFragment") constructor(
 
     private fun setupDialog(dialog: Dialog?) {
         dialog?.run {
-            window?.attributes?.height = ViewGroup.LayoutParams.MATCH_PARENT
+            window?.attributes?.height = ViewGroup.LayoutParams.WRAP_CONTENT
             window?.attributes?.width = ViewGroup.LayoutParams.MATCH_PARENT
             window?.setGravity(Gravity.CENTER)
         }

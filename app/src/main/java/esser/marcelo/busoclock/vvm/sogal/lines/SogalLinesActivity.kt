@@ -1,6 +1,7 @@
 package esser.marcelo.busoclock.vvm.sogal.lines
 
 import android.animation.ValueAnimator
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -18,6 +19,8 @@ import esser.marcelo.busoclock.model.BaseLine
 import esser.marcelo.busoclock.model.sogal.LinesDTO
 import esser.marcelo.busoclock.vvm.BaseActivity
 import esser.marcelo.busoclock.vvm.lineDialog.LineMenuDialog
+import esser.marcelo.busoclock.vvm.sogal.itineraries.SogalItinerariesActivity
+import esser.marcelo.busoclock.vvm.sogal.schedules.SogalSchedulesActivity
 import kotlinx.android.synthetic.main.activity_lines.*
 
 
@@ -169,17 +172,12 @@ class SogalLinesActivity : BaseActivity(), GenericLinesAdapterDelegate, LineMenu
 
     private fun showDialog() {
         lineMenuDialog = LineMenuDialog(
-            activityContext = this@SogalLinesActivity,
             isFavorite = viewModel.isFavorite.value ?: false,
             delegate = this,
             lineWays = viewModel.getWaysList()
         )
 
         lineMenuDialog.show(supportFragmentManager, "lineMenuDialog")
-    }
-
-    override fun goToSchedules() {
-
     }
 
     override fun findLine() {
@@ -191,11 +189,15 @@ class SogalLinesActivity : BaseActivity(), GenericLinesAdapterDelegate, LineMenu
     }
 
     override fun removeLine() {
+        
+    }
 
+    override fun goToSchedules() {
+        startActivity(Intent(this, SogalSchedulesActivity::class.java))
     }
 
     override fun goToItineraries() {
-
+        startActivity(Intent(this, SogalItinerariesActivity::class.java))
     }
 
 }

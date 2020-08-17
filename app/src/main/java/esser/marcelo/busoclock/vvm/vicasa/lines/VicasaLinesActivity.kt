@@ -99,7 +99,7 @@ class VicasaLinesActivity : BaseActivity(), FilterDialogInteraction,
     override fun onItemClickLitener(line: BaseLine) {
         viewModel.saveLineData(line.code, line.name)
         menuDialog = LineMenuDialog(
-            this@VicasaLinesActivity,
+            isFavorite = false,
             delegate = this,
             lineWays = viewModel.getWaysList()
         )
