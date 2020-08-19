@@ -61,4 +61,8 @@
     <string name="yeah_sure">É... acho que sim!</string>
     <string name="nooo">Não</string>
     <string name="lines_deleted">Linhas deletas!</string>
+    <string name="bruno_todeschini">Bruno Todeschini</string>
+    <string name="github_profile_todeschini">brunotodeschini</string>
+    <string name="gmail_profile_todeschini">"obruno1997@gmail.com "</string>
+    <string name="linkedin_profile_todeschini">Bruno Todeschini de Oliveira</string>
 </resources>

@@ -537,7 +537,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:layout_marginBottom="30dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@id/cv_home_activity_sogal"
                     app:layout_constraintStart_toStartOf="@id/lucas_wottrich"
                     app:layout_constraintTop_toBottomOf="@id/lucas_wottrich">
@@ -629,6 +628,115 @@
                                 android:layout_gravity="center"
                                 android:layout_marginStart="10dp"
                                 android:text="@string/linkedin_profile_wottrich" />
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                    android:id="@+id/bruno_todeschini"
+                    style="@style/AboutTitleStyle"
+                    android:layout_marginTop="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bruno_todeschini"
+                    app:layout_constraintStart_toStartOf="@id/secondCard"
+                    app:layout_constraintTop_toBottomOf="@+id/lucas_wottrich_card" />
+
+
+            <androidx.cardview.widget.CardView
+                    android:id="@+id/bruno_todeschini_card"
+                    style="@style/CardStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="30dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/cv_home_activity_sogal"
+                    app:layout_constraintStart_toStartOf="@id/bruno_todeschini"
+                    app:layout_constraintTop_toBottomOf="@id/bruno_todeschini">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    <LinearLayout
+                            android:id="@+id/llTodeschiniGitHub"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/background_transparent_ripple_grey"
+                            android:orientation="horizontal"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                                style="@style/RefferenceImageStyle"
+                                android:src="@drawable/ic_github_logo" />
+
+                        <TextView
+                                style="@style/HomeCardContentStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="10dp"
+                                android:text="@string/github_profile_todeschini" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                            android:id="@+id/llTodeschiniEmail"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:background="@drawable/background_transparent_ripple_grey"
+                            android:orientation="horizontal"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/llTodeschiniGitHub">
+
+                        <ImageView
+                                style="@style/RefferenceImageStyle"
+                                android:src="@drawable/ic_gmail_logo" />
+
+                        <TextView
+                                style="@style/HomeCardContentStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="10dp"
+                                android:text="@string/gmail_profile_todeschini" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:id="@+id/llTodeschiniLinkedIn"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/background_transparent_ripple_grey"
+                            android:orientation="horizontal"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/llTodeschiniEmail">
+
+                        <ImageView
+                                style="@style/RefferenceImageStyle"
+                                android:src="@drawable/ic_linkedin_logo" />
+
+                        <TextView
+                                style="@style/HomeCardContentStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="10dp"
+                                android:text="@string/linkedin_profile_todeschini" />
                     </LinearLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
