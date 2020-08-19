@@ -34,7 +34,6 @@ class HomeActivity : BaseActivity() {
 
         events()
 
-
         cardListeners()
 
         favoriteCardValidations()
@@ -81,9 +80,8 @@ class HomeActivity : BaseActivity() {
 
     private fun events() {
         //cardsEvents()
-
+        todeschiniEvents()
         esserEvents()
-
         wottrichEvents()
     }
 
@@ -140,12 +138,6 @@ class HomeActivity : BaseActivity() {
         }
     }
 
-    private fun openAUrl(url: String) {
-        val i = Intent(Intent.ACTION_VIEW)
-        i.data = Uri.parse(url)
-        startActivity(i)
-    }
-
     private fun wottrichEmailEvent() {
         llWottrichEmail.setOnClickListener {
 
@@ -156,5 +148,45 @@ class HomeActivity : BaseActivity() {
             )
             startActivity(Intent.createChooser(emailIntent, "Enviar email..."))
         }
+    }
+
+    private fun todeschiniEvents() {
+        todeschiniGitHubEvent()
+
+        todeschiniEmailEvent()
+
+        todeschiniLinkedInEvent()
+    }
+
+    private fun todeschiniGitHubEvent() {
+        llWottrichGitHub.setOnClickListener {
+            val url = "https://github.com/brunotodeschini"
+            openAUrl(url)
+        }
+    }
+
+    private fun todeschiniLinkedInEvent() {
+        llWottrichLinkedIn.setOnClickListener {
+            val url = "https://www.linkedin.com/in/bruno-todeschini/"
+            openAUrl(url)
+        }
+    }
+
+    private fun todeschiniEmailEvent() {
+        llWottrichEmail.setOnClickListener {
+
+            val emailIntent = Intent(
+                Intent.ACTION_SENDTO, fromParts(
+                    "mailto", "obruno1997@gmail.com", null
+                )
+            )
+            startActivity(Intent.createChooser(emailIntent, "Enviar email..."))
+        }
+    }
+
+    private fun openAUrl(url: String) {
+        val i = Intent(Intent.ACTION_VIEW)
+        i.data = Uri.parse(url)
+        startActivity(i)
     }
 }
