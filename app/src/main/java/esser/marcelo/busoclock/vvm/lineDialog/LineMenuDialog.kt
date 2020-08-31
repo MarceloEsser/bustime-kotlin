@@ -1,33 +1,23 @@
 package esser.marcelo.busoclock.vvm.lineDialog
 
-import android.app.Dialog
-import android.content.Context
 import android.os.Bundle
-import android.view.*
+import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.AdapterView
-import androidx.fragment.app.DialogFragment
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.adapter.spinner.SpinnerDefaultAdapter
 import esser.marcelo.busoclock.dao.LineDAO
 import esser.marcelo.busoclock.interfaces.LineMenuDelegate
 import esser.marcelo.busoclock.model.LineWay
+import esser.marcelo.busoclock.vvm.BaseDialog
 import kotlinx.android.synthetic.main.dialog_line_menu.*
 
 class LineMenuDialog(
     var isFavorite: Boolean = false,
     val delegate: LineMenuDelegate,
     val lineWays: List<LineWay>
-) : DialogFragment() {
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.dialog_line_menu, container, false)
-    }
+) : BaseDialog(layout = R.layout.dialog_line_menu) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -124,25 +114,5 @@ class LineMenuDialog(
     private fun lineSetup() {
         tv_line_menu_dialog_line_name.text = LineDAO.lineName
         tv_line_menu_dialog_line_code.text = LineDAO.lineCode
-    }
-
-    override fun onStart() {
-        super.onStart()
-        setupDialog(dialog)
-    }
-
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val onCreateDialog = super.onCreateDialog(savedInstanceState)
-        setupDialog(onCreateDialog)
-        onCreateDialog.window?.requestFeature(Window.FEATURE_NO_TITLE)
-        return onCreateDialog
-    }
-
-    private fun setupDialog(dialog: Dialog?) {
-        dialog?.run {
-            window?.attributes?.height = ViewGroup.LayoutParams.WRAP_CONTENT
-            window?.attributes?.width = ViewGroup.LayoutParams.MATCH_PARENT
-            window?.setGravity(Gravity.CENTER)
-        }
     }
 }

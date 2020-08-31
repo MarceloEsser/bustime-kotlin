@@ -1,26 +1,21 @@
 package esser.marcelo.busoclock.vvm.vicasa.filterDialog
 
-import android.app.Dialog
 import android.os.Bundle
-import androidx.fragment.app.DialogFragment
-import android.view.*
+import android.view.View
 import android.widget.ArrayAdapter
-import kotlinx.android.synthetic.main.dialog_vicasa_filter.*
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.interfaces.FilterDialogInteraction
 import esser.marcelo.busoclock.model.vicasa.Vicasa
+import esser.marcelo.busoclock.vvm.BaseDialog
+import kotlinx.android.synthetic.main.dialog_vicasa_filter.*
 
-class VicasaFilterDialog : DialogFragment() {
+class VicasaFilterDialog : BaseDialog(R.layout.dialog_vicasa_filter) {
 
     val viewModel: VicasaFilterDialogViewModel by lazy {
         VicasaFilterDialogViewModel()
     }
 
     lateinit var interaction: FilterDialogInteraction
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.dialog_vicasa_filter, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -38,26 +33,6 @@ class VicasaFilterDialog : DialogFragment() {
 
         filter_dialog_btn_confirm.setOnClickListener {
             doFilter()
-        }
-    }
-
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val onCreateDialog = super.onCreateDialog(savedInstanceState)
-        setupDialog(onCreateDialog)
-        onCreateDialog.window?.requestFeature(Window.FEATURE_NO_TITLE)
-        return onCreateDialog
-    }
-
-    override fun onStart() {
-        super.onStart()
-        setupDialog(dialog)
-    }
-
-    fun setupDialog(dialog: Dialog?) {
-        dialog?.run {
-            window?.attributes?.height = ViewGroup.LayoutParams.WRAP_CONTENT
-            window?.attributes?.width = ViewGroup.LayoutParams.MATCH_PARENT
-            window?.setGravity(Gravity.CENTER)
         }
     }
 

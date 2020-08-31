@@ -159,21 +159,21 @@ class HomeActivity : BaseActivity() {
     }
 
     private fun todeschiniGitHubEvent() {
-        llWottrichGitHub.setOnClickListener {
+        llTodeschiniGitHub.setOnClickListener {
             val url = "https://github.com/brunotodeschini"
             openAUrl(url)
         }
     }
 
     private fun todeschiniLinkedInEvent() {
-        llWottrichLinkedIn.setOnClickListener {
+        llTodeschiniLinkedIn.setOnClickListener {
             val url = "https://www.linkedin.com/in/bruno-todeschini/"
             openAUrl(url)
         }
     }
 
     private fun todeschiniEmailEvent() {
-        llWottrichEmail.setOnClickListener {
+        llTodeschiniEmail.setOnClickListener {
 
             val emailIntent = Intent(
                 Intent.ACTION_SENDTO, fromParts(
