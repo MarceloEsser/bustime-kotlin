@@ -5,12 +5,13 @@ import android.content.Context
 import androidx.room.Room
 import esser.marcelo.busoclock.model.favorite.LineWithSchedules
 
-class DaoHelper(context: Context) {
-    private val database = Room.databaseBuilder(
+class DaoHelper(
+    private val context: Context,
+    private val database: AppDatabase = Room.databaseBuilder(
         context,
         AppDatabase::class.java, "bustime"
     ).build()
-
+) {
     private var lineId: Long? = null
     private lateinit var line: LineWithSchedules
 

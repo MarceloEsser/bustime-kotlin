@@ -9,12 +9,11 @@ import esser.marcelo.busoclock.model.favorite.LineWithSchedules
 import esser.marcelo.busoclock.model.schedules.Saturday
 import esser.marcelo.busoclock.model.schedules.Sunday
 import esser.marcelo.busoclock.model.schedules.Workingday
-import esser.marcelo.busoclock.vvm.sogal.itineraries.SogalItinerariesViewModel
-import esser.marcelo.busoclock.vvm.sogal.schedules.SogalSchedulesActivityViewModel
-import esser.marcelo.busoclock.vvm.vicasa.schedules.VicasaSchedulesActivityViewModel
+import esser.marcelo.busoclock.viewModel.SogalItinerariesViewModel
+import esser.marcelo.busoclock.viewModel.SogalSchedulesActivityViewModel
+import esser.marcelo.busoclock.viewModel.VicasaSchedulesActivityViewModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import okhttp3.internal.wait
 
 class SaveLineHelper(val saveLineDelegate: SaveLineDelegate, val context: Context) {
 

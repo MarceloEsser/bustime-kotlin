@@ -5,7 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/grey100"
-        tools:context=".vvm.home.HomeActivity">
+        tools:context=".view.activity.HomeActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/home_toolbar"
@@ -51,7 +51,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:context=".vvm.home.HomeActivity">
+                tools:context=".view.activity.HomeActivity">
 
 
             <Button
