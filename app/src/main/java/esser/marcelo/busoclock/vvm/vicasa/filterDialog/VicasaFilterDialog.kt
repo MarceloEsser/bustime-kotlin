@@ -1,15 +1,13 @@
 package esser.marcelo.busoclock.vvm.vicasa.filterDialog
 
-import android.app.Dialog
 import android.os.Bundle
-import androidx.fragment.app.DialogFragment
-import android.view.*
+import android.view.View
 import android.widget.ArrayAdapter
-import kotlinx.android.synthetic.main.dialog_vicasa_filter.*
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.interfaces.FilterDialogInteraction
 import esser.marcelo.busoclock.model.vicasa.Vicasa
 import esser.marcelo.busoclock.vvm.BaseDialog
+import kotlinx.android.synthetic.main.dialog_vicasa_filter.*
 
 class VicasaFilterDialog : BaseDialog(R.layout.dialog_vicasa_filter) {
 

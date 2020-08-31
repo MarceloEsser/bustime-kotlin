@@ -1,13 +1,10 @@
 package esser.marcelo.busoclock.vvm.lineDialog
 
-import android.app.Dialog
-import android.content.Context
 import android.os.Bundle
-import android.view.*
+import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.AdapterView
-import androidx.fragment.app.DialogFragment
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.adapter.spinner.SpinnerDefaultAdapter
 import esser.marcelo.busoclock.dao.LineDAO
