@@ -26,6 +26,8 @@ class SogalSchedulesActivity : BaseActivity(R.layout.activity_schedules) {
     private lateinit var adapter: SchedulesAdapter
 
     override fun onInitValues() {
+        showLoader()
+
         listeners()
 
         shcedule_activity_tv_line_name.text = LineDAO.lineName
@@ -93,6 +95,7 @@ class SogalSchedulesActivity : BaseActivity(R.layout.activity_schedules) {
         schedules_activity_rv_schedules.visibility = VISIBLE
         schedules_activity_img_lottie_conection.visibility = GONE
         schedules_activity_tv_connection_error.visibility = GONE
+
         hideLoader()
     }
 

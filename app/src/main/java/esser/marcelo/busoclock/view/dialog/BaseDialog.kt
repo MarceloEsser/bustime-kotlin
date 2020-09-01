@@ -1,6 +1,9 @@
 package esser.marcelo.busoclock.view.dialog
 
 import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.DialogFragment
@@ -13,11 +16,7 @@ import androidx.fragment.app.DialogFragment
  * @since 31/09/20
  */
 
-abstract class BaseDialog(
-    private val layout: Int,
-    private val height: Int = ViewGroup.LayoutParams.WRAP_CONTENT,
-    private val width: Int = ViewGroup.LayoutParams.MATCH_PARENT
-) : DialogFragment() {
+abstract class BaseDialog(private val layout: Int) : DialogFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,18 +33,17 @@ abstract class BaseDialog(
         return onCreateDialog
     }
 
-
-    private fun setupDialog(dialog: Dialog?) {
-        dialog?.run {
-            window?.attributes?.height = height
-            window?.attributes?.width = width
-            window?.setGravity(Gravity.CENTER)
-        }
-    }
-
     override fun onStart() {
         super.onStart()
         setupDialog(dialog)
     }
 
+    private fun setupDialog(dialog: Dialog?) {
+        dialog?.window?.apply {
+            attributes?.height = ViewGroup.LayoutParams.MATCH_PARENT
+            attributes?.width = ViewGroup.LayoutParams.MATCH_PARENT
+            setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+            setGravity(Gravity.CENTER)
+        }
+    }
 }

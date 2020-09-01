@@ -26,6 +26,8 @@ class VicasaSchedulesActivity : BaseActivity(R.layout.activity_schedules) {
     private lateinit var adapter: SchedulesAdapter
 
     override fun onInitValues() {
+        showLoader()
+
         img_btn_add_itineraries.visibility = GONE
         shcedule_activity_tv_line_name.text = LineDAO.lineName
 

@@ -5,6 +5,7 @@ import android.os.PersistableBundle
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import esser.marcelo.busoclock.helper.ProgressDialogHelper
+import esser.marcelo.busoclock.view.dialog.LoaderDialog
 
 /**
  * @author Marcelo Esser
@@ -16,6 +17,10 @@ import esser.marcelo.busoclock.helper.ProgressDialogHelper
 
 abstract class BaseActivity(private val layoutRes: Int) : AppCompatActivity() {
 
+    private val loader: LoaderDialog = LoaderDialog()
+
+    private var isShowingLoader = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layoutRes)
@@ -26,27 +31,21 @@ abstract class BaseActivity(private val layoutRes: Int) : AppCompatActivity() {
 
     abstract fun onInitValues()
 
-    private val progressDialog: ProgressDialogHelper by lazy {
-        ProgressDialogHelper(this)
-    }
-
-    private var isShowingLoader = false
-    private var canCancelLoader = true
-
-    fun showLoader(isCancelable: Boolean = true) {
-        progressDialog.showLoader()
-        canCancelLoader = isCancelable
+    fun showLoader() {
+        loader.show(supportFragmentManager, "loader")
         isShowingLoader = true
     }
 
     fun hideLoader() {
-        progressDialog.hideLoader()
+        if (isShowingLoader) {
+            loader.dismiss()
+        }
         isShowingLoader = false
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
-        if (isShowingLoader && canCancelLoader) {
+        if (isShowingLoader) {
             hideLoader()
         }
     }

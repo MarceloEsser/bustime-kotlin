@@ -53,7 +53,6 @@
                 android:layout_height="match_parent"
                 tools:context=".view.activity.HomeActivity">
 
-
             <Button
                     android:id="@+id/cv_home_activity_vicasa"
                     style="@style/HomeCardStyleBlue"
@@ -381,7 +380,7 @@
                     style="@style/AboutTitleStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="25dp"
                     android:text="@string/about"
                     app:layout_constraintStart_toStartOf="@id/cv_home_activity_sogal"
                     app:layout_constraintTop_toBottomOf="@+id/divider" />
@@ -409,7 +408,7 @@
                     style="@style/AboutTitleStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="25dp"
                     android:text="@string/marcelo_esser"
                     app:layout_constraintStart_toStartOf="@id/firstCard"
                     app:layout_constraintTop_toBottomOf="@+id/firstCard" />
@@ -420,7 +419,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    android:layout_marginBottom="30dp"
+                    android:layout_marginBottom="40dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@id/cv_home_activity_sogal"
                     app:layout_constraintStart_toStartOf="@+id/contacts"
                     app:layout_constraintTop_toBottomOf="@+id/contacts">
@@ -519,7 +519,7 @@
             </androidx.cardview.widget.CardView>
 
 
-            <TextView
+           <!-- <TextView
                     android:id="@+id/lucas_wottrich"
                     style="@style/AboutTitleStyle"
                     android:layout_width="wrap_content"
@@ -741,6 +741,7 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
+            -->
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
