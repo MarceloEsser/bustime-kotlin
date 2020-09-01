@@ -5,8 +5,12 @@ import retrofit2.Response
 
 /**
  * @author Marcelo Esser
- * @since 31/09/20
+ * @author marcelo.v.esser@gmail.com
+ *
+ * @location Rio Grande do Sul, Brazil
+ * @since 31/08/20
  */
+
 sealed class ApiResult<T> {
     companion object {
 

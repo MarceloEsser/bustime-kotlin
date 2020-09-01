@@ -9,6 +9,14 @@ import esser.marcelo.busoclock.viewModel.SogalItinerariesViewModel
 import kotlinx.android.synthetic.main.activity_itineraries.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+/**
+ * @author Marcelo Esser
+ * @author marcelo.v.esser@gmail.com
+ *
+ * @location Rio Grande do Sul, Brazil
+ * @since 31/09/20
+ */
+
 class SogalItinerariesActivity : BaseActivity(R.layout.activity_itineraries) {
 
     private val viewModel: SogalItinerariesViewModel by viewModel()

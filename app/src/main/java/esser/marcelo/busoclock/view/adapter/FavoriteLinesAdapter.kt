@@ -13,6 +13,14 @@ import esser.marcelo.busoclock.interfaces.IFavoriteLineAdapterDelegate
 import esser.marcelo.busoclock.model.favorite.FavoriteLine
 import kotlinx.android.synthetic.main.row_favorite_line.view.*
 
+/**
+ * @author Marcelo Esser
+ * @author marcelo.v.esser@gmail.com
+ *
+ * @location Rio Grande do Sul, Brazil
+ * @since 31/09/20
+ */
+
 class FavoriteLinesAdapter(
     val lines: List<FavoriteLine>,
     val context: Context,

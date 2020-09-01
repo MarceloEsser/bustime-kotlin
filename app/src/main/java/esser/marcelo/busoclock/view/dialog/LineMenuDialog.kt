@@ -12,6 +12,14 @@ import esser.marcelo.busoclock.interfaces.LineMenuDelegate
 import esser.marcelo.busoclock.model.LineWay
 import kotlinx.android.synthetic.main.dialog_line_menu.*
 
+/**
+ * @author Marcelo Esser
+ * @author marcelo.v.esser@gmail.com
+ *
+ * @location Rio Grande do Sul, Brazil
+ * @since 31/09/20
+ */
+
 class LineMenuDialog(
     var isFavorite: Boolean = false,
     val delegate: LineMenuDelegate,

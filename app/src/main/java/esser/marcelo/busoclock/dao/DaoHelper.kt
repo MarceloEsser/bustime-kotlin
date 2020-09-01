@@ -5,6 +5,14 @@ import android.content.Context
 import androidx.room.Room
 import esser.marcelo.busoclock.model.favorite.LineWithSchedules
 
+/**
+ * @author Marcelo Esser
+ * @author marcelo.v.esser@gmail.com
+ *
+ * @location Rio Grande do Sul, Brazil
+ * @since 31/08/20
+ */
+
 class DaoHelper(
     private val context: Context
 ) {

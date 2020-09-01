@@ -5,6 +5,14 @@ import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 
+/**
+ * @author Marcelo Esser
+ * @author marcelo.v.esser@gmail.com
+ *
+ * @location Rio Grande do Sul, Brazil
+ * @since 31/08/20
+ */
+
 fun Context.showKeyboard (viewGroup: View) {
     val inputMethodManager =
         this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

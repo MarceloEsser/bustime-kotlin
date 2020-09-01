@@ -11,6 +11,13 @@ import esser.marcelo.busoclock.interfaces.GenericLinesAdapterDelegate
 import esser.marcelo.busoclock.model.BaseLine
 import kotlinx.android.synthetic.main.row_line.view.*
 
+/**
+ * @author Marcelo Esser
+ * @author marcelo.v.esser@gmail.com
+ *
+ * @location Rio Grande do Sul, Brazil
+ * @since 31/09/20
+ */
 
 class GenericLinesAdapter(
     val lines: List<BaseLine>,

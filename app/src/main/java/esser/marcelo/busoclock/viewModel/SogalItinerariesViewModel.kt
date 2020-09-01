@@ -18,6 +18,14 @@ import retrofit2.Callback
 import retrofit2.Response
 import kotlin.coroutines.CoroutineContext
 
+/**
+ * @author Marcelo Esser
+ * @author marcelo.v.esser@gmail.com
+ *
+ * @location Rio Grande do Sul, Brazil
+ * @since 31/09/20
+ */
+
 class SogalItinerariesViewModel(
     private val service: SogalServiceDelegate,
     private val dispatcher: CoroutineContext

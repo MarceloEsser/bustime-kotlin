@@ -7,6 +7,14 @@ import esser.marcelo.busoclock.dao.DaoHelper
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
+/**
+ * @author Marcelo Esser
+ * @author marcelo.v.esser@gmail.com
+ *
+ * @location Rio Grande do Sul, Brazil
+ * @since 31/09/20
+ */
+
 class HomeViewModel(private val daoHelper: DaoHelper): ViewModel() {
 
     var favSize: MutableLiveData<Int> = MutableLiveData()

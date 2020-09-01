@@ -1,16 +1,23 @@
 package esser.marcelo.busoclock.view.activity
 
-import android.os.Bundle
 import android.view.View.*
 import android.widget.Toast
 import esser.marcelo.busoclock.R
-import esser.marcelo.busoclock.view.adapter.SchedulesAdapter
 import esser.marcelo.busoclock.dao.LineDAO
 import esser.marcelo.busoclock.model.schedules.BaseSchedule
+import esser.marcelo.busoclock.view.adapter.SchedulesAdapter
 import esser.marcelo.busoclock.viewModel.VicasaSchedulesActivityViewModel
 import kotlinx.android.synthetic.main.activity_lines.*
 import kotlinx.android.synthetic.main.activity_schedules.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+
+/**
+ * @author Marcelo Esser
+ * @author marcelo.v.esser@gmail.com
+ *
+ * @location Rio Grande do Sul, Brazil
+ * @since 31/09/20
+ */
 
 class VicasaSchedulesActivity : BaseActivity(R.layout.activity_schedules) {
 

@@ -5,6 +5,14 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.DialogFragment
 
+/**
+ * @author Marcelo Esser
+ * @author marcelo.v.esser@gmail.com
+ *
+ * @location Rio Grande do Sul, Brazil
+ * @since 31/09/20
+ */
+
 abstract class BaseDialog(
     private val layout: Int,
     private val height: Int = ViewGroup.LayoutParams.WRAP_CONTENT,

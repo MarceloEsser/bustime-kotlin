@@ -9,6 +9,14 @@ import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.model.LineWay
 import kotlinx.android.synthetic.main.spinner_default_row.view.*
 
+/**
+ * @author Marcelo Esser
+ * @author marcelo.v.esser@gmail.com
+ *
+ * @location Rio Grande do Sul, Brazil
+ * @since 31/09/20
+ */
+
 class SpinnerDefaultAdapter(context: Context, val ways: List<LineWay>,  val resource: Int =  R.layout.spinner_default_row) :
     ArrayAdapter<LineWay>(context, resource, ways) {
 

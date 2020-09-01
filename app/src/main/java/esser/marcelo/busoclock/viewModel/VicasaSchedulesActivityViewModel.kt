@@ -19,6 +19,14 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+/**
+ * @author Marcelo Esser
+ * @author marcelo.v.esser@gmail.com
+ *
+ * @location Rio Grande do Sul, Brazil
+ * @since 31/09/20
+ */
+
 class VicasaSchedulesActivityViewModel {
 
     var workingdaysList: MutableList<BaseSchedule> = ArrayList()
@@ -29,9 +37,6 @@ class VicasaSchedulesActivityViewModel {
     private var saturdaysElement: Element? = null
     private var sundaysElement: Element? = null
 
-    private val vicasaService: VicasaService by lazy {
-        VicasaService()
-    }
 
     fun loadSchedules(
         onSuccess: (schedules: List<BaseSchedule>) -> Unit,

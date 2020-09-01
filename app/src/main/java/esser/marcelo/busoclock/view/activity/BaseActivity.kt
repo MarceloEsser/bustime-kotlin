@@ -6,6 +6,14 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import esser.marcelo.busoclock.helper.ProgressDialogHelper
 
+/**
+ * @author Marcelo Esser
+ * @author marcelo.v.esser@gmail.com
+ *
+ * @location Rio Grande do Sul, Brazil
+ * @since 31/09/20
+ */
+
 abstract class BaseActivity(private val layoutRes: Int) : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

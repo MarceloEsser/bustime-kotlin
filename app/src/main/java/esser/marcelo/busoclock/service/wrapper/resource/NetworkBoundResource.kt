@@ -6,10 +6,15 @@ import esser.marcelo.busoclock.service.wrapper.ApiResult
 import esser.marcelo.busoclock.service.wrapper.ApiSuccessResult
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.flow.FlowCollector
+
 /**
  * @author Marcelo Esser
- * @since 31/09/20
+ * @author marcelo.v.esser@gmail.com
+ *
+ * @location Rio Grande do Sul, Brazil
+ * @since 31/08/20
  */
+
 open class NetworkBoundResource<ResultType, RequestType>(
     private val collector: FlowCollector<Resource<ResultType>>,
     private val call: Deferred<ApiResult<RequestType>>,

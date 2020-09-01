@@ -19,6 +19,13 @@ import esser.marcelo.busoclock.viewModel.SogalLinesViewModel
 import kotlinx.android.synthetic.main.activity_lines.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+/**
+ * @author Marcelo Esser
+ * @author marcelo.v.esser@gmail.com
+ *
+ * @location Rio Grande do Sul, Brazil
+ * @since 31/09/20
+ */
 
 class SogalLinesActivity : BaseActivity(R.layout.activity_lines), GenericLinesAdapterDelegate,
     LineMenuDelegate {

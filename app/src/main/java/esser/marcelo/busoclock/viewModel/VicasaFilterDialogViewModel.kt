@@ -14,6 +14,14 @@ import esser.marcelo.busoclock.helper.Constants.TODOS
 import esser.marcelo.busoclock.helper.Constants.URBANA
 import esser.marcelo.busoclock.model.vicasa.Vicasa
 
+/**
+ * @author Marcelo Esser
+ * @author marcelo.v.esser@gmail.com
+ *
+ * @location Rio Grande do Sul, Brazil
+ * @since 31/09/20
+ */
+
 class VicasaFilterDialogViewModel {
 
     fun getCountryList(): List<Vicasa> {

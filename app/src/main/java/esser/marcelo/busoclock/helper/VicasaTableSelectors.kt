@@ -1,5 +1,13 @@
 package esser.marcelo.busoclock.helper
 
+/**
+ * @author Marcelo Esser
+ * @author marcelo.v.esser@gmail.com
+ *
+ * @location Rio Grande do Sul, Brazil
+ * @since 31/08/20
+ */
+
 object VicasaTableSelectors {
     val WORKINGDAYS_BB_SELECTOR: String =
         "body > table:nth-child(2) > tbody > tr > td > table.texto_linhas > tbody > tr:nth-child(5) > td:nth-child(1)"

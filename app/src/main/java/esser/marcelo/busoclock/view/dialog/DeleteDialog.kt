@@ -6,6 +6,14 @@ import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.interfaces.DeleteDelegate
 import kotlinx.android.synthetic.main.dialog_question_delete.*
 
+/**
+ * @author Marcelo Esser
+ * @author marcelo.v.esser@gmail.com
+ *
+ * @location Rio Grande do Sul, Brazil
+ * @since 31/09/20
+ */
+
 class DeleteDialog(
     val deleteDelegate: DeleteDelegate
 ) : BaseDialog(layout = R.layout.dialog_question_delete) {

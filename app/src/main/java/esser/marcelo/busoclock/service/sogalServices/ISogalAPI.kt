@@ -1,6 +1,5 @@
 package esser.marcelo.busoclock.service.sogalServices
 
-import esser.marcelo.busoclock.helper.Constants.BaseUrls.SOGAL_BASE_URL
 import esser.marcelo.busoclock.model.sogal.LinesDTO
 import esser.marcelo.busoclock.model.sogal.SogalResponse
 import esser.marcelo.busoclock.service.wrapper.ApiResult
@@ -11,8 +10,12 @@ import retrofit2.http.POST
 
 /**
  * @author Marcelo Esser
- * @since 19/02/19
+ * @author marcelo.v.esser@gmail.com
+ *
+ * @location Rio Grande do Sul, Brazil
+ * @since 31/08/20
  */
+
 interface ISogalAPI {
     @POST("http://sogal.com.br/wp-content/themes/MobidickTheme/linhas/searchLine.php")
     @FormUrlEncoded

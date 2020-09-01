@@ -12,6 +12,14 @@ import esser.marcelo.busoclock.viewModel.FavoriteSchedulesViewModel
 import kotlinx.android.synthetic.main.activity_schedules.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+/**
+ * @author Marcelo Esser
+ * @author marcelo.v.esser@gmail.com
+ *
+ * @location Rio Grande do Sul, Brazil
+ * @since 31/09/20
+ */
+
 class FavoriteSchedulesAcitivty : BaseActivity(R.layout.activity_schedules) {
 
     private val viewModel: FavoriteSchedulesViewModel by viewModel()

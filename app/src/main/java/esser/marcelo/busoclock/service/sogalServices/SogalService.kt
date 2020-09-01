@@ -9,7 +9,10 @@ import kotlinx.coroutines.flow.flow
 
 /**
  * @author Marcelo Esser
- * @since 19/02/19
+ * @author marcelo.v.esser@gmail.com
+ *
+ * @location Rio Grande do Sul, Brazil
+ * @since 31/08/20
  */
 
 interface SogalServiceDelegate {

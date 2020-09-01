@@ -9,6 +9,14 @@ import android.widget.TextView
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.model.sogal.ItinerariesDTO
 
+/**
+ * @author Marcelo Esser
+ * @author marcelo.v.esser@gmail.com
+ *
+ * @location Rio Grande do Sul, Brazil
+ * @since 31/09/20
+ */
+
 class ItinerariesAdapter(
     private val context: Context,
     private val itinerariesDTO: List<ItinerariesDTO>

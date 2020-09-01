@@ -8,8 +8,13 @@ import java.util.concurrent.TimeUnit
 
 /**
  * @author Marcelo Esser
- * @since 31/09/20
+ * @author marcelo.v.esser@gmail.com
+ *
+ * @location Rio Grande do Sul, Brazil
+ * @since 31/08/20
  */
+
+
 object NetworkHandler {
 
     private val logginInterceptor: HttpLoggingInterceptor by lazy {

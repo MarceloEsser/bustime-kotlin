@@ -12,8 +12,12 @@ import kotlinx.android.synthetic.main.row_schedule.view.*
 
 /**
  * @author Marcelo Esser
- * @since 12/03/19
+ * @author marcelo.v.esser@gmail.com
+ *
+ * @location Rio Grande do Sul, Brazil
+ * @since 31/09/20
  */
+
 class SchedulesAdapter(
     private val context: Context,
     private val schedules: List<BaseSchedule>

@@ -11,6 +11,14 @@ import esser.marcelo.busoclock.viewModel.HomeViewModel
 import kotlinx.android.synthetic.main.activity_home.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+/**
+ * @author Marcelo Esser
+ * @author marcelo.v.esser@gmail.com
+ *
+ * @location Rio Grande do Sul, Brazil
+ * @since 31/09/20
+ */
+
 class HomeActivity : BaseActivity(R.layout.activity_home) {
 
     private val activityContext by lazy {

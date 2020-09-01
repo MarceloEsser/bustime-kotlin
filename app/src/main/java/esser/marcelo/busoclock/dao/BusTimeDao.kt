@@ -8,6 +8,14 @@ import esser.marcelo.busoclock.model.schedules.Saturday
 import esser.marcelo.busoclock.model.schedules.Sunday
 import esser.marcelo.busoclock.model.schedules.Workingday
 
+/**
+ * @author Marcelo Esser
+ * @author marcelo.v.esser@gmail.com
+ *
+ * @location Rio Grande do Sul, Brazil
+ * @since 31/08/20
+ */
+
 @Dao
 interface BusTimeDao {
 

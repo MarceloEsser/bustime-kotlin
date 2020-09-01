@@ -20,6 +20,14 @@ import esser.marcelo.busoclock.view.dialog.VicasaFilterDialog
 import esser.marcelo.busoclock.viewModel.VicasaLinesActivityViewModel
 import kotlinx.android.synthetic.main.activity_lines.*
 
+/**
+ * @author Marcelo Esser
+ * @author marcelo.v.esser@gmail.com
+ *
+ * @location Rio Grande do Sul, Brazil
+ * @since 31/09/20
+ */
+
 class VicasaLinesActivity : BaseActivity(R.layout.activity_lines), FilterDialogInteraction,
     GenericLinesAdapterDelegate, LineMenuDelegate {
 

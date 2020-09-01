@@ -3,6 +3,14 @@ package esser.marcelo.busoclock.helper
 import android.content.Context
 import esser.marcelo.busoclock.interfaces.SaveLineDelegate
 
+/**
+ * @author Marcelo Esser
+ * @author marcelo.v.esser@gmail.com
+ *
+ * @location Rio Grande do Sul, Brazil
+ * @since 31/08/20
+ */
+
 class SaveLineHelper(val saveLineDelegate: SaveLineDelegate, val context: Context) {
 //
 //    private lateinit var line: LineWithSchedules

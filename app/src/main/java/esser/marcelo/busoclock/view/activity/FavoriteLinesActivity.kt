@@ -18,6 +18,14 @@ import esser.marcelo.busoclock.viewModel.FavoriteLinesViewModel
 import kotlinx.android.synthetic.main.activity_lines.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+/**
+ * @author Marcelo Esser
+ * @author marcelo.v.esser@gmail.com
+ *
+ * @location Rio Grande do Sul, Brazil
+ * @since 31/09/20
+ */
+
 class FavoriteLinesActivity : BaseActivity(R.layout.activity_lines), IFavoriteLineAdapterDelegate,
     DeleteDelegate {
 

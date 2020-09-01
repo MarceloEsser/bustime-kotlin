@@ -1,22 +1,31 @@
 package esser.marcelo.busoclock.viewModel
 
+import androidx.lifecycle.ViewModel
+import esser.marcelo.busoclock.dao.DaoHelper
 import esser.marcelo.busoclock.dao.LineDAO
 import esser.marcelo.busoclock.helper.Constants
 import esser.marcelo.busoclock.helper.Constants.CB_WAY
 import esser.marcelo.busoclock.model.LineWay
 import esser.marcelo.busoclock.model.vicasa.Vicasa
 import esser.marcelo.busoclock.service.vicasaServices.VicasaService
+import esser.marcelo.busoclock.service.vicasaServices.VicasaServiceDelegate
+import kotlinx.coroutines.CoroutineDispatcher
 import okhttp3.ResponseBody
 import org.jsoup.nodes.Entities.escape
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.coroutines.CoroutineContext
 
 /**
  * @author Marcelo Esser
  * @since 19/02/19
  */
-class VicasaLinesActivityViewModel {
+class VicasaLinesActivityViewModel(
+    private val service: VicasaServiceDelegate,
+    private val daoHelper: DaoHelper,
+    private val dispatcher: CoroutineContext,
+) : ViewModel() {
     //private val service = VicasaService().vicasaService()
     var resultsList: ArrayList<Vicasa> = ArrayList()
 

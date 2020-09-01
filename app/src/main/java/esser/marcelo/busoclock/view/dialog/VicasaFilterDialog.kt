@@ -9,6 +9,14 @@ import esser.marcelo.busoclock.model.vicasa.Vicasa
 import esser.marcelo.busoclock.viewModel.VicasaFilterDialogViewModel
 import kotlinx.android.synthetic.main.dialog_vicasa_filter.*
 
+/**
+ * @author Marcelo Esser
+ * @author marcelo.v.esser@gmail.com
+ *
+ * @location Rio Grande do Sul, Brazil
+ * @since 31/09/20
+ */
+
 class VicasaFilterDialog : BaseDialog(R.layout.dialog_vicasa_filter) {
 
     val viewModel: VicasaFilterDialogViewModel by lazy {

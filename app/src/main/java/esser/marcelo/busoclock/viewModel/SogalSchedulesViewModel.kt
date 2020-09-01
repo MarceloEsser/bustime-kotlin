@@ -15,8 +15,12 @@ import kotlin.coroutines.CoroutineContext
 
 /**
  * @author Marcelo Esser
- * @since 12/03/19
+ * @author marcelo.v.esser@gmail.com
+ *
+ * @location Rio Grande do Sul, Brazil
+ * @since 31/09/20
  */
+
 class SogalSchedulesViewModel(
     private val service: SogalServiceDelegate,
     private val dispatcher: CoroutineContext
