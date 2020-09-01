@@ -50,21 +50,6 @@ class VicasaLinesViewModel(
                         findVicasaObjects(resource.data)
                 }
         }
-
-//        service.postLoadVicasaLinesBy(escape(countryDestination), escape(countryOrigin), serviceType)
-//            .enqueue(object : Callback<ResponseBody> {
-//                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-//                    t.message?.let { onError(it) }
-//                }
-//
-//                override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-//
-//                    findVicasaObjects(response)
-//
-//                    onSuccess(resultsList)
-//                }
-//
-//            })
     }
 
     fun getWaysList(): ArrayList<LineWay> {
@@ -78,33 +63,56 @@ class VicasaLinesViewModel(
         return waysList
     }
 
-    private fun findVicasaObjects(
-        response: ResponseBody
-    ) {
+    private fun findVicasaObjects(response: ResponseBody) {
+
+        //Regex to find the vicasa line object on html body
+        val lineObjectRegex = "asp\\?(.*?)</a>"
+
+        //getting all the 'parts' what matches with the regex
+        val matchResults: Sequence<MatchResult> =
+            Regex(lineObjectRegex, RegexOption.MULTILINE).findAll(response.string())
+
+        groupMatchResults(matchResults)
+    }
+
+    private fun groupMatchResults(matchResults: Sequence<MatchResult>) {
         val resultsList: ArrayList<Vicasa> = ArrayList()
 
-        val matchResults: Sequence<MatchResult> =
-            Regex("asp\\?(.*?)</a>", RegexOption.MULTILINE).findAll(response.string())
-
+        //Creating a 'Vicasa' object from html body using the match result
         matchResults.groupBy {
-            val vicasaLineDescription = formatVicasaLineDescription(it)
-            val vicasaLineCode: String = formatVicasaLineCode(it)
+            val lineDescription: String = formatVicasaLineDescription(it)
+            val lineCode: String = formatVicasaLineCode(it)
 
-            resultsList.add(Vicasa(vicasaLineDescription, vicasaLineCode))
+            resultsList.add(Vicasa(lineDescription, lineCode))
         }
 
         _lines.postValue(resultsList)
     }
 
+    //Getting just the line id from html body
     fun formatVicasaLineCode(it: MatchResult): String {
-        var vicasaLineId = it.value.replace(Regex("""((.*?)LineId=)"""), "")
-        vicasaLineId = vicasaLineId.replace(Regex("""',.*"""), "")
+        //regex to find the line id on html body
+        val lineIdRegex = """((.*?)LineId=)"""
+        //regex to remove the 'trash' from id on html body
+        val lineIdTrashRegex = """',.*"""
+
+        var vicasaLineId = it.value.replace(Regex(lineIdRegex), "")
+        vicasaLineId = vicasaLineId.replace(Regex(lineIdTrashRegex), "")
+
         return vicasaLineId
     }
 
+    //Getting just the line description from html body
     private fun formatVicasaLineDescription(it: MatchResult): String {
-        var vicasaLineDescription = it.value.replace(Regex("""(.*?)">"""), "")
-        vicasaLineDescription = vicasaLineDescription.replace("</a>", "")
+        //regex to find the line description on html body
+        val lineDescriptionRegex = """(.*?)">"""
+
+        //regex to remove the 'trash' from description on html body
+        val lineDescriptionTrashRegex = "</a>"
+
+        var vicasaLineDescription = it.value.replace(Regex(lineDescriptionRegex), "")
+        vicasaLineDescription = vicasaLineDescription.replace(lineDescriptionTrashRegex, "")
+
         return vicasaLineDescription
     }
 

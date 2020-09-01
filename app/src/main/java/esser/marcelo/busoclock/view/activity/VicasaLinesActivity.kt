@@ -19,6 +19,7 @@ import esser.marcelo.busoclock.view.dialog.VicasaFilterDialog
 import esser.marcelo.busoclock.viewModel.VicasaLinesViewModel
 import kotlinx.android.synthetic.main.activity_lines.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.*
 
 /**
  * @author Marcelo Esser
@@ -81,14 +82,26 @@ class VicasaLinesActivity : BaseActivity(R.layout.activity_lines), FilterDialogI
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                configureList(viewModel.lines.value?.filter {
-                    it.name.toLowerCase()
-                        .contains(activity_lines_et_search.text.toString().toLowerCase())
-                            || it.code.toLowerCase()
-                        .contains(activity_lines_et_search.text.toString().toLowerCase())
-                } ?: listOf())
+                configureList(
+                    viewModel.lines.value?.filter { line ->
+                        containsLineName(line) || containsLineCode(line)
+                    } ?: listOf())
             }
         })
+    }
+
+    private fun containsLineName(line: Vicasa): Boolean {
+        return line.name.toLowerCase(Locale.getDefault()).contains(
+            activity_lines_et_search.text.toString()
+                .toLowerCase(Locale.getDefault())
+        )
+    }
+
+    private fun containsLineCode(line: Vicasa): Boolean {
+        return line.code.toLowerCase(Locale.getDefault()).contains(
+            activity_lines_et_search.text.toString()
+                .toLowerCase(Locale.getDefault())
+        )
     }
 
     private fun buildDialog() {
@@ -151,22 +164,8 @@ class VicasaLinesActivity : BaseActivity(R.layout.activity_lines), FilterDialogI
 
     override fun doFilter(countryOrigin: String, countryDestination: String, serviceType: String) {
         showLoader()
-
         viewModel.saveFilterData(countryOrigin, countryDestination, serviceType)
         viewModel.loadLines()
-//
-//        viewModel.loadVicasaLinesBy(
-//            onSuccess = {
-//                successConfig()
-//                if (it.isNotEmpty()) {
-//                    lines_activity_tv_without_lines.visibility = GONE
-//                    configureList(it)
-//                } else {
-//                    lines_activity_tv_without_lines.visibility = VISIBLE
-//                }
-//            }, onError = {
-//                errorConfig()
-//            })
     }
 
     override fun saveLine() {
