@@ -1,12 +1,11 @@
 package esser.marcelo.busoclock.view.activity
 
-import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.view.WindowManager
+import androidx.lifecycle.Observer
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.view.adapter.GenericLinesAdapter
 import esser.marcelo.busoclock.extensions.hideKeyboard
@@ -17,8 +16,9 @@ import esser.marcelo.busoclock.model.BaseLine
 import esser.marcelo.busoclock.model.vicasa.Vicasa
 import esser.marcelo.busoclock.view.dialog.LineMenuDialog
 import esser.marcelo.busoclock.view.dialog.VicasaFilterDialog
-import esser.marcelo.busoclock.viewModel.VicasaLinesActivityViewModel
+import esser.marcelo.busoclock.viewModel.VicasaLinesViewModel
 import kotlinx.android.synthetic.main.activity_lines.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * @author Marcelo Esser
@@ -31,9 +31,7 @@ import kotlinx.android.synthetic.main.activity_lines.*
 class VicasaLinesActivity : BaseActivity(R.layout.activity_lines), FilterDialogInteraction,
     GenericLinesAdapterDelegate, LineMenuDelegate {
 
-    private val viewModel: VicasaLinesActivityViewModel by lazy {
-        VicasaLinesActivityViewModel()
-    }
+    private val viewModel: VicasaLinesViewModel by viewModel()
 
     lateinit var menuDialog: LineMenuDialog
 
@@ -48,6 +46,19 @@ class VicasaLinesActivity : BaseActivity(R.layout.activity_lines), FilterDialogI
         dialogDoFilter()
 
         listeners()
+
+        linesObserver()
+    }
+
+    private fun linesObserver() {
+        val linesObserver = Observer<List<Vicasa>> { lines ->
+            lines_activity_tv_without_lines.visibility = GONE
+            hideLoader()
+            configureList(lines)
+            successConfig()
+        }
+
+        viewModel.lines.observe(this, linesObserver)
     }
 
     private fun listeners() {
@@ -70,12 +81,12 @@ class VicasaLinesActivity : BaseActivity(R.layout.activity_lines), FilterDialogI
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                configureList(viewModel.resultsList.filter {
+                configureList(viewModel.lines.value?.filter {
                     it.name.toLowerCase()
                         .contains(activity_lines_et_search.text.toString().toLowerCase())
                             || it.code.toLowerCase()
                         .contains(activity_lines_et_search.text.toString().toLowerCase())
-                })
+                } ?: listOf())
             }
         })
     }
@@ -142,19 +153,20 @@ class VicasaLinesActivity : BaseActivity(R.layout.activity_lines), FilterDialogI
         showLoader()
 
         viewModel.saveFilterData(countryOrigin, countryDestination, serviceType)
-
-        viewModel.loadVicasaLinesBy(
-            onSuccess = {
-                successConfig()
-                if (it.isNotEmpty()) {
-                    lines_activity_tv_without_lines.visibility = GONE
-                    configureList(it)
-                } else {
-                    lines_activity_tv_without_lines.visibility = VISIBLE
-                }
-            }, onError = {
-                errorConfig()
-            })
+        viewModel.loadLines()
+//
+//        viewModel.loadVicasaLinesBy(
+//            onSuccess = {
+//                successConfig()
+//                if (it.isNotEmpty()) {
+//                    lines_activity_tv_without_lines.visibility = GONE
+//                    configureList(it)
+//                } else {
+//                    lines_activity_tv_without_lines.visibility = VISIBLE
+//                }
+//            }, onError = {
+//                errorConfig()
+//            })
     }
 
     override fun saveLine() {

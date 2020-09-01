@@ -9,7 +9,6 @@ package esser.marcelo.busoclock.dependenciesInjection
  */
 
 import esser.marcelo.busoclock.dao.DaoHelper
-import esser.marcelo.busoclock.helper.Constants.BaseUrls.SOGAL_BASE_URL
 import esser.marcelo.busoclock.service.NetworkHandler
 import esser.marcelo.busoclock.service.callAdapter.CallAdapterFactory
 import esser.marcelo.busoclock.service.sogalServices.ISogalAPI
@@ -18,14 +17,12 @@ import esser.marcelo.busoclock.service.sogalServices.SogalServiceDelegate
 import esser.marcelo.busoclock.service.vicasaServices.IVicasaAPI
 import esser.marcelo.busoclock.service.vicasaServices.VicasaService
 import esser.marcelo.busoclock.service.vicasaServices.VicasaServiceDelegate
-import esser.marcelo.busoclock.view.activity.HomeActivity
 import esser.marcelo.busoclock.viewModel.*
 import kotlinx.coroutines.Dispatchers
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.net.URL
 
 private val roomModule = module {
     single { DaoHelper(context = get()) }
@@ -74,7 +71,7 @@ private val viewModelModule = module {
 
     //VicasaViewModel
     viewModel {
-        VicasaLinesActivityViewModel(
+        VicasaLinesViewModel(
             service = get(),
             daoHelper = get(),
             dispatcher = Dispatchers.IO
