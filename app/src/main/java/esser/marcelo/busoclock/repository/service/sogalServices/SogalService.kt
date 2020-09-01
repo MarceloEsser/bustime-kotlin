@@ -1,9 +1,9 @@
-package esser.marcelo.busoclock.service.sogalServices
+package esser.marcelo.busoclock.repository.service.sogalServices
 
-import esser.marcelo.busoclock.service.wrapper.resource.Resource
+import esser.marcelo.busoclock.repository.service.wrapper.resource.Resource
 import esser.marcelo.busoclock.model.sogal.LinesDTO
 import esser.marcelo.busoclock.model.sogal.SogalResponse
-import esser.marcelo.busoclock.service.wrapper.resource.NetworkBoundResource
+import esser.marcelo.busoclock.repository.service.wrapper.resource.NetworkBoundResource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 

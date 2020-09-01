@@ -9,39 +9,39 @@ package esser.marcelo.busoclock.helper
  */
 
 object VicasaTableSelectors {
-    val WORKINGDAYS_BB_SELECTOR: String =
+    const val WORKINGDAYS_BB: String =
         "body > table:nth-child(2) > tbody > tr > td > table.texto_linhas > tbody > tr:nth-child(5) > td:nth-child(1)"
 
-    val SATURDAYS_BB_SELECTOR: String =
+    const val SATURDAYS_BB: String =
         "body > table:nth-child(2) > tbody > tr > td > table.texto_linhas > tbody > tr:nth-child(5) > td:nth-child(2)"
 
-    val SUNDAYS_BB_SELECTOR: String =
+    const val SUNDAYS_BB: String =
         "body > table:nth-child(2) > tbody > tr > td > table.texto_linhas > tbody > tr:nth-child(5) > td:nth-child(3)"
 
-    val WORKINGDAYS_BC_SELECTOR: String =
+    const val WORKINGDAYS_BC: String =
         "body > table:nth-child(2) > tbody > tr > td > table.texto_linhas > tbody > tr:nth-child(2) > td:nth-child(1)"
 
-    val SATURDAYS_BC_SELECTOR: String =
+    const val SATURDAYS_BC: String =
         "body > table:nth-child(2) > tbody > tr > td > table.texto_linhas > tbody > tr:nth-child(2) > td:nth-child(2)"
 
-    val SUNDAYS_BC_SELECTOR: String =
+    const val SUNDAYS_BC: String =
         "body > table:nth-child(2) > tbody > tr > td > table.texto_linhas > tbody > tr:nth-child(2) > td:nth-child(3)"
 
-    val WORKINGDAYS_CB_SELECTOR: String =
+    const val WORKINGDAYS_CB: String =
         "body > table:nth-child(2) > tbody > tr > td > table.texto_linhas > tbody > tr:nth-child(2) > td:nth-child(4)"
 
-    val SATURDAYS_CB_SELECTOR: String =
+    const val SATURDAYS_CB: String =
         "body > table:nth-child(2) > tbody > tr > td > table.texto_linhas > tbody > tr:nth-child(2) > td:nth-child(5)"
 
-    val SUNDAYS_CB_SELECTOR: String =
+    const val SUNDAYS_CB: String =
         "body > table:nth-child(2) > tbody > tr > td > table.texto_linhas > tbody > tr:nth-child(2) > td:nth-child(6)"
 
-    val WORKINGDAYS_CC_SELECTOR: String =
+    const val WORKINGDAYS_CC: String =
         "body > table:nth-child(2) > tbody > tr > td > table.texto_linhas > tbody > tr:nth-child(5) > td:nth-child(4)"
 
-    val SATURDAYS_CC_SELECTOR: String =
+    const val SATURDAYS_CC: String =
         "body > table:nth-child(2) > tbody > tr > td > table.texto_linhas > tbody > tr:nth-child(5) > td:nth-child(5)"
 
-    val SUNDAYS_CC_SELECTOR: String =
+    const val SUNDAYS_CC: String =
         "body > table:nth-child(2) > tbody > tr > td > table.texto_linhas > tbody > tr:nth-child(5) > td:nth-child(6)"
 }

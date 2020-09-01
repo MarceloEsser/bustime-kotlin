@@ -1,8 +1,8 @@
-package esser.marcelo.busoclock.service.sogalServices
+package esser.marcelo.busoclock.repository.service.sogalServices
 
 import esser.marcelo.busoclock.model.sogal.LinesDTO
 import esser.marcelo.busoclock.model.sogal.SogalResponse
-import esser.marcelo.busoclock.service.wrapper.ApiResult
+import esser.marcelo.busoclock.repository.service.wrapper.ApiResult
 import kotlinx.coroutines.Deferred
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded

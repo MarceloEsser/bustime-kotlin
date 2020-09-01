@@ -1,4 +1,4 @@
-package esser.marcelo.busoclock.service.wrapper
+package esser.marcelo.busoclock.repository.service.wrapper
 
 import org.json.JSONObject
 import retrofit2.Response

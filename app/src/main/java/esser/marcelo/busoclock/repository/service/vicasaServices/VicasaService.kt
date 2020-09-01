@@ -1,7 +1,7 @@
-package esser.marcelo.busoclock.service.vicasaServices
+package esser.marcelo.busoclock.repository.service.vicasaServices
 
-import esser.marcelo.busoclock.service.wrapper.resource.NetworkBoundResource
-import esser.marcelo.busoclock.service.wrapper.resource.Resource
+import esser.marcelo.busoclock.repository.service.wrapper.resource.NetworkBoundResource
+import esser.marcelo.busoclock.repository.service.wrapper.resource.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import okhttp3.ResponseBody

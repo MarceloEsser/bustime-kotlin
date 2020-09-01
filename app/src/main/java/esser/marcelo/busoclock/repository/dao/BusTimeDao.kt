@@ -1,4 +1,4 @@
-package esser.marcelo.busoclock.dao
+package esser.marcelo.busoclock.repository.dao
 
 import androidx.room.*
 import esser.marcelo.busoclock.model.favorite.FavoriteItineraries

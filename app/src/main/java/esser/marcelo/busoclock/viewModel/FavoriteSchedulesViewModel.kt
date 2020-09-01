@@ -1,11 +1,9 @@
 package esser.marcelo.busoclock.viewModel
 
-import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.room.Dao
-import esser.marcelo.busoclock.dao.DaoHelper
-import esser.marcelo.busoclock.dao.LineDAO
+import esser.marcelo.busoclock.repository.dao.DaoHelper
+import esser.marcelo.busoclock.repository.dao.LineDAO
 import esser.marcelo.busoclock.model.favorite.LineWithSchedules
 import esser.marcelo.busoclock.model.schedules.BaseSchedule
 import kotlinx.coroutines.GlobalScope

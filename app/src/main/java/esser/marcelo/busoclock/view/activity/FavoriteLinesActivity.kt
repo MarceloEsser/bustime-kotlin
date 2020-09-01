@@ -1,15 +1,12 @@
 package esser.marcelo.busoclock.view.activity
 
 import android.content.Intent
-import android.os.Bundle
 import android.view.View.VISIBLE
 import android.widget.Toast
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.view.adapter.FavoriteLinesAdapter
-import esser.marcelo.busoclock.dao.LineDAO
+import esser.marcelo.busoclock.repository.dao.LineDAO
 import esser.marcelo.busoclock.interfaces.DeleteDelegate
 import esser.marcelo.busoclock.interfaces.IFavoriteLineAdapterDelegate
 import esser.marcelo.busoclock.model.favorite.FavoriteLine

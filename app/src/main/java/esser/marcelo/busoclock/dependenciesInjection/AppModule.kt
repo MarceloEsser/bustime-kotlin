@@ -8,15 +8,15 @@ package esser.marcelo.busoclock.dependenciesInjection
  * @since 31/08/20
  */
 
-import esser.marcelo.busoclock.dao.DaoHelper
-import esser.marcelo.busoclock.service.NetworkHandler
-import esser.marcelo.busoclock.service.callAdapter.CallAdapterFactory
-import esser.marcelo.busoclock.service.sogalServices.ISogalAPI
-import esser.marcelo.busoclock.service.sogalServices.SogalService
-import esser.marcelo.busoclock.service.sogalServices.SogalServiceDelegate
-import esser.marcelo.busoclock.service.vicasaServices.IVicasaAPI
-import esser.marcelo.busoclock.service.vicasaServices.VicasaService
-import esser.marcelo.busoclock.service.vicasaServices.VicasaServiceDelegate
+import esser.marcelo.busoclock.repository.dao.DaoHelper
+import esser.marcelo.busoclock.repository.service.NetworkHandler
+import esser.marcelo.busoclock.repository.service.callAdapter.CallAdapterFactory
+import esser.marcelo.busoclock.repository.service.sogalServices.ISogalAPI
+import esser.marcelo.busoclock.repository.service.sogalServices.SogalService
+import esser.marcelo.busoclock.repository.service.sogalServices.SogalServiceDelegate
+import esser.marcelo.busoclock.repository.service.vicasaServices.IVicasaAPI
+import esser.marcelo.busoclock.repository.service.vicasaServices.VicasaService
+import esser.marcelo.busoclock.repository.service.vicasaServices.VicasaServiceDelegate
 import esser.marcelo.busoclock.viewModel.*
 import kotlinx.coroutines.Dispatchers
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -74,6 +74,13 @@ private val viewModelModule = module {
         VicasaLinesViewModel(
             service = get(),
             daoHelper = get(),
+            dispatcher = Dispatchers.IO
+        )
+    }
+
+    viewModel {
+        VicasaSchedulesViewModel(
+            service = get(),
             dispatcher = Dispatchers.IO
         )
     }

@@ -1,6 +1,6 @@
-package esser.marcelo.busoclock.service.callAdapter
+package esser.marcelo.busoclock.repository.service.callAdapter
 
-import esser.marcelo.busoclock.service.wrapper.ApiResult
+import esser.marcelo.busoclock.repository.service.wrapper.ApiResult
 import kotlinx.coroutines.Deferred
 import retrofit2.CallAdapter
 import retrofit2.Retrofit

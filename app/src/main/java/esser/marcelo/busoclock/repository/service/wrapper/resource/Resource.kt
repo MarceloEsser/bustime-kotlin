@@ -1,4 +1,4 @@
-package esser.marcelo.busoclock.service.wrapper.resource
+package esser.marcelo.busoclock.repository.service.wrapper.resource
 
 /**
  * @author Marcelo Esser

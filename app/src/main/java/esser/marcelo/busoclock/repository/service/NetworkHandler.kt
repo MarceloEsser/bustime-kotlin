@@ -1,4 +1,4 @@
-package esser.marcelo.busoclock.service
+package esser.marcelo.busoclock.repository.service
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder

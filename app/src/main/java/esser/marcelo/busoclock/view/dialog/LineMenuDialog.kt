@@ -7,7 +7,7 @@ import android.view.View.VISIBLE
 import android.widget.AdapterView
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.view.adapter.spinner.SpinnerDefaultAdapter
-import esser.marcelo.busoclock.dao.LineDAO
+import esser.marcelo.busoclock.repository.dao.LineDAO
 import esser.marcelo.busoclock.interfaces.LineMenuDelegate
 import esser.marcelo.busoclock.model.LineWay
 import kotlinx.android.synthetic.main.dialog_line_menu.*

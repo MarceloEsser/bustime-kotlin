@@ -1,6 +1,6 @@
-package esser.marcelo.busoclock.dao
+package esser.marcelo.busoclock.repository.dao
 
-import esser.marcelo.busoclock.database.AppDatabase
+import esser.marcelo.busoclock.repository.dao.database.AppDatabase
 import android.content.Context
 import androidx.room.Room
 import esser.marcelo.busoclock.model.favorite.LineWithSchedules

@@ -1,9 +1,8 @@
 package esser.marcelo.busoclock.viewModel
 
 import androidx.lifecycle.MutableLiveData
-import android.content.Context
 import androidx.lifecycle.ViewModel
-import esser.marcelo.busoclock.dao.DaoHelper
+import esser.marcelo.busoclock.repository.dao.DaoHelper
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 

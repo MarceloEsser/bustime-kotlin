@@ -1,15 +1,15 @@
 package esser.marcelo.busoclock.view.activity
 
 import android.view.View.*
-import android.widget.Toast
+import androidx.lifecycle.Observer
 import esser.marcelo.busoclock.R
-import esser.marcelo.busoclock.dao.LineDAO
+import esser.marcelo.busoclock.repository.dao.LineDAO
 import esser.marcelo.busoclock.model.schedules.BaseSchedule
 import esser.marcelo.busoclock.view.adapter.SchedulesAdapter
-import esser.marcelo.busoclock.viewModel.VicasaSchedulesActivityViewModel
+import esser.marcelo.busoclock.viewModel.VicasaSchedulesViewModel
 import kotlinx.android.synthetic.main.activity_lines.*
 import kotlinx.android.synthetic.main.activity_schedules.*
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * @author Marcelo Esser
@@ -21,9 +21,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 class VicasaSchedulesActivity : BaseActivity(R.layout.activity_schedules) {
 
-    private val viewModel: VicasaSchedulesActivityViewModel by lazy {
-        VicasaSchedulesActivityViewModel()
-    }
+    private val viewModel: VicasaSchedulesViewModel by viewModel()
 
     private lateinit var adapter: SchedulesAdapter
 
@@ -31,13 +29,23 @@ class VicasaSchedulesActivity : BaseActivity(R.layout.activity_schedules) {
         img_btn_add_itineraries.visibility = GONE
         shcedule_activity_tv_line_name.text = LineDAO.lineName
 
-        loadSchedules()
-
         listeners()
 
         LineDAO.lineWay?.let {
             shcedule_activity_tv_line_code.text = it.description
         }
+
+        schedulesObservers()
+    }
+
+    private fun schedulesObservers() {
+        val workingdaysObserver = Observer<List<BaseSchedule>> { workingdays ->
+            configureList(workingdays)
+            successConfig()
+            hideLoader()
+        }
+
+        viewModel.workingdays.observe(this, workingdaysObserver)
     }
 
     private fun listeners() {
@@ -60,7 +68,6 @@ class VicasaSchedulesActivity : BaseActivity(R.layout.activity_schedules) {
         hideLoader()
     }
 
-    @ExperimentalCoroutinesApi
     private fun errorConfig() {
         schedules_activity_img_lottie_conection.resumeAnimation()
 
@@ -73,11 +80,10 @@ class VicasaSchedulesActivity : BaseActivity(R.layout.activity_schedules) {
         hideLoader()
     }
 
-    @ExperimentalCoroutinesApi
     private fun lottieAnimationClick() {
         lines_activity_img_lottie_conection.setOnClickListener {
             lines_activity_img_lottie_conection.pauseAnimation()
-            loadSchedules()
+            viewModel.loadSchedules()
         }
     }
 
@@ -85,15 +91,15 @@ class VicasaSchedulesActivity : BaseActivity(R.layout.activity_schedules) {
         schedules_bottom_navigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.action_workingdays -> {
-                    configureList(viewModel.workingdaysList)
+                    configureList(viewModel.workingdays.value)
                     true
                 }
                 R.id.action_saturday -> {
-                    configureList(viewModel.saturdaysList)
+                    configureList(viewModel.saturdays.value)
                     true
                 }
                 R.id.action_sunday -> {
-                    configureList(viewModel.sundaysList)
+                    configureList(viewModel.sundays.value)
                     true
                 }
 
@@ -102,29 +108,14 @@ class VicasaSchedulesActivity : BaseActivity(R.layout.activity_schedules) {
         }
     }
 
-    @ExperimentalCoroutinesApi
-    private fun loadSchedules() {
-        showLoader()
-
-        viewModel.loadSchedules(
-            onSuccess = { schedulesList ->
-                successConfig()
-                configureList(schedulesList)
-            }, onError = { errorMessage ->
-                errorConfig()
-                Toast.makeText(this@VicasaSchedulesActivity, errorMessage, Toast.LENGTH_SHORT)
-                    .show()
-            })
-    }
-
-    private fun configureList(schedulesList: List<BaseSchedule>) {
-        if (schedulesList.isEmpty()) {
-            tv_schedules_activity_without_items.visibility = VISIBLE
-            schedules_activity_rv_schedules.visibility = GONE
-        } else {
+    private fun configureList(schedulesList: List<BaseSchedule>?) {
+        if (!schedulesList.isNullOrEmpty()) {
             schedules_activity_rv_schedules.visibility = VISIBLE
             tv_schedules_activity_without_items.visibility = INVISIBLE
             adapterConstruct(schedulesList)
+        } else {
+            tv_schedules_activity_without_items.visibility = VISIBLE
+            schedules_activity_rv_schedules.visibility = GONE
         }
     }
 

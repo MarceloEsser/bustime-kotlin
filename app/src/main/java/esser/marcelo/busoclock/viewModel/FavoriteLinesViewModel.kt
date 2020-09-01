@@ -1,9 +1,8 @@
 package esser.marcelo.busoclock.viewModel
 
-import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import esser.marcelo.busoclock.dao.DaoHelper
+import esser.marcelo.busoclock.repository.dao.DaoHelper
 import esser.marcelo.busoclock.model.favorite.FavoriteLine
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

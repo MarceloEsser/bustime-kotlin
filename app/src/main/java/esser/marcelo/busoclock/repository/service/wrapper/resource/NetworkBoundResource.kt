@@ -1,9 +1,9 @@
-package esser.marcelo.busoclock.service.wrapper.resource
+package esser.marcelo.busoclock.repository.service.wrapper.resource
 
-import esser.marcelo.busoclock.service.wrapper.ApiEmptyResult
-import esser.marcelo.busoclock.service.wrapper.ApiFailureResult
-import esser.marcelo.busoclock.service.wrapper.ApiResult
-import esser.marcelo.busoclock.service.wrapper.ApiSuccessResult
+import esser.marcelo.busoclock.repository.service.wrapper.ApiEmptyResult
+import esser.marcelo.busoclock.repository.service.wrapper.ApiFailureResult
+import esser.marcelo.busoclock.repository.service.wrapper.ApiResult
+import esser.marcelo.busoclock.repository.service.wrapper.ApiSuccessResult
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.flow.FlowCollector
 

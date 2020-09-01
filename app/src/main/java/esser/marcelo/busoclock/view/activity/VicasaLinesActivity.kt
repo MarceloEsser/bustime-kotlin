@@ -1,5 +1,6 @@
 package esser.marcelo.busoclock.view.activity
 
+import android.content.Intent
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -176,8 +177,8 @@ class VicasaLinesActivity : BaseActivity(R.layout.activity_lines), FilterDialogI
 
     }
 
-    override fun goToItineraries() {
-
+    override fun goToSchedules() {
+        startActivity(Intent(this@VicasaLinesActivity, VicasaSchedulesActivity::class.java))
     }
 
     override fun findLine() {

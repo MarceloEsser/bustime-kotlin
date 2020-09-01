@@ -1,9 +1,8 @@
-package esser.marcelo.busoclock.service.vicasaServices
+package esser.marcelo.busoclock.repository.service.vicasaServices
 
-import esser.marcelo.busoclock.service.wrapper.ApiResult
+import esser.marcelo.busoclock.repository.service.wrapper.ApiResult
 import kotlinx.coroutines.Deferred
 import okhttp3.ResponseBody
-import retrofit2.Call
 import retrofit2.http.*
 
 /**
