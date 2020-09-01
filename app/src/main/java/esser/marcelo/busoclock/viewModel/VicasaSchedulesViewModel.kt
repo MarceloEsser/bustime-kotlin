@@ -13,16 +13,11 @@ import esser.marcelo.busoclock.helper.VicasaTableSelectors
 import esser.marcelo.busoclock.model.schedules.BaseSchedule
 import esser.marcelo.busoclock.repository.service.vicasaServices.VicasaServiceDelegate
 import esser.marcelo.busoclock.repository.service.wrapper.resource.Status
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import okhttp3.ResponseBody
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
-import retrofit2.Response
 import kotlin.coroutines.CoroutineContext
 
 /**
@@ -58,16 +53,32 @@ class VicasaSchedulesViewModel(
     private var sundaysElement: Element? = null
 
 
-    fun loadSchedules() {
-        viewModelScope.launch(dispatcher) {
-            service.getSchedules(LineDAO.lineCode).collect { resource ->
-                if (resource.requestStatus == Status.success && resource.data != null)
-                    parseResponse(resource.data.toString())
+    fun loadSchedules() = viewModelScope.launch(dispatcher) {
+
+        service.getSchedules(LineDAO.lineCode).collect { resource ->
+            if (resource.requestStatus == Status.success && resource.data != null) {
+                val htmlBody = async { resource.data.string() }
+                parseResponse(htmlBody.await())
             }
         }
     }
 
-    private fun parseResponse(response: String) = runBlocking {
+    private fun parseResponse(response: String) = viewModelScope.launch(dispatcher) {
+
+        setElements(response)
+
+        val workingdaysListAsync = async { getSchedulesFrom(workingdaysElement) }
+        val saturdaysListAsync = async { getSchedulesFrom(saturdaysElement) }
+        val sundaysListAsync = async { getSchedulesFrom(sundaysElement) }
+
+        setAllCompletedList(
+            workingdaysListAsync.await(),
+            saturdaysListAsync.await(),
+            sundaysListAsync.await(),
+        )
+    }
+
+    private fun setElements(response: String) {
         val document: Document = Jsoup.parse(response)
 
         when (LineDAO.lineWay!!.way) {
@@ -76,16 +87,6 @@ class VicasaSchedulesViewModel(
             BC_WAY -> fillBCElements(document)
             CB_WAY -> fillCBElements(document)
         }
-
-        val workingdaysListAsync = async { getSchedulesListBy(workingdaysElement) }
-        val saturdaysListAsync = async { getSchedulesListBy(saturdaysElement) }
-        val sundaysListAsync = async { getSchedulesListBy(sundaysElement) }
-
-        getAllCompletedList(
-            workingdaysListAsync.await(),
-            saturdaysListAsync.await(),
-            sundaysListAsync.await(),
-        )
     }
 
     private fun fillCCElements(document: Document) {
@@ -112,7 +113,7 @@ class VicasaSchedulesViewModel(
         sundaysElement = document.selectFirst(VicasaTableSelectors.SUNDAYS_CB)
     }
 
-    private fun getSchedulesListBy(element: Element?): MutableList<BaseSchedule> {
+    private fun getSchedulesFrom(element: Element?): MutableList<BaseSchedule> {
         val schedulesList: MutableList<BaseSchedule> = ArrayList()
 
         element?.apply {
@@ -129,7 +130,7 @@ class VicasaSchedulesViewModel(
         return schedulesList
     }
 
-    private fun getAllCompletedList(
+    private fun setAllCompletedList(
         workingdaysList: MutableList<BaseSchedule>,
         saturdaysList: MutableList<BaseSchedule>,
         sundaysList: MutableList<BaseSchedule>,
@@ -137,7 +138,5 @@ class VicasaSchedulesViewModel(
         this._workingdays.postValue(workingdaysList)
         this._saturdays.postValue(saturdaysList)
         this._sundays.postValue(sundaysList)
-
-
     }
 }
