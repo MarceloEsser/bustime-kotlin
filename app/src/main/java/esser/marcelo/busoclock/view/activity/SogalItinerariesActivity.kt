@@ -1,26 +1,24 @@
 package esser.marcelo.busoclock.view.activity
 
-import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import esser.marcelo.busoclock.R
-import esser.marcelo.busoclock.view.adapter.ItinerariesAdapter
 import esser.marcelo.busoclock.dao.LineDAO
 import esser.marcelo.busoclock.model.sogal.ItinerariesDTO
+import esser.marcelo.busoclock.view.adapter.ItinerariesAdapter
 import esser.marcelo.busoclock.viewModel.SogalItinerariesViewModel
 import kotlinx.android.synthetic.main.activity_itineraries.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SogalItinerariesActivity : BaseActivity(R.layout.activity_itineraries) {
 
-    private val viewModel: SogalItinerariesViewModel by viewModels()
+    private val viewModel: SogalItinerariesViewModel by viewModel()
 
     private lateinit var itinerariesAdapter: ItinerariesAdapter
 
     override fun onInitValues() {
-        setContentView(R.layout.activity_itineraries)
 
         btnBack()
-        loadItineraries()
+        showLoader()
 
         itineraries_activity_tv_line_name.text = LineDAO.lineName
 
@@ -29,6 +27,7 @@ class SogalItinerariesActivity : BaseActivity(R.layout.activity_itineraries) {
 
     private fun itinerariesList() {
         val itinerariesListObserver = Observer<List<ItinerariesDTO>> { itineraries ->
+            hideLoader()
             adapterConstruct(itineraries)
         }
 
@@ -39,11 +38,6 @@ class SogalItinerariesActivity : BaseActivity(R.layout.activity_itineraries) {
         itineraries_activity_img_btn_back.setOnClickListener {
             onBackPressed()
         }
-    }
-
-    private fun loadItineraries() {
-        showLoader()
-        viewModel.loadItineraries()
     }
 
     private fun adapterConstruct(it: List<ItinerariesDTO>) {

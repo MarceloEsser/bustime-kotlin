@@ -1,21 +1,28 @@
-package esser.marcelo.busoclock.service
+package esser.marcelo.busoclock.service.wrapper
 
 import org.json.JSONObject
 import retrofit2.Response
 
+/**
+ * @author Marcelo Esser
+ * @since 31/09/20
+ */
 sealed class ApiResult<T> {
     companion object {
+
         fun <T> create(throwable: Throwable): ApiFailureResult<T> {
             return ApiFailureResult(throwable.message)
         }
 
         fun <T> create(response: Response<T>): ApiResult<T> {
             if (response.isSuccessful) {
+
                 if (responseIsNotEmpty(response)) {
                     return ApiSuccessResult(response.body())
                 }
 
                 return ApiEmptyResult()
+
             }
 
             val errorBody: JSONObject? = createJsonObject(response)
@@ -25,7 +32,6 @@ sealed class ApiResult<T> {
             return ApiFailureResult(errorMessage)
 
         }
-
 
         private fun getErrorMessageFrom(errorBody: JSONObject?): String? {
             var errorMessage: String? = "unknown error"

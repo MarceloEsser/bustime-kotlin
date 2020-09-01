@@ -33,27 +33,25 @@ class VicasaSchedulesActivityViewModel {
         VicasaService()
     }
 
-    @ExperimentalCoroutinesApi
     fun loadSchedules(
         onSuccess: (schedules: List<BaseSchedule>) -> Unit,
         onError: (errorMessage: String) -> Unit
     ) {
-        vicasaService.vicasaService().getVicasaSchedules(LineDAO.lineCode)
-            .enqueue(object : Callback<ResponseBody> {
-                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                    onError(t.message!!)
-                }
-
-                override fun onResponse(
-                    call: Call<ResponseBody>,
-                    response: Response<ResponseBody>
-                ) {
-                    parseResponse(response.body()!!.string(), onSuccess)
-                }
-            })
+//        vicasaService.vicasaService().getVicasaSchedules(LineDAO.lineCode)
+//            .enqueue(object : Callback<ResponseBody> {
+//                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+//                    onError(t.message!!)
+//                }
+//
+//                override fun onResponse(
+//                    call: Call<ResponseBody>,
+//                    response: Response<ResponseBody>
+//                ) {
+//                    parseResponse(response.body()!!.string(), onSuccess)
+//                }
+//            })
     }
 
-    @ExperimentalCoroutinesApi
     fun parseResponse(response: String, onSuccess: (schedules: List<BaseSchedule>) -> Unit) =
         runBlocking {
             val document: Document = Jsoup.parse(response)

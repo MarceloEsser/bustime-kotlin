@@ -1,6 +1,6 @@
 package esser.marcelo.busoclock.service.callAdapter
 
-import esser.marcelo.busoclock.service.ApiResult
+import esser.marcelo.busoclock.service.wrapper.ApiResult
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Deferred
 import retrofit2.Call
@@ -8,7 +8,10 @@ import retrofit2.CallAdapter
 import retrofit2.Callback
 import retrofit2.Response
 import java.lang.reflect.Type
-
+/**
+ * @author Marcelo Esser
+ * @since 31/09/20
+ */
 class MyCallAdapter<T>(
     private val mResponseType: Type
 ) : CallAdapter<T, Deferred<ApiResult<T>>> {

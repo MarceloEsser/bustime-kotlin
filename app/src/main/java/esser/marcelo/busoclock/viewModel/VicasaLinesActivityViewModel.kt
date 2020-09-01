@@ -17,7 +17,7 @@ import retrofit2.Response
  * @since 19/02/19
  */
 class VicasaLinesActivityViewModel {
-    private val service = VicasaService().vicasaService()
+    //private val service = VicasaService().vicasaService()
     var resultsList: ArrayList<Vicasa> = ArrayList()
 
     var countryOrigin: String = ""
@@ -29,20 +29,20 @@ class VicasaLinesActivityViewModel {
         onSuccess: (succes: List<Vicasa>) -> Unit,
         onError: (errorMessage: String) -> Unit
     ) {
-        service.postLoadVicasaLinesBy(escape(countryDestination), escape(countryOrigin), serviceType)
-            .enqueue(object : Callback<ResponseBody> {
-                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                    t.message?.let { onError(it) }
-                }
-
-                override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-
-                    findVicasaObjects(response)
-
-                    onSuccess(resultsList)
-                }
-
-            })
+//        service.postLoadVicasaLinesBy(escape(countryDestination), escape(countryOrigin), serviceType)
+//            .enqueue(object : Callback<ResponseBody> {
+//                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+//                    t.message?.let { onError(it) }
+//                }
+//
+//                override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+//
+//                    findVicasaObjects(response)
+//
+//                    onSuccess(resultsList)
+//                }
+//
+//            })
     }
 
     fun getWaysList(): ArrayList<LineWay> {

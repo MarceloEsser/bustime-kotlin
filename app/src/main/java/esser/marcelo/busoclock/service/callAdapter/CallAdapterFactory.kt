@@ -1,12 +1,15 @@
 package esser.marcelo.busoclock.service.callAdapter
 
-import esser.marcelo.busoclock.service.ApiResult
+import esser.marcelo.busoclock.service.wrapper.ApiResult
 import kotlinx.coroutines.Deferred
 import retrofit2.CallAdapter
 import retrofit2.Retrofit
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
-
+/**
+ * @author Marcelo Esser
+ * @since 31/09/20
+ */
 class CallAdapterFactory : CallAdapter.Factory() {
 
     override fun get(

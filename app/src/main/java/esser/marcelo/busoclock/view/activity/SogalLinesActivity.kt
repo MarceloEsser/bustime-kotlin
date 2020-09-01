@@ -32,7 +32,7 @@ class SogalLinesActivity : BaseActivity(R.layout.activity_lines), GenericLinesAd
     var lineWay: String = CB_WAY
 
     override fun onInitValues() {
-
+        showLoader()
         listeners()
 
         linesObserver()
@@ -51,6 +51,7 @@ class SogalLinesActivity : BaseActivity(R.layout.activity_lines), GenericLinesAd
 
     private fun linesObserver() {
         val linesObserver = Observer<List<LinesDTO>> { lines ->
+            hideLoader()
             adapterConstruct(lines)
         }
         viewModel.lines.observe(this, linesObserver)
@@ -120,11 +121,11 @@ class SogalLinesActivity : BaseActivity(R.layout.activity_lines), GenericLinesAd
     }
 
     private fun loadLines() {
-        showLoader()
-        viewModel.loadSogalLines(onError = {
-            hideLoader()
-            errorConfig()
-        })
+//        showLoader()
+//        viewModel.loadSogalLines(onError = {
+//            hideLoader()
+//            errorConfig()
+//        })
     }
 
     private fun errorConfig() {
