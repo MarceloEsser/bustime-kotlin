@@ -9,6 +9,7 @@ import esser.marcelo.busoclock.model.sogal.ItinerariesDTO
 import esser.marcelo.busoclock.model.sogal.LinesDTO
 import esser.marcelo.busoclock.service.sogalServices.SogalService
 import esser.marcelo.busoclock.service.sogalServices.SogalServiceDelegate
+import esser.marcelo.busoclock.service.wrapper.resource.Status
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -24,15 +25,16 @@ class SogalItinerariesViewModel(
 
     val itineraries: LiveData<List<ItinerariesDTO>> by lazy {
         val _itineraries = MutableLiveData<List<ItinerariesDTO>>()
-        setItineraries(_itineraries)
+        viewModelScope.launch(dispatcher) {
+            setItineraries(_itineraries)
+        }
         return@lazy _itineraries
     }
 
-    private fun setItineraries(_itineraries: MutableLiveData<List<ItinerariesDTO>>) {
-        viewModelScope.launch(dispatcher) {
-            service.getSogalItineraries(LineDAO.lineCode).collect {
-                _itineraries.postValue(it.data?.itineraries)
-            }
+    private suspend fun setItineraries(_itineraries: MutableLiveData<List<ItinerariesDTO>>) {
+        service.getSogalItineraries(LineDAO.lineCode).collect { resource ->
+            if (resource.requestStatus == Status.success)
+                _itineraries.postValue(resource.data?.itineraries)
         }
     }
 }

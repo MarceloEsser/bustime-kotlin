@@ -32,6 +32,13 @@ private val viewModelModule = module {
             dispatcher = Dispatchers.IO
         )
     }
+
+    viewModel {
+        SogalSchedulesViewModel(
+            service = get(),
+            dispatcher = Dispatchers.IO
+        )
+    }
     viewModel {
         SogalItinerariesViewModel(
             service = get(),

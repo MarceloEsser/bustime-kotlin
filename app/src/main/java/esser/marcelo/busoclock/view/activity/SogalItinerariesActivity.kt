@@ -40,9 +40,8 @@ class SogalItinerariesActivity : BaseActivity(R.layout.activity_itineraries) {
         }
     }
 
-    private fun adapterConstruct(it: List<ItinerariesDTO>) {
-        hideLoader()
-        itinerariesAdapter = ItinerariesAdapter(this@SogalItinerariesActivity, it)
+    private fun adapterConstruct(itineraries: List<ItinerariesDTO>) {
+        itinerariesAdapter = ItinerariesAdapter(this@SogalItinerariesActivity, itineraries)
         itineraries_activity_rv_itineraries.adapter = itinerariesAdapter
     }
 }

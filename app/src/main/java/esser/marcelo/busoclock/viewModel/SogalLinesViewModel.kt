@@ -36,20 +36,21 @@ class SogalLinesViewModel(
 
     //private lateinit var mLines: List<LinesDTO>
 
+    val _lines = MutableLiveData<List<LinesDTO>>()
+
     val lines: LiveData<List<LinesDTO>> by lazy {
-        val _lines = MutableLiveData<List<LinesDTO>>()
         viewModelScope.launch(dispatcher) {
-            setLines(_lines)
+            setLines()
         }
         return@lazy _lines
     }
 
     val isFavorite: MutableLiveData<Boolean> = MutableLiveData()
 
-    private suspend fun setLines(lines: MutableLiveData<List<LinesDTO>>) {
+    private suspend fun setLines() {
         service.getLines().collect { resource ->
             if (resource.requestStatus == Status.success)
-                lines.postValue(resource.data)
+                _lines.postValue(resource.data)
         }
     }
 

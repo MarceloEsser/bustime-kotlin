@@ -57,11 +57,6 @@ class SogalLinesActivity : BaseActivity(R.layout.activity_lines), GenericLinesAd
         viewModel.lines.observe(this, linesObserver)
     }
 
-    override fun onResume() {
-        super.onResume()
-        loadLines()
-    }
-
     private fun listeners() {
         lav_cancel_search_action.setOnClickListener {
             if (activity_lines_et_search.text.isNotEmpty()) {
@@ -120,20 +115,13 @@ class SogalLinesActivity : BaseActivity(R.layout.activity_lines), GenericLinesAd
         }
     }
 
-    private fun loadLines() {
-//        showLoader()
-//        viewModel.loadSogalLines(onError = {
-//            hideLoader()
-//            errorConfig()
-//        })
-    }
-
     private fun errorConfig() {
         lines_activity_img_lottie_conection.resumeAnimation()
 
         lines_activity_img_lottie_conection.setOnClickListener {
             lines_activity_img_lottie_conection.pauseAnimation()
-            loadLines()
+            //TODO: Review this
+            //loadLines()
         }
 
         lines_activity_img_lottie_conection.visibility = VISIBLE

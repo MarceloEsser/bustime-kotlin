@@ -1,19 +1,7 @@
 package esser.marcelo.busoclock.helper
 
-import esser.marcelo.busoclock.dao.DaoHelper
 import android.content.Context
-import esser.marcelo.busoclock.dao.LineDAO
 import esser.marcelo.busoclock.interfaces.SaveLineDelegate
-import esser.marcelo.busoclock.model.favorite.FavoriteLine
-import esser.marcelo.busoclock.model.favorite.LineWithSchedules
-import esser.marcelo.busoclock.model.schedules.Saturday
-import esser.marcelo.busoclock.model.schedules.Sunday
-import esser.marcelo.busoclock.model.schedules.Workingday
-import esser.marcelo.busoclock.viewModel.SogalItinerariesViewModel
-import esser.marcelo.busoclock.viewModel.SogalSchedulesActivityViewModel
-import esser.marcelo.busoclock.viewModel.VicasaSchedulesActivityViewModel
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class SaveLineHelper(val saveLineDelegate: SaveLineDelegate, val context: Context) {
 //

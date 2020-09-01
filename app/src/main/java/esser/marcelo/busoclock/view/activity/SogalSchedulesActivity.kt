@@ -1,20 +1,19 @@
 package esser.marcelo.busoclock.view.activity
 
 import android.content.Intent
-import android.os.Bundle
 import android.view.View.*
+import androidx.lifecycle.Observer
 import esser.marcelo.busoclock.R
-import esser.marcelo.busoclock.view.adapter.SchedulesAdapter
 import esser.marcelo.busoclock.dao.LineDAO
 import esser.marcelo.busoclock.model.schedules.BaseSchedule
-import esser.marcelo.busoclock.viewModel.SogalSchedulesActivityViewModel
+import esser.marcelo.busoclock.view.adapter.SchedulesAdapter
+import esser.marcelo.busoclock.viewModel.SogalSchedulesViewModel
 import kotlinx.android.synthetic.main.activity_schedules.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SogalSchedulesActivity : BaseActivity(R.layout.activity_schedules) {
 
-    private val viewModelSogal: SogalSchedulesActivityViewModel by lazy {
-        SogalSchedulesActivityViewModel()
-    }
+    private val viewModelSogal: SogalSchedulesViewModel by viewModel()
 
     private lateinit var adapter: SchedulesAdapter
 
@@ -22,14 +21,12 @@ class SogalSchedulesActivity : BaseActivity(R.layout.activity_schedules) {
         listeners()
 
         shcedule_activity_tv_line_name.text = LineDAO.lineName
+
         LineDAO.lineWay?.let {
             shcedule_activity_tv_line_code.text = it.description
         }
-    }
 
-    override fun onStart() {
-        super.onStart()
-        loadSchedules()
+        workingdaysObserver()
     }
 
     private fun listeners() {
@@ -57,15 +54,15 @@ class SogalSchedulesActivity : BaseActivity(R.layout.activity_schedules) {
         schedules_bottom_navigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.action_workingdays -> {
-                    configureList(viewModelSogal.workingDays)
+                    configureList(viewModelSogal.workingDays.value)
                     true
                 }
                 R.id.action_saturday -> {
-                    configureList(viewModelSogal.saturdays)
+                    configureList(viewModelSogal.saturdays.value)
                     true
                 }
                 R.id.action_sunday -> {
-                    configureList(viewModelSogal.sundays)
+                    configureList(viewModelSogal.sundays.value)
                     true
                 }
 
@@ -74,14 +71,13 @@ class SogalSchedulesActivity : BaseActivity(R.layout.activity_schedules) {
         }
     }
 
-    private fun loadSchedules() {
-        showLoader()
-        viewModelSogal.loadSchedules(onSuccess = { schedules ->
-            configureList(schedules)
+    private fun workingdaysObserver() {
+        val workingdays = Observer<List<BaseSchedule>> { workingdays ->
+            configureList(workingdays)
             successConfig()
-        }, onError = { errorMessage ->
-            errorConfig()
-        })
+        }
+
+        viewModelSogal.workingDays.observe(this, workingdays)
     }
 
     private fun successConfig() {
@@ -92,6 +88,7 @@ class SogalSchedulesActivity : BaseActivity(R.layout.activity_schedules) {
         hideLoader()
     }
 
+    //TODO: Review this
     private fun errorConfig() {
         schedules_activity_img_lottie_conection.resumeAnimation()
 
@@ -107,7 +104,7 @@ class SogalSchedulesActivity : BaseActivity(R.layout.activity_schedules) {
     private fun lottieAnimationClick() {
         schedules_activity_img_lottie_conection.setOnClickListener {
             schedules_activity_img_lottie_conection.pauseAnimation()
-            loadSchedules()
+            workingdaysObserver()
         }
     }
 
