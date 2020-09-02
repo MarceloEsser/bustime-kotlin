@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.interfaces.IFavoriteLineAdapterDelegate
 import esser.marcelo.busoclock.model.favorite.FavoriteLine
+import esser.marcelo.busoclock.model.favorite.LineWithSchedules
 import kotlinx.android.synthetic.main.row_favorite_line.view.*
 
 /**
@@ -22,7 +23,7 @@ import kotlinx.android.synthetic.main.row_favorite_line.view.*
  */
 
 class FavoriteLinesAdapter(
-    val lines: List<FavoriteLine>,
+    val lines: List<LineWithSchedules>,
     val context: Context,
     val delegate: IFavoriteLineAdapterDelegate
 ) :
@@ -46,27 +47,29 @@ class FavoriteLinesAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
-        if (lines[position].isSogal)
+        if (lines[position].line?.isSogal == true)
             return 1
         return 0
     }
 
     override fun onBindViewHolder(holder: FavoriteLinesViewHolder, position: Int) {
-        val line = lines[position]
+        val line = lines[position].line
 
-        with(holder) {
-            tvLineCode.text = line.code
-            tvLineName.text = line.name
-            tvLineWay.text = line.way
-            if (line.isSogal) {
-                tvSogalCompany.visibility = VISIBLE
-                tvVicasaCompany.visibility = GONE
-            } else {
-                tvSogalCompany.visibility = GONE
-                tvVicasaCompany.visibility = VISIBLE
-            }
-            itemView.setOnClickListener {
-                delegate.onLineClicked(line)
+        line?.apply {
+            with(holder) {
+                tvLineCode.text = code
+                tvLineName.text = name
+                tvLineWay.text = way
+                if (isSogal) {
+                    tvSogalCompany.visibility = VISIBLE
+                    tvVicasaCompany.visibility = GONE
+                } else {
+                    tvSogalCompany.visibility = GONE
+                    tvVicasaCompany.visibility = VISIBLE
+                }
+                itemView.setOnClickListener {
+                    delegate.onLineClicked(this@apply)
+                }
             }
         }
     }

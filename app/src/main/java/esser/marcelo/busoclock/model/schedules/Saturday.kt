@@ -21,17 +21,4 @@ data class Saturday(
 
     @ColumnInfo(name = "lineId")
     var saturdayKey: Long? = null,
-
-    @SerializedName("hora")
-    var hour: String = "",
-
-    @ColumnInfo(name = "abrev")
-    var abrev: String = "",
-
-    @SerializedName("apd")
-    var apd: String = "N"
-) {
-    fun isApd(): Boolean {
-        return apd == "S"
-    }
-}
+) : BaseSchedule()

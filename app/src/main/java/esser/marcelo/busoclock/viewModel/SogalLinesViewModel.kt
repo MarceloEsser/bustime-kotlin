@@ -85,11 +85,11 @@ class SogalLinesViewModel(
     }
 
     fun saveLine() = viewModelScope.launch(dispatcher) {
-        val favoriteLine: FavoriteLine = createFavoriteLine()
+        val favoriteLine: FavoriteLine = getFavoriteLine()
         daoHelper.insertLine(favoriteLine)
     }
 
-    private fun createFavoriteLine(): FavoriteLine {
+    private fun getFavoriteLine(): FavoriteLine {
         return FavoriteLine(
             isSogal = true,
             name = LineDAO.lineName,

@@ -28,7 +28,7 @@ interface BusTimeDao {
 
     @Transaction
     @Query("SELECT * FROM FavoriteLine WHERE id in (:id)")
-    fun getLineBy(id: Long): List<LineWithSchedules>
+    fun getLineBy(id: Long): Flow<List<LineWithSchedules>>
 
     @Transaction
     @Query("SELECT * FROM FavoriteLine WHERE line_name in (:name) and line_code in (:code) and line_way in (:way)")
@@ -50,7 +50,7 @@ interface BusTimeDao {
     fun clearDatabase()
 
     @Insert
-    fun insertLine(lines: FavoriteLine)
+    suspend fun insertLine(lines: FavoriteLine): Long
 
     @Insert
     fun insertWorkingdays(schedules: List<Workingday>)

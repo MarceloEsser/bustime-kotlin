@@ -16,9 +16,6 @@
             tools:ignore="GoogleAppIndexingWarning"
             tools:targetApi="m">
 
-        <activity android:name=".view.activity.FavoriteSchedulesAcitivty" />
-        <activity android:name=".view.activity.FavoriteLinesActivity" />
-        <activity android:name=".view.activity.VicasaSchedulesActivity" />
         <activity android:name=".view.activity.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,6 +23,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".view.activity.FavoriteSchedulesAcitivty" />
+        <activity android:name=".view.activity.FavoriteLinesActivity" />
+        <activity android:name=".view.activity.VicasaSchedulesActivity" />
         <activity android:name=".view.activity.SogalItinerariesActivity" />
         <activity android:name=".view.activity.SogalLinesActivity" />
         <activity android:name=".view.activity.SogalSchedulesActivity" />

@@ -21,16 +21,5 @@ data class Workingday(
 
     @ColumnInfo(name = "lineId")
     var workindayKey: Long? = null,
-    @SerializedName("hora")
-    var hour: String = "",
-
-    @SerializedName("abrev")
-    var abrev: String = "",
-
-    @SerializedName("apd")
-    var apd: String = "N"
-) {
-    fun isApd(): Boolean {
-        return apd == "S"
-    }
+):BaseSchedule() {
 }

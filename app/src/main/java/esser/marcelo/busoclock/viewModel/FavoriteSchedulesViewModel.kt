@@ -28,11 +28,11 @@ class FavoriteSchedulesViewModel(
     fun fillSchedules() {
         GlobalScope.launch {
 
-            val lines = daoHelper.getLine(LineDAO.lineId ?: 0)
-
-            fillWorkingdays(lines)
-            fillSaturdays(lines)
-            fillSundays(lines)
+//            val lines = daoHelper.getLine(LineDAO.lineId ?: 0)
+//
+//            fillWorkingdays(lines)
+//            fillSaturdays(lines)
+//            fillSundays(lines)
         }
     }
 

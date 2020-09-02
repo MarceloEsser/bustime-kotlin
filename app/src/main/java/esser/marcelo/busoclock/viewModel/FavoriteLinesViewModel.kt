@@ -1,13 +1,15 @@
 package esser.marcelo.busoclock.viewModel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import esser.marcelo.busoclock.repository.dao.DaoHelper
-import esser.marcelo.busoclock.model.favorite.FavoriteLine
+import androidx.lifecycle.viewModelScope
+import esser.marcelo.busoclock.model.favorite.LineWithSchedules
 import esser.marcelo.busoclock.repository.dao.DaoHelperDelegate
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.flow.forEach
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
 /**
  * @author Marcelo Esser
@@ -18,21 +20,22 @@ import kotlinx.coroutines.launch
  */
 
 class FavoriteLinesViewModel(
-    private val daoHelper: DaoHelperDelegate
+    private val daoHelper: DaoHelperDelegate,
+    private val dispatcher: CoroutineContext
 ) : ViewModel() {
 
-    private var mLines: MutableList<FavoriteLine> = mutableListOf()
+    private val _favoriteLines: MutableLiveData<List<LineWithSchedules>> = MutableLiveData()
+    val favoriteLines: LiveData<List<LineWithSchedules>> by lazy {
+        fillFavoriteLinesList()
 
-    val favoriteLines: MutableLiveData<List<FavoriteLine>> = MutableLiveData()
+        return@lazy _favoriteLines
+    }
 
-    fun fillFavoriteLinesList() {
-//        GlobalScope.launch {
-//            val lines = daoHelper.getAll()
-//            lines.forEach {
-//                mLines.add(it.line!!)
-//            }
-//            favoriteLines.postValue(mLines)
-//        }
+    fun fillFavoriteLinesList() = viewModelScope.launch(dispatcher) {
+        daoHelper.getAll().collect { lines ->
+            if (lines != null)
+                _favoriteLines.postValue(lines)
+        }
     }
 
     fun deleteAll() {

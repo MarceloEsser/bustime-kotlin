@@ -10,6 +10,7 @@ import esser.marcelo.busoclock.repository.dao.LineDAO
 import esser.marcelo.busoclock.interfaces.DeleteDelegate
 import esser.marcelo.busoclock.interfaces.IFavoriteLineAdapterDelegate
 import esser.marcelo.busoclock.model.favorite.FavoriteLine
+import esser.marcelo.busoclock.model.favorite.LineWithSchedules
 import esser.marcelo.busoclock.view.dialog.DeleteDialog
 import esser.marcelo.busoclock.viewModel.FavoriteLinesViewModel
 import kotlinx.android.synthetic.main.activity_lines.*
@@ -46,7 +47,7 @@ class FavoriteLinesActivity : BaseActivity(R.layout.activity_lines), IFavoriteLi
             onBackPressed()
         }
 
-        val linesListObserver = Observer<List<FavoriteLine>> { lines ->
+        val linesListObserver = Observer<List<LineWithSchedules>> { lines ->
             adapter = FavoriteLinesAdapter(lines, this@FavoriteLinesActivity, this)
             lines_activity_rv_lines.visibility = VISIBLE
             lines_activity_rv_lines.adapter = adapter

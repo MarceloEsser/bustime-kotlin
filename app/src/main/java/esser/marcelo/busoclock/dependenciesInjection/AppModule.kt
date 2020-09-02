@@ -26,7 +26,13 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 private val roomModule = module {
-    single<DaoHelperDelegate> { DaoHelper(context = get(), get(), get()) }
+    single<DaoHelperDelegate> {
+        DaoHelper(
+            context = get(),
+            sogalSchedulesViewModel = get(),
+            vicasaSchedulesViewModel = get()
+        )
+    }
 }
 
 private val viewModelModule = module {
@@ -54,7 +60,8 @@ private val viewModelModule = module {
     //Favorite viewModels
     viewModel {
         FavoriteLinesViewModel(
-            daoHelper = get()
+            daoHelper = get(),
+            dispatcher = Dispatchers.IO
         )
     }
     viewModel {
