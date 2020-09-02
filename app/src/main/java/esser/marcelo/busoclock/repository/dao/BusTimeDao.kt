@@ -7,6 +7,9 @@ import esser.marcelo.busoclock.model.favorite.LineWithSchedules
 import esser.marcelo.busoclock.model.schedules.Saturday
 import esser.marcelo.busoclock.model.schedules.Sunday
 import esser.marcelo.busoclock.model.schedules.Workingday
+import esser.marcelo.busoclock.repository.service.wrapper.ApiResult
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.flow.Flow
 
 /**
  * @author Marcelo Esser
@@ -21,7 +24,7 @@ interface BusTimeDao {
 
     @Transaction
     @Query("SELECT * FROM FavoriteLine")
-    fun getAll(): List<LineWithSchedules>
+    fun getAll(): Flow<List<LineWithSchedules>?>
 
     @Transaction
     @Query("SELECT * FROM FavoriteLine WHERE id in (:id)")
@@ -47,7 +50,7 @@ interface BusTimeDao {
     fun clearDatabase()
 
     @Insert
-    fun insertLine(lines: FavoriteLine): Long
+    fun insertLine(lines: FavoriteLine)
 
     @Insert
     fun insertWorkingdays(schedules: List<Workingday>)

@@ -4,12 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import esser.marcelo.busoclock.repository.dao.DaoHelper
 import esser.marcelo.busoclock.repository.dao.LineDAO
-import esser.marcelo.busoclock.helper.Constants
+import esser.marcelo.busoclock.model.Constants
 import esser.marcelo.busoclock.model.LineWay
+import esser.marcelo.busoclock.model.favorite.FavoriteLine
 import esser.marcelo.busoclock.model.favorite.LineWithSchedules
 import esser.marcelo.busoclock.model.sogal.LinesDTO
+import esser.marcelo.busoclock.repository.dao.DaoHelperDelegate
 import esser.marcelo.busoclock.repository.service.sogalServices.SogalServiceDelegate
 import esser.marcelo.busoclock.repository.service.wrapper.resource.Status
 import kotlinx.coroutines.flow.collect
@@ -26,12 +27,11 @@ import kotlin.coroutines.CoroutineContext
  */
 
 class SogalLinesViewModel(
-    private val daoHelper: DaoHelper,
+    private val daoHelper: DaoHelperDelegate,
     private val service: SogalServiceDelegate,
     private val dispatcher: CoroutineContext
 ) : ViewModel() {
 
-    //private lateinit var mLines: List<LinesDTO>
 
     val _lines = MutableLiveData<List<LinesDTO>>()
 
@@ -41,6 +41,8 @@ class SogalLinesViewModel(
         }
         return@lazy _lines
     }
+
+    val mFavoriteLine = MutableLiveData<FavoriteLine>()
 
     val isFavorite: MutableLiveData<Boolean> = MutableLiveData()
 
@@ -75,10 +77,24 @@ class SogalLinesViewModel(
 
     fun findLine() {
         viewModelScope.launch(dispatcher) {
-            val lines: List<LineWithSchedules> =
-                daoHelper.findLineBy(LineDAO.lineName, LineDAO.lineCode, LineDAO.lineWay?.way ?: "")
+            val lines: LineWithSchedules =
+                daoHelper.getLine(LineDAO.lineName, LineDAO.lineCode, LineDAO.lineWay?.way ?: "")
 
-            isFavorite.postValue(lines.size == 1)
+//            isFavorite.postValue(lines != null)
         }
+    }
+
+    fun saveLine() = viewModelScope.launch(dispatcher) {
+        val favoriteLine: FavoriteLine = createFavoriteLine()
+        daoHelper.insertLine(favoriteLine)
+    }
+
+    private fun createFavoriteLine(): FavoriteLine {
+        return FavoriteLine(
+            isSogal = true,
+            name = LineDAO.lineName,
+            code = LineDAO.lineCode,
+            way = LineDAO.lineWay?.description ?: ""
+        )
     }
 }

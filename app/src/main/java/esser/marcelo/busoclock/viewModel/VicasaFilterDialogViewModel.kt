@@ -1,17 +1,17 @@
 package esser.marcelo.busoclock.viewModel
 
-import esser.marcelo.busoclock.helper.Constants.CACHOEIRINHA
-import esser.marcelo.busoclock.helper.Constants.CANOAS
-import esser.marcelo.busoclock.helper.Constants.COMUM
-import esser.marcelo.busoclock.helper.Constants.EXECUTIVO
-import esser.marcelo.busoclock.helper.Constants.GRAVATAI
-import esser.marcelo.busoclock.helper.Constants.INTEGRACAO
-import esser.marcelo.busoclock.helper.Constants.METROPOLITANA
-import esser.marcelo.busoclock.helper.Constants.POA
-import esser.marcelo.busoclock.helper.Constants.ROTAS
-import esser.marcelo.busoclock.helper.Constants.SELETIVA
-import esser.marcelo.busoclock.helper.Constants.TODOS
-import esser.marcelo.busoclock.helper.Constants.URBANA
+import esser.marcelo.busoclock.model.Constants.CACHOEIRINHA
+import esser.marcelo.busoclock.model.Constants.CANOAS
+import esser.marcelo.busoclock.model.Constants.COMUM
+import esser.marcelo.busoclock.model.Constants.EXECUTIVO
+import esser.marcelo.busoclock.model.Constants.GRAVATAI
+import esser.marcelo.busoclock.model.Constants.INTEGRACAO
+import esser.marcelo.busoclock.model.Constants.METROPOLITANA
+import esser.marcelo.busoclock.model.Constants.POA
+import esser.marcelo.busoclock.model.Constants.ROTAS
+import esser.marcelo.busoclock.model.Constants.SELETIVA
+import esser.marcelo.busoclock.model.Constants.TODOS
+import esser.marcelo.busoclock.model.Constants.URBANA
 import esser.marcelo.busoclock.model.vicasa.Vicasa
 
 /**

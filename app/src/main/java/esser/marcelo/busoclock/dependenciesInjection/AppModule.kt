@@ -9,6 +9,7 @@ package esser.marcelo.busoclock.dependenciesInjection
  */
 
 import esser.marcelo.busoclock.repository.dao.DaoHelper
+import esser.marcelo.busoclock.repository.dao.DaoHelperDelegate
 import esser.marcelo.busoclock.repository.service.NetworkHandler
 import esser.marcelo.busoclock.repository.service.callAdapter.CallAdapterFactory
 import esser.marcelo.busoclock.repository.service.sogalServices.ISogalAPI
@@ -25,7 +26,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 private val roomModule = module {
-    single { DaoHelper(context = get()) }
+    single<DaoHelperDelegate> { DaoHelper(context = get(), get(), get()) }
 }
 
 private val viewModelModule = module {
@@ -65,7 +66,8 @@ private val viewModelModule = module {
     //Home viewModel
     viewModel {
         HomeViewModel(
-            daoHelper = get()
+            daoHelper = get(),
+            dispatcher = Dispatchers.IO
         )
     }
 

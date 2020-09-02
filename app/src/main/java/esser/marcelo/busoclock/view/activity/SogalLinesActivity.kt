@@ -5,13 +5,15 @@ import android.content.Intent
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View.*
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.extensions.hideKeyboard
-import esser.marcelo.busoclock.helper.Constants.CB_WAY
+import esser.marcelo.busoclock.model.Constants.CB_WAY
 import esser.marcelo.busoclock.interfaces.GenericLinesAdapterDelegate
 import esser.marcelo.busoclock.interfaces.LineMenuDelegate
 import esser.marcelo.busoclock.model.BaseLine
+import esser.marcelo.busoclock.model.favorite.FavoriteLine
 import esser.marcelo.busoclock.model.sogal.LinesDTO
 import esser.marcelo.busoclock.view.adapter.GenericLinesAdapter
 import esser.marcelo.busoclock.view.dialog.LineMenuDialog
@@ -35,6 +37,7 @@ class SogalLinesActivity : BaseActivity(R.layout.activity_lines), GenericLinesAd
     lateinit var lineMenuDialog: LineMenuDialog
 
     private lateinit var adapter: GenericLinesAdapter
+    private val mContext = this
 
     var lineWay: String = CB_WAY
 
@@ -45,6 +48,12 @@ class SogalLinesActivity : BaseActivity(R.layout.activity_lines), GenericLinesAd
         linesObserver()
 
         isFavoriteObserver()
+
+        val favoriteLineObserver = Observer<FavoriteLine> { line ->
+            Toast.makeText(mContext, "${line.name} salva com sucesso", Toast.LENGTH_SHORT).show()
+        }
+
+        viewModel.mFavoriteLine.observe(mContext, favoriteLineObserver)
     }
 
     private fun isFavoriteObserver() {
@@ -168,11 +177,11 @@ class SogalLinesActivity : BaseActivity(R.layout.activity_lines), GenericLinesAd
     }
 
     override fun findLine() {
-        viewModel.findLine()
+        //viewModel.findLine()
     }
 
     override fun saveLine() {
-
+        viewModel.saveLine()
     }
 
     override fun removeLine() {

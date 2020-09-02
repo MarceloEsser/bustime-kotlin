@@ -2,9 +2,13 @@ package esser.marcelo.busoclock.viewModel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import esser.marcelo.busoclock.repository.dao.DaoHelper
+import esser.marcelo.busoclock.repository.dao.DaoHelperDelegate
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
 /**
  * @author Marcelo Esser
@@ -14,14 +18,16 @@ import kotlinx.coroutines.launch
  * @since 31/09/20
  */
 
-class HomeViewModel(private val daoHelper: DaoHelper): ViewModel() {
+class HomeViewModel(
+    private val daoHelper: DaoHelperDelegate,
+    private val dispatcher: CoroutineContext
+) : ViewModel() {
 
     var favSize: MutableLiveData<Int> = MutableLiveData()
 
-    fun getLinesQuantity() {
-        GlobalScope.launch {
-            val size = daoHelper.getAll().size
-            favSize.postValue(size)
+    fun getLinesQuantity() = viewModelScope.launch(dispatcher) {
+        daoHelper.getAll().collect {
+                favSize.postValue(it?.size)
         }
     }
 }

@@ -1,10 +1,8 @@
 package esser.marcelo.busoclock.view.activity
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import esser.marcelo.busoclock.helper.ProgressDialogHelper
 import esser.marcelo.busoclock.view.dialog.LoaderDialog
 
 /**

@@ -1,9 +1,16 @@
 package esser.marcelo.busoclock.repository.dao
 
-import esser.marcelo.busoclock.repository.dao.database.AppDatabase
 import android.content.Context
 import androidx.room.Room
+import esser.marcelo.busoclock.model.favorite.FavoriteLine
 import esser.marcelo.busoclock.model.favorite.LineWithSchedules
+import esser.marcelo.busoclock.repository.dao.database.AppDatabase
+import esser.marcelo.busoclock.repository.service.wrapper.resource.NetworkBoundResource
+import esser.marcelo.busoclock.repository.service.wrapper.resource.Resource
+import esser.marcelo.busoclock.viewModel.SogalSchedulesViewModel
+import esser.marcelo.busoclock.viewModel.VicasaSchedulesViewModel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 /**
  * @author Marcelo Esser
@@ -13,9 +20,19 @@ import esser.marcelo.busoclock.model.favorite.LineWithSchedules
  * @since 31/08/20
  */
 
+interface DaoHelperDelegate {
+    fun getAll(): Flow<List<LineWithSchedules>?>
+    fun getLine(lineId: Long): LineWithSchedules
+    fun getLine(name: String, code: String, way: String): LineWithSchedules
+    fun deleteAllLines()
+    suspend fun insertLine(line: FavoriteLine)
+}
+
 class DaoHelper(
-    private val context: Context
-) {
+    context: Context,
+    private val sogalSchedulesViewModel: SogalSchedulesViewModel,
+    private val vicasaSchedulesViewModel: VicasaSchedulesViewModel
+) : DaoHelperDelegate {
 
     private val database: AppDatabase = Room.databaseBuilder(
         context,
@@ -29,33 +46,24 @@ class DaoHelper(
         database.busTimeDao()
     }
 
-    fun getAll(): List<LineWithSchedules> {
+    override fun getAll(): Flow<List<LineWithSchedules>?> {
         return bustimeDao.getAll()
     }
 
-    fun getLineBy(id: Long): List<LineWithSchedules> {
-        return bustimeDao.getLineBy(id)
+    override fun getLine(lineId: Long): LineWithSchedules {
+        return bustimeDao.getLineBy(lineId)[0]
     }
 
-    fun findLineBy(name: String, code: String, way: String): List<LineWithSchedules> {
-        return bustimeDao.getLineBy(name, code, way)
+    override fun getLine(name: String, code: String, way: String): LineWithSchedules {
+        return bustimeDao.getLineBy(name, code, way)[0]
     }
 
-    fun deleteAll() {
+    override fun deleteAllLines() {
         bustimeDao.clearDatabase()
     }
 
-    fun insert(
-        line: LineWithSchedules,
-        onLineInserted: () -> Unit
-    ) {
-        this.line = line
-
-        lineId = bustimeDao.insertLine(line.line!!)
-
-        insertSchedules()
-
-        onLineInserted()
+    override suspend fun insertLine(line: FavoriteLine) {
+        bustimeDao.insertLine(line)
     }
 
     private fun insertSchedules() {

@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import esser.marcelo.busoclock.repository.dao.DaoHelper
 import esser.marcelo.busoclock.repository.dao.LineDAO
-import esser.marcelo.busoclock.helper.Constants
-import esser.marcelo.busoclock.helper.Constants.CB_WAY
+import esser.marcelo.busoclock.model.Constants
+import esser.marcelo.busoclock.model.Constants.CB_WAY
 import esser.marcelo.busoclock.model.LineWay
 import esser.marcelo.busoclock.model.vicasa.Vicasa
 import esser.marcelo.busoclock.repository.service.vicasaServices.VicasaServiceDelegate

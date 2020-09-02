@@ -15,7 +15,7 @@ buildscript {
 
         //AppCompat and UI Things
         app_compat = '1.2.0'
-        constraint_layout = '2.0.0'
+        constraint_layout = '2.0.1'
         recycler_view = '1.1.0'
         material = '1.2.0'
         lottie = '3.3.1'

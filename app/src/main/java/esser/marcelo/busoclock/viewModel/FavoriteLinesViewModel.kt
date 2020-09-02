@@ -4,7 +4,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import esser.marcelo.busoclock.repository.dao.DaoHelper
 import esser.marcelo.busoclock.model.favorite.FavoriteLine
+import esser.marcelo.busoclock.repository.dao.DaoHelperDelegate
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.forEach
 import kotlinx.coroutines.launch
 
 /**
@@ -16,7 +18,7 @@ import kotlinx.coroutines.launch
  */
 
 class FavoriteLinesViewModel(
-    private val daoHelper: DaoHelper
+    private val daoHelper: DaoHelperDelegate
 ) : ViewModel() {
 
     private var mLines: MutableList<FavoriteLine> = mutableListOf()
@@ -24,18 +26,18 @@ class FavoriteLinesViewModel(
     val favoriteLines: MutableLiveData<List<FavoriteLine>> = MutableLiveData()
 
     fun fillFavoriteLinesList() {
-        GlobalScope.launch {
-            val lines = daoHelper.getAll()
-            lines.forEach {
-                mLines.add(it.line!!)
-            }
-            favoriteLines.postValue(mLines)
-        }
+//        GlobalScope.launch {
+//            val lines = daoHelper.getAll()
+//            lines.forEach {
+//                mLines.add(it.line!!)
+//            }
+//            favoriteLines.postValue(mLines)
+//        }
     }
 
     fun deleteAll() {
         GlobalScope.launch {
-            daoHelper.deleteAll()
+            daoHelper.deleteAllLines()
         }
     }
 }

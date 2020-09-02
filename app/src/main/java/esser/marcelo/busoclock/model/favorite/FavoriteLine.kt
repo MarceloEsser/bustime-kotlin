@@ -15,17 +15,16 @@ import esser.marcelo.busoclock.model.schedules.BaseSchedule
 
 @Entity
 data class FavoriteLine(
-    @PrimaryKey var id : Long? = null
-    ) {
+    @PrimaryKey var id: Long? = null,
     @ColumnInfo(name = "is_sogal")
-    var isSogal: Boolean = true
+    var isSogal: Boolean,
 
     @ColumnInfo(name = "line_name")
-    var name: String = ""
+    val name: String,
 
     @ColumnInfo(name = "line_code")
-    var code: String = ""
+    val code: String,
 
     @ColumnInfo(name = "line_way")
-    var way: String = ""
-}
+    val way: String = ""
+)

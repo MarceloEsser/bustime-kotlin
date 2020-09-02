@@ -5,11 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import esser.marcelo.busoclock.repository.dao.LineDAO
-import esser.marcelo.busoclock.helper.Constants.BB_WAY
-import esser.marcelo.busoclock.helper.Constants.BC_WAY
-import esser.marcelo.busoclock.helper.Constants.CB_WAY
-import esser.marcelo.busoclock.helper.Constants.CC_WAY
-import esser.marcelo.busoclock.helper.VicasaTableSelectors
+import esser.marcelo.busoclock.model.Constants.BB_WAY
+import esser.marcelo.busoclock.model.Constants.BC_WAY
+import esser.marcelo.busoclock.model.Constants.CB_WAY
+import esser.marcelo.busoclock.model.Constants.CC_WAY
+import esser.marcelo.busoclock.model.VicasaTableSelectors
 import esser.marcelo.busoclock.model.schedules.BaseSchedule
 import esser.marcelo.busoclock.repository.service.vicasaServices.VicasaServiceDelegate
 import esser.marcelo.busoclock.repository.service.wrapper.resource.Status

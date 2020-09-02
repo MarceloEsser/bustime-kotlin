@@ -1,4 +1,4 @@
-package esser.marcelo.busoclock.helper
+package esser.marcelo.busoclock.model
 
 /**
  * @author Marcelo Esser

@@ -2,10 +2,10 @@ package esser.marcelo.busoclock.viewModel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import esser.marcelo.busoclock.repository.dao.DaoHelper
 import esser.marcelo.busoclock.repository.dao.LineDAO
 import esser.marcelo.busoclock.model.favorite.LineWithSchedules
 import esser.marcelo.busoclock.model.schedules.BaseSchedule
+import esser.marcelo.busoclock.repository.dao.DaoHelperDelegate
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
  */
 
 class FavoriteSchedulesViewModel(
-    private val daoHelper: DaoHelper
+    private val daoHelper: DaoHelperDelegate
 ) : ViewModel() {
 
     val workingDays: MutableLiveData<List<BaseSchedule>> = MutableLiveData()
@@ -28,12 +28,11 @@ class FavoriteSchedulesViewModel(
     fun fillSchedules() {
         GlobalScope.launch {
 
-            val lines = daoHelper.getLineBy(LineDAO.lineId ?: 0)
-            val line = lines[0]
+            val lines = daoHelper.getLine(LineDAO.lineId ?: 0)
 
-            fillWorkingdays(line)
-            fillSaturdays(line)
-            fillSundays(line)
+            fillWorkingdays(lines)
+            fillSaturdays(lines)
+            fillSundays(lines)
         }
     }
 
