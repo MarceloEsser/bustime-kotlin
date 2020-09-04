@@ -6,7 +6,6 @@ import android.widget.ArrayAdapter
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.interfaces.FilterDialogInteraction
 import esser.marcelo.busoclock.model.vicasa.Vicasa
-import esser.marcelo.busoclock.viewModel.VicasaFilterDialogViewModel
 import kotlinx.android.synthetic.main.dialog_vicasa_filter.*
 
 /**
@@ -17,11 +16,10 @@ import kotlinx.android.synthetic.main.dialog_vicasa_filter.*
  * @since 31/09/20
  */
 
-class VicasaFilterDialog : BaseDialog(R.layout.dialog_vicasa_filter) {
-
-    val viewModel: VicasaFilterDialogViewModel by lazy {
-        VicasaFilterDialogViewModel()
-    }
+class VicasaFilterDialog(
+    private val countryList: List<Vicasa>,
+    private val serviceTypeList: List<Vicasa>
+) : BaseDialog(R.layout.dialog_vicasa_filter) {
 
     lateinit var interaction: FilterDialogInteraction
 
@@ -46,11 +44,11 @@ class VicasaFilterDialog : BaseDialog(R.layout.dialog_vicasa_filter) {
 
     private fun buildAdapter() {
         val adapter = ArrayAdapter(
-            this.activity!!, android.R.layout.simple_spinner_item, viewModel.getCountryList()
+            this.activity!!, android.R.layout.simple_spinner_item, countryList
         )
 
         val serviceTypeAdapter = ArrayAdapter(
-            this.activity!!, android.R.layout.simple_spinner_item, viewModel.getServiceTypeList()
+            this.activity!!, android.R.layout.simple_spinner_item, serviceTypeList
         )
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)

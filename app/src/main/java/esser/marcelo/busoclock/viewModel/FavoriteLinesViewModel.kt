@@ -40,7 +40,7 @@ class FavoriteLinesViewModel(
 
     fun deleteAll() {
         GlobalScope.launch {
-            daoHelper.deleteAllLines()
+            daoHelper.clearDatabase()
         }
     }
 }

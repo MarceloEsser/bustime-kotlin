@@ -21,5 +21,4 @@ data class Workingday(
 
     @ColumnInfo(name = "lineId")
     var workindayKey: Long? = null,
-):BaseSchedule() {
-}
+):BaseSchedule()

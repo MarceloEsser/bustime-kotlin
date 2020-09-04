@@ -2,6 +2,7 @@ package esser.marcelo.busoclock.view.activity
 
 import android.view.View.*
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.repository.dao.LineDAO
 import esser.marcelo.busoclock.model.schedules.BaseSchedule
@@ -9,6 +10,7 @@ import esser.marcelo.busoclock.view.adapter.SchedulesAdapter
 import esser.marcelo.busoclock.viewModel.VicasaSchedulesViewModel
 import kotlinx.android.synthetic.main.activity_lines.*
 import kotlinx.android.synthetic.main.activity_schedules.*
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -85,7 +87,9 @@ class VicasaSchedulesActivity : BaseActivity(R.layout.activity_schedules) {
     private fun lottieAnimationClick() {
         lines_activity_img_lottie_conection.setOnClickListener {
             lines_activity_img_lottie_conection.pauseAnimation()
-            viewModel.loadSchedules()
+            lifecycleScope.launch {
+                viewModel.loadSchedules()
+            }
         }
     }
 

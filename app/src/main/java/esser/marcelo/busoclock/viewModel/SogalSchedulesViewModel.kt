@@ -4,16 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import esser.marcelo.busoclock.interfaces.SaveLineDelegate
 import esser.marcelo.busoclock.repository.dao.LineDAO
-import esser.marcelo.busoclock.model.schedules.BaseSchedule
 import esser.marcelo.busoclock.model.schedules.Saturday
 import esser.marcelo.busoclock.model.schedules.Sunday
 import esser.marcelo.busoclock.model.schedules.Workingday
+import esser.marcelo.busoclock.model.sogal.SogalResponse
 import esser.marcelo.busoclock.repository.service.sogalServices.SogalServiceDelegate
+import esser.marcelo.busoclock.repository.service.wrapper.resource.Resource
 import esser.marcelo.busoclock.repository.service.wrapper.resource.Status
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import okhttp3.internal.wait
 import kotlin.coroutines.CoroutineContext
 
 /**
@@ -29,11 +30,11 @@ class SogalSchedulesViewModel(
     private val dispatcher: CoroutineContext
 ) : ViewModel() {
 
+    var saverDelegate: SaveLineDelegate? = null
+
     private val _workingDays = MutableLiveData<List<Workingday>>()
-    val workingDays: LiveData<List<Workingday>> by lazy {
-        viewModelScope.launch(dispatcher) {
-            loadSchedules()
-        }
+    val workingdays: LiveData<List<Workingday>> by lazy {
+        loadSchedules()
         return@lazy _workingDays
     }
 
@@ -47,13 +48,27 @@ class SogalSchedulesViewModel(
         return@lazy _sundays
     }
 
-    suspend fun loadSchedules() {
-        service.getSchedules(LineDAO.lineWay?.way ?: "", LineDAO.lineCode).collect { resource ->
-            if (resource.requestStatus == Status.success) {
-                _workingDays.postValue(resource.data?.workingDays)
-                _saturdays.postValue(resource.data?.saturdays)
-                _sundays.postValue(resource.data?.sundays)
+    fun loadSchedules() {
+        viewModelScope.launch(dispatcher) {
+            service.getSchedules(LineDAO.lineWay?.way ?: "", LineDAO.lineCode).collect { resource ->
+                if (resource.requestStatus == Status.success) {
+                    fillSchedules(resource)
+
+                    saveLineDelegate()
+                }
             }
         }
+    }
+
+    private fun saveLineDelegate() {
+        if (saverDelegate != null) {
+            saverDelegate?.canInsertSchedules(isSogal = true)
+        }
+    }
+
+    private fun fillSchedules(resource: Resource<SogalResponse?>) {
+        _workingDays.postValue(resource.data?.workingDays)
+        _saturdays.postValue(resource.data?.saturdays)
+        _sundays.postValue(resource.data?.sundays)
     }
 }

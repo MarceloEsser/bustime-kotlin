@@ -1,7 +1,5 @@
 package esser.marcelo.busoclock.model
 
-import org.jsoup.nodes.Entities.escape
-
 /**
  * @author Marcelo Esser
  * @author marcelo.v.esser@gmail.com

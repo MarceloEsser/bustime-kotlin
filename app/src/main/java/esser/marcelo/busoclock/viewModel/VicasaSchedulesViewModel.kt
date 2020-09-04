@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import esser.marcelo.busoclock.interfaces.SaveLineDelegate
 import esser.marcelo.busoclock.repository.dao.LineDAO
 import esser.marcelo.busoclock.model.Constants.BB_WAY
 import esser.marcelo.busoclock.model.Constants.BC_WAY
@@ -11,6 +12,9 @@ import esser.marcelo.busoclock.model.Constants.CB_WAY
 import esser.marcelo.busoclock.model.Constants.CC_WAY
 import esser.marcelo.busoclock.model.VicasaTableSelectors
 import esser.marcelo.busoclock.model.schedules.BaseSchedule
+import esser.marcelo.busoclock.model.schedules.Saturday
+import esser.marcelo.busoclock.model.schedules.Sunday
+import esser.marcelo.busoclock.model.schedules.Workingday
 import esser.marcelo.busoclock.repository.service.vicasaServices.VicasaServiceDelegate
 import esser.marcelo.busoclock.repository.service.wrapper.resource.Status
 import kotlinx.coroutines.*
@@ -33,49 +37,51 @@ class VicasaSchedulesViewModel(
     private val dispatcher: CoroutineContext
 ) : ViewModel() {
 
-    private val _workingdays = MutableLiveData<List<BaseSchedule>>()
-    val workingdays: LiveData<List<BaseSchedule>> by lazy {
+    var saverDelegate: SaveLineDelegate? = null
+
+    private val _workingdays = MutableLiveData<List<Workingday>>()
+    val workingdays: LiveData<List<Workingday>> by lazy {
         loadSchedules()
         return@lazy _workingdays
     }
 
-    private val _saturdays = MutableLiveData<List<BaseSchedule>>()
-    val saturdays: LiveData<List<BaseSchedule>>
+    private val _saturdays = MutableLiveData<List<Saturday>>()
+    val saturdays: LiveData<List<Saturday>>
         get() = _saturdays
 
-    private val _sundays = MutableLiveData<List<BaseSchedule>>()
-    val sundays: LiveData<List<BaseSchedule>>
+    private val _sundays = MutableLiveData<List<Sunday>>()
+    val sundays: LiveData<List<Sunday>>
         get() = _sundays
-
 
     private var workingdaysElement: Element? = null
     private var saturdaysElement: Element? = null
     private var sundaysElement: Element? = null
 
 
-    fun loadSchedules() = viewModelScope.launch(dispatcher) {
-
-        service.getSchedules(LineDAO.lineCode).collect { resource ->
-            if (resource.requestStatus == Status.success && resource.data != null) {
-                val htmlBody = async { resource.data.string() }
-                parseResponse(htmlBody.await())
+    fun loadSchedules() {
+        viewModelScope.launch(dispatcher) {
+            service.getSchedules(LineDAO.lineCode).collect { resource ->
+                if (resource.requestStatus == Status.success && resource.data != null) {
+                    parseResponse(resource.data.string())
+                }
             }
         }
     }
 
-    private fun parseResponse(response: String) = viewModelScope.launch(dispatcher) {
+    private suspend fun parseResponse(response: String) = viewModelScope.launch(dispatcher) {
 
         setElements(response)
 
-        val workingdaysListAsync = async { getSchedulesFrom(workingdaysElement) }
-        val saturdaysListAsync = async { getSchedulesFrom(saturdaysElement) }
-        val sundaysListAsync = async { getSchedulesFrom(sundaysElement) }
+        val workingdaysListAsync = async { fillWorkingdays(workingdaysElement) }
+        val saturdaysListAsync = async { fillSaturdays(saturdaysElement) }
+        val sundaysListAsync = async { fillSundays(sundaysElement) }
 
         setAllCompletedList(
             workingdaysListAsync.await(),
             saturdaysListAsync.await(),
             sundaysListAsync.await(),
         )
+
     }
 
     private fun setElements(response: String) {
@@ -113,17 +119,45 @@ class VicasaSchedulesViewModel(
         sundaysElement = document.selectFirst(VicasaTableSelectors.SUNDAYS_CB)
     }
 
-    private fun getSchedulesFrom(element: Element?): MutableList<BaseSchedule> {
-        val schedulesList: MutableList<BaseSchedule> = ArrayList()
+    private fun fillSundays(element: Element?): MutableList<Sunday> {
+        val schedulesList: MutableList<Sunday> = ArrayList()
 
         element?.apply {
             for (mElement in children()) {
                 val schedule = mElement.text()
-                schedulesList.add(
-                    BaseSchedule(
-                        hour = schedule
-                    )
-                )
+                val sunday = Sunday()
+                sunday.hour = schedule
+                schedulesList.add(sunday)
+            }
+        }
+
+        return schedulesList
+    }
+
+    private fun fillSaturdays(element: Element?): MutableList<Saturday> {
+        val schedulesList: MutableList<Saturday> = ArrayList()
+
+        element?.apply {
+            for (mElement in children()) {
+                val schedule = mElement.text()
+                val saturday = Saturday()
+                saturday.hour = schedule
+                schedulesList.add(saturday)
+            }
+        }
+
+        return schedulesList
+    }
+
+    private fun fillWorkingdays(element: Element?): MutableList<Workingday> {
+        val schedulesList: MutableList<Workingday> = ArrayList()
+
+        element?.apply {
+            for (mElement in children()) {
+                val schedule = mElement.text()
+                val workingday = Workingday()
+                workingday.hour = schedule
+                schedulesList.add(workingday)
             }
         }
 
@@ -131,12 +165,21 @@ class VicasaSchedulesViewModel(
     }
 
     private fun setAllCompletedList(
-        workingdaysList: MutableList<BaseSchedule>,
-        saturdaysList: MutableList<BaseSchedule>,
-        sundaysList: MutableList<BaseSchedule>,
+        workingdaysList: MutableList<Workingday>,
+        saturdaysList: MutableList<Saturday>,
+        sundaysList: MutableList<Sunday>,
     ) {
+
         this._workingdays.postValue(workingdaysList)
         this._saturdays.postValue(saturdaysList)
         this._sundays.postValue(sundaysList)
+
+        saveLineDelegate()
+    }
+
+    private fun saveLineDelegate() {
+        if (this.saverDelegate != null) {
+            saverDelegate?.canInsertSchedules(isSogal = false)
+        }
     }
 }

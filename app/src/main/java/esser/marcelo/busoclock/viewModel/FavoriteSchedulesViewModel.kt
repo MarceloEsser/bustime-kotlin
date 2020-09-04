@@ -2,12 +2,16 @@ package esser.marcelo.busoclock.viewModel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import esser.marcelo.busoclock.repository.dao.LineDAO
 import esser.marcelo.busoclock.model.favorite.LineWithSchedules
-import esser.marcelo.busoclock.model.schedules.BaseSchedule
+import esser.marcelo.busoclock.model.schedules.Saturday
+import esser.marcelo.busoclock.model.schedules.Sunday
+import esser.marcelo.busoclock.model.schedules.Workingday
 import esser.marcelo.busoclock.repository.dao.DaoHelperDelegate
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
 /**
  * @author Marcelo Esser
@@ -18,48 +22,26 @@ import kotlinx.coroutines.launch
  */
 
 class FavoriteSchedulesViewModel(
-    private val daoHelper: DaoHelperDelegate
+    private val daoHelper: DaoHelperDelegate,
+    private val dispatcher: CoroutineContext
 ) : ViewModel() {
 
-    val workingDays: MutableLiveData<List<BaseSchedule>> = MutableLiveData()
-    val saturdays: MutableLiveData<List<BaseSchedule>> = MutableLiveData()
-    val sundays: MutableLiveData<List<BaseSchedule>> = MutableLiveData()
+    val workingDays: MutableLiveData<List<Workingday>> = MutableLiveData()
+    val saturdays: MutableLiveData<List<Saturday>> = MutableLiveData()
+    val sundays: MutableLiveData<List<Sunday>> = MutableLiveData()
 
-    fun fillSchedules() {
-        GlobalScope.launch {
-
-//            val lines = daoHelper.getLine(LineDAO.lineId ?: 0)
-//
-//            fillWorkingdays(lines)
-//            fillSaturdays(lines)
-//            fillSundays(lines)
+    fun fillSchedules() = viewModelScope.launch(dispatcher) {
+        daoHelper.getLines(LineDAO.lineId ?: 0).collect {
+            if (it != null && it.isNotEmpty()) {
+                val line = it[0]
+                fillSchedules(line)
+            }
         }
     }
 
-    private fun fillWorkingdays(line: LineWithSchedules) {
-        val baseSchedules = mutableListOf<BaseSchedule>()
-        for (workingday in line.workingdays!!) {
-            baseSchedules.add(BaseSchedule(workingday.hour, workingday.abrev, workingday.apd))
-        }
-
-        workingDays.postValue(baseSchedules)
-    }
-
-    private fun fillSaturdays(line: LineWithSchedules) {
-        val baseSchedules = mutableListOf<BaseSchedule>()
-        for (saturday in line.saturdays!!) {
-            baseSchedules.add(BaseSchedule(saturday.hour, saturday.abrev, saturday.apd))
-        }
-
-        saturdays.postValue(baseSchedules)
-    }
-
-    private fun fillSundays(line: LineWithSchedules) {
-        val baseSchedules = mutableListOf<BaseSchedule>()
-        for (sunday in line.sundays!!) {
-            baseSchedules.add(BaseSchedule(sunday.hour, sunday.abrev, sunday.apd))
-        }
-
-        sundays.postValue(baseSchedules)
+    private fun fillSchedules(line: LineWithSchedules) {
+        workingDays.postValue(line.workingdays)
+        saturdays.postValue(line.saturdays)
+        sundays.postValue(line.sundays)
     }
 }

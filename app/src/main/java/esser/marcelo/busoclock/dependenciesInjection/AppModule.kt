@@ -66,7 +66,8 @@ private val viewModelModule = module {
     }
     viewModel {
         FavoriteSchedulesViewModel(
-            daoHelper = get()
+            daoHelper = get(),
+            dispatcher = Dispatchers.IO
         )
     }
 

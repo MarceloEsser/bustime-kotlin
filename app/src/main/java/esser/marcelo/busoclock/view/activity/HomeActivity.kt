@@ -77,8 +77,7 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
     private fun events() {
         //cardsEvents()
         esserEvents()
-//        todeschiniEvents()
-//        wottrichEvents()
+        wottrichEvents()
     }
 
     private fun esserEvents() {
@@ -112,73 +111,39 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
         }
     }
 
-//    private fun wottrichEvents() {
-//        wottrichGitHubEvent()
-//
-//        wottrichEmailEvent()
-//
-//        wottrichLinkedInEvent()
-//    }
-//
-//    private fun wottrichGitHubEvent() {
-//        llWottrichGitHub.setOnClickListener {
-//            val url = "https://github.com/Wottrich"
-//            openAUrl(url)
-//        }
-//    }
-//
-//    private fun wottrichLinkedInEvent() {
-//        llWottrichLinkedIn.setOnClickListener {
-//            val url = "https://www.linkedin.com/in/lucas-c-wottrich/"
-//            openAUrl(url)
-//        }
-//    }
-//
-//    private fun wottrichEmailEvent() {
-//        llWottrichEmail.setOnClickListener {
-//
-//            val emailIntent = Intent(
-//                Intent.ACTION_SENDTO, fromParts(
-//                    "mailto", "wottrich78@gmail.com", null
-//                )
-//            )
-//            startActivity(Intent.createChooser(emailIntent, "Enviar email..."))
-//        }
-//    }
-//
-//    private fun todeschiniEvents() {
-//        todeschiniGitHubEvent()
-//
-//        todeschiniEmailEvent()
-//
-//        todeschiniLinkedInEvent()
-//    }
-//
-//    private fun todeschiniGitHubEvent() {
-//        llTodeschiniGitHub.setOnClickListener {
-//            val url = "https://github.com/brunotodeschini"
-//            openAUrl(url)
-//        }
-//    }
-//
-//    private fun todeschiniLinkedInEvent() {
-//        llTodeschiniLinkedIn.setOnClickListener {
-//            val url = "https://www.linkedin.com/in/bruno-todeschini/"
-//            openAUrl(url)
-//        }
-//    }
-//
-//    private fun todeschiniEmailEvent() {
-//        llTodeschiniEmail.setOnClickListener {
-//
-//            val emailIntent = Intent(
-//                Intent.ACTION_SENDTO, fromParts(
-//                    "mailto", "obruno1997@gmail.com", null
-//                )
-//            )
-//            startActivity(Intent.createChooser(emailIntent, "Enviar email..."))
-//        }
-//    }
+    private fun wottrichEvents() {
+        wottrichGitHubEvent()
+
+        wottrichEmailEvent()
+
+        wottrichLinkedInEvent()
+    }
+
+    private fun wottrichGitHubEvent() {
+        llWottrichGitHub.setOnClickListener {
+            val url = "https://github.com/Wottrich"
+            openAUrl(url)
+        }
+    }
+
+    private fun wottrichLinkedInEvent() {
+        llWottrichLinkedIn.setOnClickListener {
+            val url = "https://www.linkedin.com/in/lucas-c-wottrich/"
+            openAUrl(url)
+        }
+    }
+
+    private fun wottrichEmailEvent() {
+        llWottrichEmail.setOnClickListener {
+
+            val emailIntent = Intent(
+                Intent.ACTION_SENDTO, fromParts(
+                    "mailto", "wottrich78@gmail.com", null
+                )
+            )
+            startActivity(Intent.createChooser(emailIntent, "Enviar email..."))
+        }
+    }
 
     private fun openAUrl(url: String) {
         val i = Intent(Intent.ACTION_VIEW)

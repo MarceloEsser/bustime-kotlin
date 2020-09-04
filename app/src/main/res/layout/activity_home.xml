@@ -420,7 +420,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:layout_marginBottom="40dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@id/cv_home_activity_sogal"
                     app:layout_constraintStart_toStartOf="@+id/contacts"
                     app:layout_constraintTop_toBottomOf="@+id/contacts">
@@ -519,7 +518,7 @@
             </androidx.cardview.widget.CardView>
 
 
-           <!-- <TextView
+           <TextView
                     android:id="@+id/lucas_wottrich"
                     style="@style/AboutTitleStyle"
                     android:layout_width="wrap_content"
@@ -537,6 +536,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:layout_marginBottom="30dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@id/cv_home_activity_sogal"
                     app:layout_constraintStart_toStartOf="@id/lucas_wottrich"
                     app:layout_constraintTop_toBottomOf="@id/lucas_wottrich">
@@ -632,7 +632,7 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
-
+<!--
             <TextView
                     android:id="@+id/bruno_todeschini"
                     style="@style/AboutTitleStyle"
@@ -740,9 +740,7 @@
                     </LinearLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
-            -->
-
+            </androidx.cardview.widget.CardView>-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

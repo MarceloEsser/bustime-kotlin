@@ -107,7 +107,10 @@ class VicasaLinesActivity : BaseActivity(R.layout.activity_lines), FilterDialogI
     }
 
     private fun buildDialog() {
-        filterDialog = VicasaFilterDialog()
+        filterDialog = VicasaFilterDialog(
+            serviceTypeList = viewModel.getServiceTypeList(),
+            countryList = viewModel.getCountryList()
+        )
         filterDialog.interaction = this
 
         filterDialog.show(supportFragmentManager, "teste")
@@ -171,7 +174,7 @@ class VicasaLinesActivity : BaseActivity(R.layout.activity_lines), FilterDialogI
     }
 
     override fun saveLine() {
-
+        viewModel.saveLine()
     }
 
     override fun removeLine() {

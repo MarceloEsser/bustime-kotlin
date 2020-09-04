@@ -32,7 +32,7 @@ interface BusTimeDao {
 
     @Transaction
     @Query("SELECT * FROM FavoriteLine WHERE line_name in (:name) and line_code in (:code) and line_way in (:way)")
-    fun getLineBy(name: String, code: String, way: String): List<LineWithSchedules>
+    fun getLineBy(name: String, code: String, way: String): Flow<List<LineWithSchedules>>
 
     @Query("DELETE FROM FavoriteLine")
     fun deleteLines()
@@ -47,7 +47,7 @@ interface BusTimeDao {
     fun deleteSundays()
 
     @Query("DELETE FROM FavoriteLine")
-    fun clearDatabase()
+    fun deleteAllLines()
 
     @Insert
     suspend fun insertLine(lines: FavoriteLine): Long

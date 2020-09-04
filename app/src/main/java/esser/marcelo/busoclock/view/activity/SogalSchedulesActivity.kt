@@ -64,7 +64,7 @@ class SogalSchedulesActivity : BaseActivity(R.layout.activity_schedules) {
         schedules_bottom_navigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.action_workingdays -> {
-                    configureList(viewModelSogal.workingDays.value)
+                    configureList(viewModelSogal.workingdays.value)
                     true
                 }
                 R.id.action_saturday -> {
@@ -87,7 +87,7 @@ class SogalSchedulesActivity : BaseActivity(R.layout.activity_schedules) {
             successConfig()
         }
 
-        viewModelSogal.workingDays.observe(this, workingdays)
+        viewModelSogal.workingdays.observe(this, workingdays)
     }
 
     private fun successConfig() {

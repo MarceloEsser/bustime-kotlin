@@ -9,7 +9,9 @@ import esser.marcelo.busoclock.repository.dao.LineDAO
 import esser.marcelo.busoclock.model.Constants
 import esser.marcelo.busoclock.model.Constants.CB_WAY
 import esser.marcelo.busoclock.model.LineWay
+import esser.marcelo.busoclock.model.favorite.FavoriteLine
 import esser.marcelo.busoclock.model.vicasa.Vicasa
+import esser.marcelo.busoclock.repository.dao.DaoHelperDelegate
 import esser.marcelo.busoclock.repository.service.vicasaServices.VicasaServiceDelegate
 import esser.marcelo.busoclock.repository.service.wrapper.resource.Status
 import kotlinx.coroutines.flow.collect
@@ -28,7 +30,7 @@ import kotlin.coroutines.CoroutineContext
 
 class VicasaLinesViewModel(
     private val service: VicasaServiceDelegate,
-    private val daoHelper: DaoHelper,
+    private val daoHelper: DaoHelperDelegate,
     private val dispatcher: CoroutineContext,
 ) : ViewModel() {
 
@@ -50,17 +52,6 @@ class VicasaLinesViewModel(
                         findVicasaObjects(resource.data)
                 }
         }
-    }
-
-    fun getWaysList(): ArrayList<LineWay> {
-        val waysList: ArrayList<LineWay> = ArrayList()
-        waysList.add(LineWay("Selecione um sentido", "none"))
-        waysList.add(LineWay("Centro Bairro - CB", CB_WAY))
-        waysList.add(LineWay("Bairro Centro - BC", Constants.BC_WAY))
-        waysList.add(LineWay("Centro Circular - CC", Constants.CC_WAY))
-        waysList.add(LineWay("Bairro Circular - BB", Constants.BB_WAY))
-
-        return waysList
     }
 
     private fun findVicasaObjects(response: ResponseBody) {
@@ -125,5 +116,54 @@ class VicasaLinesViewModel(
         this.countryOrigin = countryOrigin
         this.countryDestination = countryDestination
         this.serviceType = serviceType
+    }
+
+    fun saveLine() = viewModelScope.launch(dispatcher) {
+        val favoriteLine: FavoriteLine = getFavoriteLine()
+        daoHelper.insertLine(favoriteLine)
+    }
+
+    private fun getFavoriteLine(): FavoriteLine {
+        return FavoriteLine(
+            isSogal = false,
+            name = LineDAO.lineName,
+            code = LineDAO.lineCode,
+            way = LineDAO.lineWay?.description ?: ""
+        )
+    }
+
+    fun getWaysList(): ArrayList<LineWay> {
+        val waysList: ArrayList<LineWay> = ArrayList()
+        waysList.add(LineWay("Selecione um sentido", "none"))
+        waysList.add(LineWay("Centro Bairro - CB", CB_WAY))
+        waysList.add(LineWay("Bairro Centro - BC", Constants.BC_WAY))
+        waysList.add(LineWay("Centro Circular - CC", Constants.CC_WAY))
+        waysList.add(LineWay("Bairro Circular - BB", Constants.BB_WAY))
+
+        return waysList
+    }
+
+    fun getCountryList(): List<Vicasa> {
+        val countryList = ArrayList<Vicasa>()
+        countryList.add(Vicasa("Cachoeirinha", Constants.CACHOEIRINHA))
+        countryList.add(Vicasa("Canoas", Constants.CANOAS))
+        countryList.add(Vicasa("Gravataí", Constants.GRAVATAI))
+        countryList.add(Vicasa("Porto Alegre", Constants.POA))
+
+        return countryList
+    }
+
+    fun getServiceTypeList(): List<Vicasa> {
+        val serviceTypeList = ArrayList<Vicasa>()
+        serviceTypeList.add(Vicasa("Todos", Constants.TODOS))
+        serviceTypeList.add(Vicasa("Comum", Constants.COMUM))
+        serviceTypeList.add(Vicasa("Executiva", Constants.EXECUTIVO))
+        serviceTypeList.add(Vicasa("Integração", Constants.INTEGRACAO))
+        serviceTypeList.add(Vicasa("Metropolitana", Constants.METROPOLITANA))
+        serviceTypeList.add(Vicasa("Rotas", Constants.ROTAS))
+        serviceTypeList.add(Vicasa("Seletiva", Constants.SELETIVA))
+        serviceTypeList.add(Vicasa("Urbana", Constants.URBANA))
+
+        return serviceTypeList
     }
 }
