@@ -62,7 +62,7 @@ class SogalLinesActivity : BaseActivity(R.layout.activity_lines), GenericLinesAd
             lineMenuDialog.validateImageButton()
         }
 
-        viewModel.isFavorite.observe(this, isFavoriteObserver)
+        viewModel.isLineFavorite.observe(this, isFavoriteObserver)
     }
 
     private fun linesObserver() {
@@ -168,7 +168,6 @@ class SogalLinesActivity : BaseActivity(R.layout.activity_lines), GenericLinesAd
 
     private fun showDialog() {
         lineMenuDialog = LineMenuDialog(
-            isFavorite = viewModel.isFavorite.value ?: false,
             delegate = this,
             lineWays = viewModel.getWaysList()
         )
@@ -177,7 +176,7 @@ class SogalLinesActivity : BaseActivity(R.layout.activity_lines), GenericLinesAd
     }
 
     override fun findLine() {
-        //viewModel.findLine()
+        viewModel.validateLine()
     }
 
     override fun saveLine() {
@@ -185,7 +184,7 @@ class SogalLinesActivity : BaseActivity(R.layout.activity_lines), GenericLinesAd
     }
 
     override fun removeLine() {
-
+        viewModel.deleteLine()
     }
 
     override fun goToSchedules() {

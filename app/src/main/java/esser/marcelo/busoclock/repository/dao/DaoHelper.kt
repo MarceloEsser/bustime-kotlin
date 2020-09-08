@@ -5,7 +5,6 @@ import androidx.room.Room
 import esser.marcelo.busoclock.interfaces.SaveLineDelegate
 import esser.marcelo.busoclock.model.favorite.FavoriteLine
 import esser.marcelo.busoclock.model.favorite.LineWithSchedules
-import esser.marcelo.busoclock.model.schedules.BaseSchedule
 import esser.marcelo.busoclock.model.schedules.Saturday
 import esser.marcelo.busoclock.model.schedules.Sunday
 import esser.marcelo.busoclock.model.schedules.Workingday
@@ -27,7 +26,8 @@ interface DaoHelperDelegate {
     suspend fun getLines(lineId: Long): Flow<List<LineWithSchedules>?>
     suspend fun getLines(name: String, code: String, way: String): Flow<List<LineWithSchedules>?>
     fun clearDatabase()
-    suspend fun insertLine(line: FavoriteLine)
+    suspend fun insertLine(line: FavoriteLine): Long?
+    fun deleteLine(lineId: Long?)
 }
 
 class DaoHelper(
@@ -56,6 +56,14 @@ class DaoHelper(
 
     private var _lineId: Long? = null
 
+    override suspend fun insertLine(line: FavoriteLine): Long? {
+        this._lineId = bustimeDao.insertLine(line)
+
+        loadSchedules(line)
+
+        return this._lineId
+    }
+
     override fun getAll(): Flow<List<LineWithSchedules>?> {
         return bustimeDao.getAll()
     }
@@ -74,15 +82,18 @@ class DaoHelper(
 
     override fun clearDatabase() {
         bustimeDao.deleteAllLines()
-        bustimeDao.deleteSaturdays()
-        bustimeDao.deleteWorkingdays()
-        bustimeDao.deleteSundays()
+        bustimeDao.deleteAllSaturdays()
+        bustimeDao.deleteAllWorkingdays()
+        bustimeDao.deleteAllSundays()
     }
 
-    override suspend fun insertLine(line: FavoriteLine) {
-        this._lineId = bustimeDao.insertLine(line)
-
-        loadSchedules(line)
+    override fun deleteLine(lineId: Long?) {
+        if (lineId != null) {
+            bustimeDao.deleteLineFrom(lineId)
+            bustimeDao.deleteSaturdaysFrom(lineId)
+            bustimeDao.deleteWorkingdaysFrom(lineId)
+            bustimeDao.deleteSundaysFrom(lineId)
+        }
     }
 
     private fun loadSchedules(line: FavoriteLine) {
@@ -113,7 +124,6 @@ class DaoHelper(
                 val workingday = schedule
                 workingday.workindayKey = _lineId
                 workingdays.add(workingday)
-
             }
         }
     }

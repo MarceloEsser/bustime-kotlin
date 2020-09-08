@@ -32,8 +32,7 @@ class SogalLinesViewModel(
 ) : ViewModel() {
 
 
-    val _lines = MutableLiveData<List<LinesDTO>>()
-
+    private val _lines = MutableLiveData<List<LinesDTO>>()
     val lines: LiveData<List<LinesDTO>> by lazy {
         viewModelScope.launch(dispatcher) {
             setLines()
@@ -43,12 +42,29 @@ class SogalLinesViewModel(
 
     val mFavoriteLine = MutableLiveData<FavoriteLine>()
 
-    val isFavorite: MutableLiveData<Boolean> = MutableLiveData()
+    private val lastLineInsertedId = MutableLiveData<Long>()
+
+    private val _isLineFavorite: MutableLiveData<Boolean> = MutableLiveData()
+    val isLineFavorite: LiveData<Boolean>
+        get() = _isLineFavorite
 
     private suspend fun setLines() {
         service.getLines().collect { resource ->
             if (resource.requestStatus == Status.success)
                 _lines.postValue(resource.data)
+        }
+    }
+
+    fun validateLine() {
+        viewModelScope.launch(dispatcher) {
+            daoHelper.getLines(
+                LineDAO.lineName,
+                LineDAO.lineCode,
+                LineDAO.lineWay?.description ?: ""
+            )
+                .collect {
+                    _isLineFavorite.postValue(it?.size == 1)
+                }
         }
     }
 
@@ -85,7 +101,8 @@ class SogalLinesViewModel(
 
     fun saveLine() = viewModelScope.launch(dispatcher) {
         val favoriteLine: FavoriteLine = getFavoriteLine()
-        daoHelper.insertLine(favoriteLine)
+        val lineId = daoHelper.insertLine(favoriteLine)
+        lastLineInsertedId.postValue(lineId)
     }
 
     private fun getFavoriteLine(): FavoriteLine {
@@ -95,5 +112,11 @@ class SogalLinesViewModel(
             code = LineDAO.lineCode,
             way = LineDAO.lineWay?.description ?: ""
         )
+    }
+
+    fun deleteLine() {
+        viewModelScope.launch(dispatcher) {
+            daoHelper.deleteLine(lastLineInsertedId.value)
+        }
     }
 }
