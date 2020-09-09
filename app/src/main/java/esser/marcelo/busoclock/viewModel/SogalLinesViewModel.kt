@@ -42,8 +42,6 @@ class SogalLinesViewModel(
 
     val mFavoriteLine = MutableLiveData<FavoriteLine>()
 
-    private val lastLineInsertedId = MutableLiveData<Long>()
-
     private val _isLineFavorite: MutableLiveData<Boolean> = MutableLiveData()
     val isLineFavorite: LiveData<Boolean>
         get() = _isLineFavorite
@@ -61,10 +59,26 @@ class SogalLinesViewModel(
                 LineDAO.lineName,
                 LineDAO.lineCode,
                 LineDAO.lineWay?.description ?: ""
+            ).collect {
+                _isLineFavorite.postValue(it?.size == 1)
+            }
+        }
+    }
+
+    fun saveLine() = viewModelScope.launch(dispatcher) {
+        val favoriteLine: FavoriteLine = getFavoriteLine()
+        daoHelper.insertLine(favoriteLine)
+        validateLine()
+    }
+
+    fun deleteLine() {
+        viewModelScope.launch(dispatcher) {
+            daoHelper.deleteLine(
+                lineName = LineDAO.lineName,
+                lineCode = LineDAO.lineCode,
+                lineWayDescription = LineDAO.lineWay?.description ?: ""
             )
-                .collect {
-                    _isLineFavorite.postValue(it?.size == 1)
-                }
+            validateLine()
         }
     }
 
@@ -82,6 +96,16 @@ class SogalLinesViewModel(
         LineDAO.lineCode = lineCode
     }
 
+    private fun getFavoriteLine(): FavoriteLine {
+        return FavoriteLine(
+            isSogal = true,
+            name = LineDAO.lineName,
+            code = LineDAO.lineCode,
+            way = LineDAO.lineWay?.description ?: ""
+        )
+    }
+
+
     fun filterBy(text: String) {
 //        val filter: List<LinesDTO>? = mLines.filter {
 //            it.name.toLowerCase(Locale.getDefault()).contains(text)
@@ -95,28 +119,7 @@ class SogalLinesViewModel(
 //            val lines: LineWithSchedules =
 //                daoHelper.getLines(LineDAO.lineName, LineDAO.lineCode, LineDAO.lineWay?.way ?: "")
 //
-////            isFavorite.postValue(lines != null)
+//            isFavorite.postValue(lines != null)
 //        }
 //    }
-
-    fun saveLine() = viewModelScope.launch(dispatcher) {
-        val favoriteLine: FavoriteLine = getFavoriteLine()
-        val lineId = daoHelper.insertLine(favoriteLine)
-        lastLineInsertedId.postValue(lineId)
-    }
-
-    private fun getFavoriteLine(): FavoriteLine {
-        return FavoriteLine(
-            isSogal = true,
-            name = LineDAO.lineName,
-            code = LineDAO.lineCode,
-            way = LineDAO.lineWay?.description ?: ""
-        )
-    }
-
-    fun deleteLine() {
-        viewModelScope.launch(dispatcher) {
-            daoHelper.deleteLine(lastLineInsertedId.value)
-        }
-    }
 }

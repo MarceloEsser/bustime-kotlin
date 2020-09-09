@@ -1,5 +1,6 @@
 package esser.marcelo.busoclock.viewModel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -23,11 +24,15 @@ class HomeViewModel(
     private val dispatcher: CoroutineContext
 ) : ViewModel() {
 
-    var favSize: MutableLiveData<Int> = MutableLiveData()
+    val _favSize: MutableLiveData<Int> = MutableLiveData()
+    val favSize: LiveData<Int> by lazy {
+        getLinesQuantity()
+        return@lazy _favSize
+    }
 
     fun getLinesQuantity() = viewModelScope.launch(dispatcher) {
         daoHelper.getAll().collect {
-                favSize.postValue(it?.size)
+            _favSize.postValue(it?.size)
         }
     }
 }

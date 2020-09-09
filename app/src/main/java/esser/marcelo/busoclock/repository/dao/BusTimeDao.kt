@@ -52,7 +52,6 @@ interface BusTimeDao {
     @Query("DELETE FROM Workingday WHERE lineId in (:lineId)")
     fun deleteWorkingdaysFrom(lineId: Long)
 
-
     @Query("DELETE FROM Saturday WHERE lineId in (:lineId)")
     fun deleteSaturdaysFrom(lineId: Long)
 

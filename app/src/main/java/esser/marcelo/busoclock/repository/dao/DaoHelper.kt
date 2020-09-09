@@ -12,6 +12,7 @@ import esser.marcelo.busoclock.repository.dao.database.AppDatabase
 import esser.marcelo.busoclock.viewModel.SogalSchedulesViewModel
 import esser.marcelo.busoclock.viewModel.VicasaSchedulesViewModel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
 
 /**
  * @author Marcelo Esser
@@ -24,14 +25,20 @@ import kotlinx.coroutines.flow.Flow
 interface DaoHelperDelegate {
     fun getAll(): Flow<List<LineWithSchedules>?>
     suspend fun getLines(lineId: Long): Flow<List<LineWithSchedules>?>
-    suspend fun getLines(name: String, code: String, way: String): Flow<List<LineWithSchedules>?>
+    suspend fun getLines(
+        lineName: String,
+        lineCode: String,
+        lineWayDescription: String
+    ): Flow<List<LineWithSchedules>?>
+
     fun clearDatabase()
     suspend fun insertLine(line: FavoriteLine): Long?
     fun deleteLine(lineId: Long?)
+    suspend fun deleteLine(lineName: String, lineCode: String, lineWayDescription: String)
 }
 
 class DaoHelper(
-    context: Context,
+    private val context: Context,
     private val sogalSchedulesViewModel: SogalSchedulesViewModel,
     private val vicasaSchedulesViewModel: VicasaSchedulesViewModel
 ) : DaoHelperDelegate, SaveLineDelegate {
@@ -64,6 +71,15 @@ class DaoHelper(
         return this._lineId
     }
 
+    override fun deleteLine(lineId: Long?) {
+        if (lineId != null) {
+            bustimeDao.deleteLineFrom(lineId)
+            bustimeDao.deleteSaturdaysFrom(lineId)
+            bustimeDao.deleteWorkingdaysFrom(lineId)
+            bustimeDao.deleteSundaysFrom(lineId)
+        }
+    }
+
     override fun getAll(): Flow<List<LineWithSchedules>?> {
         return bustimeDao.getAll()
     }
@@ -73,11 +89,11 @@ class DaoHelper(
     }
 
     override suspend fun getLines(
-        name: String,
-        code: String,
-        way: String
+        lineName: String,
+        lineCode: String,
+        lineWayDescription: String
     ): Flow<List<LineWithSchedules>?> {
-        return bustimeDao.getLineBy(name, code, way)
+        return bustimeDao.getLineBy(lineName, lineCode, lineWayDescription)
     }
 
     override fun clearDatabase() {
@@ -87,13 +103,33 @@ class DaoHelper(
         bustimeDao.deleteAllSundays()
     }
 
-    override fun deleteLine(lineId: Long?) {
-        if (lineId != null) {
-            bustimeDao.deleteLineFrom(lineId)
-            bustimeDao.deleteSaturdaysFrom(lineId)
-            bustimeDao.deleteWorkingdaysFrom(lineId)
-            bustimeDao.deleteSundaysFrom(lineId)
+    override suspend fun deleteLine(
+        lineName: String,
+        lineCode: String,
+        lineWayDescription: String
+    ) {
+        findAndDeleteLine(lineName, lineCode, lineWayDescription)
+    }
+
+    private suspend fun findAndDeleteLine(
+        lineName: String,
+        lineCode: String,
+        lineWayDescription: String
+    ) {
+        bustimeDao.getLineBy(name = lineName, code = lineCode, way = lineWayDescription).collect {
+            if (!it.isNullOrEmpty()) {
+                val lineId = it[0].line?.id ?: -1
+                removeLineFromDatabaseBy(lineId)
+            }
         }
+
+    }
+
+    private fun removeLineFromDatabaseBy(lineId: Long) {
+        bustimeDao.deleteLineFrom(lineId)
+        bustimeDao.deleteSaturdaysFrom(lineId)
+        bustimeDao.deleteWorkingdaysFrom(lineId)
+        bustimeDao.deleteSundaysFrom(lineId)
     }
 
     private fun loadSchedules(line: FavoriteLine) {
@@ -140,7 +176,7 @@ class DaoHelper(
     ) {
         if (!_saturdays.isNullOrEmpty()) {
             for (schedule in _saturdays) {
-                val saturday = schedule as Saturday
+                val saturday = schedule
                 saturday.saturdayKey = _lineId
                 saturdays.add(saturday)
 
@@ -160,7 +196,7 @@ class DaoHelper(
     ) {
         if (!_sundays.isNullOrEmpty()) {
             for (schedule in _sundays) {
-                val sunday = schedule as Sunday
+                val sunday = schedule
                 sunday.sundayKey = _lineId
                 sundays.add(sunday)
 

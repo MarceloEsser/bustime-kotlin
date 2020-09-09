@@ -27,21 +27,16 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
 
     private val viewModel: HomeViewModel by viewModel()
 
+    override fun observers() {
+        favoriteQuantityObserver()
+    }
+
     override fun onInitValues() {
-
         events()
-
         cardListeners()
-
-        favoriteCardValidations()
     }
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.getLinesQuantity()
-    }
-
-    private fun favoriteCardValidations() {
+    private fun favoriteQuantityObserver() {
         val favSizeObserver = Observer<Int> { value ->
             if (value != null && value > 0) {
                 cv_home_activity_favorities.visibility = VISIBLE

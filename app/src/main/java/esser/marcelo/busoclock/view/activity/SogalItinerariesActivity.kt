@@ -23,6 +23,10 @@ class SogalItinerariesActivity : BaseActivity(R.layout.activity_itineraries) {
 
     private lateinit var itinerariesAdapter: ItinerariesAdapter
 
+    override fun observers() {
+        itinerariesObserver()
+    }
+
     override fun onInitValues() {
 
         btnBack()
@@ -30,10 +34,9 @@ class SogalItinerariesActivity : BaseActivity(R.layout.activity_itineraries) {
 
         itineraries_activity_tv_line_name.text = LineDAO.lineName
 
-        itinerariesList()
     }
 
-    private fun itinerariesList() {
+    private fun itinerariesObserver() {
         val itinerariesListObserver = Observer<List<ItinerariesDTO>> { itineraries ->
             hideLoader()
             adapterConstruct(itineraries)

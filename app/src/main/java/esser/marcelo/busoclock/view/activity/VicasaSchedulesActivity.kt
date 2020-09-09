@@ -27,6 +27,10 @@ class VicasaSchedulesActivity : BaseActivity(R.layout.activity_schedules) {
 
     private lateinit var adapter: SchedulesAdapter
 
+    override fun observers() {
+        schedulesObservers()
+    }
+
     override fun onInitValues() {
         showLoader()
 
@@ -39,7 +43,6 @@ class VicasaSchedulesActivity : BaseActivity(R.layout.activity_schedules) {
             shcedule_activity_tv_line_code.text = it.description
         }
 
-        schedulesObservers()
     }
 
     private fun schedulesObservers() {

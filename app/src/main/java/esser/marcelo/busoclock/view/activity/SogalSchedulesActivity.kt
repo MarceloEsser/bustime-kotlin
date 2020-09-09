@@ -25,6 +25,10 @@ class SogalSchedulesActivity : BaseActivity(R.layout.activity_schedules) {
 
     private lateinit var adapter: SchedulesAdapter
 
+    override fun observers() {
+        workingdaysObserver()
+    }
+
     override fun onInitValues() {
         showLoader()
 
@@ -36,7 +40,6 @@ class SogalSchedulesActivity : BaseActivity(R.layout.activity_schedules) {
             shcedule_activity_tv_line_code.text = it.description
         }
 
-        workingdaysObserver()
     }
 
     private fun listeners() {

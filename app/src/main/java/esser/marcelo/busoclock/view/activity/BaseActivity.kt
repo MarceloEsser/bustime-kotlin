@@ -24,10 +24,14 @@ abstract class BaseActivity(private val layoutRes: Int) : AppCompatActivity() {
         setContentView(layoutRes)
         this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
+        observers()
+
         onInitValues()
     }
 
     abstract fun onInitValues()
+
+    abstract fun observers()
 
     fun showLoader() {
         loader.show(supportFragmentManager, "loader")

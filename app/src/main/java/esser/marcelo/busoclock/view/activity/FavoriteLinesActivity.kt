@@ -32,9 +32,21 @@ class FavoriteLinesActivity : BaseActivity(R.layout.activity_lines), IFavoriteLi
 
     lateinit var deleteDialog: DeleteDialog
 
+    override fun observers() {
+        linesObserver()
+    }
+
+    private fun linesObserver() {
+        val linesListObserver = Observer<List<LineWithSchedules>> { lines ->
+            adapter = FavoriteLinesAdapter(lines, this@FavoriteLinesActivity, this)
+            lines_activity_rv_lines.visibility = VISIBLE
+            lines_activity_rv_lines.adapter = adapter
+        }
+
+        viewModel.favoriteLines.observe(this, linesListObserver)
+    }
 
     override fun onInitValues() {
-        viewModel.fillFavoriteLinesList()
 
         lines_activity_img_btn_delete_all.visibility = VISIBLE
 
@@ -46,14 +58,6 @@ class FavoriteLinesActivity : BaseActivity(R.layout.activity_lines), IFavoriteLi
         lines_activity_img_btn_back.setOnClickListener {
             onBackPressed()
         }
-
-        val linesListObserver = Observer<List<LineWithSchedules>> { lines ->
-            adapter = FavoriteLinesAdapter(lines, this@FavoriteLinesActivity, this)
-            lines_activity_rv_lines.visibility = VISIBLE
-            lines_activity_rv_lines.adapter = adapter
-        }
-
-        viewModel.favoriteLines.observe(this, linesListObserver)
     }
 
     override fun onLineClicked(line: FavoriteLine) {

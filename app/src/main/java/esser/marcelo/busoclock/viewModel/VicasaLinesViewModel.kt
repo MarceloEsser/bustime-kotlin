@@ -35,7 +35,7 @@ class VicasaLinesViewModel(
 ) : ViewModel() {
 
     private val _lines = MutableLiveData<List<Vicasa>>()
-
+    
     val lines: LiveData<List<Vicasa>>
         get() = _lines
 
@@ -53,6 +53,10 @@ class VicasaLinesViewModel(
                 }
         }
     }
+
+    private val _isLineFavorite: MutableLiveData<Boolean> = MutableLiveData()
+    val isLineFavorite: LiveData<Boolean>
+        get() = _isLineFavorite
 
     private fun findVicasaObjects(response: ResponseBody) {
 
@@ -121,6 +125,30 @@ class VicasaLinesViewModel(
     fun saveLine() = viewModelScope.launch(dispatcher) {
         val favoriteLine: FavoriteLine = getFavoriteLine()
         daoHelper.insertLine(favoriteLine)
+    }
+
+    fun validateLine() {
+        viewModelScope.launch(dispatcher) {
+            daoHelper.getLines(
+                LineDAO.lineName,
+                LineDAO.lineCode,
+                LineDAO.lineWay?.description ?: ""
+            ).collect {
+                _isLineFavorite.postValue(it?.size == 1)
+            }
+            validateLine()
+        }
+    }
+
+    fun deleteLine() {
+        viewModelScope.launch(dispatcher) {
+            daoHelper.deleteLine(
+                lineName = LineDAO.lineName,
+                lineCode = LineDAO.lineCode,
+                lineWayDescription = LineDAO.lineWay?.description ?: ""
+            )
+            validateLine()
+        }
     }
 
     private fun getFavoriteLine(): FavoriteLine {

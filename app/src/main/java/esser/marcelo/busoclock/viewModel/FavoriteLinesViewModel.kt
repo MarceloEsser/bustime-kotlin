@@ -31,7 +31,7 @@ class FavoriteLinesViewModel(
         return@lazy _favoriteLines
     }
 
-    fun fillFavoriteLinesList() = viewModelScope.launch(dispatcher) {
+    private fun fillFavoriteLinesList() = viewModelScope.launch(dispatcher) {
         daoHelper.getAll().collect { lines ->
             if (lines != null)
                 _favoriteLines.postValue(lines)

@@ -24,6 +24,10 @@ class FavoriteSchedulesAcitivty : BaseActivity(R.layout.activity_schedules) {
 
     private lateinit var adapter: SchedulesAdapter
 
+    override fun observers() {
+        workingdaysObserver()
+    }
+
     override fun onInitValues() {
         viewModel.fillSchedules()
 
@@ -45,8 +49,6 @@ class FavoriteSchedulesAcitivty : BaseActivity(R.layout.activity_schedules) {
         schedules_activity_img_btn_back.setOnClickListener {
             onBackPressed()
         }
-
-        workingdaysObserver()
 
         bottomNavigationBarListener()
     }

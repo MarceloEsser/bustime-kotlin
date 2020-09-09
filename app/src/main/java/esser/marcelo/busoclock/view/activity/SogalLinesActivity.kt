@@ -41,14 +41,18 @@ class SogalLinesActivity : BaseActivity(R.layout.activity_lines), GenericLinesAd
 
     var lineWay: String = CB_WAY
 
+    override fun observers() {
+        linesObserver()
+        isFavoriteObserver()
+        favoriteLineObserver()
+    }
+
     override fun onInitValues() {
         showLoader()
         listeners()
+    }
 
-        linesObserver()
-
-        isFavoriteObserver()
-
+    private fun favoriteLineObserver() {
         val favoriteLineObserver = Observer<FavoriteLine> { line ->
             Toast.makeText(mContext, "${line.name} salva com sucesso", Toast.LENGTH_SHORT).show()
         }

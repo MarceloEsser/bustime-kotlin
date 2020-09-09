@@ -36,21 +36,34 @@ class VicasaLinesActivity : BaseActivity(R.layout.activity_lines), FilterDialogI
 
     private val viewModel: VicasaLinesViewModel by viewModel()
 
-    lateinit var menuDialog: LineMenuDialog
+    var lineMenuDialog: LineMenuDialog? = null
 
     private lateinit var filterDialog: VicasaFilterDialog
     private lateinit var adapter: GenericLinesAdapter
 
+
+    override fun observers() {
+        linesObserver()
+        isFavoriteObserver()
+    }
+
     override fun onInitValues() {
         activity_lines_imgbtn_filter.visibility = VISIBLE
 
-        buildDialog()
-
+        showFilterDialog()
         dialogDoFilter()
-
         listeners()
+    }
 
-        linesObserver()
+    private fun isFavoriteObserver() {
+        val isFavoriteObserver = Observer<Boolean> {
+            lineMenuDialog?.apply {
+                isFavorite = it
+                validateImageButton()
+            }
+        }
+
+        viewModel.isLineFavorite.observe(this, isFavoriteObserver)
     }
 
     private fun linesObserver() {
@@ -106,7 +119,7 @@ class VicasaLinesActivity : BaseActivity(R.layout.activity_lines), FilterDialogI
         )
     }
 
-    private fun buildDialog() {
+    private fun showFilterDialog() {
         filterDialog = VicasaFilterDialog(
             serviceTypeList = viewModel.getServiceTypeList(),
             countryList = viewModel.getCountryList()
@@ -129,13 +142,20 @@ class VicasaLinesActivity : BaseActivity(R.layout.activity_lines), FilterDialogI
     }
 
     override fun onItemClickLitener(line: BaseLine) {
+        holdData(line)
+        showLineMenuDialog()
+    }
+
+    private fun holdData(line: BaseLine) {
         viewModel.saveLineData(line.code, line.name)
-        menuDialog = LineMenuDialog(
-            isFavorite = false,
+    }
+
+    private fun showLineMenuDialog() {
+        lineMenuDialog = LineMenuDialog(
             delegate = this,
             lineWays = viewModel.getWaysList()
         )
-        menuDialog.show(supportFragmentManager, "menuDialog")
+        lineMenuDialog?.show(supportFragmentManager, "menuDialog")
     }
 
     private fun successConfig() {
@@ -173,20 +193,20 @@ class VicasaLinesActivity : BaseActivity(R.layout.activity_lines), FilterDialogI
         viewModel.loadLines()
     }
 
+    override fun findLine() {
+        viewModel.validateLine()
+    }
+
     override fun saveLine() {
         viewModel.saveLine()
     }
 
     override fun removeLine() {
-
+        viewModel.deleteLine()
     }
 
     override fun goToSchedules() {
         startActivity(Intent(this@VicasaLinesActivity, VicasaSchedulesActivity::class.java))
-    }
-
-    override fun findLine() {
-
     }
 
 }

@@ -46,9 +46,7 @@ class LineMenuDialog(
         validateImageButton()
 
         favorite_image_button.setOnClickListener {
-            this.isFavorite = !this.isFavorite
-
-            if (isFavorite) {
+            if (!isFavorite) {
                 delegate.saveLine()
             } else {
                 delegate.removeLine()
@@ -87,6 +85,7 @@ class LineMenuDialog(
                     favorite_image_button.visibility = VISIBLE
                     btn_line_menu_dialog_schedules.visibility = VISIBLE
                     btn_line_menu_dialog_itineraries.visibility = VISIBLE
+
                     delegate.findLine()
                 }
             }
