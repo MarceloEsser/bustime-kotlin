@@ -42,15 +42,14 @@ class LineMenuDialog(
     }
 
     private fun favoriteButtonEvent() {
-
-        validateImageButton()
-
         favorite_image_button.setOnClickListener {
             if (!isFavorite) {
                 delegate.saveLine()
             } else {
                 delegate.removeLine()
             }
+            isFavorite = !isFavorite
+            validateImageButton()
         }
     }
 

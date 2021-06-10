@@ -39,7 +39,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/dialog_delete_question_animation" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/divider" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
                 android:id="@+id/dialog_delete_do_the_delete"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
@@ -74,7 +74,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
                 android:id="@+id/dialog_delete_cancel"
                 android:layout_width="0dp"
                 android:layout_height="50dp"

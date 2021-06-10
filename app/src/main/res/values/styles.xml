@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -15,7 +15,7 @@
     </style>
 
     <style name="CardStyle">
-        <item name="android:background">@color/white</item>
+        <item name="cardBackgroundColor">@color/white</item>
         <item name="android:elevation">8dp</item>
     </style>
 
@@ -67,21 +67,34 @@
         <item name="android:fontFamily">@font/ubuntu_medium</item>
     </style>
 
-    <style name="HomeCardStyleBlue">
-        <item name="android:paddingEnd">30dp</item>
-        <item name="android:background">@drawable/background_blue_ripple_blue</item>
-        <item name="android:elevation">6dp</item>
+    <style name="HomeCardStyleBlue" parent="ShapeAppearanceCutSmallCornerCard">
+        <item name="rippleColor">@color/blue700</item>
+        <item name="android:backgroundTint">@color/blue500</item>
     </style>
-    <style name="HomeCardStyleGreen">
-        <item name="android:paddingEnd">30dp</item>
-        <item name="android:background">@drawable/background_green_ripple_white</item>
-        <item name="android:elevation">6dp</item>
+
+    <style name="HomeCardStyleGreen" parent="ShapeAppearanceCutSmallCornerCard">
+        <item name="rippleColor">@color/green700</item>
+        <item name="android:backgroundTint">@color/green500</item>
     </style>
-    <style name="HomeCardStyleFavorite">
-        <item name="android:paddingEnd">30dp</item>
-        <item name="android:background">@drawable/background_gold_ripple_gold</item>
-        <item name="android:elevation">6dp</item>
+    
+    <style name="HomeCardStyleFavorite" parent="ShapeAppearanceCutSmallCornerCard">
+        <item name="rippleColor">@color/amber700</item>
+        <item name="android:backgroundTint">@color/amber500</item>
     </style>
+
+    <style name="ShapeAppearanceCutSmallCornerCard">
+        <item name="android:layout_height">120dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:paddingEnd">30dp</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceRoundedSmallCorner</item>
+        <item name="android:elevation">8dp</item>
+    </style>
+
+    <style name="ShapeAppearanceRoundedSmallCorner">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">6dp</item>
+    </style>
+    
     <style name="IBActionStyle">
         <item name="android:background">@drawable/background_ib_action</item>
         <item name="android:src">@drawable/ic_arrow_back</item>
@@ -128,8 +141,8 @@
     </style>
 
     <style name="SpinnerStyle">
-        <item name="android:textColor">@color/black</item>
-        <item name="android:background">@drawable/background_spinner</item>
+        <item name="android:textColor">@color/grey700</item>
+        <item name="android:background">@android:color/transparent</item>
     </style>
 
     <style name="HomeCardButtonTextStyle">

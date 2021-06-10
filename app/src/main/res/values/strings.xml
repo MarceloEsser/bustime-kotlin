@@ -32,7 +32,7 @@
     <string name="home_title">Canoas horários</string>
     <string name="about">Sobre o aplicativo</string>
     <string name="about_content">Este aplicativo tem o intuito de informar os horários de partida dos ônibus seja sentido bairro centro, centro bairro, centro circular ou bairro circular (em Canoas).
-        Não contendo nem um vínculo com as empresas de transporte público.
+        Não tendo nem um vínculo com as empresas de transporte público.
     </string>
     <string name="sogal_wpp">(51) 98194-9917 </string>
     <string name="sogal_residential_phone">(51) 3472-6233</string>
@@ -65,4 +65,7 @@
     <string name="github_profile_todeschini">brunotodeschini</string>
     <string name="gmail_profile_todeschini">"obruno1997@gmail.com "</string>
     <string name="linkedin_profile_todeschini">Bruno Todeschini de Oliveira</string>
+    <string name="wheelchair_accessible_bus">Acessível para cadeirantes</string>
+    <string name="back">Voltar</string>
+    <string name="delete_all">Deletar todas as linhas</string>
 </resources>

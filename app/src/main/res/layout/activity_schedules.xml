@@ -5,6 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/grey100"
         tools:context=".view.activity.SogalSchedulesActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,9 +22,10 @@
                 style="@style/IBActionStyle"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/back" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
                 style="@style/TitleStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -43,7 +45,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/shcedule_activity_tv_line_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -75,7 +77,7 @@
                 android:layout_height="wrap_content"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_schedules_activity_without_items"
             android:layout_width="match_parent"
             android:textAlignment="center"
@@ -92,6 +94,7 @@
             android:id="@+id/schedules_activity_rv_schedules"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:background="@color/grey100"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@id/schedules_bottom_navigation"
             app:layout_constraintEnd_toEndOf="parent"
@@ -111,7 +114,7 @@
             android:layout_height="0dp"
             app:layout_constraintBottom_toTopOf="@+id/schedules_activity_tv_connection_error"/>
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
             app:layout_constraintBottom_toTopOf="@id/schedules_bottom_navigation"
             app:layout_constraintTop_toBottomOf="@id/tab_bar"
             app:layout_constraintVertical_bias="0.9"
@@ -125,7 +128,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/schedules_activity_tv_connection_error"/>
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
             android:id="@+id/schedules_activity_tv_empty_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -150,7 +153,8 @@
             android:src="@drawable/icon_itineraries"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            android:contentDescription="@string/itineraries" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/schedules_bottom_navigation"

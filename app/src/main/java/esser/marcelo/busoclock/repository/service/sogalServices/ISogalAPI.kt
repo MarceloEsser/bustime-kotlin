@@ -19,20 +19,20 @@ import retrofit2.http.POST
 interface ISogalAPI {
     @POST("http://sogal.com.br/wp-content/themes/MobidickTheme/linhas/searchLine.php")
     @FormUrlEncoded
-    fun getSogalSchedulesBy(
+    fun getSogalSchedulesAsync(
         @Field("action") lineWay: String,
         @Field("linha") lineCode: String
     ): Deferred<ApiResult<SogalResponse>>
 
     @POST("http://sogal.com.br/wp-content/themes/MobidickTheme/linhas/searchLine.php")
     @FormUrlEncoded
-    fun getSogalList(
+    fun getSogalListAsync(
         @Field("action") action: String
     ): Deferred<ApiResult<List<LinesDTO>>>
 
     @POST("http://sogal.com.br/wp-content/themes/MobidickTheme/linhas/searchLine.php")
     @FormUrlEncoded
-    fun getSogalItineraries(
+    fun getSogalItinerariesAsync(
         @Field("action") action: String,
         @Field("linha") linha: String
     ): Deferred<ApiResult<LinesDTO>>

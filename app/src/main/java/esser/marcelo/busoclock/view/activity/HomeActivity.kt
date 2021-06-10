@@ -5,11 +5,15 @@ import android.net.Uri
 import android.net.Uri.fromParts
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.view.Window
+import android.view.WindowManager
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.viewModel.HomeViewModel
 import kotlinx.android.synthetic.main.activity_home.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 /**
  * @author Marcelo Esser
@@ -34,6 +38,10 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
     override fun onInitValues() {
         events()
         cardListeners()
+
+        val window: Window = window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.statusBarColor = ContextCompat.getColor(this@HomeActivity, R.color.grey400)
     }
 
     private fun favoriteQuantityObserver() {
@@ -72,7 +80,6 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
     private fun events() {
         //cardsEvents()
         esserEvents()
-        wottrichEvents()
     }
 
     private fun esserEvents() {
@@ -103,40 +110,6 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
     private fun esserLinkedInEvent() {
         llEsserLinkedIn.setOnClickListener {
             openAUrl("https://www.linkedin.com/in/marcelo-esser/")
-        }
-    }
-
-    private fun wottrichEvents() {
-        wottrichGitHubEvent()
-
-        wottrichEmailEvent()
-
-        wottrichLinkedInEvent()
-    }
-
-    private fun wottrichGitHubEvent() {
-        llWottrichGitHub.setOnClickListener {
-            val url = "https://github.com/Wottrich"
-            openAUrl(url)
-        }
-    }
-
-    private fun wottrichLinkedInEvent() {
-        llWottrichLinkedIn.setOnClickListener {
-            val url = "https://www.linkedin.com/in/lucas-c-wottrich/"
-            openAUrl(url)
-        }
-    }
-
-    private fun wottrichEmailEvent() {
-        llWottrichEmail.setOnClickListener {
-
-            val emailIntent = Intent(
-                Intent.ACTION_SENDTO, fromParts(
-                    "mailto", "wottrich78@gmail.com", null
-                )
-            )
-            startActivity(Intent.createChooser(emailIntent, "Enviar email..."))
         }
     }
 

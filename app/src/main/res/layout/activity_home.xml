@@ -7,46 +7,13 @@
         android:background="@color/grey100"
         tools:context=".view.activity.HomeActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/home_toolbar"
-            style="@style/TabBarStyle"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:elevation="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-                android:id="@+id/activity_home_title"
-                style="@style/TitleStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/home_title"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
-                android:id="@+id/lines_activity_img_btn_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:src="@drawable/icon_back"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
     <androidx.core.widget.NestedScrollView
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/home_toolbar">
+            app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -56,8 +23,6 @@
             <Button
                     android:id="@+id/cv_home_activity_vicasa"
                     style="@style/HomeCardStyleBlue"
-                    android:layout_width="0dp"
-                    android:layout_height="100dp"
                     android:layout_margin="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -69,8 +34,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
-                    android:elevation="7dp"
+                    android:layout_marginTop="15dp"
+                    android:elevation="10dp"
                     android:text="@string/contacts"
                     app:layout_constraintStart_toStartOf="@id/cv_home_activity_vicasa"
                     app:layout_constraintTop_toTopOf="@id/cv_home_activity_vicasa" />
@@ -80,8 +45,8 @@
                     style="@style/HomeCardSubcontentStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:elevation="7dp"
+                    android:layout_marginTop="5dp"
+                    android:elevation="10dp"
                     android:text="@string/vicasa_phone"
                     app:layout_constraintStart_toStartOf="@+id/vicasa_contats_header"
                     app:layout_constraintTop_toBottomOf="@id/vicasa_contats_header" />
@@ -92,21 +57,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="20dp"
-                    android:elevation="7dp"
+                    android:elevation="10dp"
                     android:text="Vicasa"
                     app:layout_constraintBottom_toBottomOf="@id/cv_home_activity_vicasa"
                     app:layout_constraintEnd_toEndOf="@id/cv_home_activity_vicasa"
                     app:layout_constraintTop_toTopOf="@id/cv_home_activity_vicasa" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                     android:id="@+id/cv_home_activity_sogal"
                     style="@style/HomeCardStyleGreen"
-                    android:layout_width="0dp"
-                    android:layout_height="100dp"
                     android:layout_margin="20dp"
+                    android:layout_marginTop="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/cv_home_activity_vicasa" />
+                    app:layout_constraintTop_toBottomOf="@id/cv_home_activity_vicasa"/>
 
             <TextView
                     android:id="@+id/contats_header"
@@ -114,8 +78,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
-                    android:elevation="7dp"
+                    android:layout_marginTop="15dp"
+                    android:elevation="10dp"
                     android:text="@string/contacts"
                     app:layout_constraintStart_toStartOf="@id/cv_home_activity_sogal"
                     app:layout_constraintTop_toTopOf="@id/cv_home_activity_sogal" />
@@ -125,8 +89,8 @@
                     style="@style/HomeCardSubcontentStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:elevation="6dp"
+                    android:layout_marginTop="5dp"
+                    android:elevation="10dp"
                     android:text="@string/sogal_wpp"
                     app:layout_constraintStart_toStartOf="@+id/contats_header"
                     app:layout_constraintTop_toBottomOf="@id/contats_header" />
@@ -135,8 +99,8 @@
                     style="@style/HomeCardSubcontentStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:elevation="6dp"
+                    android:layout_marginTop="5dp"
+                    android:elevation="10dp"
                     android:text="@string/sogal_residential_phone"
                     app:layout_constraintStart_toStartOf="@+id/contats_header"
                     app:layout_constraintTop_toBottomOf="@+id/sogal_wpp" />
@@ -147,17 +111,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="20dp"
-                    android:elevation="6dp"
+                    android:elevation="10dp"
                     android:text="Sogal"
                     app:layout_constraintBottom_toBottomOf="@id/cv_home_activity_sogal"
                     app:layout_constraintEnd_toEndOf="@id/cv_home_activity_sogal"
                     app:layout_constraintTop_toTopOf="@id/cv_home_activity_sogal" />
 
-            <Button
+
+            <com.google.android.material.button.MaterialButton
                     android:id="@+id/cv_home_activity_favorities"
                     style="@style/HomeCardStyleFavorite"
-                    android:layout_width="0dp"
-                    android:layout_height="96dp"
                     android:layout_margin="20dp"
                     android:layout_marginTop="44dp"
                     android:visibility="gone"
@@ -166,13 +129,14 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/cv_home_activity_sogal"/>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:visibility="gone"
                     tools:visibility="visible"
                     android:id="@+id/cl_favorites_button_content"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:elevation="6dp"
+                    android:elevation="10dp"
                     app:layout_constraintBottom_toBottomOf="@id/cv_home_activity_favorities"
                     app:layout_constraintEnd_toEndOf="@id/cv_home_activity_favorities"
                     app:layout_constraintStart_toStartOf="@id/cv_home_activity_favorities"
@@ -183,7 +147,8 @@
                         android:layout_width="13dp"
                         android:layout_height="16dp"
                         android:layout_marginStart="32dp"
-                        android:elevation="7dp"
+                        android:layout_marginBottom="10dp"
+                        android:elevation="10dp"
                         android:src="@drawable/ic_white_star"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/imageView2" />
@@ -342,8 +307,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
-                        android:elevation="6dp"
-                        android:text="35 Linhas salvas"
+                        android:elevation="10dp"
+                        tools:text="35 Linhas salvas"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -355,7 +320,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="20dp"
-                        android:elevation="6dp"
+                        android:elevation="10dp"
                         android:text="@string/favorites_content"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -372,8 +337,7 @@
                     android:layout_marginEnd="10dp"
                     android:background="@color/grey400"
                     app:layout_constraintStart_toStartOf="@id/cv_home_activity_favorities"
-                    app:layout_constraintTop_toBottomOf="@+id/cv_home_activity_favorities" />
-
+                    app:layout_constraintTop_toBottomOf="@+id/cl_favorites_button_content" />
 
             <TextView
                     android:id="@+id/about"
@@ -385,7 +349,7 @@
                     app:layout_constraintStart_toStartOf="@id/cv_home_activity_sogal"
                     app:layout_constraintTop_toBottomOf="@+id/divider" />
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                     android:id="@+id/firstCard"
                     style="@style/CardStyle"
                     android:layout_width="0dp"
@@ -395,15 +359,15 @@
                     app:layout_constraintStart_toStartOf="@+id/about"
                     app:layout_constraintTop_toBottomOf="@id/about">
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                         style="@style/HomeCardContentStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="15dp"
                         android:text="@string/about_content" />
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/contacts"
                     style="@style/AboutTitleStyle"
                     android:layout_width="wrap_content"
@@ -413,13 +377,14 @@
                     app:layout_constraintStart_toStartOf="@id/firstCard"
                     app:layout_constraintTop_toBottomOf="@+id/firstCard" />
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                     android:id="@+id/secondCard"
                     style="@style/CardStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:layout_marginBottom="40dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@id/cv_home_activity_sogal"
                     app:layout_constraintStart_toStartOf="@+id/contacts"
                     app:layout_constraintTop_toBottomOf="@+id/contacts">
@@ -515,232 +480,8 @@
                                 android:text="@string/linkedin_profile" />
                     </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-
-           <TextView
-                    android:id="@+id/lucas_wottrich"
-                    style="@style/AboutTitleStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:text="@string/lucas_wottrich"
-                    app:layout_constraintStart_toStartOf="@id/secondCard"
-                    app:layout_constraintTop_toBottomOf="@+id/secondCard" />
-
-
-            <androidx.cardview.widget.CardView
-                    android:id="@+id/lucas_wottrich_card"
-                    style="@style/CardStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="30dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@id/cv_home_activity_sogal"
-                    app:layout_constraintStart_toStartOf="@id/lucas_wottrich"
-                    app:layout_constraintTop_toBottomOf="@id/lucas_wottrich">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                    <LinearLayout
-                            android:id="@+id/llWottrichGitHub"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="10dp"
-                            android:background="@drawable/background_transparent_ripple_grey"
-                            android:orientation="horizontal"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                        <ImageView
-                                android:id="@+id/home_activity_img_github_logo_wottrich"
-                                style="@style/RefferenceImageStyle"
-                                android:src="@drawable/ic_github_logo" />
-
-                        <TextView
-                                android:id="@+id/home_activity_tv_github_description_wottrich"
-                                style="@style/HomeCardContentStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="10dp"
-                                android:text="@string/github_profile_wottrich" />
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                            android:id="@+id/llWottrichEmail"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:background="@drawable/background_transparent_ripple_grey"
-                            android:orientation="horizontal"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/llWottrichGitHub">
-
-                        <ImageView
-                                android:id="@+id/home_activity_img_gmail_logo_wottrich"
-                                style="@style/RefferenceImageStyle"
-                                android:src="@drawable/ic_gmail_logo" />
-
-                        <TextView
-                                android:id="@+id/home_activity_tv_gmail_description_wottrich"
-                                style="@style/HomeCardContentStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="10dp"
-                                android:text="@string/gmail_profile_wottrich" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                            android:id="@+id/llWottrichLinkedIn"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:background="@drawable/background_transparent_ripple_grey"
-                            android:orientation="horizontal"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/llWottrichEmail">
-
-                        <ImageView
-                                android:id="@+id/home_activity_img_linkedin_logo_wottrich"
-                                style="@style/RefferenceImageStyle"
-                                android:src="@drawable/ic_linkedin_logo" />
-
-                        <TextView
-                                android:id="@+id/home_activity_tv_linkedin_description_wottrich"
-                                style="@style/HomeCardContentStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="10dp"
-                                android:text="@string/linkedin_profile_wottrich" />
-                    </LinearLayout>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
-<!--
-            <TextView
-                    android:id="@+id/bruno_todeschini"
-                    style="@style/AboutTitleStyle"
-                    android:layout_marginTop="30dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/bruno_todeschini"
-                    app:layout_constraintStart_toStartOf="@id/secondCard"
-                    app:layout_constraintTop_toBottomOf="@+id/lucas_wottrich_card" />
-
-
-            <androidx.cardview.widget.CardView
-                    android:id="@+id/bruno_todeschini_card"
-                    style="@style/CardStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="30dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@id/cv_home_activity_sogal"
-                    app:layout_constraintStart_toStartOf="@id/bruno_todeschini"
-                    app:layout_constraintTop_toBottomOf="@id/bruno_todeschini">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                    <LinearLayout
-                            android:id="@+id/llTodeschiniGitHub"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="10dp"
-                            android:background="@drawable/background_transparent_ripple_grey"
-                            android:orientation="horizontal"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                        <ImageView
-                                style="@style/RefferenceImageStyle"
-                                android:src="@drawable/ic_github_logo" />
-
-                        <TextView
-                                style="@style/HomeCardContentStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="10dp"
-                                android:text="@string/github_profile_todeschini" />
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                            android:id="@+id/llTodeschiniEmail"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:background="@drawable/background_transparent_ripple_grey"
-                            android:orientation="horizontal"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/llTodeschiniGitHub">
-
-                        <ImageView
-                                style="@style/RefferenceImageStyle"
-                                android:src="@drawable/ic_gmail_logo" />
-
-                        <TextView
-                                style="@style/HomeCardContentStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="10dp"
-                                android:text="@string/gmail_profile_todeschini" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                            android:id="@+id/llTodeschiniLinkedIn"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:background="@drawable/background_transparent_ripple_grey"
-                            android:orientation="horizontal"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/llTodeschiniEmail">
-
-                        <ImageView
-                                style="@style/RefferenceImageStyle"
-                                android:src="@drawable/ic_linkedin_logo" />
-
-                        <TextView
-                                style="@style/HomeCardContentStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="10dp"
-                                android:text="@string/linkedin_profile_todeschini" />
-                    </LinearLayout>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

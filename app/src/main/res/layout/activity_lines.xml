@@ -4,7 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
+        android:background="@color/grey100"
         tools:context=".view.activity.VicasaLinesActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,7 +35,8 @@
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/back" />
 
         <ImageButton
                 android:id="@+id/lines_activity_img_btn_delete_all"
@@ -44,7 +45,8 @@
                 tools:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/delete_all" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -107,6 +109,7 @@
             android:clickable="true"
             android:focusable="true"
             android:visibility="invisible"
+            android:background="@color/grey100"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@+id/clSearch"
             app:layout_constraintEnd_toEndOf="parent"

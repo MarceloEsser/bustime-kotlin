@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/cl_modal_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -53,6 +54,7 @@
             <Spinner
                     android:id="@+id/sp_menu_dialog_select_way"
                     style="@style/SpinnerStyle"
+                    android:spinnerMode="dropdown"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="5dp"
@@ -82,6 +84,7 @@
             <Spinner
                     android:id="@+id/filter_dialog_sp_destination_county"
                     style="@style/SpinnerStyle"
+                    android:spinnerMode="dropdown"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="5dp"
@@ -113,6 +116,7 @@
                     style="@style/SpinnerStyle"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
+                    android:spinnerMode="dropdown"
                     android:layout_marginTop="5dp"
                     app:layout_constraintStart_toStartOf="@id/filter_dialog_service_type"
                     app:layout_constraintTop_toBottomOf="@+id/filter_dialog_service_type" />

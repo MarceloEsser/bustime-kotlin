@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.spinner_default_row.view.*
  * @since 31/09/20
  */
 
-class SpinnerDefaultAdapter(context: Context, val ways: List<LineWay>,  val resource: Int =  R.layout.spinner_default_row) :
+class SpinnerDefaultAdapter(context: Context, val ways: List<LineWay>, val resource: Int =  R.layout.spinner_default_row) :
     ArrayAdapter<LineWay>(context, resource, ways) {
 
     override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {

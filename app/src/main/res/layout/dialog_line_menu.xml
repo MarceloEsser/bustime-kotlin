@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/cl_modal_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -11,7 +13,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:paddingBottom="20dp"
-            android:background="@color/white"
+            android:background="@color/grey50"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -37,7 +39,7 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/ubuntu_medium"
                 android:maxLines="2"
-                android:textColor="@color/black"
+                android:textColor="@color/grey700"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/favorite_image_button"
                 app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:fontFamily="@font/ubuntu_regular"
-                android:textColor="@color/black"
+                android:textColor="@color/grey600"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_line_menu_dialog_line_name"
@@ -65,54 +67,54 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_line_menu_dialog_line_code"
                 tools:layout_editor_absoluteX="20dp" />
 
-        <TextView
-                android:id="@+id/tv_menu_dialog_select_way"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/ubuntu_medium"
-                android:text="@string/line_way"
-                android:textColor="@color/grey900"
-                app:layout_constraintStart_toStartOf="@+id/tv_line_menu_dialog_line_code"
-                app:layout_constraintTop_toBottomOf="@+id/view" />
-
         <Spinner
                 android:id="@+id/sp_menu_dialog_select_way"
                 style="@style/SpinnerStyle"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginBottom="15dp"
                 android:spinnerMode="dropdown"
                 app:layout_constraintBottom_toTopOf="@+id/btn_line_menu_dialog_schedules"
                 app:layout_constraintEnd_toEndOf="@+id/btn_line_menu_dialog_schedules"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="@+id/btn_line_menu_dialog_schedules"
-                app:layout_constraintTop_toBottomOf="@+id/tv_menu_dialog_select_way" />
+                app:layout_constraintTop_toBottomOf="@+id/view" />
+        <View
+                android:background="@color/grey500"
+                app:layout_constraintTop_toBottomOf="@id/sp_menu_dialog_select_way"
+                app:layout_constraintEnd_toEndOf="@id/sp_menu_dialog_select_way"
+                app:layout_constraintStart_toStartOf="@id/sp_menu_dialog_select_way"
+                android:layout_width="0dp"
+                android:layout_height="1dp"/>
 
         <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
+                android:elevation="7dp"
                 android:src="@drawable/ic_arrow_drop_down"
                 app:layout_constraintBottom_toBottomOf="@+id/sp_menu_dialog_select_way"
                 app:layout_constraintEnd_toEndOf="@id/sp_menu_dialog_select_way"
                 app:layout_constraintTop_toTopOf="@+id/sp_menu_dialog_select_way" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_line_menu_dialog_schedules"
                 android:layout_width="match_parent"
-                android:layout_height="55dp"
+                android:layout_height="65dp"
+                android:backgroundTint="@color/white"
+                app:rippleColor="@color/grey400"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/background_white_ripple_grey"
+                android:layout_marginBottom="10dp"
                 android:fontFamily="@font/ubuntu_medium"
+                android:elevation="10dp"
+                android:textSize="16sp"
                 android:text="@string/schedules"
                 android:textAllCaps="false"
-                android:textSize="14sp"
                 android:visibility="gone"
+                android:textColor="@color/grey800"
                 app:layout_constraintBottom_toTopOf="@+id/btn_line_menu_dialog_itineraries"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -120,19 +122,22 @@
                 app:layout_constraintTop_toBottomOf="@+id/sp_menu_dialog_select_way"
                 tools:visibility="visible" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_line_menu_dialog_itineraries"
                 android:layout_width="match_parent"
-                android:layout_height="55dp"
+                android:backgroundTint="@color/white"
+                app:rippleColor="@color/grey400"
+                android:layout_height="65dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
-                android:background="@drawable/background_white_ripple_grey"
                 android:fontFamily="@font/ubuntu_medium"
+                android:elevation="10dp"
+                android:textSize="16sp"
                 android:text="@string/itineraries"
                 android:textAllCaps="false"
-                android:textSize="14sp"
                 android:visibility="gone"
+                android:textColor="@color/grey800"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

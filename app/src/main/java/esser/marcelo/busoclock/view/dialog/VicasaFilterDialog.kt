@@ -40,6 +40,10 @@ class VicasaFilterDialog(
         filter_dialog_btn_confirm.setOnClickListener {
             doFilter()
         }
+
+        cl_modal_background.setOnClickListener{
+            dismiss()
+        }
     }
 
     private fun buildAdapter() {

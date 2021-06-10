@@ -4,9 +4,12 @@ import android.animation.ValueAnimator
 import android.content.Intent
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.LayoutInflater
+import android.view.View
 import android.view.View.*
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import com.google.android.material.snackbar.Snackbar
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.extensions.hideKeyboard
 import esser.marcelo.busoclock.model.Constants.CB_WAY
@@ -19,6 +22,8 @@ import esser.marcelo.busoclock.view.adapter.GenericLinesAdapter
 import esser.marcelo.busoclock.view.dialog.LineMenuDialog
 import esser.marcelo.busoclock.viewModel.SogalLinesViewModel
 import kotlinx.android.synthetic.main.activity_lines.*
+import kotlinx.android.synthetic.main.dialog_line_menu.*
+import kotlinx.android.synthetic.main.snack_bar.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -50,11 +55,37 @@ class SogalLinesActivity : BaseActivity(R.layout.activity_lines), GenericLinesAd
     override fun onInitValues() {
         showLoader()
         listeners()
+        errorObserver()
+    }
+
+    private fun listeners() {
+        lav_cancel_search_action.setOnClickListener {
+            if (activity_lines_et_search.text.isNotEmpty()) {
+                activity_lines_et_search.setText("")
+                this.hideKeyboard()
+            }
+        }
+        searchEvent()
+
+        ibBacAction()
+    }
+
+    private fun errorObserver() {
+        val errorOberver = Observer<String> { message ->
+            hideLoader()
+            var mMessage = message
+            if(isNetworkAvailable(this)){
+                mMessage = "Verifique sua conexão com a internet e tente novamente mais tarde"
+            }
+            showSnackBar(mMessage)
+            errorConfig()
+        }
+        viewModel.error.observe(this, errorOberver)
     }
 
     private fun favoriteLineObserver() {
         val favoriteLineObserver = Observer<FavoriteLine> { line ->
-            Toast.makeText(mContext, "${line.name} salva com sucesso", Toast.LENGTH_SHORT).show()
+            showSnackBar("${line.name} salva com sucesso")
         }
 
         viewModel.mFavoriteLine.observe(mContext, favoriteLineObserver)
@@ -75,18 +106,7 @@ class SogalLinesActivity : BaseActivity(R.layout.activity_lines), GenericLinesAd
             adapterConstruct(lines)
         }
         viewModel.lines.observe(this, linesObserver)
-    }
-
-    private fun listeners() {
-        lav_cancel_search_action.setOnClickListener {
-            if (activity_lines_et_search.text.isNotEmpty()) {
-                activity_lines_et_search.setText("")
-                this.hideKeyboard()
-            }
-        }
-        searchEvent()
-
-        ibBacAction()
+        return
     }
 
     private fun ibBacAction() {
@@ -140,8 +160,8 @@ class SogalLinesActivity : BaseActivity(R.layout.activity_lines), GenericLinesAd
 
         lines_activity_img_lottie_conection.setOnClickListener {
             lines_activity_img_lottie_conection.pauseAnimation()
-            //TODO: Review this
-            //loadLines()
+            showLoader()
+            viewModel.loadLines()
         }
 
         lines_activity_img_lottie_conection.visibility = VISIBLE

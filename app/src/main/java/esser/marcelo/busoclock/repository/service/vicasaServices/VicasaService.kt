@@ -35,7 +35,7 @@ open class VicasaService(private val _mApi: IVicasaAPI) : VicasaServiceDelegate 
             NetworkBoundResource(
                 collector = this,
                 processResponse = { it },
-                call = _mApi.postLisnesFrom(destination, origin, service)
+                call = _mApi.postLinesAsync(destination, origin, service)
             ).build()
         }
     }
@@ -44,7 +44,7 @@ open class VicasaService(private val _mApi: IVicasaAPI) : VicasaServiceDelegate 
         return flow {
             NetworkBoundResource(
                 collector = this,
-                call = _mApi.getSchedules(lineCode = lindeId),
+                call = _mApi.getSchedulesAsync(lineCode = lindeId),
                 processResponse = { it }
             ).build()
         }

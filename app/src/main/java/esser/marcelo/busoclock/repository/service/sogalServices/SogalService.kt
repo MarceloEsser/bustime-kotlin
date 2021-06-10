@@ -35,7 +35,7 @@ class SogalService(
         return flow {
             NetworkBoundResource(
                 collector = this,
-                call = _mApi.getSogalSchedulesBy(lineWay, lineCode),
+                call = _mApi.getSogalSchedulesAsync(lineWay, lineCode),
                 processResponse = { it }
             ).build()
         }
@@ -46,7 +46,7 @@ class SogalService(
             NetworkBoundResource(
                 collector = this,
                 processResponse = { it },
-                call = _mApi.getSogalList(SEARCH_LINES)
+                call = _mApi.getSogalListAsync(SEARCH_LINES)
             ).build()
         }
     }
@@ -56,7 +56,7 @@ class SogalService(
             NetworkBoundResource(
                 collector = this,
                 processResponse = { it },
-                call = _mApi.getSogalItineraries(SEARCH_ITINERARIES, lineCode)
+                call = _mApi.getSogalItinerariesAsync(SEARCH_ITINERARIES, lineCode)
             ).build()
         }
     }
