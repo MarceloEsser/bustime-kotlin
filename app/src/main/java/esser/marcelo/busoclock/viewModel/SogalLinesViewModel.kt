@@ -32,6 +32,7 @@ class SogalLinesViewModel(
 ) : ViewModel() {
 
 
+    private val _allLines = MutableLiveData<List<LinesDTO>>()
     private val _lines = MutableLiveData<List<LinesDTO>>()
     val lines: LiveData<List<LinesDTO>> by lazy {
         loadLines()
@@ -52,7 +53,10 @@ class SogalLinesViewModel(
         viewModelScope.launch(dispatcher) {
             service.getLines().collect { resource ->
                 when (resource.requestStatus) {
-                    Status.success -> _lines.postValue(resource.data)
+                    Status.success -> {
+                        _lines.postValue(resource.data)
+                        _allLines.postValue(resource.data)
+                    }
                     Status.error -> _error.postValue(resource.message)
                 }
             }
@@ -113,19 +117,11 @@ class SogalLinesViewModel(
 
 
     fun filterBy(text: String) {
-//        val filter: List<LinesDTO>? = mLines.filter {
-//            it.name.toLowerCase(Locale.getDefault()).contains(text)
-//                    || it.code.toLowerCase(Locale.getDefault()).contains(text)
-//        }
-//        lines.value = filter ?: listOf()
+        val linesToFilter = _allLines.value
+        val filter: List<LinesDTO>? = linesToFilter?.filter {
+            it.name.toLowerCase(Locale.getDefault()).contains(text)
+                    || it.code.toLowerCase(Locale.getDefault()).contains(text)
+        }
+        _lines.value = filter ?: listOf()
     }
-
-//    fun findLine() {
-//        viewModelScope.launch(dispatcher) {
-//            val lines: LineWithSchedules =
-//                daoHelper.getLines(LineDAO.lineName, LineDAO.lineCode, LineDAO.lineWay?.way ?: "")
-//
-//            isFavorite.postValue(lines != null)
-//        }
-//    }
 }
