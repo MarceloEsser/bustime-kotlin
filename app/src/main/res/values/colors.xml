@@ -6,6 +6,7 @@
     <color name="colorAccentLight">#7c43bd</color>
 
     <color name="white">#ffffff</color>
+    <color name="transparentWhite">#66ffffff</color>
     <color name="black">#000000</color>
     <!--  RED PALETTE  -->
     <color name="red50">#FFEBEE</color>

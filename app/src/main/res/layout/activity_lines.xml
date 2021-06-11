@@ -12,7 +12,6 @@
             style="@style/TabBarStyle"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:elevation="10dp"
             android:focusable="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -21,12 +20,12 @@
         <TextView
                 android:id="@+id/activity_home_title"
                 style="@style/TitleStyle"
+                android:layout_marginStart="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/lines_title"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@id/lines_activity_img_btn_back"
                 app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
@@ -53,7 +52,7 @@
             android:id="@+id/clSearch"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorPrimaryDark"
             android:elevation="6dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -70,6 +69,8 @@
                 android:paddingStart="15dp"
                 android:paddingEnd="50dp"
                 android:textSize="14sp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey600"
                 android:hint="@string/line_or_line_way"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/activity_lines_imgbtn_filter"

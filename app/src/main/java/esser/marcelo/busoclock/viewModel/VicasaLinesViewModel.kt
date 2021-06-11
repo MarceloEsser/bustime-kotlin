@@ -4,14 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import esser.marcelo.busoclock.repository.dao.DaoHelper
 import esser.marcelo.busoclock.repository.dao.LineDAO
 import esser.marcelo.busoclock.model.Constants
 import esser.marcelo.busoclock.model.Constants.CB_WAY
 import esser.marcelo.busoclock.model.LineWay
 import esser.marcelo.busoclock.model.favorite.FavoriteLine
 import esser.marcelo.busoclock.model.vicasa.Vicasa
-import esser.marcelo.busoclock.repository.dao.DaoHelperDelegate
+import esser.marcelo.busoclock.repository.dao.DaoHelper
 import esser.marcelo.busoclock.repository.service.vicasaServices.VicasaServiceDelegate
 import esser.marcelo.busoclock.repository.service.wrapper.resource.Status
 import kotlinx.coroutines.flow.collect
@@ -30,7 +29,7 @@ import kotlin.coroutines.CoroutineContext
 
 class VicasaLinesViewModel(
     private val service: VicasaServiceDelegate,
-    private val daoHelper: DaoHelperDelegate,
+    private val daoHelper: DaoHelper,
     private val dispatcher: CoroutineContext,
 ) : ViewModel() {
 

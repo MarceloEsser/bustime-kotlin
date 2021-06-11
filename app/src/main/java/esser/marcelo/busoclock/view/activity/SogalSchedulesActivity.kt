@@ -27,6 +27,7 @@ class SogalSchedulesActivity : BaseActivity(R.layout.activity_schedules) {
 
     override fun observers() {
         workingdaysObserver()
+        favoriteLineActions()
     }
 
     override fun onInitValues() {
@@ -56,8 +57,26 @@ class SogalSchedulesActivity : BaseActivity(R.layout.activity_schedules) {
         }
     }
 
+    private fun favoriteLineActions() {
+        val isFavoriteObserver = Observer<Boolean> { isFavorite ->
+            if (isFavorite)
+                img_btn_add_itineraries.setImageResource(R.drawable.ic_favorite)
+            else img_btn_add_itineraries.setImageResource(R.drawable.ic_favorite_border)
+        }
+
+        viewModelSogal.isLineFavorite.observe(this, isFavoriteObserver)
+
+        img_btn_add_itineraries.setOnClickListener { v ->
+            if (viewModelSogal.isLineFavorite.value == false) {
+                viewModelSogal.saveLine()
+                return@setOnClickListener
+            }
+            viewModelSogal.deleteLine()
+        }
+    }
+
     private fun btnGoToItineraries() {
-        img_btn_add_itineraries.setOnClickListener {
+        lines_activity_img_btn_itinerary.setOnClickListener {
             val goToItineraries = Intent(this, SogalItinerariesActivity::class.java)
             startActivity(goToItineraries)
         }

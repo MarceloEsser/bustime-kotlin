@@ -9,8 +9,6 @@ import esser.marcelo.busoclock.model.schedules.Saturday
 import esser.marcelo.busoclock.model.schedules.Sunday
 import esser.marcelo.busoclock.model.schedules.Workingday
 import esser.marcelo.busoclock.repository.dao.database.AppDatabase
-import esser.marcelo.busoclock.viewModel.SogalSchedulesViewModel
-import esser.marcelo.busoclock.viewModel.VicasaSchedulesViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 
@@ -22,31 +20,10 @@ import kotlinx.coroutines.flow.collect
  * @since 31/08/20
  */
 
-interface DaoHelperDelegate {
-    fun getAll(): Flow<List<LineWithSchedules>?>
-    suspend fun getLines(lineId: Long): Flow<List<LineWithSchedules>?>
-    suspend fun getLines(
-        lineName: String,
-        lineCode: String,
-        lineWayDescription: String
-    ): Flow<List<LineWithSchedules>?>
-
-    fun clearDatabase()
-    suspend fun insertLine(line: FavoriteLine): Long?
-    fun deleteLine(lineId: Long?)
-    suspend fun deleteLine(lineName: String, lineCode: String, lineWayDescription: String)
-}
 
 class DaoHelper(
     private val context: Context,
-    private val sogalSchedulesViewModel: SogalSchedulesViewModel,
-    private val vicasaSchedulesViewModel: VicasaSchedulesViewModel
-) : DaoHelperDelegate, SaveLineDelegate {
-
-    init {
-        sogalSchedulesViewModel.saverDelegate = this
-        vicasaSchedulesViewModel.saverDelegate = this
-    }
+) : SaveLineDelegate {
 
     private val database: AppDatabase = Room.databaseBuilder(
         context,
@@ -57,21 +34,18 @@ class DaoHelper(
         database.busTimeDao()
     }
 
-    private lateinit var _workingdays: List<Workingday>
-    private lateinit var _saturdays: List<Saturday>
-    private lateinit var _sundays: List<Sunday>
+    lateinit var workingdays: List<Workingday>
+    lateinit var saturdays: List<Saturday>
+    lateinit var sundays: List<Sunday>
 
     private var _lineId: Long? = null
 
-    override suspend fun insertLine(line: FavoriteLine): Long? {
+    suspend fun insertLine(line: FavoriteLine): Long? {
         this._lineId = bustimeDao.insertLine(line)
-
-        loadSchedules(line)
-
         return this._lineId
     }
 
-    override fun deleteLine(lineId: Long?) {
+    fun deleteLine(lineId: Long?) {
         if (lineId != null) {
             bustimeDao.deleteLineFrom(lineId)
             bustimeDao.deleteSaturdaysFrom(lineId)
@@ -80,15 +54,15 @@ class DaoHelper(
         }
     }
 
-    override fun getAll(): Flow<List<LineWithSchedules>?> {
+    fun getAll(): Flow<List<LineWithSchedules>?> {
         return bustimeDao.getAll()
     }
 
-    override suspend fun getLines(lineId: Long): Flow<List<LineWithSchedules>?> {
+    suspend fun getLines(lineId: Long): Flow<List<LineWithSchedules>?> {
         return bustimeDao.getLineBy(lineId)
     }
 
-    override suspend fun getLines(
+    suspend fun getLines(
         lineName: String,
         lineCode: String,
         lineWayDescription: String
@@ -96,14 +70,14 @@ class DaoHelper(
         return bustimeDao.getLineBy(lineName, lineCode, lineWayDescription)
     }
 
-    override fun clearDatabase() {
+    fun clearDatabase() {
         bustimeDao.deleteAllLines()
         bustimeDao.deleteAllSaturdays()
         bustimeDao.deleteAllWorkingdays()
         bustimeDao.deleteAllSundays()
     }
 
-    override suspend fun deleteLine(
+    suspend fun deleteLine(
         lineName: String,
         lineCode: String,
         lineWayDescription: String
@@ -132,13 +106,6 @@ class DaoHelper(
         bustimeDao.deleteSundaysFrom(lineId)
     }
 
-    private fun loadSchedules(line: FavoriteLine) {
-        if (line.isSogal)
-            sogalSchedulesViewModel.loadSchedules()
-        else
-            vicasaSchedulesViewModel.loadSchedules()
-    }
-
     private fun insertSchedules() {
         insertWorkingday()
         insertSaturday()
@@ -155,8 +122,8 @@ class DaoHelper(
     private fun fillWorkingdays(
         workingdays: MutableList<Workingday>
     ) {
-        if (!_workingdays.isNullOrEmpty()) {
-            for (schedule in _workingdays) {
+        if (!this.workingdays.isNullOrEmpty()) {
+            for (schedule in this.workingdays) {
                 val workingday = schedule
                 workingday.workindayKey = _lineId
                 workingdays.add(workingday)
@@ -174,8 +141,8 @@ class DaoHelper(
     private fun fillSaturdays(
         saturdays: MutableList<Saturday>
     ) {
-        if (!_saturdays.isNullOrEmpty()) {
-            for (schedule in _saturdays) {
+        if (!this.saturdays.isNullOrEmpty()) {
+            for (schedule in this.saturdays) {
                 val saturday = schedule
                 saturday.saturdayKey = _lineId
                 saturdays.add(saturday)
@@ -194,8 +161,8 @@ class DaoHelper(
     private fun fillSundays(
         sundays: MutableList<Sunday>
     ) {
-        if (!_sundays.isNullOrEmpty()) {
-            for (schedule in _sundays) {
+        if (!this.sundays.isNullOrEmpty()) {
+            for (schedule in this.sundays) {
                 val sunday = schedule
                 sunday.sundayKey = _lineId
                 sundays.add(sunday)
@@ -205,29 +172,6 @@ class DaoHelper(
     }
 
     override fun canInsertSchedules(isSogal: Boolean) {
-        fillMemberSchedules(isSogal)
-
         insertSchedules()
-    }
-
-    private fun fillMemberSchedules(isSogal: Boolean) {
-        if (isSogal) {
-            fillSogalSchedulesFromViewModel()
-        } else {
-            fillVicasaSchedulesFromViewModel()
-        }
-
-    }
-
-    private fun fillVicasaSchedulesFromViewModel() {
-        this._workingdays = vicasaSchedulesViewModel.workingdays.value ?: listOf()
-        this._saturdays = vicasaSchedulesViewModel.saturdays.value ?: listOf()
-        this._sundays = vicasaSchedulesViewModel.sundays.value ?: listOf()
-    }
-
-    private fun fillSogalSchedulesFromViewModel() {
-        this._workingdays = sogalSchedulesViewModel.workingdays.value ?: listOf()
-        this._saturdays = sogalSchedulesViewModel.saturdays.value ?: listOf()
-        this._sundays = sogalSchedulesViewModel.sundays.value ?: listOf()
     }
 }

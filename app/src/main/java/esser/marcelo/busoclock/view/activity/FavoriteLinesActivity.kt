@@ -47,7 +47,7 @@ class FavoriteLinesActivity : BaseActivity(R.layout.activity_lines), IFavoriteLi
     }
 
     override fun onInitValues() {
-
+        activity_home_title.text = "Linhas salvas"
         lines_activity_img_btn_delete_all.visibility = VISIBLE
 
         lines_activity_img_btn_delete_all.setOnClickListener {

@@ -8,7 +8,7 @@ import esser.marcelo.busoclock.model.favorite.LineWithSchedules
 import esser.marcelo.busoclock.model.schedules.Saturday
 import esser.marcelo.busoclock.model.schedules.Sunday
 import esser.marcelo.busoclock.model.schedules.Workingday
-import esser.marcelo.busoclock.repository.dao.DaoHelperDelegate
+import esser.marcelo.busoclock.repository.dao.DaoHelper
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
@@ -22,7 +22,7 @@ import kotlin.coroutines.CoroutineContext
  */
 
 class FavoriteSchedulesViewModel(
-    private val daoHelper: DaoHelperDelegate,
+    private val daoHelper: DaoHelper,
     private val dispatcher: CoroutineContext
 ) : ViewModel() {
 

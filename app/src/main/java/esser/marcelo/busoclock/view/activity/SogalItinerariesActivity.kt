@@ -7,6 +7,7 @@ import esser.marcelo.busoclock.model.sogal.ItinerariesDTO
 import esser.marcelo.busoclock.view.adapter.ItinerariesAdapter
 import esser.marcelo.busoclock.viewModel.SogalItinerariesViewModel
 import kotlinx.android.synthetic.main.activity_itineraries.*
+import kotlinx.android.synthetic.main.activity_lines.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -28,7 +29,6 @@ class SogalItinerariesActivity : BaseActivity(R.layout.activity_itineraries) {
     }
 
     override fun onInitValues() {
-
         btnBack()
         showLoader()
 

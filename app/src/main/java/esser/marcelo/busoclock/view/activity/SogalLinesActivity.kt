@@ -53,6 +53,7 @@ class SogalLinesActivity : BaseActivity(R.layout.activity_lines), GenericLinesAd
     }
 
     override fun onInitValues() {
+        activity_home_title.text = "Sogal"
         showLoader()
         listeners()
         errorObserver()
@@ -200,15 +201,12 @@ class SogalLinesActivity : BaseActivity(R.layout.activity_lines), GenericLinesAd
     }
 
     override fun findLine() {
-        viewModel.validateLine()
     }
 
     override fun saveLine() {
-        viewModel.saveLine()
     }
 
     override fun removeLine() {
-        viewModel.deleteLine()
     }
 
     override fun goToSchedules() {

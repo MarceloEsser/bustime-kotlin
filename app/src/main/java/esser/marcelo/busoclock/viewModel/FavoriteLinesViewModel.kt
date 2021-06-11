@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import esser.marcelo.busoclock.model.favorite.LineWithSchedules
-import esser.marcelo.busoclock.repository.dao.DaoHelperDelegate
+import esser.marcelo.busoclock.repository.dao.DaoHelper
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -20,7 +20,7 @@ import kotlin.coroutines.CoroutineContext
  */
 
 class FavoriteLinesViewModel(
-    private val daoHelper: DaoHelperDelegate,
+    private val daoHelper: DaoHelper,
     private val dispatcher: CoroutineContext
 ) : ViewModel() {
 

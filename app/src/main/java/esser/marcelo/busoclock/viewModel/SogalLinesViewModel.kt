@@ -8,7 +8,6 @@ import esser.marcelo.busoclock.model.Constants
 import esser.marcelo.busoclock.model.LineWay
 import esser.marcelo.busoclock.model.favorite.FavoriteLine
 import esser.marcelo.busoclock.model.sogal.LinesDTO
-import esser.marcelo.busoclock.repository.dao.DaoHelperDelegate
 import esser.marcelo.busoclock.repository.dao.LineDAO
 import esser.marcelo.busoclock.repository.service.sogalServices.SogalServiceDelegate
 import esser.marcelo.busoclock.repository.service.wrapper.resource.Status
@@ -26,7 +25,6 @@ import kotlin.coroutines.CoroutineContext
  */
 
 class SogalLinesViewModel(
-    private val daoHelper: DaoHelperDelegate,
     private val service: SogalServiceDelegate,
     private val dispatcher: CoroutineContext
 ) : ViewModel() {
@@ -63,35 +61,6 @@ class SogalLinesViewModel(
         }
     }
 
-    fun validateLine() {
-        viewModelScope.launch(dispatcher) {
-            daoHelper.getLines(
-                LineDAO.lineName,
-                LineDAO.lineCode,
-                LineDAO.lineWay?.description ?: ""
-            ).collect {
-                _isLineFavorite.postValue(it?.size == 1)
-            }
-        }
-    }
-
-    fun saveLine() = viewModelScope.launch(dispatcher) {
-        val favoriteLine: FavoriteLine = getFavoriteLine()
-        daoHelper.insertLine(favoriteLine)
-        validateLine()
-    }
-
-    fun deleteLine() {
-        viewModelScope.launch(dispatcher) {
-            daoHelper.deleteLine(
-                lineName = LineDAO.lineName,
-                lineCode = LineDAO.lineCode,
-                lineWayDescription = LineDAO.lineWay?.description ?: ""
-            )
-            validateLine()
-        }
-    }
-
     fun getWaysList(): ArrayList<LineWay> {
         val waysList: ArrayList<LineWay> = ArrayList()
         waysList.add(LineWay("Selecione um sentido", "none"))
@@ -106,16 +75,6 @@ class SogalLinesViewModel(
         LineDAO.lineCode = lineCode
     }
 
-    private fun getFavoriteLine(): FavoriteLine {
-        return FavoriteLine(
-            isSogal = true,
-            name = LineDAO.lineName,
-            code = LineDAO.lineCode,
-            way = LineDAO.lineWay?.description ?: ""
-        )
-    }
-
-
     fun filterBy(text: String) {
         val linesToFilter = _allLines.value
         val filter: List<LinesDTO>? = linesToFilter?.filter {
@@ -124,4 +83,5 @@ class SogalLinesViewModel(
         }
         _lines.value = filter ?: listOf()
     }
+
 }

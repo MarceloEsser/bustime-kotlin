@@ -49,7 +49,7 @@ class VicasaLinesActivity : BaseActivity(R.layout.activity_lines), FilterDialogI
 
     override fun onInitValues() {
         activity_lines_imgbtn_filter.visibility = VISIBLE
-
+        activity_home_title.text = "Vicasa"
         showFilterDialog()
         dialogDoFilter()
         listeners()
