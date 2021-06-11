@@ -9,6 +9,6 @@ package esser.marcelo.busoclock.model
  */
 
 class LineWay (
-    val description: String,
-    val way: String
+    var description: String,
+    var way: String?
 )

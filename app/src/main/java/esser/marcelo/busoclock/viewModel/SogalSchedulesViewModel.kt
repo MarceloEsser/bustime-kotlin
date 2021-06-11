@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.interfaces.SaveLineDelegate
 import esser.marcelo.busoclock.model.favorite.FavoriteLine
 import esser.marcelo.busoclock.repository.dao.LineDAO
@@ -15,6 +16,7 @@ import esser.marcelo.busoclock.repository.dao.DaoHelper
 import esser.marcelo.busoclock.repository.service.sogalServices.SogalServiceDelegate
 import esser.marcelo.busoclock.repository.service.wrapper.resource.Resource
 import esser.marcelo.busoclock.repository.service.wrapper.resource.Status
+import kotlinx.android.synthetic.main.activity_schedules.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext

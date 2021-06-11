@@ -1,5 +1,6 @@
 package esser.marcelo.busoclock.viewModel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -43,5 +44,15 @@ class FavoriteSchedulesViewModel(
         workingDays.postValue(line.workingdays)
         saturdays.postValue(line.saturdays)
         sundays.postValue(line.sundays)
+    }
+
+    fun deleteLine() {
+        viewModelScope.launch(dispatcher) {
+            daoHelper.deleteLine(
+                lineName = LineDAO.lineName,
+                lineCode = LineDAO.lineCode,
+                lineWayDescription = LineDAO.lineWay?.description ?: ""
+            )
+        }
     }
 }

@@ -8,6 +8,8 @@ import esser.marcelo.busoclock.repository.dao.LineDAO
 import esser.marcelo.busoclock.model.schedules.BaseSchedule
 import esser.marcelo.busoclock.viewModel.FavoriteSchedulesViewModel
 import kotlinx.android.synthetic.main.activity_schedules.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -19,13 +21,17 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  */
 
 class FavoriteSchedulesAcitivty : BaseActivity(R.layout.activity_schedules) {
+    companion object {
+        val deletedLineCode = 0
+    }
 
     private val viewModel: FavoriteSchedulesViewModel by viewModel()
 
     private lateinit var adapter: SchedulesAdapter
 
     override fun observers() {
-        workingdaysObserver()
+        workingDaysObserver()
+        favoriteLineActions()
     }
 
     override fun onInitValues() {
@@ -34,12 +40,19 @@ class FavoriteSchedulesAcitivty : BaseActivity(R.layout.activity_schedules) {
         setupScreen()
     }
 
-    private fun workingdaysObserver() {
-        val workingdayObserver = Observer<List<BaseSchedule>> { schedules ->
+    private fun favoriteLineActions() {
+        img_btn_add_itineraries.setOnClickListener {
+            viewModel.deleteLine()
+            finish()
+        }
+    }
+
+    private fun workingDaysObserver() {
+        val workingDayObserver = Observer<List<BaseSchedule>> { schedules ->
             configureList(schedules)
         }
 
-        viewModel.workingDays.observe(this, workingdayObserver)
+        viewModel.workingDays.observe(this, workingDayObserver)
     }
 
     private fun setupScreen() {

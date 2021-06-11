@@ -1,6 +1,7 @@
 package esser.marcelo.busoclock.view.activity
 
 import android.content.Intent
+import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -9,6 +10,7 @@ import esser.marcelo.busoclock.view.adapter.FavoriteLinesAdapter
 import esser.marcelo.busoclock.repository.dao.LineDAO
 import esser.marcelo.busoclock.interfaces.DeleteDelegate
 import esser.marcelo.busoclock.interfaces.IFavoriteLineAdapterDelegate
+import esser.marcelo.busoclock.model.LineWay
 import esser.marcelo.busoclock.model.favorite.FavoriteLine
 import esser.marcelo.busoclock.model.favorite.LineWithSchedules
 import esser.marcelo.busoclock.view.dialog.DeleteDialog
@@ -26,7 +28,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FavoriteLinesActivity : BaseActivity(R.layout.activity_lines), IFavoriteLineAdapterDelegate,
     DeleteDelegate {
-
     private val viewModel: FavoriteLinesViewModel by viewModel()
     private lateinit var adapter: FavoriteLinesAdapter
 
@@ -39,8 +40,14 @@ class FavoriteLinesActivity : BaseActivity(R.layout.activity_lines), IFavoriteLi
     private fun linesObserver() {
         val linesListObserver = Observer<List<LineWithSchedules>> { lines ->
             adapter = FavoriteLinesAdapter(lines, this@FavoriteLinesActivity, this)
-            lines_activity_rv_lines.visibility = VISIBLE
-            lines_activity_rv_lines.adapter = adapter
+            if (lines != null && lines.isNotEmpty()) {
+                lines_activity_tv_without_lines.visibility = GONE
+                lines_activity_rv_lines.visibility = VISIBLE
+                lines_activity_rv_lines.adapter = adapter
+            } else {
+                lines_activity_rv_lines.visibility = GONE
+                lines_activity_tv_without_lines.visibility = VISIBLE
+            }
         }
 
         viewModel.favoriteLines.observe(this, linesListObserver)
@@ -64,8 +71,19 @@ class FavoriteLinesActivity : BaseActivity(R.layout.activity_lines), IFavoriteLi
         LineDAO.lineCode = line.code
         LineDAO.lineName = line.name
         LineDAO.lineId = line.id
+        val newWay = LineWay(description = line.way, way = null)
+        LineDAO.lineWay = newWay
+        startActivity(
+            Intent(
+                this@FavoriteLinesActivity,
+                FavoriteSchedulesAcitivty::class.java
+            )
+        )
+    }
 
-        startActivity(Intent(this@FavoriteLinesActivity, FavoriteSchedulesAcitivty::class.java))
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        adapter.notifyDataSetChanged()
     }
 
     override fun doDelete() {

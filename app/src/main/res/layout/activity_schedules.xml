@@ -166,7 +166,7 @@
             android:layout_marginEnd="16dp"
             android:elevation="9dp"
             android:background="@drawable/background_bluegrey_ripple_bluegrey"
-            android:src="@drawable/ic_favorite_border"
+            android:src="@drawable/ic_favorite"
             app:layout_constraintBottom_toTopOf="@id/schedules_bottom_navigation"
             app:layout_constraintEnd_toEndOf="parent"
             android:contentDescription="@string/itineraries" />

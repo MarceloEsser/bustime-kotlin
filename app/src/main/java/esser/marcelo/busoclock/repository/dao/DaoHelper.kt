@@ -42,17 +42,10 @@ class DaoHelper(
 
     suspend fun insertLine(line: FavoriteLine): Long? {
         this._lineId = bustimeDao.insertLine(line)
+        insertSchedules()
         return this._lineId
     }
 
-    fun deleteLine(lineId: Long?) {
-        if (lineId != null) {
-            bustimeDao.deleteLineFrom(lineId)
-            bustimeDao.deleteSaturdaysFrom(lineId)
-            bustimeDao.deleteWorkingdaysFrom(lineId)
-            bustimeDao.deleteSundaysFrom(lineId)
-        }
-    }
 
     fun getAll(): Flow<List<LineWithSchedules>?> {
         return bustimeDao.getAll()
