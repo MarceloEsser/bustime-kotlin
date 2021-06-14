@@ -24,13 +24,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.FavoriteSchedulesAcitivty" />
-        <activity android:name=".view.activity.FavoriteLinesActivity" />
-        <activity android:name=".view.activity.VicasaSchedulesActivity" />
-        <activity android:name=".view.activity.SogalItinerariesActivity" />
-        <activity android:name=".view.activity.SogalLinesActivity" />
-        <activity android:name=".view.activity.SogalSchedulesActivity" />
-        <activity android:name=".view.activity.VicasaLinesActivity" />
+        <activity android:name=".view.activity.favorite.FavoriteSchedulesAcitivty" />
+        <activity android:name=".view.activity.favorite.FavoriteLinesActivity" />
+        <activity android:name=".view.activity.favorite.FavoriteItinerariesActivity" />
+        <activity android:name=".view.activity.vicasa.VicasaSchedulesActivity" />
+        <activity android:name=".view.activity.sogal.SogalItinerariesActivity" />
+        <activity android:name=".view.activity.sogal.SogalLinesActivity" />
+        <activity android:name=".view.activity.sogal.SogalSchedulesActivity" />
+        <activity android:name=".view.activity.vicasa.VicasaLinesActivity" />
 
     </application>
 

@@ -1,4 +1,4 @@
-package esser.marcelo.busoclock.view.activity
+package esser.marcelo.busoclock.view.activity.favorite
 
 import android.content.Intent
 import android.view.View.GONE
@@ -13,6 +13,7 @@ import esser.marcelo.busoclock.interfaces.IFavoriteLineAdapterDelegate
 import esser.marcelo.busoclock.model.LineWay
 import esser.marcelo.busoclock.model.favorite.FavoriteLine
 import esser.marcelo.busoclock.model.favorite.LineWithSchedules
+import esser.marcelo.busoclock.view.activity.BaseActivity
 import esser.marcelo.busoclock.view.dialog.DeleteDialog
 import esser.marcelo.busoclock.viewModel.FavoriteLinesViewModel
 import kotlinx.android.synthetic.main.activity_lines.*

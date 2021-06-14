@@ -5,6 +5,7 @@ import androidx.room.Relation
 import esser.marcelo.busoclock.model.schedules.Saturday
 import esser.marcelo.busoclock.model.schedules.Sunday
 import esser.marcelo.busoclock.model.schedules.Workingday
+import esser.marcelo.busoclock.model.sogal.ItinerariesDTO
 
 /**
  * @author Marcelo Esser
@@ -34,5 +35,11 @@ data class LineWithSchedules(
         parentColumn = "id",
         entityColumn = "lineId"
     )
-    var sundays: List<Sunday>? = null
+    var sundays: List<Sunday>? = null,
+
+    @Relation(
+        parentColumn = "id",
+        entityColumn = "lineId"
+    )
+    var itineraries: List<ItinerariesDTO>? = null
 )

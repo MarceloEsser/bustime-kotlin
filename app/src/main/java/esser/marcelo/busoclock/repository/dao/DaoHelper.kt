@@ -2,12 +2,14 @@ package esser.marcelo.busoclock.repository.dao
 
 import android.content.Context
 import androidx.room.Room
+import esser.marcelo.busoclock.interfaces.ItinerariesDelegte
 import esser.marcelo.busoclock.interfaces.SaveLineDelegate
 import esser.marcelo.busoclock.model.favorite.FavoriteLine
 import esser.marcelo.busoclock.model.favorite.LineWithSchedules
 import esser.marcelo.busoclock.model.schedules.Saturday
 import esser.marcelo.busoclock.model.schedules.Sunday
 import esser.marcelo.busoclock.model.schedules.Workingday
+import esser.marcelo.busoclock.model.sogal.ItinerariesDTO
 import esser.marcelo.busoclock.repository.dao.database.AppDatabase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
@@ -24,6 +26,8 @@ import kotlinx.coroutines.flow.collect
 class DaoHelper(
     private val context: Context,
 ) : SaveLineDelegate {
+
+    var itinerariesDelegate: ItinerariesDelegte? = null
 
     private val database: AppDatabase = Room.databaseBuilder(
         context,
@@ -43,6 +47,10 @@ class DaoHelper(
     suspend fun insertLine(line: FavoriteLine): Long? {
         this._lineId = bustimeDao.insertLine(line)
         insertSchedules()
+        if(itinerariesDelegate != null){
+            itinerariesDelegate?.loadItineraries()
+
+        }
         return this._lineId
     }
 
@@ -51,11 +59,11 @@ class DaoHelper(
         return bustimeDao.getAll()
     }
 
-    suspend fun getLines(lineId: Long): Flow<List<LineWithSchedules>?> {
+    fun getLines(lineId: Long): Flow<List<LineWithSchedules>?> {
         return bustimeDao.getLineBy(lineId)
     }
 
-    suspend fun getLines(
+    fun getLines(
         lineName: String,
         lineCode: String,
         lineWayDescription: String
@@ -103,6 +111,18 @@ class DaoHelper(
         insertWorkingday()
         insertSaturday()
         insertSunday()
+    }
+
+    fun insertItineraries(itineraries: List<ItinerariesDTO>) {
+        val mItineraries:MutableList<ItinerariesDTO> = mutableListOf()
+        if (!itineraries.isNullOrEmpty()) {
+            for (itinerary in itineraries) {
+                val mItinerary = itinerary
+                mItinerary.itineraryKey = _lineId
+                mItineraries.add(mItinerary)
+            }
+        }
+        bustimeDao.insertItineraries(mItineraries)
     }
 
     private fun insertWorkingday() {

@@ -1,9 +1,10 @@
-package esser.marcelo.busoclock.view.activity
+package esser.marcelo.busoclock.view.activity.sogal
 
 import androidx.lifecycle.Observer
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.repository.dao.LineDAO
 import esser.marcelo.busoclock.model.sogal.ItinerariesDTO
+import esser.marcelo.busoclock.view.activity.BaseActivity
 import esser.marcelo.busoclock.view.adapter.ItinerariesAdapter
 import esser.marcelo.busoclock.viewModel.SogalItinerariesViewModel
 import kotlinx.android.synthetic.main.activity_itineraries.*

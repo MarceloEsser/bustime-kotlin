@@ -49,6 +49,7 @@ private val viewModelModule = module {
     }
     viewModel {
         SogalItinerariesViewModel(
+            daoHelper = get(),
             service = get(),
             dispatcher = Dispatchers.IO
         )
@@ -63,6 +64,12 @@ private val viewModelModule = module {
     }
     viewModel {
         FavoriteSchedulesViewModel(
+            daoHelper = get(),
+            dispatcher = Dispatchers.IO
+        )
+    }
+    viewModel {
+        FavoriteItinerariesViewModel(
             daoHelper = get(),
             dispatcher = Dispatchers.IO
         )

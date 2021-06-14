@@ -1,4 +1,4 @@
-package esser.marcelo.busoclock.view.activity
+package esser.marcelo.busoclock.view.activity.vicasa
 
 import android.content.Intent
 
@@ -16,6 +16,7 @@ import esser.marcelo.busoclock.interfaces.GenericLinesAdapterDelegate
 import esser.marcelo.busoclock.interfaces.LineMenuDelegate
 import esser.marcelo.busoclock.model.BaseLine
 import esser.marcelo.busoclock.model.vicasa.Vicasa
+import esser.marcelo.busoclock.view.activity.BaseActivity
 import esser.marcelo.busoclock.view.dialog.LineMenuDialog
 import esser.marcelo.busoclock.view.dialog.VicasaFilterDialog
 import esser.marcelo.busoclock.viewModel.VicasaLinesViewModel

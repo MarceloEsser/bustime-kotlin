@@ -1,14 +1,12 @@
 package esser.marcelo.busoclock.repository.dao
 
 import androidx.room.*
-import esser.marcelo.busoclock.model.favorite.FavoriteItineraries
 import esser.marcelo.busoclock.model.favorite.FavoriteLine
 import esser.marcelo.busoclock.model.favorite.LineWithSchedules
 import esser.marcelo.busoclock.model.schedules.Saturday
 import esser.marcelo.busoclock.model.schedules.Sunday
 import esser.marcelo.busoclock.model.schedules.Workingday
-import esser.marcelo.busoclock.repository.service.wrapper.ApiResult
-import kotlinx.coroutines.Deferred
+import esser.marcelo.busoclock.model.sogal.ItinerariesDTO
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -71,6 +69,6 @@ interface BusTimeDao {
     fun insertSundays(schedules: List<Sunday>)
 
     @Insert
-    fun insertItineraries(schedules: List<FavoriteItineraries>)
+    fun insertItineraries(schedules: List<ItinerariesDTO>)
 
 }

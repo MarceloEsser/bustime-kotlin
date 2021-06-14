@@ -1,4 +1,4 @@
-package esser.marcelo.busoclock.view.activity
+package esser.marcelo.busoclock.view.activity.vicasa
 
 import android.view.View.*
 import androidx.lifecycle.Observer
@@ -6,6 +6,7 @@ import androidx.lifecycle.lifecycleScope
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.repository.dao.LineDAO
 import esser.marcelo.busoclock.model.schedules.BaseSchedule
+import esser.marcelo.busoclock.view.activity.BaseActivity
 import esser.marcelo.busoclock.view.adapter.SchedulesAdapter
 import esser.marcelo.busoclock.viewModel.VicasaSchedulesViewModel
 import kotlinx.android.synthetic.main.activity_lines.*

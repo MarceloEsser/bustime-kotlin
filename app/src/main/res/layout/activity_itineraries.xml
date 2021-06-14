@@ -5,7 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/grey100"
-        tools:context=".view.activity.SogalItinerariesActivity">
+        tools:context=".view.activity.sogal.SogalItinerariesActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/toolbar"

@@ -1,15 +1,15 @@
-package esser.marcelo.busoclock.view.activity
+package esser.marcelo.busoclock.view.activity.favorite
 
+import android.content.Intent
 import android.view.View
 import androidx.lifecycle.Observer
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.view.adapter.SchedulesAdapter
 import esser.marcelo.busoclock.repository.dao.LineDAO
 import esser.marcelo.busoclock.model.schedules.BaseSchedule
+import esser.marcelo.busoclock.view.activity.BaseActivity
 import esser.marcelo.busoclock.viewModel.FavoriteSchedulesViewModel
 import kotlinx.android.synthetic.main.activity_schedules.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -38,6 +38,11 @@ class FavoriteSchedulesAcitivty : BaseActivity(R.layout.activity_schedules) {
         viewModel.fillSchedules()
 
         setupScreen()
+
+        lines_activity_img_btn_itinerary.setOnClickListener {
+            val goToItineraries = Intent(this, FavoriteItinerariesActivity::class.java)
+            startActivity(goToItineraries)
+        }
     }
 
     private fun favoriteLineActions() {

@@ -4,8 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import esser.marcelo.busoclock.interfaces.ItinerariesDelegte
 import esser.marcelo.busoclock.repository.dao.LineDAO
 import esser.marcelo.busoclock.model.sogal.ItinerariesDTO
+import esser.marcelo.busoclock.repository.dao.DaoHelper
 import esser.marcelo.busoclock.repository.service.sogalServices.SogalServiceDelegate
 import esser.marcelo.busoclock.repository.service.wrapper.resource.Status
 import kotlinx.coroutines.flow.collect
@@ -21,22 +23,35 @@ import kotlin.coroutines.CoroutineContext
  */
 
 class SogalItinerariesViewModel(
+    private val daoHelper: DaoHelper,
     private val service: SogalServiceDelegate,
     private val dispatcher: CoroutineContext
-) : ViewModel() {
+) : ViewModel(), ItinerariesDelegte {
 
+    init {
+        daoHelper.itinerariesDelegate = this
+    }
+
+    private val _itineraries = MutableLiveData<List<ItinerariesDTO>>()
     val itineraries: LiveData<List<ItinerariesDTO>> by lazy {
-        val _itineraries = MutableLiveData<List<ItinerariesDTO>>()
         viewModelScope.launch(dispatcher) {
-            setItineraries(_itineraries)
+            getItineraries()
         }
         return@lazy _itineraries
     }
 
-    private suspend fun setItineraries(_itineraries: MutableLiveData<List<ItinerariesDTO>>) {
+    private suspend fun getItineraries() {
         service.getSogalItineraries(LineDAO.lineCode).collect { resource ->
-            if (resource.requestStatus == Status.success)
+            if (resource.requestStatus == Status.success) {
                 _itineraries.postValue(resource.data?.itineraries)
+                daoHelper.insertItineraries(resource.data?.itineraries ?: listOf())
+            }
+        }
+    }
+
+    override fun loadItineraries() {
+        viewModelScope.launch(dispatcher) {
+            getItineraries()
         }
     }
 }

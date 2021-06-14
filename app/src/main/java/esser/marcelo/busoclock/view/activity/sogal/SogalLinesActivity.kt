@@ -1,15 +1,11 @@
-package esser.marcelo.busoclock.view.activity
+package esser.marcelo.busoclock.view.activity.sogal
 
 import android.animation.ValueAnimator
 import android.content.Intent
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.LayoutInflater
-import android.view.View
 import android.view.View.*
-import android.widget.Toast
 import androidx.lifecycle.Observer
-import com.google.android.material.snackbar.Snackbar
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.extensions.hideKeyboard
 import esser.marcelo.busoclock.model.Constants.CB_WAY
@@ -18,6 +14,7 @@ import esser.marcelo.busoclock.interfaces.LineMenuDelegate
 import esser.marcelo.busoclock.model.BaseLine
 import esser.marcelo.busoclock.model.favorite.FavoriteLine
 import esser.marcelo.busoclock.model.sogal.LinesDTO
+import esser.marcelo.busoclock.view.activity.BaseActivity
 import esser.marcelo.busoclock.view.adapter.GenericLinesAdapter
 import esser.marcelo.busoclock.view.dialog.LineMenuDialog
 import esser.marcelo.busoclock.viewModel.SogalLinesViewModel

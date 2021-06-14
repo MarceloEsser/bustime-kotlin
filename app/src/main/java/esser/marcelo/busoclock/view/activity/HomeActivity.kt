@@ -10,6 +10,9 @@ import android.view.WindowManager
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import esser.marcelo.busoclock.R
+import esser.marcelo.busoclock.view.activity.favorite.FavoriteLinesActivity
+import esser.marcelo.busoclock.view.activity.sogal.SogalLinesActivity
+import esser.marcelo.busoclock.view.activity.vicasa.VicasaLinesActivity
 import esser.marcelo.busoclock.viewModel.HomeViewModel
 import kotlinx.android.synthetic.main.activity_home.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
