@@ -5,7 +5,7 @@ import android.view.View
 import androidx.lifecycle.Observer
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.view.adapter.SchedulesAdapter
-import esser.marcelo.busoclock.repository.dao.LineDAO
+import esser.marcelo.busoclock.repository.LineHolder
 import esser.marcelo.busoclock.model.schedules.BaseSchedule
 import esser.marcelo.busoclock.view.activity.BaseActivity
 import esser.marcelo.busoclock.viewModel.FavoriteSchedulesViewModel
@@ -61,8 +61,8 @@ class FavoriteSchedulesAcitivty : BaseActivity(R.layout.activity_schedules) {
     }
 
     private fun setupScreen() {
-        shcedule_activity_tv_line_name.text = LineDAO.lineName
-        shcedule_activity_tv_line_code.text = LineDAO.lineCode
+        shcedule_activity_tv_line_name.text = LineHolder.lineName
+        shcedule_activity_tv_line_code.text = LineHolder.lineCode
 
         schedules_activity_img_btn_back.setOnClickListener {
             onBackPressed()

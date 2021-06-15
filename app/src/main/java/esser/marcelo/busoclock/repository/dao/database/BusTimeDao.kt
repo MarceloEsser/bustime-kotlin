@@ -1,4 +1,4 @@
-package esser.marcelo.busoclock.repository.dao
+package esser.marcelo.busoclock.repository.dao.database
 
 import androidx.room.*
 import esser.marcelo.busoclock.model.favorite.FavoriteLine
@@ -41,6 +41,9 @@ interface BusTimeDao {
     @Query("DELETE FROM Sunday")
     fun deleteAllSundays()
 
+    @Query("DELETE FROM ItinerariesDTO")
+    fun deleteAllItineraries()
+
     @Query("DELETE FROM FavoriteLine")
     fun deleteAllLines()
 
@@ -55,6 +58,9 @@ interface BusTimeDao {
 
     @Query("DELETE FROM Sunday WHERE lineId in (:lineId)")
     fun deleteSundaysFrom(lineId: Long)
+
+    @Query("DELETE FROM ItinerariesDTO WHERE lineId in (:lineId)")
+    fun deleteItinerariesFrom(lineId: Long)
 
     @Insert
     suspend fun insertLine(lines: FavoriteLine): Long

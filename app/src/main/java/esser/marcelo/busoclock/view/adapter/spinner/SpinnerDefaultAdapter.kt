@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.model.LineWay
-import kotlinx.android.synthetic.main.spinner_default_row.view.*
+import kotlinx.android.synthetic.main.row_line_way.view.*
 
 /**
  * @author Marcelo Esser
@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.spinner_default_row.view.*
  * @since 31/09/20
  */
 
-class SpinnerDefaultAdapter(context: Context, val ways: List<LineWay>, val resource: Int =  R.layout.spinner_default_row) :
+class SpinnerDefaultAdapter(context: Context, val ways: List<LineWay>, val resource: Int =  R.layout.row_line_way) :
     ArrayAdapter<LineWay>(context, resource, ways) {
 
     override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {

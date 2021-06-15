@@ -4,7 +4,7 @@ import android.content.Intent
 import android.view.View.*
 import androidx.lifecycle.Observer
 import esser.marcelo.busoclock.R
-import esser.marcelo.busoclock.repository.dao.LineDAO
+import esser.marcelo.busoclock.repository.LineHolder
 import esser.marcelo.busoclock.model.schedules.BaseSchedule
 import esser.marcelo.busoclock.view.activity.BaseActivity
 import esser.marcelo.busoclock.view.adapter.SchedulesAdapter
@@ -36,9 +36,9 @@ class SogalSchedulesActivity : BaseActivity(R.layout.activity_schedules) {
 
         listeners()
 
-        shcedule_activity_tv_line_name.text = LineDAO.lineName
+        shcedule_activity_tv_line_name.text = LineHolder.lineName
 
-        LineDAO.lineWay?.let {
+        LineHolder.lineWay?.let {
             shcedule_activity_tv_line_code.text = it.description
         }
 
@@ -67,7 +67,7 @@ class SogalSchedulesActivity : BaseActivity(R.layout.activity_schedules) {
 
         viewModelSogal.isLineFavorite.observe(this, isFavoriteObserver)
 
-        img_btn_add_itineraries.setOnClickListener { v ->
+        img_btn_add_itineraries.setOnClickListener {
             if (viewModelSogal.isLineFavorite.value == false) {
                 viewModelSogal.saveLine()
                 return@setOnClickListener

@@ -5,14 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import esser.marcelo.busoclock.model.sogal.ItinerariesDTO
-import esser.marcelo.busoclock.repository.dao.DaoHelper
-import esser.marcelo.busoclock.repository.dao.LineDAO
+import esser.marcelo.busoclock.repository.dao.database.BusTimeDao
+import esser.marcelo.busoclock.repository.LineHolder
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class FavoriteItinerariesViewModel(
-    val daoHelper: DaoHelper,
+    val dao: BusTimeDao,
     val dispatcher: CoroutineDispatcher
 ): ViewModel() {
 
@@ -24,8 +24,8 @@ class FavoriteItinerariesViewModel(
     }
 
     private fun fillFavoriteLinesList() = viewModelScope.launch(dispatcher) {
-        daoHelper.getLines(LineDAO.lineId ?: 0).collect {
-            if (it != null && it.isNotEmpty()) {
+        dao.getLineBy(LineHolder.lineId ?: 0).collect {
+            if (it.isNotEmpty()) {
                 val line = it[0]
                 _itineraries.postValue(line.itineraries)
             }

@@ -8,7 +8,9 @@ package esser.marcelo.busoclock.dependenciesInjection
  * @since 31/08/20
  */
 
-import esser.marcelo.busoclock.repository.dao.DaoHelper
+import androidx.room.Room
+import esser.marcelo.busoclock.repository.dao.helper.DaoHelper
+import esser.marcelo.busoclock.repository.dao.database.AppDatabase
 import esser.marcelo.busoclock.repository.service.NetworkHandler
 import esser.marcelo.busoclock.repository.service.callAdapter.CallAdapterFactory
 import esser.marcelo.busoclock.repository.service.sogalServices.ISogalAPI
@@ -24,10 +26,14 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-private val roomModule = module {
+private val daoHelperModule = module {
     single {
         DaoHelper(
             context = get(),
+            database = get(),
+            sogalItinerariesViewModel = get(),
+            sogalSchedulesViewModel = null,
+            vicasaSchedulesViewModel = null,
         )
     }
 }
@@ -49,7 +55,6 @@ private val viewModelModule = module {
     }
     viewModel {
         SogalItinerariesViewModel(
-            daoHelper = get(),
             service = get(),
             dispatcher = Dispatchers.IO
         )
@@ -58,19 +63,19 @@ private val viewModelModule = module {
     //Favorite viewModels
     viewModel {
         FavoriteLinesViewModel(
-            daoHelper = get(),
+            dao = get(),
             dispatcher = Dispatchers.IO
         )
     }
     viewModel {
         FavoriteSchedulesViewModel(
-            daoHelper = get(),
+            dao = get(),
             dispatcher = Dispatchers.IO
         )
     }
     viewModel {
         FavoriteItinerariesViewModel(
-            daoHelper = get(),
+            dao = get(),
             dispatcher = Dispatchers.IO
         )
     }
@@ -78,7 +83,7 @@ private val viewModelModule = module {
     //Home viewModel
     viewModel {
         HomeViewModel(
-            daoHelper = get(),
+            dao = get(),
             dispatcher = Dispatchers.IO
         )
     }
@@ -87,7 +92,7 @@ private val viewModelModule = module {
     viewModel {
         VicasaLinesViewModel(
             service = get(),
-            daoHelper = get(),
+            dao = get(),
             dispatcher = Dispatchers.IO
         )
     }
@@ -112,6 +117,11 @@ private val networkModule = module {
     single { get<Retrofit>().create(IVicasaAPI::class.java) }
 }
 
+val dbModule = module {
+    single<AppDatabase> { Room.databaseBuilder(get(), AppDatabase::class.java, "bustime").build() }
+    single { get<AppDatabase>().busTimeDao() }
+}
+
 private fun retrofit() = Retrofit.Builder()
     .addConverterFactory(GsonConverterFactory.create(NetworkHandler.gsonBuilder()))
     .addCallAdapterFactory(CallAdapterFactory())
@@ -119,4 +129,4 @@ private fun retrofit() = Retrofit.Builder()
     .baseUrl("http://sogal.com.br/")
     .build()
 
-val appModule = listOf(roomModule, viewModelModule, networkModule, serviceModule)
+val appModule = listOf(daoHelperModule, viewModelModule, networkModule, serviceModule, dbModule)

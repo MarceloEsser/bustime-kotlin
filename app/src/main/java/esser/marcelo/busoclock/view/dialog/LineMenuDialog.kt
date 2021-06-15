@@ -7,7 +7,7 @@ import android.view.View.VISIBLE
 import android.widget.AdapterView
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.view.adapter.spinner.SpinnerDefaultAdapter
-import esser.marcelo.busoclock.repository.dao.LineDAO
+import esser.marcelo.busoclock.repository.LineHolder
 import esser.marcelo.busoclock.interfaces.LineMenuDelegate
 import esser.marcelo.busoclock.model.LineWay
 import kotlinx.android.synthetic.main.dialog_line_menu.*
@@ -78,7 +78,7 @@ class LineMenuDialog(
                 id: Long
             ) {
 
-                LineDAO.lineWay = lineWays[position]
+                LineHolder.lineWay = lineWays[position]
 
                 if (lineWays[position].way != "none") {
                     favorite_image_button.visibility = VISIBLE
@@ -102,7 +102,7 @@ class LineMenuDialog(
 
     private fun goToSchedules() {
         btn_line_menu_dialog_schedules.setOnClickListener {
-            if (LineDAO.lineWay?.way != "none") {
+            if (LineHolder.lineWay?.way != "none") {
                 delegate.goToSchedules()
                 dismiss()
             }
@@ -117,7 +117,7 @@ class LineMenuDialog(
     }
 
     private fun lineSetup() {
-        tv_line_menu_dialog_line_name.text = LineDAO.lineName
-        tv_line_menu_dialog_line_code.text = LineDAO.lineCode
+        tv_line_menu_dialog_line_name.text = LineHolder.lineName
+        tv_line_menu_dialog_line_code.text = LineHolder.lineCode
     }
 }

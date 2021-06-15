@@ -4,7 +4,7 @@ import android.view.View.*
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import esser.marcelo.busoclock.R
-import esser.marcelo.busoclock.repository.dao.LineDAO
+import esser.marcelo.busoclock.repository.LineHolder
 import esser.marcelo.busoclock.model.schedules.BaseSchedule
 import esser.marcelo.busoclock.view.activity.BaseActivity
 import esser.marcelo.busoclock.view.adapter.SchedulesAdapter
@@ -36,11 +36,11 @@ class VicasaSchedulesActivity : BaseActivity(R.layout.activity_schedules) {
         showLoader()
 
         img_btn_add_itineraries.visibility = GONE
-        shcedule_activity_tv_line_name.text = LineDAO.lineName
+        shcedule_activity_tv_line_name.text = LineHolder.lineName
 
         listeners()
 
-        LineDAO.lineWay?.let {
+        LineHolder.lineWay?.let {
             shcedule_activity_tv_line_code.text = it.description
         }
 

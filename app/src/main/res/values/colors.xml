@@ -271,6 +271,7 @@
     <color name="grey800">#424242</color>
     <color name="grey900">#212121</color>
     <color name="transparentGgrey300">#7EE0E0E0</color>
+    <color name="transparentBlack">#7E000000</color>
     <!--  BLUE GREY PALETTE  -->
     <color name="blueGrey50">#eceff1</color>
     <color name="blueGrey100">#cfd8dc</color>

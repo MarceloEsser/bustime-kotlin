@@ -8,7 +8,7 @@ import esser.marcelo.busoclock.model.Constants
 import esser.marcelo.busoclock.model.LineWay
 import esser.marcelo.busoclock.model.favorite.FavoriteLine
 import esser.marcelo.busoclock.model.sogal.LinesDTO
-import esser.marcelo.busoclock.repository.dao.LineDAO
+import esser.marcelo.busoclock.repository.LineHolder
 import esser.marcelo.busoclock.repository.service.sogalServices.SogalServiceDelegate
 import esser.marcelo.busoclock.repository.service.wrapper.resource.Status
 import kotlinx.coroutines.flow.collect
@@ -63,7 +63,6 @@ class SogalLinesViewModel(
 
     fun getWaysList(): ArrayList<LineWay> {
         val waysList: ArrayList<LineWay> = ArrayList()
-        waysList.add(LineWay("Selecione um sentido", "none"))
         waysList.add(LineWay("Centro Bairro - CB", Constants.CB_WAY))
         waysList.add(LineWay("Bairro Centro - BC", Constants.BC_WAY))
 
@@ -71,8 +70,8 @@ class SogalLinesViewModel(
     }
 
     fun saveData(lineCode: String, lineName: String) {
-        LineDAO.lineName = lineName
-        LineDAO.lineCode = lineCode
+        LineHolder.lineName = lineName
+        LineHolder.lineCode = lineCode
     }
 
     fun filterBy(text: String) {

@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.view.adapter.FavoriteLinesAdapter
-import esser.marcelo.busoclock.repository.dao.LineDAO
+import esser.marcelo.busoclock.repository.LineHolder
 import esser.marcelo.busoclock.interfaces.DeleteDelegate
 import esser.marcelo.busoclock.interfaces.IFavoriteLineAdapterDelegate
 import esser.marcelo.busoclock.model.LineWay
@@ -69,11 +69,11 @@ class FavoriteLinesActivity : BaseActivity(R.layout.activity_lines), IFavoriteLi
     }
 
     override fun onLineClicked(line: FavoriteLine) {
-        LineDAO.lineCode = line.code
-        LineDAO.lineName = line.name
-        LineDAO.lineId = line.id
+        LineHolder.lineCode = line.code
+        LineHolder.lineName = line.name
+        LineHolder.lineId = line.id
         val newWay = LineWay(description = line.way, way = null)
-        LineDAO.lineWay = newWay
+        LineHolder.lineWay = newWay
         startActivity(
             Intent(
                 this@FavoriteLinesActivity,

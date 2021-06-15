@@ -4,13 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import esser.marcelo.busoclock.repository.dao.LineDAO
+import esser.marcelo.busoclock.repository.LineHolder
 import esser.marcelo.busoclock.model.Constants
 import esser.marcelo.busoclock.model.Constants.CB_WAY
 import esser.marcelo.busoclock.model.LineWay
 import esser.marcelo.busoclock.model.favorite.FavoriteLine
 import esser.marcelo.busoclock.model.vicasa.Vicasa
-import esser.marcelo.busoclock.repository.dao.DaoHelper
+import esser.marcelo.busoclock.repository.dao.database.BusTimeDao
 import esser.marcelo.busoclock.repository.service.vicasaServices.VicasaServiceDelegate
 import esser.marcelo.busoclock.repository.service.wrapper.resource.Status
 import kotlinx.coroutines.flow.collect
@@ -29,7 +29,7 @@ import kotlin.coroutines.CoroutineContext
 
 class VicasaLinesViewModel(
     private val service: VicasaServiceDelegate,
-    private val daoHelper: DaoHelper,
+    private val dao: BusTimeDao,
     private val dispatcher: CoroutineContext,
 ) : ViewModel() {
 
@@ -111,8 +111,8 @@ class VicasaLinesViewModel(
     }
 
     fun saveLineData(lineCode: String, lineName: String) {
-        LineDAO.lineName = lineName
-        LineDAO.lineCode = lineCode
+        LineHolder.lineName = lineName
+        LineHolder.lineCode = lineCode
     }
 
     fun saveFilterData(countryOrigin: String, countryDestination: String, serviceType: String) {
@@ -123,17 +123,17 @@ class VicasaLinesViewModel(
 
     fun saveLine() = viewModelScope.launch(dispatcher) {
         val favoriteLine: FavoriteLine = getFavoriteLine()
-        daoHelper.insertLine(favoriteLine)
+        dao.insertLine(favoriteLine)
     }
 
     fun validateLine() {
         viewModelScope.launch(dispatcher) {
-            daoHelper.getLines(
-                LineDAO.lineName,
-                LineDAO.lineCode,
-                LineDAO.lineWay?.description ?: ""
+            dao.getLineBy(
+                LineHolder.lineName,
+                LineHolder.lineCode,
+                LineHolder.lineWay?.description ?: ""
             ).collect {
-                _isLineFavorite.postValue(it?.size == 1)
+                _isLineFavorite.postValue(it.size == 1)
             }
             validateLine()
         }
@@ -141,21 +141,43 @@ class VicasaLinesViewModel(
 
     fun deleteLine() {
         viewModelScope.launch(dispatcher) {
-            daoHelper.deleteLine(
-                lineName = LineDAO.lineName,
-                lineCode = LineDAO.lineCode,
-                lineWayDescription = LineDAO.lineWay?.description ?: ""
+            findAndDeleteLine(
+                lineName = LineHolder.lineName,
+                lineCode = LineHolder.lineCode,
+                lineWayDescription = LineHolder.lineWay?.description ?: ""
             )
             validateLine()
         }
     }
 
+
+    private suspend fun findAndDeleteLine(
+        lineName: String,
+        lineCode: String,
+        lineWayDescription: String
+    ) {
+        dao.getLineBy(name = lineName, code = lineCode, way = lineWayDescription).collect {
+            if (!it.isNullOrEmpty()) {
+                val lineId = it[0].line?.id ?: -1
+                removeLineFromDatabaseBy(lineId)
+            }
+        }
+
+    }
+
+    private fun removeLineFromDatabaseBy(lineId: Long) {
+        dao.deleteLineFrom(lineId)
+        dao.deleteSaturdaysFrom(lineId)
+        dao.deleteWorkingdaysFrom(lineId)
+        dao.deleteSundaysFrom(lineId)
+    }
+
     private fun getFavoriteLine(): FavoriteLine {
         return FavoriteLine(
             isSogal = false,
-            name = LineDAO.lineName,
-            code = LineDAO.lineCode,
-            way = LineDAO.lineWay?.description ?: ""
+            name = LineHolder.lineName,
+            code = LineHolder.lineCode,
+            way = LineHolder.lineWay?.description ?: ""
         )
     }
 

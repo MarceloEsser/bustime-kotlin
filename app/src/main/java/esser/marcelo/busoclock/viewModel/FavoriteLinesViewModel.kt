@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import esser.marcelo.busoclock.model.favorite.LineWithSchedules
-import esser.marcelo.busoclock.repository.dao.DaoHelper
+import esser.marcelo.busoclock.repository.dao.database.BusTimeDao
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -20,7 +20,7 @@ import kotlin.coroutines.CoroutineContext
  */
 
 class FavoriteLinesViewModel(
-    private val daoHelper: DaoHelper,
+    private val dao: BusTimeDao,
     private val dispatcher: CoroutineContext
 ) : ViewModel() {
 
@@ -32,7 +32,7 @@ class FavoriteLinesViewModel(
     }
 
     private fun fillFavoriteLinesList() = viewModelScope.launch(dispatcher) {
-        daoHelper.getAll().collect { lines ->
+        dao.getAll().collect { lines ->
             if (lines != null)
                 _favoriteLines.postValue(lines)
         }
@@ -40,7 +40,15 @@ class FavoriteLinesViewModel(
 
     fun deleteAll() {
         GlobalScope.launch {
-            daoHelper.clearDatabase()
+            clearDatabase()
         }
+    }
+
+    private fun clearDatabase() {
+        dao.deleteAllLines()
+        dao.deleteAllSaturdays()
+        dao.deleteAllWorkingdays()
+        dao.deleteAllSundays()
+        dao.deleteAllItineraries()
     }
 }

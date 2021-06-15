@@ -1,15 +1,14 @@
 package esser.marcelo.busoclock.viewModel
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import esser.marcelo.busoclock.repository.dao.LineDAO
+import esser.marcelo.busoclock.repository.LineHolder
 import esser.marcelo.busoclock.model.favorite.LineWithSchedules
 import esser.marcelo.busoclock.model.schedules.Saturday
 import esser.marcelo.busoclock.model.schedules.Sunday
 import esser.marcelo.busoclock.model.schedules.Workingday
-import esser.marcelo.busoclock.repository.dao.DaoHelper
+import esser.marcelo.busoclock.repository.dao.database.BusTimeDao
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
@@ -23,7 +22,7 @@ import kotlin.coroutines.CoroutineContext
  */
 
 class FavoriteSchedulesViewModel(
-    private val daoHelper: DaoHelper,
+    private val dao: BusTimeDao,
     private val dispatcher: CoroutineContext
 ) : ViewModel() {
 
@@ -32,8 +31,8 @@ class FavoriteSchedulesViewModel(
     val sundays: MutableLiveData<List<Sunday>> = MutableLiveData()
 
     fun fillSchedules() = viewModelScope.launch(dispatcher) {
-        daoHelper.getLines(LineDAO.lineId ?: 0).collect {
-            if (it != null && it.isNotEmpty()) {
+        dao.getLineBy(LineHolder.lineId ?: 0).collect {
+            if (it.isNotEmpty()) {
                 val line = it[0]
                 fillSchedules(line)
             }
@@ -48,11 +47,32 @@ class FavoriteSchedulesViewModel(
 
     fun deleteLine() {
         viewModelScope.launch(dispatcher) {
-            daoHelper.deleteLine(
-                lineName = LineDAO.lineName,
-                lineCode = LineDAO.lineCode,
-                lineWayDescription = LineDAO.lineWay?.description ?: ""
+            findAndDeleteLine(
+                lineName = LineHolder.lineName,
+                lineCode = LineHolder.lineCode,
+                lineWayDescription = LineHolder.lineWay?.description ?: ""
             )
         }
+    }
+
+    private suspend fun findAndDeleteLine(
+        lineName: String,
+        lineCode: String,
+        lineWayDescription: String
+    ) {
+        dao.getLineBy(name = lineName, code = lineCode, way = lineWayDescription).collect {
+            if (!it.isNullOrEmpty()) {
+                val lineId = it[0].line?.id ?: -1
+                removeLineFromDatabaseBy(lineId)
+            }
+        }
+
+    }
+
+    private fun removeLineFromDatabaseBy(lineId: Long) {
+        dao.deleteLineFrom(lineId)
+        dao.deleteSaturdaysFrom(lineId)
+        dao.deleteWorkingdaysFrom(lineId)
+        dao.deleteSundaysFrom(lineId)
     }
 }

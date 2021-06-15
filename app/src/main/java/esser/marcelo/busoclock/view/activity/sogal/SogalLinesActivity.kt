@@ -4,24 +4,33 @@ import android.animation.ValueAnimator
 import android.content.Intent
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.DisplayMetrics
+import android.util.Log
+import android.view.View
 import android.view.View.*
+import androidx.core.view.ViewCompat
 import androidx.lifecycle.Observer
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.extensions.hideKeyboard
-import esser.marcelo.busoclock.model.Constants.CB_WAY
 import esser.marcelo.busoclock.interfaces.GenericLinesAdapterDelegate
 import esser.marcelo.busoclock.interfaces.LineMenuDelegate
 import esser.marcelo.busoclock.model.BaseLine
+import esser.marcelo.busoclock.model.Constants.CB_WAY
 import esser.marcelo.busoclock.model.favorite.FavoriteLine
 import esser.marcelo.busoclock.model.sogal.LinesDTO
 import esser.marcelo.busoclock.view.activity.BaseActivity
 import esser.marcelo.busoclock.view.adapter.GenericLinesAdapter
+import esser.marcelo.busoclock.view.adapter.LineWaysAdapter
 import esser.marcelo.busoclock.view.dialog.LineMenuDialog
 import esser.marcelo.busoclock.viewModel.SogalLinesViewModel
 import kotlinx.android.synthetic.main.activity_lines.*
 import kotlinx.android.synthetic.main.dialog_line_menu.*
 import kotlinx.android.synthetic.main.snack_bar.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.math.log
+
 
 /**
  * @author Marcelo Esser
@@ -34,6 +43,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class SogalLinesActivity : BaseActivity(R.layout.activity_lines), GenericLinesAdapterDelegate,
     LineMenuDelegate {
 
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<*>
     private val viewModel: SogalLinesViewModel by viewModel()
 
     lateinit var lineMenuDialog: LineMenuDialog
@@ -185,17 +195,46 @@ class SogalLinesActivity : BaseActivity(R.layout.activity_lines), GenericLinesAd
 
     override fun onItemClickLitener(line: BaseLine) {
         viewModel.saveData(line.code, line.name)
-        showDialog()
+
+        bottomSheetBehavior = BottomSheetBehavior.from<View>(bottomSheet)
+
+        bottom_sheet_bg.visibility = VISIBLE
+
+        configureBottomSheet(bottomSheetBehavior)
+
+        rvWays.adapter = LineWaysAdapter(this, viewModel.getWaysList(), this)
+        bottomSheetBehavior.peekHeight = bottomSheet.height - bottom_sheet_content.height + 50
+
     }
 
-    private fun showDialog() {
-        lineMenuDialog = LineMenuDialog(
-            delegate = this,
-            lineWays = viewModel.getWaysList()
-        )
+    private fun configureBottomSheet(bottomSheetBehavior: BottomSheetBehavior<*>) {
+        bottom_sheet_bg.setOnClickListener {
+            hideBottomSheet()
+        }
 
-        lineMenuDialog.show(supportFragmentManager, "lineMenuDialog")
+        bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
+                    hideBottomSheet()
+                }
+            }
+
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                if (slideOffset == 0f) {
+                    hideBottomSheet()
+                }
+            }
+        })
+
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
     }
+
+    private fun hideBottomSheet() {
+        bottomSheetBehavior.peekHeight = 0
+        bottom_sheet_bg.visibility = GONE
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+    }
+
 
     override fun findLine() {
     }
@@ -207,6 +246,7 @@ class SogalLinesActivity : BaseActivity(R.layout.activity_lines), GenericLinesAd
     }
 
     override fun goToSchedules() {
+        hideBottomSheet()
         startActivity(Intent(this, SogalSchedulesActivity::class.java))
     }
 

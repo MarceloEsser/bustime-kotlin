@@ -5,13 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import esser.marcelo.busoclock.interfaces.SaveLineDelegate
-import esser.marcelo.busoclock.repository.dao.LineDAO
+import esser.marcelo.busoclock.repository.LineHolder
 import esser.marcelo.busoclock.model.Constants.BB_WAY
 import esser.marcelo.busoclock.model.Constants.BC_WAY
 import esser.marcelo.busoclock.model.Constants.CB_WAY
 import esser.marcelo.busoclock.model.Constants.CC_WAY
 import esser.marcelo.busoclock.model.VicasaTableSelectors
-import esser.marcelo.busoclock.model.schedules.BaseSchedule
 import esser.marcelo.busoclock.model.schedules.Saturday
 import esser.marcelo.busoclock.model.schedules.Sunday
 import esser.marcelo.busoclock.model.schedules.Workingday
@@ -60,7 +59,7 @@ class VicasaSchedulesViewModel(
 
     fun loadSchedules() {
         viewModelScope.launch(dispatcher) {
-            service.getSchedules(LineDAO.lineCode).collect { resource ->
+            service.getSchedules(LineHolder.lineCode).collect { resource ->
                 if (resource.requestStatus == Status.success && resource.data != null) {
                     parseResponse(resource.data.string())
                 }
@@ -87,7 +86,7 @@ class VicasaSchedulesViewModel(
     private fun setElements(response: String) {
         val document: Document = Jsoup.parse(response)
 
-        when (LineDAO.lineWay!!.way) {
+        when (LineHolder.lineWay!!.way) {
             CC_WAY -> fillCCElements(document)
             BB_WAY -> fillBBElements(document)
             BC_WAY -> fillBCElements(document)

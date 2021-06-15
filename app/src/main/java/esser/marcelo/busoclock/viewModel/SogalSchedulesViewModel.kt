@@ -4,15 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.interfaces.SaveLineDelegate
 import esser.marcelo.busoclock.model.favorite.FavoriteLine
-import esser.marcelo.busoclock.repository.dao.LineDAO
+import esser.marcelo.busoclock.repository.LineHolder
 import esser.marcelo.busoclock.model.schedules.Saturday
 import esser.marcelo.busoclock.model.schedules.Sunday
 import esser.marcelo.busoclock.model.schedules.Workingday
 import esser.marcelo.busoclock.model.sogal.SogalResponse
-import esser.marcelo.busoclock.repository.dao.DaoHelper
+import esser.marcelo.busoclock.repository.dao.helper.DaoHelper
 import esser.marcelo.busoclock.repository.service.sogalServices.SogalServiceDelegate
 import esser.marcelo.busoclock.repository.service.wrapper.resource.Resource
 import esser.marcelo.busoclock.repository.service.wrapper.resource.Status
@@ -34,6 +33,10 @@ class SogalSchedulesViewModel(
     private val service: SogalServiceDelegate,
     private val dispatcher: CoroutineContext
 ) : ViewModel() {
+
+    init {
+        daoHelper.sogalSchedulesViewModel = this
+    }
 
     private val _isLineFavorite: MutableLiveData<Boolean> = MutableLiveData()
     val isLineFavorite: LiveData<Boolean> by lazy {
@@ -61,7 +64,7 @@ class SogalSchedulesViewModel(
 
     fun loadSchedules() {
         viewModelScope.launch(dispatcher) {
-            service.getSchedules(LineDAO.lineWay?.way ?: "", LineDAO.lineCode).collect { resource ->
+            service.getSchedules(LineHolder.lineWay?.way ?: "", LineHolder.lineCode).collect { resource ->
                 if (resource.requestStatus == Status.success) {
                     fillSchedules(resource)
 
@@ -86,9 +89,9 @@ class SogalSchedulesViewModel(
     private fun validateLine() {
         viewModelScope.launch(dispatcher) {
             daoHelper.getLines(
-                LineDAO.lineName,
-                LineDAO.lineCode,
-                LineDAO.lineWay?.description ?: ""
+                LineHolder.lineName,
+                LineHolder.lineCode,
+                LineHolder.lineWay?.description ?: ""
             ).collect {
                 _isLineFavorite.postValue(it?.size == 1)
             }
@@ -98,9 +101,9 @@ class SogalSchedulesViewModel(
     private fun getFavoriteLine(): FavoriteLine {
         return FavoriteLine(
             isSogal = true,
-            name = LineDAO.lineName,
-            code = LineDAO.lineCode,
-            way = LineDAO.lineWay?.description ?: ""
+            name = LineHolder.lineName,
+            code = LineHolder.lineCode,
+            way = LineHolder.lineWay?.description ?: ""
         )
     }
 
@@ -116,9 +119,9 @@ class SogalSchedulesViewModel(
     fun deleteLine() {
         viewModelScope.launch(dispatcher) {
             daoHelper.deleteLine(
-                lineName = LineDAO.lineName,
-                lineCode = LineDAO.lineCode,
-                lineWayDescription = LineDAO.lineWay?.description ?: ""
+                lineName = LineHolder.lineName,
+                lineCode = LineHolder.lineCode,
+                lineWayDescription = LineHolder.lineWay?.description ?: ""
             )
             validateLine()
         }

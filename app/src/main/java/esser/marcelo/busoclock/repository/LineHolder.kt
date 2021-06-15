@@ -1,4 +1,4 @@
-package esser.marcelo.busoclock.repository.dao
+package esser.marcelo.busoclock.repository
 
 import esser.marcelo.busoclock.model.LineWay
 import esser.marcelo.busoclock.model.schedules.BaseSchedule
@@ -11,7 +11,7 @@ import esser.marcelo.busoclock.model.schedules.BaseSchedule
  * @since 31/08/20
  */
 
-object LineDAO {
+object LineHolder {
 
     var lineId: Long? = 0
     var lineName: String = ""

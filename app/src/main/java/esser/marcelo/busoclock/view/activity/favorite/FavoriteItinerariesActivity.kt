@@ -3,7 +3,7 @@ package esser.marcelo.busoclock.view.activity.favorite
 import androidx.lifecycle.Observer
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.model.sogal.ItinerariesDTO
-import esser.marcelo.busoclock.repository.dao.LineDAO
+import esser.marcelo.busoclock.repository.LineHolder
 import esser.marcelo.busoclock.view.activity.BaseActivity
 import esser.marcelo.busoclock.view.adapter.ItinerariesAdapter
 import esser.marcelo.busoclock.viewModel.FavoriteItinerariesViewModel
@@ -27,7 +27,7 @@ class FavoriteItinerariesActivity: BaseActivity(R.layout.activity_itineraries) {
         btnBack()
         showLoader()
 
-        itineraries_activity_tv_line_name.text = LineDAO.lineName
+        itineraries_activity_tv_line_name.text = LineHolder.lineName
     }
 
     private fun btnBack() {

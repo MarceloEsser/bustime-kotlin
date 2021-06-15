@@ -4,8 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import esser.marcelo.busoclock.repository.dao.DaoHelper
-import kotlinx.coroutines.GlobalScope
+import esser.marcelo.busoclock.repository.dao.database.BusTimeDao
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
@@ -19,7 +18,7 @@ import kotlin.coroutines.CoroutineContext
  */
 
 class HomeViewModel(
-    private val daoHelper: DaoHelper,
+    private val dao: BusTimeDao,
     private val dispatcher: CoroutineContext
 ) : ViewModel() {
 
@@ -30,7 +29,7 @@ class HomeViewModel(
     }
 
     fun getLinesQuantity() = viewModelScope.launch(dispatcher) {
-        daoHelper.getAll().collect {
+        dao.getAll().collect {
             _favSize.postValue(it?.size)
         }
     }
