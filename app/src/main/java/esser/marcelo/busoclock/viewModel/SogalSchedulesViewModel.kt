@@ -62,13 +62,20 @@ class SogalSchedulesViewModel(
         return@lazy _sundays
     }
 
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String>
+        get() = _error
+
+
     fun loadSchedules() {
         viewModelScope.launch(dispatcher) {
             service.getSchedules(LineHolder.lineWay?.way ?: "", LineHolder.lineCode).collect { resource ->
-                if (resource.requestStatus == Status.success) {
-                    fillSchedules(resource)
-
-                    saveLineDelegate()
+                when (resource.requestStatus) {
+                    Status.success -> {
+                        fillSchedules(resource)
+                        saveLineDelegate()
+                    }
+                    Status.error -> _error.postValue(resource.message)
                 }
             }
         }

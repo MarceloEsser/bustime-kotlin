@@ -44,9 +44,9 @@ class LineMenuDialog(
     private fun favoriteButtonEvent() {
         favorite_image_button.setOnClickListener {
             if (!isFavorite) {
-                delegate.saveLine()
+//                delegate.saveLine()
             } else {
-                delegate.removeLine()
+//                delegate.removeLine()
             }
             isFavorite = !isFavorite
             validateImageButton()
@@ -85,7 +85,7 @@ class LineMenuDialog(
                     btn_line_menu_dialog_schedules.visibility = VISIBLE
                     btn_line_menu_dialog_itineraries.visibility = VISIBLE
 
-                    delegate.findLine()
+//                    delegate.findLine()
                 }
             }
 
@@ -111,7 +111,7 @@ class LineMenuDialog(
 
     private fun goToItineraries() {
         btn_line_menu_dialog_itineraries.setOnClickListener {
-            delegate.goToItineraries()
+//            delegate.goToItineraries()
             dismiss()
         }
     }

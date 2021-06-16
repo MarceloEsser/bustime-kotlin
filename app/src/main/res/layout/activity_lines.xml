@@ -194,6 +194,7 @@
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvWays"
                     android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:nestedScrollingEnabled="false"
@@ -206,14 +207,12 @@
                     tools:itemCount="2"
                     tools:listitem="@layout/row_line_way" />
 
-            <com.google.android.material.card.MaterialCardView
+            <View
                     android:id="@+id/mcv_collapse_event"
                     android:layout_width="50dp"
                     android:layout_height="5dp"
                     android:layout_margin="10dp"
-                    android:backgroundTint="@color/transparentGgrey300"
-                    app:cardCornerRadius="100dp"
-                    android:elevation="4dp"
+                    android:background="@drawable/shape_drop_down_bottom_sheet"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

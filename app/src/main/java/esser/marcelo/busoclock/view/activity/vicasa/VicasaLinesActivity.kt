@@ -194,18 +194,6 @@ class VicasaLinesActivity : BaseActivity(R.layout.activity_lines), FilterDialogI
         viewModel.loadLines()
     }
 
-    override fun findLine() {
-        viewModel.validateLine()
-    }
-
-    override fun saveLine() {
-        viewModel.saveLine()
-    }
-
-    override fun removeLine() {
-        viewModel.deleteLine()
-    }
-
     override fun goToSchedules() {
         startActivity(Intent(this@VicasaLinesActivity, VicasaSchedulesActivity::class.java))
     }

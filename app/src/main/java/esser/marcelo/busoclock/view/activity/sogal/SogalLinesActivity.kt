@@ -2,6 +2,7 @@ package esser.marcelo.busoclock.view.activity.sogal
 
 import android.animation.ValueAnimator
 import android.content.Intent
+import android.graphics.Color
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.DisplayMetrics
@@ -12,6 +13,7 @@ import androidx.core.view.ViewCompat
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
+import com.google.android.material.snackbar.Snackbar
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.extensions.hideKeyboard
 import esser.marcelo.busoclock.interfaces.GenericLinesAdapterDelegate
@@ -203,7 +205,7 @@ class SogalLinesActivity : BaseActivity(R.layout.activity_lines), GenericLinesAd
         configureBottomSheet(bottomSheetBehavior)
 
         rvWays.adapter = LineWaysAdapter(this, viewModel.getWaysList(), this)
-        bottomSheetBehavior.peekHeight = bottomSheet.height - bottom_sheet_content.height + 50
+        bottomSheetBehavior.peekHeight = bottomSheet.height - bottom_sheet_content.height + 100
 
     }
 
@@ -235,23 +237,9 @@ class SogalLinesActivity : BaseActivity(R.layout.activity_lines), GenericLinesAd
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
     }
 
-
-    override fun findLine() {
-    }
-
-    override fun saveLine() {
-    }
-
-    override fun removeLine() {
-    }
-
     override fun goToSchedules() {
-        hideBottomSheet()
         startActivity(Intent(this, SogalSchedulesActivity::class.java))
-    }
-
-    override fun goToItineraries() {
-        startActivity(Intent(this, SogalItinerariesActivity::class.java))
+        hideBottomSheet()
     }
 
 }

@@ -52,12 +52,12 @@ abstract class BaseActivity(private val layoutRes: Int) : AppCompatActivity() {
         isShowingLoader = false
     }
 
-
     fun showSnackBar(message: String) {
-        Snackbar.make(findViewById(R.id.content), message,
+        Snackbar.make(findViewById(android.R.id.content), message,
             Snackbar.LENGTH_SHORT
         ).setBackgroundTint(Color.BLACK).setTextColor(Color.WHITE).show()
     }
+
 
     override fun onBackPressed() {
         super.onBackPressed()
