@@ -27,18 +27,25 @@ class SogalItinerariesViewModel(
 
     private val _itineraries = MutableLiveData<List<ItinerariesDTO>>()
     val itineraries: LiveData<List<ItinerariesDTO>> by lazy {
-        viewModelScope.launch(dispatcher) {
-            loadItineraries(null)
-        }
+        loadItineraries(null)
         return@lazy _itineraries
     }
 
-    suspend fun loadItineraries(onItinerariesLoaded: (() -> Unit)?) {
-        service.getSogalItineraries(LineHolder.lineCode).collect { resource ->
-            if (resource.requestStatus == Status.success) {
-                _itineraries.postValue(resource.data?.itineraries)
-                if(onItinerariesLoaded != null) {
-                    onItinerariesLoaded()
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String>
+        get() = _error
+
+    fun loadItineraries(onItinerariesLoaded: (() -> Unit)?) {
+        viewModelScope.launch(dispatcher) {
+            service.getSogalItineraries(LineHolder.lineCode).collect { resource ->
+                when (resource.requestStatus) {
+                    Status.success -> {
+                        _itineraries.postValue(resource.data?.itineraries)
+                        if (onItinerariesLoaded != null) {
+                            onItinerariesLoaded()
+                        }
+                    }
+                    Status.error -> _error.postValue(resource.message)
                 }
             }
         }

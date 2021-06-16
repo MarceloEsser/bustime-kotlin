@@ -9,7 +9,6 @@ import esser.marcelo.busoclock.model.schedules.BaseSchedule
 import esser.marcelo.busoclock.view.activity.BaseActivity
 import esser.marcelo.busoclock.view.adapter.SchedulesAdapter
 import esser.marcelo.busoclock.viewModel.SogalSchedulesViewModel
-import kotlinx.android.synthetic.main.activity_lines.*
 import kotlinx.android.synthetic.main.activity_schedules.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -140,17 +139,17 @@ class SogalSchedulesActivity : BaseActivity(R.layout.activity_schedules) {
     }
 
     private fun errorConfig() {
-        lines_activity_img_lottie_conection.resumeAnimation()
+        schedules_activity_img_lottie_conection.resumeAnimation()
 
-        lines_activity_img_lottie_conection.setOnClickListener {
-            lines_activity_img_lottie_conection.pauseAnimation()
+        schedules_activity_img_lottie_conection.setOnClickListener {
+            schedules_activity_img_lottie_conection.pauseAnimation()
             showLoader()
             viewModelSogal.loadSchedules()
         }
 
-        lines_activity_img_lottie_conection.visibility = VISIBLE
-        lines_activity_tv_connection_error.visibility = VISIBLE
-        lines_activity_rv_lines.visibility = INVISIBLE
+        schedules_activity_img_lottie_conection.visibility = VISIBLE
+        schedules_activity_tv_connection_error.visibility = VISIBLE
+        schedules_activity_rv_schedules.visibility = INVISIBLE
     }
 
 

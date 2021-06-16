@@ -94,7 +94,7 @@ class DaoHelper(
         insertSunday()
     }
 
-    private suspend fun insertItineraries() {
+    private fun insertItineraries() {
         sogalItinerariesViewModel.loadItineraries(onItinerariesLoaded = {
             val mItineraries: List<ItinerariesDTO> = sogalItinerariesViewModel.itineraries.value ?: listOf()
             if (!mItineraries.isNullOrEmpty()) {
