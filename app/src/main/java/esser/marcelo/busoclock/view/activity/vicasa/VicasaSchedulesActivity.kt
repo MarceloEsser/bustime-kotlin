@@ -8,7 +8,7 @@ import esser.marcelo.busoclock.repository.LineHolder
 import esser.marcelo.busoclock.model.schedules.BaseSchedule
 import esser.marcelo.busoclock.view.activity.BaseActivity
 import esser.marcelo.busoclock.view.adapter.SchedulesAdapter
-import esser.marcelo.busoclock.viewModel.VicasaSchedulesViewModel
+import esser.marcelo.busoclock.viewModel.vicasa.VicasaSchedulesViewModel
 import kotlinx.android.synthetic.main.activity_schedules.*
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -100,6 +100,7 @@ class VicasaSchedulesActivity : BaseActivity(R.layout.activity_schedules) {
         val errorOberver = Observer<String> { message ->
             hideLoader()
             var mMessage = message
+            schedules_activity_tv_empty_list.visibility = GONE
             img_btn_add_itineraries.isEnabled = false
             if(isNetworkAvailable(this)){
                 mMessage = "Verifique sua conexão com a internet e tente novamente mais tarde"

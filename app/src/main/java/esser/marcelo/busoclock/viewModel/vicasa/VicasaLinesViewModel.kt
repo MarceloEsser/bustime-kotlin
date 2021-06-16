@@ -1,4 +1,4 @@
-package esser.marcelo.busoclock.viewModel
+package esser.marcelo.busoclock.viewModel.vicasa
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -43,12 +43,21 @@ class VicasaLinesViewModel(
     var serviceType: String = ""
     var lineWay: String = CB_WAY
 
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String>
+        get() = _error
+
     fun loadLines() {
         viewModelScope.launch(dispatcher) {
             service.getLinesFrom(escape(countryDestination), escape(countryOrigin), serviceType)
                 .collect { resource ->
-                    if (resource.requestStatus == Status.success && resource.data != null)
-                        findVicasaObjects(resource.data)
+                    when (resource.requestStatus) {
+                        Status.success -> {
+                            if (resource.requestStatus == Status.success && resource.data != null)
+                                findVicasaObjects(resource.data)
+                        }
+                        Status.error -> _error.postValue(resource.message)
+                    }
                 }
         }
     }

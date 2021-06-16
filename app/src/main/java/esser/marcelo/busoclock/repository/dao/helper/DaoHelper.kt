@@ -9,9 +9,9 @@ import esser.marcelo.busoclock.model.schedules.Sunday
 import esser.marcelo.busoclock.model.schedules.Workingday
 import esser.marcelo.busoclock.model.sogal.ItinerariesDTO
 import esser.marcelo.busoclock.repository.dao.database.AppDatabase
-import esser.marcelo.busoclock.viewModel.SogalItinerariesViewModel
-import esser.marcelo.busoclock.viewModel.SogalSchedulesViewModel
-import esser.marcelo.busoclock.viewModel.VicasaSchedulesViewModel
+import esser.marcelo.busoclock.viewModel.sogal.SogalItinerariesViewModel
+import esser.marcelo.busoclock.viewModel.sogal.SogalSchedulesViewModel
+import esser.marcelo.busoclock.viewModel.vicasa.VicasaSchedulesViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 

@@ -16,12 +16,11 @@ import esser.marcelo.busoclock.interfaces.FilterDialogInteraction
 import esser.marcelo.busoclock.interfaces.GenericLinesAdapterDelegate
 import esser.marcelo.busoclock.interfaces.LineMenuDelegate
 import esser.marcelo.busoclock.model.BaseLine
-import esser.marcelo.busoclock.model.sogal.LinesDTO
 import esser.marcelo.busoclock.model.vicasa.Vicasa
 import esser.marcelo.busoclock.view.activity.BaseActivity
 import esser.marcelo.busoclock.view.adapter.LineWaysAdapter
 import esser.marcelo.busoclock.view.dialog.VicasaFilterDialog
-import esser.marcelo.busoclock.viewModel.VicasaLinesViewModel
+import esser.marcelo.busoclock.viewModel.vicasa.VicasaLinesViewModel
 import kotlinx.android.synthetic.main.activity_lines.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
@@ -39,13 +38,18 @@ class VicasaLinesActivity : BaseActivity(R.layout.activity_lines), FilterDialogI
 
     private val viewModel: VicasaLinesViewModel by viewModel()
 
-    private lateinit var filterDialog: VicasaFilterDialog
+    private val filterDialog: VicasaFilterDialog by lazy {
+        VicasaFilterDialog(
+            serviceTypeList = viewModel.getServiceTypeList(),
+            countryList = viewModel.getCountryList()
+        )
+    }
     private lateinit var adapter: GenericLinesAdapter
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<*>
 
-
     override fun observers() {
         linesObserver()
+        errorObserver()
     }
 
     override fun onInitValues() {
@@ -95,6 +99,19 @@ class VicasaLinesActivity : BaseActivity(R.layout.activity_lines), FilterDialogI
         })
     }
 
+    private fun errorObserver() {
+        val errorOberver = Observer<String> { message ->
+            hideLoader()
+            var mMessage = message
+            if(isNetworkAvailable(this)){
+                mMessage = "Verifique sua conexão com a internet e tente novamente mais tarde"
+            }
+            showSnackBar(mMessage)
+            errorConfig()
+        }
+        viewModel.error.observe(this, errorOberver)
+    }
+
     private fun containsLineName(line: Vicasa): Boolean {
         return line.name.toLowerCase(Locale.getDefault()).contains(
             activity_lines_et_search.text.toString()
@@ -110,10 +127,6 @@ class VicasaLinesActivity : BaseActivity(R.layout.activity_lines), FilterDialogI
     }
 
     private fun showFilterDialog() {
-        filterDialog = VicasaFilterDialog(
-            serviceTypeList = viewModel.getServiceTypeList(),
-            countryList = viewModel.getCountryList()
-        )
         filterDialog.interaction = this
 
         filterDialog.show(supportFragmentManager, "teste")
@@ -210,6 +223,7 @@ class VicasaLinesActivity : BaseActivity(R.layout.activity_lines), FilterDialogI
 
     override fun goToSchedules() {
         startActivity(Intent(this@VicasaLinesActivity, VicasaSchedulesActivity::class.java))
+        hideBottomSheet()
     }
 
 }

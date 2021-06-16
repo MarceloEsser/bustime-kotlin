@@ -1,4 +1,4 @@
-package esser.marcelo.busoclock.viewModel
+package esser.marcelo.busoclock.viewModel.vicasa
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

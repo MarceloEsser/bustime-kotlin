@@ -15,7 +15,7 @@ import esser.marcelo.busoclock.model.favorite.FavoriteLine
 import esser.marcelo.busoclock.model.favorite.LineWithSchedules
 import esser.marcelo.busoclock.view.activity.BaseActivity
 import esser.marcelo.busoclock.view.dialog.DeleteDialog
-import esser.marcelo.busoclock.viewModel.FavoriteLinesViewModel
+import esser.marcelo.busoclock.viewModel.favorite.FavoriteLinesViewModel
 import kotlinx.android.synthetic.main.activity_lines.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

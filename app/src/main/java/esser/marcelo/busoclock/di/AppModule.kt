@@ -1,4 +1,4 @@
-package esser.marcelo.busoclock.dependenciesInjection
+package esser.marcelo.busoclock.di
 
 /**
  * @author Marcelo Esser
@@ -20,6 +20,14 @@ import esser.marcelo.busoclock.repository.service.vicasaServices.IVicasaAPI
 import esser.marcelo.busoclock.repository.service.vicasaServices.VicasaService
 import esser.marcelo.busoclock.repository.service.vicasaServices.VicasaServiceDelegate
 import esser.marcelo.busoclock.viewModel.*
+import esser.marcelo.busoclock.viewModel.favorite.FavoriteItinerariesViewModel
+import esser.marcelo.busoclock.viewModel.favorite.FavoriteLinesViewModel
+import esser.marcelo.busoclock.viewModel.favorite.FavoriteSchedulesViewModel
+import esser.marcelo.busoclock.viewModel.sogal.SogalItinerariesViewModel
+import esser.marcelo.busoclock.viewModel.sogal.SogalLinesViewModel
+import esser.marcelo.busoclock.viewModel.sogal.SogalSchedulesViewModel
+import esser.marcelo.busoclock.viewModel.vicasa.VicasaLinesViewModel
+import esser.marcelo.busoclock.viewModel.vicasa.VicasaSchedulesViewModel
 import kotlinx.coroutines.Dispatchers
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module

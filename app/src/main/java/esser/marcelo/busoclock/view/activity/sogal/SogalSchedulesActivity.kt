@@ -8,7 +8,7 @@ import esser.marcelo.busoclock.repository.LineHolder
 import esser.marcelo.busoclock.model.schedules.BaseSchedule
 import esser.marcelo.busoclock.view.activity.BaseActivity
 import esser.marcelo.busoclock.view.adapter.SchedulesAdapter
-import esser.marcelo.busoclock.viewModel.SogalSchedulesViewModel
+import esser.marcelo.busoclock.viewModel.sogal.SogalSchedulesViewModel
 import kotlinx.android.synthetic.main.activity_schedules.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

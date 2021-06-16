@@ -7,7 +7,7 @@ import esser.marcelo.busoclock.repository.LineHolder
 import esser.marcelo.busoclock.model.sogal.ItinerariesDTO
 import esser.marcelo.busoclock.view.activity.BaseActivity
 import esser.marcelo.busoclock.view.adapter.ItinerariesAdapter
-import esser.marcelo.busoclock.viewModel.SogalItinerariesViewModel
+import esser.marcelo.busoclock.viewModel.sogal.SogalItinerariesViewModel
 import kotlinx.android.synthetic.main.activity_itineraries.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

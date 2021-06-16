@@ -2,18 +2,13 @@ package esser.marcelo.busoclock.view.activity.sogal
 
 import android.animation.ValueAnimator
 import android.content.Intent
-import android.graphics.Color
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.DisplayMetrics
-import android.util.Log
 import android.view.View
 import android.view.View.*
-import androidx.core.view.ViewCompat
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
-import com.google.android.material.snackbar.Snackbar
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.extensions.hideKeyboard
 import esser.marcelo.busoclock.interfaces.GenericLinesAdapterDelegate
@@ -25,12 +20,11 @@ import esser.marcelo.busoclock.model.sogal.LinesDTO
 import esser.marcelo.busoclock.view.activity.BaseActivity
 import esser.marcelo.busoclock.view.adapter.GenericLinesAdapter
 import esser.marcelo.busoclock.view.adapter.LineWaysAdapter
-import esser.marcelo.busoclock.viewModel.SogalLinesViewModel
+import esser.marcelo.busoclock.viewModel.sogal.SogalLinesViewModel
 import kotlinx.android.synthetic.main.activity_lines.*
 import kotlinx.android.synthetic.main.dialog_line_menu.*
 import kotlinx.android.synthetic.main.snack_bar.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import kotlin.math.log
 
 
 /**
