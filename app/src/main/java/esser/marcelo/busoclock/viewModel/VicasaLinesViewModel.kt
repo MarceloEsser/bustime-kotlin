@@ -183,7 +183,6 @@ class VicasaLinesViewModel(
 
     fun getWaysList(): ArrayList<LineWay> {
         val waysList: ArrayList<LineWay> = ArrayList()
-        waysList.add(LineWay("Selecione um sentido", "none"))
         waysList.add(LineWay("Centro Bairro - CB", CB_WAY))
         waysList.add(LineWay("Bairro Centro - BC", Constants.BC_WAY))
         waysList.add(LineWay("Centro Circular - CC", Constants.CC_WAY))

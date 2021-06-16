@@ -9,7 +9,6 @@ import esser.marcelo.busoclock.model.schedules.BaseSchedule
 import esser.marcelo.busoclock.view.activity.BaseActivity
 import esser.marcelo.busoclock.view.adapter.SchedulesAdapter
 import esser.marcelo.busoclock.viewModel.VicasaSchedulesViewModel
-import kotlinx.android.synthetic.main.activity_lines.*
 import kotlinx.android.synthetic.main.activity_schedules.*
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -30,12 +29,13 @@ class VicasaSchedulesActivity : BaseActivity(R.layout.activity_schedules) {
 
     override fun observers() {
         schedulesObservers()
+        favoriteLineActions()
+        errorObserver()
     }
 
     override fun onInitValues() {
         showLoader()
-
-        img_btn_add_itineraries.visibility = GONE
+        lines_activity_img_btn_itinerary.visibility = GONE
         shcedule_activity_tv_line_name.text = LineHolder.lineName
 
         listeners()
@@ -67,6 +67,25 @@ class VicasaSchedulesActivity : BaseActivity(R.layout.activity_schedules) {
         }
     }
 
+    private fun favoriteLineActions() {
+        val isFavoriteObserver = Observer<Boolean> { isFavorite ->
+            if (isFavorite)
+                img_btn_add_itineraries.setImageResource(R.drawable.ic_favorite)
+            else img_btn_add_itineraries.setImageResource(R.drawable.ic_favorite_border)
+        }
+
+        viewModel.isLineFavorite.observe(this, isFavoriteObserver)
+
+        img_btn_add_itineraries.setOnClickListener {
+            if (viewModel.isLineFavorite.value == false) {
+                viewModel.saveLine()
+                return@setOnClickListener
+            }
+            viewModel.deleteLine()
+        }
+    }
+
+
     private fun successConfig() {
         schedules_activity_rv_schedules.setOnClickListener(null)
         schedules_activity_rv_schedules.visibility = VISIBLE
@@ -74,6 +93,21 @@ class VicasaSchedulesActivity : BaseActivity(R.layout.activity_schedules) {
         schedules_activity_tv_connection_error.visibility = GONE
 
         hideLoader()
+    }
+
+
+    private fun errorObserver() {
+        val errorOberver = Observer<String> { message ->
+            hideLoader()
+            var mMessage = message
+            img_btn_add_itineraries.isEnabled = false
+            if(isNetworkAvailable(this)){
+                mMessage = "Verifique sua conexão com a internet e tente novamente mais tarde"
+            }
+            showSnackBar(mMessage)
+            errorConfig()
+        }
+        viewModel.error.observe(this, errorOberver)
     }
 
     private fun errorConfig() {
@@ -89,8 +123,8 @@ class VicasaSchedulesActivity : BaseActivity(R.layout.activity_schedules) {
     }
 
     private fun lottieAnimationClick() {
-        lines_activity_img_lottie_conection.setOnClickListener {
-            lines_activity_img_lottie_conection.pauseAnimation()
+        schedules_activity_img_lottie_conection.setOnClickListener {
+            schedules_activity_img_lottie_conection.pauseAnimation()
             lifecycleScope.launch {
                 viewModel.loadSchedules()
             }

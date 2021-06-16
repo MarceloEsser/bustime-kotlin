@@ -203,6 +203,12 @@
         <item name="android:textSize">18sp</item>
     </style>
 
+    <style name="RowVicasaOption">
+        <item name="android:fontFamily">@font/ubuntu_medium</item>
+        <item name="android:textColor">@color/grey700</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
     <style name="RefferenceImageStyle">
         <item name="android:layout_width">32dp</item>
         <item name="android:layout_height">32dp</item>

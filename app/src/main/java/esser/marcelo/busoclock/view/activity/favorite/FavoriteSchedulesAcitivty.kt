@@ -2,6 +2,7 @@ package esser.marcelo.busoclock.view.activity.favorite
 
 import android.content.Intent
 import android.view.View
+import android.view.View.INVISIBLE
 import androidx.lifecycle.Observer
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.view.adapter.SchedulesAdapter
@@ -54,6 +55,9 @@ class FavoriteSchedulesAcitivty : BaseActivity(R.layout.activity_schedules) {
 
     private fun workingDaysObserver() {
         val workingDayObserver = Observer<List<BaseSchedule>> { schedules ->
+            if(viewModel.isSogal == false) {
+                lines_activity_img_btn_itinerary.visibility = INVISIBLE
+            }
             configureList(schedules)
         }
 

@@ -99,6 +99,7 @@ private val viewModelModule = module {
 
     viewModel {
         VicasaSchedulesViewModel(
+            daoHelper = get(),
             service = get(),
             dispatcher = Dispatchers.IO
         )

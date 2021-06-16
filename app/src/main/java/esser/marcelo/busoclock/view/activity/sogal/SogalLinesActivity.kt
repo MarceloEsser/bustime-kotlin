@@ -25,7 +25,6 @@ import esser.marcelo.busoclock.model.sogal.LinesDTO
 import esser.marcelo.busoclock.view.activity.BaseActivity
 import esser.marcelo.busoclock.view.adapter.GenericLinesAdapter
 import esser.marcelo.busoclock.view.adapter.LineWaysAdapter
-import esser.marcelo.busoclock.view.dialog.LineMenuDialog
 import esser.marcelo.busoclock.viewModel.SogalLinesViewModel
 import kotlinx.android.synthetic.main.activity_lines.*
 import kotlinx.android.synthetic.main.dialog_line_menu.*
@@ -48,8 +47,6 @@ class SogalLinesActivity : BaseActivity(R.layout.activity_lines), GenericLinesAd
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<*>
     private val viewModel: SogalLinesViewModel by viewModel()
 
-    lateinit var lineMenuDialog: LineMenuDialog
-
     private lateinit var adapter: GenericLinesAdapter
     private val mContext = this
 
@@ -57,7 +54,6 @@ class SogalLinesActivity : BaseActivity(R.layout.activity_lines), GenericLinesAd
 
     override fun observers() {
         linesObserver()
-        isFavoriteObserver()
         favoriteLineObserver()
     }
 
@@ -99,15 +95,6 @@ class SogalLinesActivity : BaseActivity(R.layout.activity_lines), GenericLinesAd
         }
 
         viewModel.mFavoriteLine.observe(mContext, favoriteLineObserver)
-    }
-
-    private fun isFavoriteObserver() {
-        val isFavoriteObserver = Observer<Boolean> {
-            lineMenuDialog.isFavorite = it
-            lineMenuDialog.validateImageButton()
-        }
-
-        viewModel.isLineFavorite.observe(this, isFavoriteObserver)
     }
 
     private fun linesObserver() {

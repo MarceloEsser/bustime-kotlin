@@ -27,7 +27,7 @@ import kotlinx.coroutines.flow.collect
 class DaoHelper(
     private val sogalItinerariesViewModel: SogalItinerariesViewModel,
     var sogalSchedulesViewModel: SogalSchedulesViewModel?,
-    private var vicasaSchedulesViewModel: VicasaSchedulesViewModel?,
+    var vicasaSchedulesViewModel: VicasaSchedulesViewModel?,
     private val context: Context,
     private val database: AppDatabase,
 ) : SaveLineDelegate {

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.model.LineWay
+import esser.marcelo.busoclock.model.vicasa.Vicasa
 import kotlinx.android.synthetic.main.row_line_way.view.*
 
 /**
@@ -17,8 +18,8 @@ import kotlinx.android.synthetic.main.row_line_way.view.*
  * @since 31/09/20
  */
 
-class SpinnerDefaultAdapter(context: Context, val ways: List<LineWay>, val resource: Int =  R.layout.row_line_way) :
-    ArrayAdapter<LineWay>(context, resource, ways) {
+class SpinnerDefaultAdapter(context: Context, val ways: List<Vicasa>, val resource: Int =  R.layout.row_vicasa_option) :
+    ArrayAdapter<Vicasa>(context, resource, ways) {
 
     override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
         return createView(position, parent)
@@ -30,7 +31,7 @@ class SpinnerDefaultAdapter(context: Context, val ways: List<LineWay>, val resou
 
     private fun createView(position: Int, parent: ViewGroup) : View {
         val view  = LayoutInflater.from(context).inflate(resource, parent, false)
-        view.tvDescription.text = ways[position].description
+        view.tvDescription.text = ways[position].toString()
 
         return view
     }

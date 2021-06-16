@@ -8,6 +8,7 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.lifecycle.Observer
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.view.adapter.GenericLinesAdapter
 import esser.marcelo.busoclock.extensions.hideKeyboard
@@ -15,9 +16,10 @@ import esser.marcelo.busoclock.interfaces.FilterDialogInteraction
 import esser.marcelo.busoclock.interfaces.GenericLinesAdapterDelegate
 import esser.marcelo.busoclock.interfaces.LineMenuDelegate
 import esser.marcelo.busoclock.model.BaseLine
+import esser.marcelo.busoclock.model.sogal.LinesDTO
 import esser.marcelo.busoclock.model.vicasa.Vicasa
 import esser.marcelo.busoclock.view.activity.BaseActivity
-import esser.marcelo.busoclock.view.dialog.LineMenuDialog
+import esser.marcelo.busoclock.view.adapter.LineWaysAdapter
 import esser.marcelo.busoclock.view.dialog.VicasaFilterDialog
 import esser.marcelo.busoclock.viewModel.VicasaLinesViewModel
 import kotlinx.android.synthetic.main.activity_lines.*
@@ -37,15 +39,13 @@ class VicasaLinesActivity : BaseActivity(R.layout.activity_lines), FilterDialogI
 
     private val viewModel: VicasaLinesViewModel by viewModel()
 
-    var lineMenuDialog: LineMenuDialog? = null
-
     private lateinit var filterDialog: VicasaFilterDialog
     private lateinit var adapter: GenericLinesAdapter
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<*>
 
 
     override fun observers() {
         linesObserver()
-        isFavoriteObserver()
     }
 
     override fun onInitValues() {
@@ -54,17 +54,6 @@ class VicasaLinesActivity : BaseActivity(R.layout.activity_lines), FilterDialogI
         showFilterDialog()
         dialogDoFilter()
         listeners()
-    }
-
-    private fun isFavoriteObserver() {
-        val isFavoriteObserver = Observer<Boolean> {
-            lineMenuDialog?.apply {
-                isFavorite = it
-                validateImageButton()
-            }
-        }
-
-        viewModel.isLineFavorite.observe(this, isFavoriteObserver)
     }
 
     private fun linesObserver() {
@@ -143,20 +132,45 @@ class VicasaLinesActivity : BaseActivity(R.layout.activity_lines), FilterDialogI
     }
 
     override fun onItemClickLitener(line: BaseLine) {
-        holdData(line)
-        showLineMenuDialog()
-    }
-
-    private fun holdData(line: BaseLine) {
         viewModel.saveLineData(line.code, line.name)
+
+        bottomSheetBehavior = BottomSheetBehavior.from<View>(bottomSheet)
+
+        bottom_sheet_bg.visibility = VISIBLE
+
+        configureBottomSheet(bottomSheetBehavior)
+
+        rvWays.adapter = LineWaysAdapter(this, viewModel.getWaysList(), this)
+        bottomSheetBehavior.peekHeight = bottomSheet.height - bottom_sheet_content.height + 100
+
     }
 
-    private fun showLineMenuDialog() {
-        lineMenuDialog = LineMenuDialog(
-            delegate = this,
-            lineWays = viewModel.getWaysList()
-        )
-        lineMenuDialog?.show(supportFragmentManager, "menuDialog")
+    private fun configureBottomSheet(bottomSheetBehavior: BottomSheetBehavior<*>) {
+        bottom_sheet_bg.setOnClickListener {
+            hideBottomSheet()
+        }
+
+        bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
+                    hideBottomSheet()
+                }
+            }
+
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                if (slideOffset == 0f) {
+                    hideBottomSheet()
+                }
+            }
+        })
+
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+    }
+
+    private fun hideBottomSheet() {
+        bottomSheetBehavior.peekHeight = 0
+        bottom_sheet_bg.visibility = GONE
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
     }
 
     private fun successConfig() {

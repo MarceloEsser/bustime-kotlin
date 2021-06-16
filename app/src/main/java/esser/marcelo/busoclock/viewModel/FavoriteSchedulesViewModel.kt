@@ -29,11 +29,13 @@ class FavoriteSchedulesViewModel(
     val workingDays: MutableLiveData<List<Workingday>> = MutableLiveData()
     val saturdays: MutableLiveData<List<Saturday>> = MutableLiveData()
     val sundays: MutableLiveData<List<Sunday>> = MutableLiveData()
+    var isSogal: Boolean? = null
 
     fun fillSchedules() = viewModelScope.launch(dispatcher) {
         dao.getLineBy(LineHolder.lineId ?: 0).collect {
             if (it.isNotEmpty()) {
                 val line = it[0]
+                isSogal = line.line?.isSogal
                 fillSchedules(line)
             }
         }

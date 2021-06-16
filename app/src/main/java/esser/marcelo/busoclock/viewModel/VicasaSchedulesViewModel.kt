@@ -11,9 +11,11 @@ import esser.marcelo.busoclock.model.Constants.BC_WAY
 import esser.marcelo.busoclock.model.Constants.CB_WAY
 import esser.marcelo.busoclock.model.Constants.CC_WAY
 import esser.marcelo.busoclock.model.VicasaTableSelectors
+import esser.marcelo.busoclock.model.favorite.FavoriteLine
 import esser.marcelo.busoclock.model.schedules.Saturday
 import esser.marcelo.busoclock.model.schedules.Sunday
 import esser.marcelo.busoclock.model.schedules.Workingday
+import esser.marcelo.busoclock.repository.dao.helper.DaoHelper
 import esser.marcelo.busoclock.repository.service.vicasaServices.VicasaServiceDelegate
 import esser.marcelo.busoclock.repository.service.wrapper.resource.Status
 import kotlinx.coroutines.*
@@ -32,16 +34,21 @@ import kotlin.coroutines.CoroutineContext
  */
 
 class VicasaSchedulesViewModel(
+    private val daoHelper: DaoHelper,
     private val service: VicasaServiceDelegate,
     private val dispatcher: CoroutineContext
 ) : ViewModel() {
 
+    init {
+        daoHelper.vicasaSchedulesViewModel = this
+    }
+
     var saverDelegate: SaveLineDelegate? = null
 
-    private val _workingdays = MutableLiveData<List<Workingday>>()
+    private val _workingDays = MutableLiveData<List<Workingday>>()
     val workingdays: LiveData<List<Workingday>> by lazy {
         loadSchedules()
-        return@lazy _workingdays
+        return@lazy _workingDays
     }
 
     private val _saturdays = MutableLiveData<List<Saturday>>()
@@ -52,6 +59,16 @@ class VicasaSchedulesViewModel(
     val sundays: LiveData<List<Sunday>>
         get() = _sundays
 
+    private val _isLineFavorite: MutableLiveData<Boolean> = MutableLiveData()
+    val isLineFavorite: LiveData<Boolean> by lazy {
+        validateLine()
+        return@lazy _isLineFavorite
+    }
+
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String>
+        get() = _error
+
     private var workingdaysElement: Element? = null
     private var saturdaysElement: Element? = null
     private var sundaysElement: Element? = null
@@ -60,9 +77,15 @@ class VicasaSchedulesViewModel(
     fun loadSchedules() {
         viewModelScope.launch(dispatcher) {
             service.getSchedules(LineHolder.lineCode).collect { resource ->
-                if (resource.requestStatus == Status.success && resource.data != null) {
-                    parseResponse(resource.data.string())
+                when (resource.requestStatus) {
+                    Status.success -> {
+                        if (resource.data != null) {
+                            parseResponse(resource.data.string())
+                        }
+                    }
+                    Status.error -> _error.postValue(resource.message)
                 }
+
             }
         }
     }
@@ -169,7 +192,7 @@ class VicasaSchedulesViewModel(
         sundaysList: MutableList<Sunday>,
     ) {
 
-        this._workingdays.postValue(workingdaysList)
+        this._workingDays.postValue(workingdaysList)
         this._saturdays.postValue(saturdaysList)
         this._sundays.postValue(sundaysList)
 
@@ -179,6 +202,47 @@ class VicasaSchedulesViewModel(
     private fun saveLineDelegate() {
         if (this.saverDelegate != null) {
             saverDelegate?.canInsertSchedules(isSogal = false)
+        }
+    }
+
+    private fun validateLine() {
+        viewModelScope.launch(dispatcher) {
+            daoHelper.getLines(
+                LineHolder.lineName,
+                LineHolder.lineCode,
+                LineHolder.lineWay?.description ?: ""
+            ).collect {
+                _isLineFavorite.postValue(it?.size == 1)
+            }
+        }
+    }
+
+    private fun getFavoriteLine(): FavoriteLine {
+        return FavoriteLine(
+            isSogal = false,
+            name = LineHolder.lineName,
+            code = LineHolder.lineCode,
+            way = LineHolder.lineWay?.description ?: ""
+        )
+    }
+
+    fun saveLine() = viewModelScope.launch(dispatcher) {
+        val favoriteLine: FavoriteLine = getFavoriteLine()
+        daoHelper.workingdays = _workingDays.value ?: listOf()
+        daoHelper.saturdays = saturdays.value ?: listOf()
+        daoHelper.sundays = sundays.value ?: listOf()
+        daoHelper.insertLine(favoriteLine)
+        validateLine()
+    }
+
+    fun deleteLine() {
+        viewModelScope.launch(dispatcher) {
+            daoHelper.deleteLine(
+                lineName = LineHolder.lineName,
+                lineCode = LineHolder.lineCode,
+                lineWayDescription = LineHolder.lineWay?.description ?: ""
+            )
+            validateLine()
         }
     }
 }
