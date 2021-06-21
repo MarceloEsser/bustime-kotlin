@@ -57,6 +57,7 @@ class FavoriteLinesActivity : BaseActivity(R.layout.activity_lines), IFavoriteLi
     override fun onInitValues() {
         activity_home_title.text = "Linhas salvas"
         lines_activity_img_btn_delete_all.visibility = VISIBLE
+        clSearch.visibility = GONE
 
         lines_activity_img_btn_delete_all.setOnClickListener {
             deleteDialog = DeleteDialog(this)

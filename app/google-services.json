@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1012039249051",
+    "project_id": "busoclock-64212",
+    "storage_bucket": "busoclock-64212.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1012039249051:android:fcb7f56c346eeb2baaea3e",
+        "android_client_info": {
+          "package_name": "esser.marcelo.busoclock"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1012039249051-ahccavbe1j1ns025af87nv1kt05npc9s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAN7dkHRqZ-iftbPflEHe8CNpehmbGiPQY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1012039249051-ahccavbe1j1ns025af87nv1kt05npc9s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

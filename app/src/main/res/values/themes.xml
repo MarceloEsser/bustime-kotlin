@@ -1,0 +1,228 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="RowLineStyle">
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:background">@drawable/ripple_lines</item>
+        <item name="android:elevation">3dp</item>
+    </style>
+
+    <style name="CardStyle">
+        <item name="cardBackgroundColor">@color/white</item>
+        <item name="android:elevation">8dp</item>
+    </style>
+
+    <style name="RowLineDeionStyle">
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/ubuntu_regular</item>
+    </style>
+
+    <style name="RowLineCodeStyle">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/ubuntu_regular</item>
+    </style>
+
+    <style name="RowLineSogalCompanyStyle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/green600</item>
+        <item name="android:fontFamily">@font/ubuntu_bold</item>
+    </style>
+
+    <style name="RowLineVicasaCompanyStyle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/blue600</item>
+        <item name="android:fontFamily">@font/ubuntu_bold</item>
+    </style>
+
+    <style name="RowLineBold">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/ubuntu_bold</item>
+    </style>
+
+    <style name="HomeCardButtonTextStyleGreen">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/green900</item>
+        <item name="android:fontFamily">@font/ubuntu_medium</item>
+    </style>
+
+    <style name="HomeCardSubcontentStyleGreen">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/green900</item>
+        <item name="android:fontFamily">@font/ubuntu_regular</item>
+    </style>
+
+    <style name="HomeCardSubcontentHeaderStyleGreen">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/ubuntu_medium</item>
+    </style>
+
+    <style name="HomeCardStyleBlue" parent="ShapeAppearanceCutSmallCornerCard">
+        <item name="rippleColor">@color/blue800</item>
+        <item name="android:backgroundTint">@color/blue500</item>
+    </style>
+
+    <style name="HomeCardStyleGreen" parent="ShapeAppearanceCutSmallCornerCard">
+        <item name="rippleColor">@color/green800</item>
+        <item name="android:backgroundTint">@color/green500</item>
+    </style>
+    
+    <style name="HomeCardStyleFavorite" parent="ShapeAppearanceCutSmallCornerCard">
+        <item name="rippleColor">@color/amber800</item>
+        <item name="android:backgroundTint">@color/amber500</item>
+    </style>
+
+    <style name="ShapeAppearanceCutSmallCornerCard">
+        <item name="android:layout_height">120dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:paddingEnd">30dp</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceRoundedSmallCorner</item>
+        <item name="android:elevation">8dp</item>
+    </style>
+
+    <style name="ShapeAppearanceRoundedSmallCorner">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">6dp</item>
+    </style>
+    
+    <style name="IBActionStyle">
+        <item name="android:background">@drawable/background_ib_action</item>
+        <item name="android:src">@drawable/ic_arrow_back</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_width">48dp</item>
+    </style>
+
+    <style name="DeleteActionStyle">
+        <item name="android:background">@drawable/background_ib_action</item>
+        <item name="android:src">@drawable/ic_delete</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_width">48dp</item>
+    </style>
+
+    <style name="ItineraryActionStyle">
+        <item name="android:background">@drawable/background_ib_action</item>
+        <item name="android:src">@drawable/ic_itinerary</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_width">48dp</item>
+    </style>
+
+    <style name="RadioButtonMenuDialogStyle">
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/ubuntu_medium</item>
+        <item name="android:textColor">@color/grey800</item>
+    </style>
+    <style name="RowLineDescriptionStyle">
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/ubuntu_regular</item>
+    </style>
+
+    <style name="AboutTitleStyle">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/grey600</item>
+        <item name="android:fontFamily">@font/ubuntu_medium</item>
+    </style>
+
+    <style name="TabBarStyle">
+        <item name="android:background">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="TitleStyle">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">@font/ubuntu_regular</item>
+    </style>
+
+    <style name="SpinnerStyle">
+        <item name="android:textColor">@color/grey700</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="HomeCardButtonTextStyle">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/ubuntu_medium</item>
+    </style>
+
+    <style name="HomeCardContentStyle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/ubuntu_regular</item>
+    </style>
+    <style name="HomeCardSubcontentStyle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/ubuntu_regular</item>
+    </style>
+    <style name="HomeCardSubcontentHeaderStyle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/ubuntu_medium</item>
+    </style>
+
+    <style name="LinesBottomSheetTitleStyle">
+        <item name="android:fontFamily">@font/ubuntu_medium</item>
+        <item name="android:textColor">@color/grey800</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="LinesBottomSheetDefaultTextStyle">
+        <item name="android:fontFamily">@font/ubuntu_regular</item>
+        <item name="android:textColor">@color/grey800</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="LinesBottomSheetDialogStyle">
+        <item name="android:background">@drawable/shape_bottom_sheet_dialog</item>
+        <item name="android:elevation">6dp</item>
+    </style>
+
+    <style name="DropDownBottomSheetStyle">
+        <item name="android:background">@drawable/shape_drop_down_bottom_sheet</item>
+    </style>
+
+    <style name="RowDefaultSpinnerStyle">
+        <item name="android:fontFamily">@font/ubuntu_regular</item>
+        <item name="android:textColor">@color/grey800</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="RowVicasaOption">
+        <item name="android:fontFamily">@font/ubuntu_medium</item>
+        <item name="android:textColor">@color/grey700</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="RefferenceImageStyle">
+        <item name="android:layout_width">32dp</item>
+        <item name="android:layout_height">32dp</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:gravity">top</item>
+    </style>
+
+    <style name="FavoriteButtonStyle">
+        <item name="android:background">@drawable/background_transparent_ripple_grey</item>
+        <item name="android:src">@drawable/ic_favorite_border</item>
+        <item name="android:layout_height">42dp</item>
+        <item name="android:layout_width">42dp</item>
+        <item name="android:layout_marginEnd">10dp</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
+</resources>

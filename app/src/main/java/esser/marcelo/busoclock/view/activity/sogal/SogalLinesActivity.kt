@@ -22,7 +22,6 @@ import esser.marcelo.busoclock.view.adapter.GenericLinesAdapter
 import esser.marcelo.busoclock.view.adapter.LineWaysAdapter
 import esser.marcelo.busoclock.viewModel.sogal.SogalLinesViewModel
 import kotlinx.android.synthetic.main.activity_lines.*
-import kotlinx.android.synthetic.main.dialog_line_menu.*
 import kotlinx.android.synthetic.main.snack_bar.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
