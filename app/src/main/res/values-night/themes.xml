@@ -75,17 +75,17 @@
 
     <style name="HomeCardStyleBlue" parent="ShapeAppearanceCutSmallCornerCard">
         <item name="rippleColor">@color/blue500</item>
-        <item name="android:backgroundTint">@color/blue800</item>
+        <item name="android:backgroundTint">@color/blue900</item>
     </style>
 
     <style name="HomeCardStyleGreen" parent="ShapeAppearanceCutSmallCornerCard">
         <item name="rippleColor">@color/green500</item>
-        <item name="android:backgroundTint">@color/green800</item>
+        <item name="android:backgroundTint">@color/green900</item>
     </style>
     
     <style name="HomeCardStyleFavorite" parent="ShapeAppearanceCutSmallCornerCard">
         <item name="rippleColor">@color/amber500</item>
-        <item name="android:backgroundTint">@color/amber800</item>
+        <item name="android:backgroundTint">@color/amber900</item>
     </style>
 
     <style name="ShapeAppearanceCutSmallCornerCard">

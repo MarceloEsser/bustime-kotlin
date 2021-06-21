@@ -69,7 +69,11 @@ class SogalSchedulesActivity : BaseActivity(R.layout.activity_schedules) {
         viewModelSogal.isLineFavorite.observe(this, isFavoriteObserver)
 
         img_btn_add_itineraries.setOnClickListener {
-            throw RuntimeException("Test Crash")
+            if (viewModelSogal.isLineFavorite.value == false) {
+                viewModelSogal.saveLine()
+                return@setOnClickListener
+            }
+            viewModelSogal.deleteLine()
         }
     }
 

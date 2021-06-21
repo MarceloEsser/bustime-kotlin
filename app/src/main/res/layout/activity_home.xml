@@ -412,7 +412,8 @@
                                 android:layout_height="32dp"
                                 android:layout_gravity="top"
                                 android:layout_margin="5dp"
-                                android:src="@drawable/ic_github_logo" />
+                                android:src="@drawable/ic_github_logo"
+                                app:tint="@color/white" />
 
                         <TextView
                                 android:id="@+id/home_activity_tv_github_description_esser"
