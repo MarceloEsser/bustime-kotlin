@@ -5,7 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/grey100"
+        style="@style/BackgroundColor"
         tools:context=".view.activity.sogal.SogalSchedulesActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -109,7 +109,6 @@
             android:id="@+id/schedules_activity_rv_schedules"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@color/grey100"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@id/schedules_bottom_navigation"
             app:layout_constraintEnd_toEndOf="parent"
@@ -170,6 +169,18 @@
             app:layout_constraintBottom_toTopOf="@id/schedules_bottom_navigation"
             app:layout_constraintEnd_toEndOf="parent"
             android:contentDescription="@string/itineraries" />
+
+    <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@color/grey300"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/schedules_bottom_navigation" />
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/schedules_bottom_navigation"

@@ -9,13 +9,29 @@
     </style>
 
     <style name="BackgroundColor">
-        <item name="android:background">@color/grey900</item>
+        <item name="android:background">@color/grey800</item>
     </style>
 
     <style name="RowLineStyle">
-        <item name="android:layout_margin">5dp</item>
-        <item name="android:background">@drawable/ripple_lines</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="android:layout_marginEnd">10dp</item>
+        <item name="android:background">@drawable/dark_ripple_lines</item>
         <item name="android:elevation">3dp</item>
+    </style>
+
+    <style name="RowItineraryStreetStyle">
+        <item name="android:textSize">@dimen/medium_font_size</item>
+        <item name="android:fontFamily">@font/ubuntu_regular</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="RowItineraryCityStyle">
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/l_medium_font_size</item>
+        <item name="android:textColor">@color/grey200</item>
+        <item name="android:fontFamily">@font/ubuntu_regular</item>
     </style>
 
     <style name="CardStyle">
@@ -23,40 +39,55 @@
         <item name="android:elevation">8dp</item>
     </style>
 
+    <style name="HomeCardStyle">
+        <item name="cardBackgroundColor">@color/grey700</item>
+        <item name="android:elevation">8dp</item>
+    </style>
+
     <style name="RowLineDeionStyle">
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">1</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">@dimen/medium_font_size</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:fontFamily">@font/ubuntu_regular</item>
     </style>
 
     <style name="RowLineCodeStyle">
-        <item name="android:textSize">12sp</item>
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/small_font_size</item>
+        <item name="android:textColor">@color/white</item>
         <item name="android:fontFamily">@font/ubuntu_regular</item>
     </style>
 
+    <style name="RowSchedulesText">
+        <item name="android:textSize">@dimen/medium_font_size</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/ubuntu_regular</item>
+    </style>
+
+    <style name="AcessbileScheduleIcon">
+        <item name="android:tint">@color/white</item>
+    </style>
+
     <style name="RowLineSogalCompanyStyle">
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/green600</item>
+        <item name="android:textSize">@dimen/medium_font_size</item>
+        <item name="android:textColor">@color/greenA700</item>
         <item name="android:fontFamily">@font/ubuntu_bold</item>
     </style>
 
     <style name="RowLineVicasaCompanyStyle">
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/blue600</item>
+        <item name="android:textSize">@dimen/medium_font_size</item>
+        <item name="android:textColor">@color/blueA200</item>
         <item name="android:fontFamily">@font/ubuntu_bold</item>
     </style>
 
     <style name="RowLineBold">
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/medium_font_size</item>
+        <item name="android:textColor">@color/grey300</item>
         <item name="android:fontFamily">@font/ubuntu_bold</item>
     </style>
 
     <style name="HomeCardButtonTextStyleGreen">
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">@dimen/extra_large_font_size</item>
         <item name="android:textColor">@color/green500</item>
         <item name="android:fontFamily">@font/ubuntu_medium</item>
     </style>
@@ -74,18 +105,18 @@
     </style>
 
     <style name="HomeCardStyleBlue" parent="ShapeAppearanceCutSmallCornerCard">
-        <item name="rippleColor">@color/blue500</item>
-        <item name="android:backgroundTint">@color/blue900</item>
+        <item name="rippleColor">@color/blue300</item>
+        <item name="android:backgroundTint">@color/blue700</item>
     </style>
 
     <style name="HomeCardStyleGreen" parent="ShapeAppearanceCutSmallCornerCard">
-        <item name="rippleColor">@color/green500</item>
-        <item name="android:backgroundTint">@color/green900</item>
+        <item name="rippleColor">@color/green300</item>
+        <item name="android:backgroundTint">@color/green700</item>
     </style>
     
     <style name="HomeCardStyleFavorite" parent="ShapeAppearanceCutSmallCornerCard">
-        <item name="rippleColor">@color/amber500</item>
-        <item name="android:backgroundTint">@color/amber900</item>
+        <item name="rippleColor">@color/amber300</item>
+        <item name="android:backgroundTint">@color/amber700</item>
     </style>
 
     <style name="ShapeAppearanceCutSmallCornerCard">
@@ -133,13 +164,13 @@
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">1</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@color/grey200</item>
         <item name="android:fontFamily">@font/ubuntu_regular</item>
     </style>
 
     <style name="AboutTitleStyle">
         <item name="android:textSize">24sp</item>
-        <item name="android:textColor">@color/grey600</item>
+        <item name="android:textColor">@color/grey400</item>
         <item name="android:fontFamily">@font/ubuntu_medium</item>
     </style>
 
@@ -148,7 +179,7 @@
     </style>
 
     <style name="TitleStyle">
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/grey200</item>
         <item name="android:textSize">20sp</item>
         <item name="android:fontFamily">@font/ubuntu_regular</item>
     </style>
@@ -160,12 +191,12 @@
 
     <style name="HomeCardButtonTextStyle">
         <item name="android:textSize">24sp</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/grey200</item>
         <item name="android:fontFamily">@font/ubuntu_medium</item>
     </style>
 
     <style name="HomeCardContentStyle">
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">@dimen/l_medium_font_size</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:fontFamily">@font/ubuntu_regular</item>
     </style>

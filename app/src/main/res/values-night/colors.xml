@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">@color/primaryColor</color>
-    <color name="colorPrimaryDark">@color/primaryDarkColor</color>
+    <color name="colorPrimary">@color/cyan600</color>
+    <color name="colorPrimaryDark">@color/grey800</color>
     <color name="colorAccent">#12005e</color>
     <color name="colorAccentLight">#7c43bd</color>
 
@@ -287,7 +287,6 @@
 
     <color name="primaryColor">#00838f</color>
     <color name="primaryLightColor">#4fb3bf</color>
-    <color name="primaryDarkColor">#005662</color>
     <color name="secondaryColor">#4a148c</color>
     <color name="secondaryLightColor">#7c43bd</color>
     <color name="secondaryDarkColor">#12005e</color>
