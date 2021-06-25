@@ -207,6 +207,7 @@
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+                style="@style/BackgroundColor"
                 android:id="@+id/bottom_sheet_content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">

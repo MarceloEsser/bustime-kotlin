@@ -1,16 +1,22 @@
 package esser.marcelo.busoclock.view.activity.sogal
 
 import android.content.Intent
+import android.util.DisplayMetrics
+import android.view.View
 import android.view.View.*
+import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import esser.marcelo.busoclock.R
 import esser.marcelo.busoclock.repository.LineHolder
 import esser.marcelo.busoclock.model.schedules.BaseSchedule
 import esser.marcelo.busoclock.view.activity.BaseActivity
 import esser.marcelo.busoclock.view.adapter.SchedulesAdapter
 import esser.marcelo.busoclock.viewModel.sogal.SogalSchedulesViewModel
-import kotlinx.android.synthetic.main.activity_schedules.*
+import kotlinx.android.synthetic.main.newsogalschedules.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.math.abs
 
 /**
  * @author Marcelo Esser
@@ -20,9 +26,10 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  * @since 31/09/20
  */
 
-class SogalSchedulesActivity : BaseActivity(R.layout.activity_schedules) {
+class SogalSchedulesActivity : BaseActivity(R.layout.newsogalschedules) {
 
     private val viewModelSogal: SogalSchedulesViewModel by viewModel()
+    private lateinit var mBottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
 
     private lateinit var adapter: SchedulesAdapter
 
@@ -51,10 +58,56 @@ class SogalSchedulesActivity : BaseActivity(R.layout.activity_schedules) {
         bottomNavigationBarListener()
 
         ibBackAction()
+
+        configBottomSheet()
+    }
+
+    private fun configBottomSheet() {
+
+        mBottomSheetBehavior = BottomSheetBehavior.from(cl_bottom_sheet)
+
+        val layoutParams = cl_bottom_sheet.layoutParams
+        val displayMetrics = DisplayMetrics()
+
+        this.display?.getRealMetrics(displayMetrics)
+        layoutParams.height = displayMetrics.heightPixels
+
+        cl_bottom_sheet.layoutParams = layoutParams
+
+        bottomSheetCallBack()
+    }
+
+    private fun bottomSheetCallBack() {
+
+        val layoutParams = cl_header_content.layoutParams
+        val height = layoutParams.height
+
+        mBottomSheetBehavior.addBottomSheetCallback(object :
+            BottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {}
+
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                val intOffSet = abs((1 - slideOffset) * (height + 2)).toInt()
+                updateScreenFrom(layoutParams, intOffSet, slideOffset)
+            }
+        })
+
+    }
+
+    private fun updateScreenFrom(
+        layoutParams: ViewGroup.LayoutParams,
+        intOffSet: Int,
+        slideOffset: Float
+    ) {
+        layoutParams.height = intOffSet
+        img_btn_close.alpha = (1 - (slideOffset))
+        lines_activity_img_btn_itinerary.alpha = (1 - (slideOffset))
+        tv_title.alpha = (1 - (slideOffset))
+        cl_header_content.layoutParams = layoutParams
     }
 
     private fun ibBackAction() {
-        schedules_activity_img_btn_back.setOnClickListener {
+        img_btn_close.setOnClickListener {
             finish()
         }
     }
@@ -160,10 +213,10 @@ class SogalSchedulesActivity : BaseActivity(R.layout.activity_schedules) {
                 adapter = SchedulesAdapter(this@SogalSchedulesActivity, sogalResponse)
                 adapter.notifyDataSetChanged()
                 schedules_activity_rv_schedules.adapter = adapter
-                tv_schedules_activity_without_items.visibility = GONE
+//                tv_schedules_activity_without_items.visibility = GONE
                 schedules_activity_rv_schedules.visibility = VISIBLE
             } else {
-                tv_schedules_activity_without_items.visibility = VISIBLE
+//                tv_schedules_activity_without_items.visibility = VISIBLE
                 schedules_activity_rv_schedules.visibility = INVISIBLE
             }
         }

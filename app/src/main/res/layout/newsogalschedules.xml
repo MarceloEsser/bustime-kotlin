@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/coordinator_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context=".view.activity.sogal.SogalSchedulesActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_header_content"
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
+            android:background="@drawable/light_to_dark_blue_green_gradient">
+
+        <ImageButton
+                android:id="@+id/lines_activity_img_btn_itinerary"
+                style="@style/ItineraryActionStyle"
+                android:contentDescription="@string/delete_all"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+                android:id="@+id/tv_title"
+                android:textSize="@dimen/extra_large_font_size"
+                android:textColor="@color/white"
+                android:fontFamily="@font/ubuntu_medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Sogal"
+                app:layout_constraintBottom_toBottomOf="@id/img_btn_close"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/img_btn_close" />
+
+        <ImageButton
+                android:id="@+id/img_btn_close"
+                style="@style/IBActionStyle"
+                android:contentDescription="@string/back"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+                android:id="@+id/ll_income_content"
+                android:layout_width="match_parent"
+                android:layout_height="77dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.6">
+
+            <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/shcedule_activity_tv_line_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/ubuntu_regular"
+                    android:maxLines="1"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/l_medium_font_size"
+                    app:layout_constraintBottom_toTopOf="@id/shcedule_activity_tv_line_code"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="asafsafasd" />
+
+            <TextView
+                    android:id="@+id/shcedule_activity_tv_line_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/ubuntu_regular"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/small_font_size"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/shcedule_activity_tv_line_name"
+                    tools:text="5001" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+            android:id="@+id/tv_without_items"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:elevation="20dp"
+            android:text="nao tem horario"
+            android:textAlignment="center"
+            android:visibility="gone" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:layout_gravity="center">
+
+        <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/schedules_activity_img_lottie_conection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="30dp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="wihtout_conection.json"
+                app:lottie_loop="true" />
+
+        <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/schedules_activity_tv_connection_error"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="@string/error_conection"
+                android:textAlignment="center"
+                android:textColor="@color/blueGrey800"
+                android:textSize="18sp"
+                android:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@id/schedules_activity_img_lottie_conection" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_bottom_sheet"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="20dp"
+            android:visibility="visible"
+            tools:visibility="gone"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/schedules_activity_rv_schedules"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginBottom="20dp"
+                android:nestedScrollingEnabled="true"
+                tools:itemCount="10"
+                tools:listitem="@layout/row_schedule"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageButton
+            android:id="@+id/img_btn_add_itineraries"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_gravity="end | bottom"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="66dp"
+            android:background="@drawable/background_bluegrey_ripple_bluegrey"
+            android:contentDescription="@string/itineraries"
+            android:elevation="9dp"
+            android:src="@drawable/ic_favorite"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/schedules_bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@color/colorPrimaryDark"
+            android:layout_gravity="bottom"
+            app:itemIconTint="@drawable/selector_lines_bottom_navigation"
+            app:itemTextColor="@drawable/selector_lines_bottom_navigation"
+            app:menu="@menu/schedules_bottom_navigation_menu" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
